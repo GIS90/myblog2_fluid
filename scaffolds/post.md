@@ -1,8 +1,8 @@
 ---
 title: {{ title }}
 date: {{ date }}
-index_img: /index_img/defalut.png
+updated: {{ date }}
+index_img: /img_index/defalut.png
 tags: []
 categories: []
-sticky: 1
 ---

@@ -1,6 +1,6 @@
 ---
 title: 又继续写博客了
-index_img: /img_index/2025/20250802-001.jpg
+index_img: /img_index/index/20250802-001.jpg
 tags: [Hexo]
 categories: [随笔]
 abbrlink: 64421
