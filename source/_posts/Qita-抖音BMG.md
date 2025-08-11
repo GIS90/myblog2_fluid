@@ -15,7 +15,7 @@ keywords: 抖音BMG, 抖音, BGM
 {% note primary %}
 抖音记录美好生活
 
-记录自己喜欢的BGM，喜欢的请拿去，不用谢
+记录自己喜欢的BGM，喜欢的请拿去，不用谢！
 {% endnote %}
 
 <!--more-->
