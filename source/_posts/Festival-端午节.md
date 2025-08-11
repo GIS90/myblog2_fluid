@@ -1,5 +1,5 @@
 ---
-title: 端午节【<font color="red" size="5">中国节</font>】
+title: 端午节【<font color="red" size="15">中国节</font>】
 index_img: /img_index/index/20190607-001.png
 categories:
   - [生活]
