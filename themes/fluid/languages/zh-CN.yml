@@ -8,7 +8,7 @@ archive:
   menu: '归档'
   title: '归档'
   subtitle: '何以解忧，唯有代码'
-  post_total: '共计 %d 篇文章'
+  post_total: '目前累计共 %d 篇文章，'
 
 category:
   menu: '分类'

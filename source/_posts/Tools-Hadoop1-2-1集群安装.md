@@ -3,7 +3,6 @@ title: Ubuntu15.10系统安装Hadoop1.2.1集群
 index_img: /img_index/index/20160920-001.png
 categories:
   - [工具集]
-  - [Python]
 tags: [Python, Hadoop, Ubuntu, Python程序篇]
 desc: 大数据时代，初学hadoop在Ubuntu环境上搭建Hadoop1.2.1版本集群
 keywords: Python, Hadoop, Ubuntu, 大数据, Hadoop集群, VMware, java, JDK, 数据处理
@@ -14,6 +13,7 @@ date: 2016-09-20 18:34:25
 最近BigData貌似很火，本人也跟着一起凑凑热闹，尝试了本机部署Hadoop1.2.1版本，基于Hadoop1.2.1 + Python2.7 + Ubuntu15.10技术栈，讲述Hadoop集群的安装过程，有什么不准确之处可以留言，一起交流***share***。
 
 <!-- more -->
+
 <hr />
 
 ## 1、摘要

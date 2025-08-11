@@ -1,5 +1,9 @@
 <div class="list-group">
-  <p class="h4"><%= __(params.key + '.post_total', params.postTotal) %></p>
+  <p class="h4">
+    <span style="color: red;font-size: 42px;">你真帅!</span>
+    <%= __(params.key + '.post_total', params.postTotal) %>
+    <span style="color: blue;font-size: 25px;">继续加油~~~</span>
+  </p>
   <hr>
   <% var dateCursor %>
   <% page.posts.each(function (post) { %>

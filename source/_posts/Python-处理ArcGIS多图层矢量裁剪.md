@@ -2,7 +2,7 @@
 title: Python处理ArcGIS多图层矢量裁剪
 index_img: /img_index/index/20151012-001.png
 categories:
-  - [ArcGIS]
+  - [工具集]
   - [Python]
 tags: [Python, ArcGIS, Python程序篇]
 keywords: python, ArcGIS, 脚本, 程序
