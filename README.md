@@ -39,7 +39,7 @@
 
 ### 6.1、文章详情底部版本新增左侧边框
 文件位置：E:\github\myblog2_fluid\themes\fluid\source\css\_pages\_base\_widget\copyright.styl
-样式类：license-box
+样式类：.license-box
 修改内容：
 ```css
 -- 新增
@@ -55,3 +55,14 @@ border-left: 8px double rgb(255, 23, 0) !important;
 <span style="color: red;font-size: 42px;">你真帅!</span>
 <span style="color: blue;font-size: 25px;">继续加油~~~</span>
 ```
+### 6.3、工具推荐（links）页面的图标hover缩放大小调整
+文件位置：E:\github\myblog2_fluid\themes\fluid\source\css\_pages\_links\links.styl
+样式类：.link-avatar hover
+修改内容：
+```css
+-- 修改
+&:hover
+      .link-avatar
+        transform scale(1.3)
+```
+
