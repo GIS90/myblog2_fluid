@@ -3,7 +3,7 @@ title: 关于MacOS系统Brew安装与常用命令
 index_img: /img_index/index/20210614-001.png
 categories:
   - [工具集]
-tags: [MacOS, brew]
+tags: [MacOS, Brew]
 abbrlink: 12880
 date: 2021-06-14 22:09:08
 updated: 2021-06-14 22:09:08

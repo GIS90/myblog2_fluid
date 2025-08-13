@@ -1,8 +1,8 @@
 ---
 title: 大学之证书那点事
 index_img: /img_index/index/20190623-001.png
-tags: [证书, 回忆录]
-categories: [大学]
+tags: [证书, 大学]
+categories: [生活]
 abbrlink: 22143
 date: 2019-06-23 21:24:01
 updated: 2019-06-23 21:24:01
