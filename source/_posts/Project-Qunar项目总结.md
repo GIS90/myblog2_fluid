@@ -19,11 +19,13 @@ Qunar负责的项目汇总。
 <font color=#1E90FF size=8 face="黑体"> 感谢Qunar让我成长 ！！！</font>
 {% endnote %}
 
-{% label danger@项目总结 %} {% label primary@Qunar %} {% label success@Python实战 %} {% label info@Web %}
+
 
 <!-- more -->
-<hr />
 
+<hr />
+{% label danger@项目总结 %} {% label primary@Qunar %} {% label success@Python实战 %} {% label info@Web %}
+<hr />
 
 ### 1、背景
 统计一下负责项目的说明。
@@ -189,11 +191,11 @@ Opstools-cron项目主要针对于其他项目有定时任务写的一个请求r
 3 点击Qunar Build，选择QA【beta环境】，先进行beta环境发布，参数详解如下：
 
     - server_list_group：A
-
+    
     - tag_name：q-xxxxxxxx-xx
-
+    
     - server_list_group代表发布机器组，发哪个组写哪个组名即可，全部写ALL。
-
+    
     - tag_name为构建的tag名称。
 
   4 QA发布完成环境之后。
