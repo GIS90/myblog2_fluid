@@ -379,6 +379,7 @@ navbar:
           { key: 'OPENTOOL-Z', link: 'http://2l.pygo2.top/' },
           { key: '阿里图标库', link: 'https://www.iconfont.cn/' },
           { key: 'Google图片压缩', link: 'https://squoosh.app/' },
+          { key: '动画免费图片', link: 'https://unsplash.com/illustrations' },
         ]
       }
 
