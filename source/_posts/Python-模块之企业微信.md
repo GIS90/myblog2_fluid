@@ -1,6 +1,6 @@
 ---
 title: Python模块之企业微信消息
-index_img: /img_index/index/20220906-001.png
+index_img: /img_index/index/article_python_module.jpeg
 categories:
   - [Python]
 tags: [Python, Python模块系列]
