@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="PyGo²个人博客">
 <meta property="og:description" content="1、简介             文件传输，而且还可以装逼的神器：nc（netcat）。             Linux nc">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://pygo2.top/img_index/index/20220525-001.png">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20220525-001.jpg">
 <meta property="article:published_time" content="2022-05-25T12:08:03.000Z">
 <meta property="article:modified_time" content="2022-05-25T12:08:03.000Z">
 <meta property="article:author" content="mingliang.gao">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Linux增强篇">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://pygo2.top/img_index/index/20220525-001.png">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20220525-001.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -377,6 +377,7 @@
 <span class="label label-default">Linux</span> <span class="label label-primary">nc</span>
 
 <span id="more"></span>
+
 <hr />
 
 <p>目前这个命令主要用来实现Linux服务器之间文件传输，当然还有其他用于传输文件的命令，比如：scp、rz&amp;&amp;sz、rsync（主要用于文件自动化同步）等等，小文件的话用nc就挺好用，小推荐一下。</p>
@@ -386,11 +387,13 @@
 
 <h3 id="4、使用方法"><a href="#4、使用方法" class="headerlink" title="4、使用方法"></a>4、使用方法</h3><p>介绍文件传输以及扫描端口2大功能。</p>
 <h4 id="4-1、传输文件"><a href="#4-1、传输文件" class="headerlink" title="4.1、传输文件"></a>4.1、传输文件</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-comment"># 发送端：</span><br>nc -v ip port &lt; <span class="hljs-keyword">test</span>.txt<br><br><span class="hljs-comment">#接收端：</span><br>nc -lp port &gt; <span class="hljs-keyword">test</span>.txt<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>l：监听模式</li>
 <li>v：显示过程详情<br>其中，ip为接收端ip地址，port为自定义端口。</li>
 </ul>
 <h4 id="4-2、扫描端口"><a href="#4-2、扫描端口" class="headerlink" title="4.2、扫描端口"></a>4.2、扫描端口</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">nc</span> -nv -w -l -z <span class="hljs-built_in">ip</span> port<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>n：扫描的目标是个ip地址</li>
 <li>l：监听模式</li>
@@ -399,10 +402,10 @@
 <li>z 表示 进行端口扫描</li>
 </ul>
 <h4 id="4-3、参数"><a href="#4-3、参数" class="headerlink" title="4.3、参数"></a>4.3、参数</h4><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs inform7">nc --help<br><br>usage: nc <span class="hljs-comment">[-46DdhklnrStUuvzC]</span> <span class="hljs-comment">[-i interval]</span> <span class="hljs-comment">[-p source_port]</span><br>	  <span class="hljs-comment">[-s source_ip_address]</span> <span class="hljs-comment">[-T ToS]</span> <span class="hljs-comment">[-w timeout]</span> <span class="hljs-comment">[-X proxy_version]</span><br>	  <span class="hljs-comment">[-x proxy_address<span class="hljs-comment">[:port]</span>]</span> <span class="hljs-comment">[hostname]</span> <span class="hljs-comment">[port<span class="hljs-comment">[s]</span>]</span><br></code></pre></td></tr></table></figure>
+
 <p>参数挺多的，<em><strong>man nc</strong></em>查看明细。</p>
 <p>参考菜鸟命令介绍：</p>
 <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-g&lt;网关&gt; 设置路由器跃程通信网关，最多可设置8个。</span><br><span class="hljs-deletion">-G&lt;指向器数目&gt; 设置来源路由指向器，其数值为4的倍数。</span><br><span class="hljs-deletion">-h 在线帮助。</span><br><span class="hljs-deletion">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</span><br><span class="hljs-deletion">-l 使用监听模式，管控传入的资料。</span><br><span class="hljs-deletion">-n 直接使用IP地址，而不通过域名服务器。</span><br><span class="hljs-deletion">-o&lt;输出文件&gt; 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</span><br><span class="hljs-deletion">-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</span><br><span class="hljs-deletion">-r 乱数指定本地与远端主机的通信端口。</span><br><span class="hljs-deletion">-s&lt;来源位址&gt; 设置本地主机送出数据包的IP地址。</span><br><span class="hljs-deletion">-u 使用UDP传输协议。</span><br><span class="hljs-deletion">-v 显示指令执行过程。</span><br><span class="hljs-deletion">-w&lt;超时秒数&gt; 设置等待连线的时间。</span><br><span class="hljs-deletion">-z 使用0输入/输出模式，只在扫描通信端口时使用。</span><br></code></pre></td></tr></table></figure>
-
 
 <h3 id="5、其他"><a href="#5、其他" class="headerlink" title="5、其他"></a>5、其他</h3><p>其他的功能暂时没怎么探索。</p>
 <h3 id="6、学习参考"><a href="#6、学习参考" class="headerlink" title="6、学习参考"></a>6、学习参考</h3><p>菜鸟nc介绍：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-nc.html">https://www.runoob.com/linux/linux-comm-nc.html</a></p>

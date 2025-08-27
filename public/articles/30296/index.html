@@ -26,13 +26,13 @@
 <meta property="og:site_name" content="PyGo²个人博客">
 <meta property="og:description" content="Qunar负责的项目汇总。 感谢Qunar让我成长 ！！！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://pygo2.top/img_index/index/20190810-001.png">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20190810-001.jpg">
 <meta property="article:published_time" content="2019-08-10T12:10:44.000Z">
 <meta property="article:modified_time" content="2019-08-19T12:10:44.000Z">
 <meta property="article:author" content="mingliang.gao">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://pygo2.top/img_index/index/20190810-001.png">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20190810-001.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -373,8 +373,6 @@
             <p>Qunar负责的项目汇总。</p><p><font color=#1E90FF size=8 face="黑体"> 感谢Qunar让我成长 ！！！</font></p>
           </div>
 
-
-
 <span id="more"></span>
 
 <hr />
@@ -573,7 +571,6 @@
 
     <a href="/articles/9777/" target="_blank" class="block_project_a">Qunar项目之Opstools-cron【定时任务】</a> -->
 
-
 <h3 id="4、发布"><a href="#4、发布" class="headerlink" title="4、发布"></a>4、发布</h3><h4 id="4-1、-提交代码"><a href="#4-1、-提交代码" class="headerlink" title="4.1、 提交代码"></a>4.1、 提交代码</h4><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>git add .<br><br><span class="hljs-symbol">2 </span>git commit -m <span class="hljs-string">&quot;XXXX&quot;</span><br><br><span class="hljs-symbol">3 </span>git tag q-xxxxxxxx-xx<br><br><span class="hljs-symbol">4 </span>git push origin master --tags<br></code></pre></td></tr></table></figure>
 
 <h4 id="4-2、自动化发布"><a href="#4-2、自动化发布" class="headerlink" title="4.2、自动化发布"></a>4.2、自动化发布</h4><p>1 打开自动化发布url。</p>
@@ -590,6 +587,7 @@
 <p>  4 QA发布完成环境之后。</p>
 <p>  5 在选择OPS【线上环境】进行发布，建议发布一台检查一台的方式去进行发现线上环境。</p>
 <h3 id="5、项目启动"><a href="#5、项目启动" class="headerlink" title="5、项目启动"></a>5、项目启动</h3><h4 id="5-1、常规"><a href="#5-1、常规" class="headerlink" title="5.1、常规"></a>5.1、常规</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">(<span class="hljs-built_in">sudo</span>) python tools/install_venv.py<br><br>(<span class="hljs-built_in">sudo</span>)  tools/with_venv.sh python setup.py develop                  <span class="hljs-comment"># develop 软链</span><br><br>(<span class="hljs-built_in">sudo</span>)  tools/with_venv.sh main --config-file 配置文件 -v<br></code></pre></td></tr></table></figure>
+
 <h4 id="5-2、调试"><a href="#5-2、调试" class="headerlink" title="5.2、调试"></a>5.2、调试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">(<span class="hljs-built_in">sudo</span>) virtualenv .venv<br><br>(<span class="hljs-built_in">sudo</span>) <span class="hljs-built_in">source</span> .venv/bin/activate<br><br>(<span class="hljs-built_in">sudo</span>) <span class="hljs-built_in">sudo</span> pip install -r requirements.txt -i 源地址 --trusted-host 源地址域名<br><br>(<span class="hljs-built_in">sudo</span>) tools/with_venv.sh python setup.py install                  <span class="hljs-comment"># install 复制</span><br><br>(<span class="hljs-built_in">sudo</span>) tools/with_venv.sh main --config-file 配置文件 -v<br></code></pre></td></tr></table></figure>
 
 <h3 id="6、supervisorctl管理"><a href="#6、supervisorctl管理" class="headerlink" title="6、supervisorctl管理"></a>6、supervisorctl管理</h3><p>登录服务器上切换到sudo用户，执行supervisorctl：</p>

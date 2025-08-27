@@ -1,6 +1,6 @@
 ---
 title: Linux云服务器环境初始化
-index_img: /img_index/index/20201128-001.png
+index_img: /img_index/index/20201128-001.jpg
 categories:
   - [服务器]
 tags: [Linux, git, Mysql]
@@ -10,18 +10,19 @@ updated: 2020-11-28 08:43:34
 desc: 腾讯云服务器的环境初始化，包含用户、数据库、VIM、Supervisor等安装
 keywords: Linux, git, MariaDB, VIM, Supervisor, swap, nginx
 ---
+{% label success@Linux %} {% label info@SSH %}  {% label danger@Swap %}
 
-{% label success@Linux %} {% label info@SSH %}  {% label danger@Swap %} 
 <hr />
 {% label warning@Supervisor %} {% label primary@Nginx %}{% label default@git %}
 
 ### 1、前言
+
 {% note info %}
 新购买的腾讯云服务器需要在上面进行环境的一些处理以及软件安装，这里我介绍一下我的服务器初始化过程。
 {% endnote %}
 
-
 <!--more-->
+
 <hr />
 
 ![](20201128-001.png)
@@ -31,6 +32,7 @@ keywords: Linux, git, MariaDB, VIM, Supervisor, swap, nginx
 CentOS Linux release 7.5.1804 (Core)
 
 Linux查看系统版本：
+
 ```
 cat /etc/*release*
 
@@ -74,6 +76,7 @@ usermod -G opsdev mingliang.gao
 > 配置用户root权限
 
 root用户vim /etc/sudoers
+
 ```
 root	ALL=(ALL) 	ALL
 mingliang.gao    ALL=(ALL)    ALL
@@ -89,6 +92,7 @@ mingliang.gao    ALL=(ALL)    ALL
 #### 3.2、环境编码
 
 修改服务器系统环境编码，执行vim /etc/profile，加入一下内容：
+
 ```
 # 编码
 export LC_ALL=en_US.UTF-8
@@ -96,6 +100,7 @@ export LANG=en_US.UTF-8
 ```
 
 查看环境编码：
+
 ```
 [root@VM-4-7-centos mingliang.gao]# echo $LANG
 en_US.UTF-8
@@ -132,6 +137,7 @@ yum -y install vim
 > 配置
 
 vi /etc/vimrc，打开vimrc配置问题添加一下2行简单配置，如果详细配置请百度。
+
 ```
 set nu          " 设置显示行号
 set showmode    " 设置在命令行界面最下面显示当前模式等
@@ -140,11 +146,13 @@ set showmode    " 设置在命令行界面最下面显示当前模式等
 #### 3.4、SSH
 
 用于免密码连接登录。
+
 ```
 ssh-copy-id 用户@服务器IP
 输入用户登录密码
 ```
-详情：<a href="/articles/1431/" target="_blank" class="block_project_a">SSH之免密码登录</a>
+
+详情：`<a href="/articles/1431/" target="_blank" class="block_project_a">`SSH之免密码登录 `</a>`
 
 #### 3.5、SWAP
 
@@ -159,11 +167,13 @@ mkswap /var/swap
 swapon /var/swap
 free -m
 ```
+
 解释一下dd，可以理解成dd获取了磁盘的一块空间，有兴趣的可以深入学习一下dd。
 
 > Swap开机初始化
 
 vi /etc/fstab，最后一行添加
+
 ```
 swap /var/swap swap defaults 0 0
 ```
@@ -195,6 +205,7 @@ yum -y install git
 > 配置
 
 下面是全局配置，也可以在单独的git项目中单独配置属于项目的git配置。
+
 ```
 # 用户名
 git config --global user.name "mingliang.gao"
@@ -215,6 +226,7 @@ git config --list
 
 这里介绍2种方式，第一种就是直接去官网下载：https://docs.conda.io/projects/miniconda/en/latest/
 第二种方式直接在服务器上执行wget：
+
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
@@ -224,9 +236,11 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
 base Miniconda3-latest-Linux-x86_64.sh
 ```
+
 - Do you accept the license terms? [yes|no] 输入yes接受许可条款
 - 配置安装路径，默认安装到根目录下的，可自定义路径（建议/usr/local/miniconda）
 - 等待安装后，出现Do you wish the installer to initialize Miniconda3，如果输入yes会对~/.bashrc文件添加一下内容
+
 ```
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -247,10 +261,13 @@ unset __conda_setup
 > 配置
 
 生效：
+
 ```
 source ~/.bashrc
 ```
+
 禁止用户登录后自动激活base环境：
+
 ```
 conda config --set auto_activate_base
 ```
@@ -262,6 +279,7 @@ conda config --set auto_activate_base
 > 安装
 
 在python项目运行环境中会进行安装，单独安装命令：
+
 ```
 pip install gunicorn
 ```
@@ -269,6 +287,7 @@ pip install gunicorn
 > 日志配置
 
 python项目需要用到，提前建好，用来存放日志，root用户执行。
+
 ```
 mkdir -p /var/log/gunicorn
 ```
@@ -292,18 +311,22 @@ systemctl enable supervisord
 ```
 ps -ef | grep supervisord
 ```
+
 系统默认的启用命令是：/usr/bin/supervisord -c /etc/supervisord.conf
 
 > 自定义配置
 
 切换root执行。
+
 ```
 echo_supervisord_conf > /etc/supervisord.d/supervisord.conf
 cd /etc/supervisord.d
 mkdir include
 mkdir -p /var/log/supervisord
 ```
+
 echo_supervisord_conf是配置文件写入，把项目配置文件与是sp的配置文件放在一起便于管理，建立include存放项目的对应配置文件，以下是本人的配置文件：
+
 ```
 [unix_http_server]
 file=/var/run/supervisor.sock   ;;UNIX socket 文件，supervisorctl会使用其与supervisord通信
@@ -335,23 +358,29 @@ minprocs=200                        ;;可以打开的进程数的最小值，默
 [include]
 files = /etc/supervisord.d/include/*.conf
 ```
+
 启动命令：/usr/bin/supervisord -c /etc/supervisord.d/supervisord.conf
 -c为指定配置文件。
 
 这样启动的supervisor如果重启需要杀死进程：
+
 ```
 ps -ef | grep supervisord
 kill 进程ID
 ```
+
 为了方便我把2个命令合并到一起：
+
 ```
 ps -ef | grep supervisord | grep -v grep | awk -F " " '{print $2}' | xargs kill
 ```
+
 直接执行上面这句话就可以直接杀死进行，这是个通用杀死指定进程的命令，只需要更换grep supervisord需要查询过滤的进程关键字。
 
 > 其他
 
 贴一下自己的supervisord项目配置文件。
+
 ```
 [program:open2lisapi]
 directory=/home/mingliang.gao/projects/open2lisapi
@@ -373,6 +402,7 @@ stdout_logfile=/var/log/supervisord/supervisor_open2lisapi.log
 > 检查gcc环境
 
 gcc编译器。
+
 ```
 # 检查gcc环境
 gcc -v
@@ -384,6 +414,7 @@ yum -y install gcc
 > 安装Nginx
 
 root用户或者sudo命令。
+
 ```
 # 查看版本
 yum list | grep nginx
@@ -391,7 +422,9 @@ yum list | grep nginx
 # 安装
 yum -y install nginx
 ```
+
 安装后执行whereis Nginx
+
 - 执行目录：/usr/sbin/nginx
 - 模块所在目录：/usr/lib64/nginx
 - 配置所在目录：/etc/nginx/
@@ -409,6 +442,7 @@ systemctl reload nginx.service
 # 查看状态
 systemctl status nginx.service
 ```
+
 > 查看进程
 
 ```
@@ -428,11 +462,13 @@ systemctl restart firewalld
 # 查看
 firewall-cmd --list-all
 ```
+
 这里根据自己的项目需求，对外开放端口。
 
 > 配置
 
 下面是我的nginx配置，仅供参考：
+
 ```
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
@@ -531,10 +567,12 @@ http {
 }
 
 ```
+
 - 因为有些参数在腾讯云服务器不能识别，所以有些被注释。
 - user root本人使用root用户启动，使用哪个用户就配置哪个
 
 server配置，单独文件，存放/etc/nginx/conf.d
+
 ```
 server {
     listen  80;
@@ -566,6 +604,7 @@ server {
 
 }
 ```
+
 - server_name：域名
 - listen：端口
 

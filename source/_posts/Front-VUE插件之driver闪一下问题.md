@@ -1,6 +1,6 @@
 ---
 title: VUE插件driver.js闪一下问题
-index_img: /img_index/index/20220428-001.png
+index_img: /img_index/index/20220428-001.jpg
 categories:
   - [前端开发]
 tags: [VUE]
@@ -10,25 +10,26 @@ updated: 2022-04-28 14:55:13
 desc:
 keywords: VUE, 插件, driver, 向导
 ---
-
 #### 1、背景
-前几天搞了一个VUE页面功能向导，那个是在单独的页面，今天把driver.js引入到一些有功能的页面，启动的时候页面就闪了一下，没有向导功能，google了一下，发现原来是VUE渲染的问题。
 
+前几天搞了一个VUE页面功能向导，那个是在单独的页面，今天把driver.js引入到一些有功能的页面，启动的时候页面就闪了一下，没有向导功能，google了一下，发现原来是VUE渲染的问题。
 
 {% label primary@VUE %} {% label info@插件 %}
 
 <!--more-->
-<hr />
 
+<hr />
 
 #### 2、解决方案
 
 解决问题的代码，在启动的时候加上setTimeout延迟，就可以了。
+
 ```
 setTimeout(() => {
   this.startGuide()
 }, 900)
 ```
+
 因为我把向导封装成组件了，其他的页面也可以进行引用，所以我用watch监听父组件传递的值，详细的请参考完整代码。
 
 #### 3、新问题

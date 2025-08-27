@@ -1,6 +1,6 @@
 ---
 title: ElementUI-table-tree全部展开与关闭
-index_img: /img_index/index/20220410-001.png
+index_img: /img_index/index/20220410-001.jpg
 categories:
   - [前端开发]
 tags: [VUE, Element-UI]
@@ -10,8 +10,6 @@ updated: 2022-04-10 23:15:39
 desc: ElementUI-table-tree全部展开与关闭
 keywords: ElementUI, table, tree, 组件, 展开, 关闭
 ---
-
-
 {% note primary %}
 ElementUI官网的table组件有个tree模式，就是类似于树模式的table表格样式，这个功能用于菜单展示挺好看也挺好用。
 {% endnote %}
@@ -19,9 +17,11 @@ ElementUI官网的table组件有个tree模式，就是类似于树模式的table
 {% label default@VUE %} {% label danger@Element-UI %}
 
 <!--more-->
+
 <hr />
 
 直接上代码：
+
 ```
 <template>
   <div class="app-container">

@@ -1,7 +1,7 @@
 ---
 title: hexo展示文章统计-hexo-symbols-count-time
 desc: hexo展示文章统计-hexo-symbols-count-time
-index_img: /img_index/index/20181124-001.png
+index_img: /img_index/index/20181124-001.jpg
 categories:
   - [Hexo]
 tags: [Hexo, Hexo插件]
@@ -11,8 +11,8 @@ abbrlink: 16195
 date: 2018-11-24 16:52:30
 updated: 2019-12-21 21:52:30
 ---
-
 ### 问题简述
+
 {% note success %}
 next主题的blog添加文章统计功能【hexo-symbols-count-time】
 {% endnote %}
@@ -24,12 +24,14 @@ next主题的blog添加文章统计功能【hexo-symbols-count-time】
 ***My blog***采用next主题，想在发布的文章中加上通统计相关的展示，google许多文章，都是关于配置hexo-wordcount、LeanCloud等，发现配置之后，仍然没有效果。身为一名程序猿，怎么可能有解决不的bug，下面是我的解决方案，官方配置。
 
 ### 版本信息
-| id  | name | version |
-| :---: | :----: | :-------: |
-| 1   | Hexo | v3.8.0  |
-| 2    |   NextT.Pisces   |     v7.0.1    |
+
+| id |     name     | version |
+| :-: | :----------: | :-----: |
+| 1 |     Hexo     | v3.8.0 |
+| 2 | NextT.Pisces | v7.0.1 |
 
 ### 解决方案
+
 去查next主题的_config.yml文件，一点点看。终于在347行发现了***# Post wordcount display settings***这一行说明，继续阅读发现hexo-symbols-count-time这个插件，立马google，官方解释：
 ![hexo-symbols-count-time](hexo-symbols-count-time.png)
 大致的意思是统计文章的符号数量以及阅读时间，比hexo-reading-time更美观，比hexo-worcount统计的更快，而且还没有依赖。这是非常爽的啊，只需要按配置一下，OK了啊。
@@ -43,6 +45,7 @@ npm install hexo-symbols-count-time --save
 #### blog配置文件
 
 ⁍ next找到_config.yml的配置，添加以下内容：
+
 ```
 # 文章统计
 symbols_count_time:
@@ -57,6 +60,7 @@ symbols_count_time:
 #### theme配置文件
 
 ⁍ next找到_config.yml的配置，搜索关键字：hexo-symbols-count-time
+
 ```
 symbols_count_time:
   separated_meta: true

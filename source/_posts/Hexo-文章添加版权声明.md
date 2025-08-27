@@ -1,7 +1,7 @@
 ---
 title: hexo文章添加版权声明
 desc: hexo博客在站内文章添加版权声明
-index_img: /img_index/index/20181109-001.png
+index_img: /img_index/index/20181109-001.jpg
 categories:
   - [Hexo]
 tags: [Hexo]
@@ -11,29 +11,29 @@ abbrlink: 46750
 date: 2018-11-09 20:03:24
 updated: 2018-11-09 20:03:24
 ---
-
-
-
 #### 问题简述
+
 {% note success %}
 想在***My blog***的文章底部添加上自己的版权声明，一是意识方便大家进行转载share，二来也是对自己写的东西有一个声明吧。废话不多说，很简单。【含样式】
 {% endnote %}
 
 <!--more-->
-<hr />
 
+<hr />
 
 ![](article_banquanshengming.png)
 
 #### 版本信息
 
-| id  | name | version |
-| :---: | :----: | :-------: |
-| 1   | Hexo | v3.8.0  |
-| 2    |   NextT.Pisces   |     v7.0.1    |
+| id |     name     | version |
+| :-: | :----------: | :-----: |
+| 1 |     Hexo     | v3.8.0 |
+| 2 | NextT.Pisces | v7.0.1 |
 
 #### 版权代码
+
 打开next主题目录下/next/layout/_macro/post.swig文件，搜索***post-body***，在这个div标签结束的下一行，添加以下代码
+
 ```
 <!-- 版权声明 -->
 <div>
@@ -54,12 +54,16 @@ updated: 2018-11-09 20:03:24
   {% endif %}
 </div>
 ```
+
 变量说明：
+
 * theme.*：hexo配置文件的基础信息
 * page.*：指的是本文章的一些相关信息
 
 #### 版权样式
+
 打开/next/source/css/_custom/custom.styl,并在里面添加如下样式代码:
+
 ```
 // 版权声明样式
 .post-copyright {

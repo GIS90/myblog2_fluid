@@ -1,6 +1,6 @@
 ---
 title: Windows安装2个Tomcat
-index_img: /img_index/index/20230113-001.png
+index_img: /img_index/index/20230113-001.jpg
 categories:
   - 服务器
 tags:
@@ -12,25 +12,22 @@ abbrlink: 27869
 date: 2023-01-13 15:35:46
 updated: 2023-01-13 15:35:46
 ---
-
-
-
 ### 1、背景
+
 {% note primary %}
 在Windows上运行Tomcat6、Tomcat8，Tomcat与对应的Java有版本关系。
 {% endnote %}
 
-
 <!--more-->
-<hr />
 
+<hr />
 
 ### 2、环境
 
-| id  | Tomcat版本 | Java版本 |
-|:---:|:----------:|:--------:|
-|  1  |     6      |   1.6    |
-|  2  |     8      |   1.8    |
+| id | Tomcat版本 | Java版本 |
+| :-: | :--------: | :------: |
+| 1 |     6     |   1.6   |
+| 2 |     8     |   1.8   |
 
 ### 3、特殊说明
 

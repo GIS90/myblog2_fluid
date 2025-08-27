@@ -1,6 +1,6 @@
 ---
 title: Windows Server2012R2安装PLSQL
-index_img: /img_index/index/20220727-001.png
+index_img: /img_index/index/20220727-001.jpg
 categories:
   - [Windows]
 tags: [Oracle, 部署教程系列]
@@ -10,14 +10,10 @@ updated: 2022-07-27 21:32:56
 desc: Windows Server2012R2安装PLSQL
 keywords: Windows, Server, 2012, R2, 安装, PLSQL
 ---
-
-
-
-实战部署系列教程：<font color="blue" size="7">Windows安装PLSQL与配置</font>。
-
-
+实战部署系列教程：`<font color="blue" size="7">`Windows安装PLSQL与配置`</font>`。
 
 <!--more-->
+
 <hr />
 
 {% label info@PLSQL %} {% label primary@Windows %} {% label default@Oracle %}
@@ -25,15 +21,10 @@ keywords: Windows, Server, 2012, R2, 安装, PLSQL
 #### 版本说明
 
 |           名称           |              版本              |
-|:------------------------:|:------------------------------:|
+| :----------------------: | :----------------------------: |
 |        服务器系统        | Windows Server2012 R2 Standard |
 |           PSQL           |          PSQL（32位）          |
 | Instant Client客户端实例 |       11.2.0.4.0（32位）       |
-
-
-
-
-
 
 #### 材料准备
 
@@ -43,14 +34,15 @@ keywords: Windows, Server, 2012, R2, 安装, PLSQL
 <font size=5.5 color='red'>（需要配套，位数保持一致）</font>
 
 一套工具baidu云盘下载：
+
 ```
 =====================================================================
 链接：https://pan.baidu.com/s/1LuLaIxK4z7AQgNFHZhoTHw?pwd=4tgc
 提取码：4tgc
 =====================================================================
 ```
-下载包含PLSQL（32位），Oracle Instant Client（32位、64位）
 
+下载包含PLSQL（32位），Oracle Instant Client（32位、64位）
 
 #### 官网下载
 
@@ -88,7 +80,6 @@ PLSQL安装路径会自动识别，一直下一步即可。
 5、点击菜单帮助 -> 注册 -> 把注册信息填写，完成注册
 ![](781662566910_.pic.jpg)
 
-
 #### 配置
 
 1、解压文件：instantclient-basic-nt-11.2.0.4.0.zip
@@ -110,6 +101,7 @@ OCI库：D:\instantclient_11_2\oci.dll
 ![](821662567000_.pic.jpg)
 
 如果没有自行创建一个或者直接把服务器上面那个文件复制出一份，写入以下内容。
+
 ```
 =========================================================
 # tnsnames.ora Network Configuration File: D:\instantclient_11_2\NETWORK\ADMIN\tnsnames.ora
@@ -124,7 +116,9 @@ PAS =
     )
   )
 ```
+
 修改的配置值：
+
 > IP
 
 10.15.176.9修改成数据库服务器IP，通过ip addr 或者 ifconfig（找到eth0网卡的ip）
@@ -133,11 +127,13 @@ PAS =
 
 通过SQPLUS获取当前数据库SERVICE_NAME，执行语句如下：
 【数据库服务器】
+
 ```
 su - oracle
 sqlplus / as /sysdba
 show parameter service_
 ```
+
 ![](831662567037_.pic.jpg)
 修改完成后保存文件。
 
@@ -165,7 +161,6 @@ show parameter service_
 7、测试PLSQL，输入相关信息登录。
 ![](881662567170_.pic.jpg)
 
-
 #### 拓展问题
 
 1、PLSQ出现了初始化错误，请检查32bits Oracle Client installed
@@ -174,22 +169,21 @@ show parameter service_
 
 2、NLS_LANG特殊说明
 Oracle配置的用户NLS_LANG变量是：
+
 - AMERICAN_AMERICA.ZHS16GBK
-Windows服务器配置NLS_LANG变量
+  Windows服务器配置NLS_LANG变量
 - SIMPLIFIED CHINESE_CHINA.ZHS16GBK
-简单解释一下，NLS_LANG由三部分组成：
-（一）语言：SIMPLIFIED CHINESE 或者 AMERICAN
-影响的是中文还是英文提示
-区域：CHINA 或者AMERICA
-影响的是日期、数字、金融格式什么的
-字符集：ZHS16GBK
-都采用的ZHS16GBK字符集，只要保持这个一直，就可以保持数据库备份，到另一个数据库恢复，中文不会乱码
-一定要按保持字符集一样
-
-
-
+  简单解释一下，NLS_LANG由三部分组成：
+  （一）语言：SIMPLIFIED CHINESE 或者 AMERICAN
+  影响的是中文还是英文提示
+  区域：CHINA 或者AMERICA
+  影响的是日期、数字、金融格式什么的
+  字符集：ZHS16GBK
+  都采用的ZHS16GBK字符集，只要保持这个一直，就可以保持数据库备份，到另一个数据库恢复，中文不会乱码
+  一定要按保持字符集一样
 
 {% raw %}
+
 <div class="post_cus_note"> =========== END =========== </div>
 {% endraw %}
 

@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="PyGo²个人博客">
 <meta property="og:description" content="Linux SSH  Swap   Supervisor Nginxgit  1、前言             新购买的腾讯云服务器需要在上面进行环境的一些处理以及软件安装，这里我介绍一下我的服务器初始化过程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://pygo2.top/img_index/index/20201128-001.png">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20201128-001.jpg">
 <meta property="article:published_time" content="2020-11-28T00:43:34.000Z">
 <meta property="article:modified_time" content="2020-11-28T00:43:34.000Z">
 <meta property="article:author" content="mingliang.gao">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://pygo2.top/img_index/index/20201128-001.png">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20201128-001.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -371,7 +371,8 @@
             
               <div class="markdown-body">
                 
-                <span class="label label-success">Linux</span> <span class="label label-info">SSH</span>  <span class="label label-danger">Swap</span> 
+                <span class="label label-success">Linux</span> <span class="label label-info">SSH</span>  <span class="label label-danger">Swap</span>
+
 <hr />
 <span class="label label-warning">Supervisor</span> <span class="label label-primary">Nginx</span><span class="label label-default">git</span>
 
@@ -379,8 +380,8 @@
             <p>新购买的腾讯云服务器需要在上面进行环境的一些处理以及软件安装，这里我介绍一下我的服务器初始化过程。</p>
           </div>
 
-
 <span id="more"></span>
+
 <hr />
 
 <p><img src="/articles/49695/20201128-001.png" srcset="/img/loading.gif" lazyload></p>
@@ -424,12 +425,14 @@
 
 <h4 id="3-4、SSH"><a href="#3-4、SSH" class="headerlink" title="3.4、SSH"></a>3.4、SSH</h4><p>用于免密码连接登录。</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs applescript">ssh-<span class="hljs-keyword">copy</span>-<span class="hljs-built_in">id</span> 用户@服务器IP<br>输入用户登录密码<br></code></pre></td></tr></table></figure>
-<p>详情：<a href="/articles/1431/" target="_blank" class="block_project_a">SSH之免密码登录</a></p>
+
+<p>详情：<code>&lt;a href=&quot;/articles/1431/&quot; target=&quot;_blank&quot; class=&quot;block_project_a&quot;&gt;</code>SSH之免密码登录 <code>&lt;/a&gt;</code></p>
 <h4 id="3-5、SWAP"><a href="#3-5、SWAP" class="headerlink" title="3.5、SWAP"></a>3.5、SWAP</h4><p>有些人可能对swap可能陌生，简单说下SWAP可以理解成虚拟内存，当服务器物理内存不足时，拿出部分硬盘指定空间当swap分区（虚拟成内存）使用，从而解决内存容量不足的情况。<br>可以先free一下看下是否又swap，如果想配置请用root用户操作。</p>
 <blockquote>
 <p>生成</p>
 </blockquote>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">dd <span class="hljs-attribute">if</span>=/dev/zero <span class="hljs-attribute">of</span>=/var/swap <span class="hljs-attribute">bs</span>=1024 <span class="hljs-attribute">count</span>=3072000<br>mkswap /var/swap<br>swapon /var/swap<br>free -m<br></code></pre></td></tr></table></figure>
+
 <p>解释一下dd，可以理解成dd获取了磁盘的一块空间，有兴趣的可以深入学习一下dd。</p>
 <blockquote>
 <p>Swap开机初始化</p>
@@ -473,6 +476,7 @@
 <p>安装</p>
 </blockquote>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">base</span> Miniconda3-latest-Linux-x86_64.sh<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>Do you accept the license terms? [yes|no] 输入yes接受许可条款</li>
 <li>配置安装路径，默认安装到根目录下的，可自定义路径（建议&#x2F;usr&#x2F;local&#x2F;miniconda）</li>
@@ -485,6 +489,7 @@
 </blockquote>
 <p>生效：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure>
+
 <p>禁止用户登录后自动激活base环境：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">conda<span class="hljs-built_in"> config </span>--<span class="hljs-built_in">set</span> auto_activate_base<br></code></pre></td></tr></table></figure>
 
@@ -510,19 +515,24 @@
 <p>查看下进程</p>
 </blockquote>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">ps</span> -ef | <span class="hljs-keyword">grep</span> supervisord<br></code></pre></td></tr></table></figure>
+
 <p>系统默认的启用命令是：&#x2F;usr&#x2F;bin&#x2F;supervisord -c &#x2F;etc&#x2F;supervisord.conf</p>
 <blockquote>
 <p>自定义配置</p>
 </blockquote>
 <p>切换root执行。</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata">echo_supervisord_conf &gt; /etc/supervisord.<span class="hljs-keyword">d</span>/supervisord.<span class="hljs-keyword">conf</span><br><span class="hljs-keyword">cd</span> /etc/supervisord.<span class="hljs-keyword">d</span><br><span class="hljs-keyword">mkdir</span> <span class="hljs-keyword">include</span><br><span class="hljs-keyword">mkdir</span> -p /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/supervisord<br></code></pre></td></tr></table></figure>
+
 <p>echo_supervisord_conf是配置文件写入，把项目配置文件与是sp的配置文件放在一起便于管理，建立include存放项目的对应配置文件，以下是本人的配置文件：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[unix_http_server]</span><br><span class="hljs-attr">file</span>=/var/run/supervisor.sock   <span class="hljs-comment">;;UNIX socket 文件，supervisorctl会使用其与supervisord通信</span><br><span class="hljs-attr">chmod</span>=<span class="hljs-number">0777</span>                     <span class="hljs-comment">;;socket文件的mode，默认是0700，改成0777: chmod 777 /var/run/supervisor.sock</span><br><span class="hljs-comment">;chown=nobody:nogroup           ;;socket文件的owner，格式：uid:gid</span><br><br><span class="hljs-comment">;[inet_http_server]          ;;web管理界面</span><br><span class="hljs-comment">;port=0.0.0.0:10001          ;;Web管理后台运行的IP和端口</span><br><span class="hljs-comment">;username=mingliang.gao      ;;登录管理后台的用户名</span><br><span class="hljs-comment">;password=971366             ;;登录管理后台的密码</span><br><br><span class="hljs-section">[supervisorctl]</span><br><span class="hljs-attr">serverurl</span>=unix:///var/run/supervisor.sock   <span class="hljs-comment">;;通过UNIX socket连接supervisord，路径与unix_http_server部分的file一致</span><br><span class="hljs-comment">;serverurl=http://0.0.0.0:10001              ;;通过HTTP的方式连接supervisord</span><br><br><span class="hljs-section">[rpcinterface:supervisor]</span><br><span class="hljs-attr">supervisor.rpcinterface_factory</span> = supervisor.rpcinterface:make_main_rpcinterface<br><br><span class="hljs-section">[supervisord]</span><br><span class="hljs-attr">logfile</span>=/var/log/supervisord/supervisord.log    <span class="hljs-comment">;;日志文件</span><br><span class="hljs-attr">logfile_maxbytes</span>=<span class="hljs-number">50</span>MB               <span class="hljs-comment">;;日志文件大小，超出会rotate，默认 50MB。如果设成0，表示不限制大小</span><br><span class="hljs-attr">logfile_backups</span>=<span class="hljs-number">10</span>                  <span class="hljs-comment">;;日志文件保留备份数量默认10，设为0表示不备份</span><br><span class="hljs-attr">loglevel</span>=info                       <span class="hljs-comment">;;日志级别，默认info，其它: debug,warn,trace</span><br><span class="hljs-attr">pidfile</span>=/var/run/supervisord.pid    <span class="hljs-comment">;;pid 文件</span><br><span class="hljs-attr">nodaemon</span>=<span class="hljs-literal">false</span>                      <span class="hljs-comment">;;是否在前台启动，默认是false，即以 daemon 的方式启动</span><br><span class="hljs-attr">minfds</span>=<span class="hljs-number">1024</span>                         <span class="hljs-comment">;;可以打开的文件描述符的最小值，默认 1024</span><br><span class="hljs-attr">minprocs</span>=<span class="hljs-number">200</span>                        <span class="hljs-comment">;;可以打开的进程数的最小值，默认 200</span><br><br><span class="hljs-section">[include]</span><br><span class="hljs-attr">files</span> = /etc/supervisord.d/include/*.conf<br></code></pre></td></tr></table></figure>
+
 <p>启动命令：&#x2F;usr&#x2F;bin&#x2F;supervisord -c &#x2F;etc&#x2F;supervisord.d&#x2F;supervisord.conf<br>-c为指定配置文件。</p>
 <p>这样启动的supervisor如果重启需要杀死进程：</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl">ps -ef | <span class="hljs-keyword">grep</span> supervisord<br><span class="hljs-keyword">kill</span> 进程ID<br></code></pre></td></tr></table></figure>
+
 <p>为了方便我把2个命令合并到一起：</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">ps -ef | <span class="hljs-keyword">grep</span> supervisord | <span class="hljs-keyword">grep</span> -v <span class="hljs-keyword">grep</span> | awk -F <span class="hljs-string">&quot; &quot;</span> <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="hljs-keyword">kill</span><br></code></pre></td></tr></table></figure>
+
 <p>直接执行上面这句话就可以直接杀死进行，这是个通用杀死指定进程的命令，只需要更换grep supervisord需要查询过滤的进程关键字。</p>
 <blockquote>
 <p>其他</p>
@@ -541,6 +551,7 @@
 </blockquote>
 <p>root用户或者sudo命令。</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 查看版本</span><br>yum list <span class="hljs-string">| grep nginx</span><br><br><span class="hljs-meta"># 安装</span><br>yum <span class="hljs-punctuation">-</span>y install nginx<br></code></pre></td></tr></table></figure>
+
 <p>安装后执行whereis Nginx</p>
 <ul>
 <li>执行目录：&#x2F;usr&#x2F;sbin&#x2F;nginx</li>
@@ -552,6 +563,7 @@
 <p>启动</p>
 </blockquote>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment"># 启动/停止/重启</span><br><span class="hljs-params">system</span>ctl start/stop/restart nginx.service<br><span class="hljs-comment"># 开启启动</span><br><span class="hljs-params">system</span>ctl enable nginx.service<br><span class="hljs-comment"># 重新加载配置</span><br><span class="hljs-params">system</span>ctl reload nginx.service<br><span class="hljs-comment"># 查看状态</span><br><span class="hljs-params">system</span>ctl status nginx.service<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>查看进程</p>
 </blockquote>
@@ -561,18 +573,21 @@
 <p>开放端口</p>
 </blockquote>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 添加端口</span><br>firewall-cmd <span class="hljs-params">--zone=public</span> <span class="hljs-params">--add-port=80/tcp</span> <span class="hljs-params">--permanent</span><br><br><span class="hljs-comment"># 重加载或者重启</span><br>firewall-cmd <span class="hljs-params">--reload</span><br>systemctl restart firewalld<br><br><span class="hljs-comment"># 查看</span><br>firewall-cmd <span class="hljs-params">--list-all</span><br></code></pre></td></tr></table></figure>
+
 <p>这里根据自己的项目需求，对外开放端口。</p>
 <blockquote>
 <p>配置</p>
 </blockquote>
 <p>下面是我的nginx配置，仅供参考：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># For more information on configuration, see:</span><br><span class="hljs-comment">#   * Official English Documentation: http://nginx.org/en/docs/</span><br><span class="hljs-comment">#   * Official Russian Documentation: http://nginx.org/ru/docs/</span><br><br><span class="hljs-attribute">user</span> root;<br><span class="hljs-attribute">worker_processes</span> <span class="hljs-number">2</span>;<br><span class="hljs-attribute">error_log</span> /var/log/nginx/<span class="hljs-literal">error</span>.log;<br><span class="hljs-attribute">pid</span> /run/nginx.pid;<br><br><span class="hljs-comment"># Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.</span><br><span class="hljs-attribute">include</span> /usr/share/nginx/modules/<span class="hljs-regexp">*.conf</span>;<br><br><span class="hljs-section">events</span> &#123;<br>    <span class="hljs-comment"># use epoll</span><br>    <span class="hljs-attribute">worker_connections</span> <span class="hljs-number">1024</span>;<br>&#125;<br><br><span class="hljs-comment"># sendfile on;</span><br><span class="hljs-comment"># tcp_nopush on;</span><br><br><span class="hljs-comment"># keepalive_timeout 65;</span><br><br><span class="hljs-comment"># gzip压缩功能设置</span><br><span class="hljs-comment"># gzip on;</span><br><span class="hljs-comment"># gzip_min_length 1k;</span><br><span class="hljs-comment"># gzip_buffers 4 16k;</span><br><span class="hljs-comment"># gzip_http_version 1.0;</span><br><span class="hljs-comment"># gzip_comp_level 6;</span><br><span class="hljs-comment"># gzip_types text/html text/plain text/css text/javascript application/json application/javascript application/x-javascript application/xml;</span><br><span class="hljs-comment"># gzip_vary on;</span><br><br><span class="hljs-comment"># http_proxy 设置</span><br><span class="hljs-comment"># client_max_body_size 10m;</span><br><span class="hljs-comment"># client_body_buffer_size 128k;</span><br><span class="hljs-comment"># proxy_connect_timeout 75;</span><br><span class="hljs-comment"># proxy_send_timeout 75;</span><br><span class="hljs-comment"># proxy_read_timeout 75;</span><br><span class="hljs-comment"># proxy_buffer_size 4k;</span><br><span class="hljs-comment"># proxy_buffers 4 32k;</span><br><span class="hljs-comment"># proxy_busy_buffers_size 64k;</span><br><span class="hljs-comment"># proxy_temp_file_write_size 64k;</span><br><span class="hljs-comment"># proxy_temp_path /usr/local/nginx/proxy_temp 1 2;</span><br><br><span class="hljs-section">http</span> &#123;<br>    <span class="hljs-attribute">log_format</span>  main  <span class="hljs-string">&#x27;<span class="hljs-variable">$remote_addr</span> - <span class="hljs-variable">$remote_user</span> [<span class="hljs-variable">$time_local</span>] &quot;<span class="hljs-variable">$request</span>&quot; &#x27;</span><br>                      <span class="hljs-string">&#x27;<span class="hljs-variable">$status</span> <span class="hljs-variable">$body_bytes_sent</span> &quot;<span class="hljs-variable">$http_referer</span>&quot; &#x27;</span><br>                      <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$http_user_agent</span>&quot; &quot;<span class="hljs-variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;<br><br>    <span class="hljs-attribute">access_log</span>  /var/log/nginx/access.log  main;<br><br>    <span class="hljs-attribute">sendfile</span>            <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">tcp_nopush</span>          <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">tcp_nodelay</span>         <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">keepalive_timeout</span>   <span class="hljs-number">65</span>;<br>    <span class="hljs-attribute">types_hash_max_size</span> <span class="hljs-number">2048</span>;<br><br>    <span class="hljs-attribute">include</span>             /etc/nginx/mime.types;<br>    <span class="hljs-attribute">default_type</span>        application/octet-stream;<br><br>    <span class="hljs-comment"># Load modular configuration files from the /etc/nginx/conf.d directory.</span><br>    <span class="hljs-comment"># See http://nginx.org/en/docs/ngx_core_module.html#include</span><br>    <span class="hljs-comment"># for more information.</span><br>    <span class="hljs-attribute">include</span> /etc/nginx/conf.d/<span class="hljs-regexp">*.conf</span>;<br><br><span class="hljs-comment"># Settings for a TLS enabled server.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#    server &#123;</span><br><span class="hljs-comment">#        listen       443 ssl http2 default_server;</span><br><span class="hljs-comment">#        listen       [::]:443 ssl http2 default_server;</span><br><span class="hljs-comment">#        server_name  _;</span><br><span class="hljs-comment">#        root         /usr/share/nginx/html;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#        ssl_certificate &quot;/etc/pki/nginx/server.crt&quot;;</span><br><span class="hljs-comment">#        ssl_certificate_key &quot;/etc/pki/nginx/private/server.key&quot;;</span><br><span class="hljs-comment">#        ssl_session_cache shared:SSL:1m;</span><br><span class="hljs-comment">#        ssl_session_timeout  10m;</span><br><span class="hljs-comment">#        ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="hljs-comment">#        ssl_prefer_server_ciphers on;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#        # Load configuration files for the default server block.</span><br><span class="hljs-comment">#        include /etc/nginx/default.d/*.conf;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#        location / &#123;</span><br><span class="hljs-comment">#        &#125;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#        error_page 404 /404.html;</span><br><span class="hljs-comment">#            location = /40x.html &#123;</span><br><span class="hljs-comment">#        &#125;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#        error_page 500 502 503 504 /50x.html;</span><br><span class="hljs-comment">#            location = /50x.html &#123;</span><br><span class="hljs-comment">#        &#125;</span><br><span class="hljs-comment">#    &#125;</span><br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>因为有些参数在腾讯云服务器不能识别，所以有些被注释。</li>
 <li>user root本人使用root用户启动，使用哪个用户就配置哪个</li>
 </ul>
 <p>server配置，单独文件，存放&#x2F;etc&#x2F;nginx&#x2F;conf.d</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span>  <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span>     _;<br><br>    <span class="hljs-attribute">access_log</span>  /var/log/nginx/default_server.access.log  main;<br>    <span class="hljs-attribute">root</span>        /home/mingliang.gao/projects/blog;<br><br>    <span class="hljs-section">location</span> = / &#123;<br>        <span class="hljs-comment"># index    index.html index.htm;</span><br>        <span class="hljs-attribute">index</span>    root.html;<br>    &#125;<br>    <span class="hljs-section">location</span> / &#123;<br>        <span class="hljs-attribute">index</span> index.jsp index.html index.htm;<br>        <span class="hljs-attribute">proxy_redirect</span> <span class="hljs-literal">off</span>;<br>        <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$host</span>;<br>        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>        <span class="hljs-attribute">proxy_set_header</span> X-Real-PORT <span class="hljs-variable">$remote_port</span>;<br>        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br>    &#125;<br><br>    <span class="hljs-attribute">error_page</span> <span class="hljs-number">404</span> /<span class="hljs-literal">error</span>.html;<br>        <span class="hljs-section">location</span> = /40x.html &#123;<br>    &#125;<br><br>    <span class="hljs-attribute">error_page</span> <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span> /<span class="hljs-literal">error</span>.html;<br>        <span class="hljs-section">location</span> = /50x.html &#123;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>server_name：域名</li>
 <li>listen：端口</li>

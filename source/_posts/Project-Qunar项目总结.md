@@ -1,6 +1,6 @@
 ---
 title: Qunar项目之总结篇
-index_img: /img_index/index/20190810-001.png
+index_img: /img_index/index/20190810-001.jpg
 categories:
   - [项目]
 tags: [Python]
@@ -11,15 +11,11 @@ desc: 记录在Qunar所做过的项目，主要是python web相关的项目
 keywords: web, python, qunar, 项目, 项目Outage, 项目Wwwhr, 项目Isapi, 项目Backyard, 项目New_hrtools, 项目Officedb, 项目Opsapp, 项目Opsbi, 项目Smsd, 项目Newoa_api, 项目Psapproval
 sticky: 1001
 ---
-
-
 {% note primary %}
 Qunar负责的项目汇总。
 
 <font color=#1E90FF size=8 face="黑体"> 感谢Qunar让我成长 ！！！</font>
 {% endnote %}
-
-
 
 <!-- more -->
 
@@ -28,24 +24,25 @@ Qunar负责的项目汇总。
 <hr />
 
 ### 1、背景
+
 统计一下负责项目的说明。
 
 ### 2、统计
 
-| ID  |   项目名称    |      中文名称       | 重要程度 | 技术架构                         |
-|:---:|:-------------:|:-------------------:|:--------:|:-------------------------------- |
-|  1  |   backyard    |       骆驼帮        |   ★★★    | 前后端分离项目【Python + React】 |
-|  2  |     isapi     |     员工信息API     |   ★★★    | rest api，Python编写             |
-|  3  |  new_hrtools  |   AD账号管理系统    |    ★★    | 任务脚本较多，Python编写         |
-|  4  |   officedb    |  办公大厦管理系统   |    ★     | 后台【Flask】+ 模板              |
-|  5  |    opsapp     |     Qtalk Apis      |    ★★    | rest api                         |
-|  6  |    outage     |      故障系统       |   ★★★    | 后台【Flask】+ 前端【angularjs】 |
-|  7  |  psapproval   |    qtalk审批申请    |    ★★    | rest api，Python编写             |
-|  8  |     wwwhr     |  员工信息采集系统   |    ★★    | 后台【Flask】+ 模板              |
-|  9  |   newoa_api   |    newoa审批Api     |    ★★    | rest api，Python编写             |
-| 10  |     opsbi     | Ops故障可视化bi系统 |    ★     | 后台【Flask】+ 前端【angularjs】 |
-| 11  |     smsdb     |       短信狗        |    ★★    | 软件 + 硬件                      |
-| 12  | opstools-cron |      定时任务       |    ★★    | Node                             |
+| ID |   项目名称   |      中文名称      | 重要程度 | 技术架构                         |
+| :-: | :-----------: | :-----------------: | :------: | :------------------------------- |
+| 1 |   backyard   |       骆驼帮       |  ★★★  | 前后端分离项目【Python + React】 |
+| 2 |     isapi     |     员工信息API     |  ★★★  | rest api，Python编写             |
+| 3 |  new_hrtools  |   AD账号管理系统   |   ★★   | 任务脚本较多，Python编写         |
+| 4 |   officedb   |  办公大厦管理系统  |    ★    | 后台【Flask】+ 模板              |
+| 5 |    opsapp    |     Qtalk Apis     |   ★★   | rest api                         |
+| 6 |    outage    |      故障系统      |  ★★★  | 后台【Flask】+ 前端【angularjs】 |
+| 7 |  psapproval  |    qtalk审批申请    |   ★★   | rest api，Python编写             |
+| 8 |     wwwhr     |  员工信息采集系统  |   ★★   | 后台【Flask】+ 模板              |
+| 9 |   newoa_api   |    newoa审批Api    |   ★★   | rest api，Python编写             |
+| 10 |     opsbi     | Ops故障可视化bi系统 |    ★    | 后台【Flask】+ 前端【angularjs】 |
+| 11 |     smsdb     |       短信狗       |   ★★   | 软件 + 硬件                      |
+| 12 | opstools-cron |      定时任务      |   ★★   | Node                             |
 
 ### 3、项目说明
 
@@ -99,7 +96,7 @@ opsapp跟Isapi实现的功能大致一样，这个项目是专门用来提供给
 
     <a href="/articles/9363/" target="_blank" class="block_project_a">Qunar项目之Opsapp-QtalkApis</a> -->
 
-####  3.6、outage
+#### 3.6、outage
 
 > <font size=4.5 color='red'>简述</font>
 
@@ -109,7 +106,7 @@ opsapp跟Isapi实现的功能大致一样，这个项目是专门用来提供给
 
     <a href="/articles/26073/" target="_blank" class="block_project_a">Qunar项目之Outage-故障系统</a> -->
 
-####  3.7、psapproval
+#### 3.7、psapproval
 
 > <font size=4.5 color='red'>简述</font>
 
@@ -119,7 +116,7 @@ opsapp跟Isapi实现的功能大致一样，这个项目是专门用来提供给
 
     <a href="/articles/204/" target="_blank" class="block_project_a">Qunar项目之Psapproval-Qtalk审批申请</a> -->
 
-####  3.8、wwwhr
+#### 3.8、wwwhr
 
 > <font size=4.5 color='red'>简述</font>
 
@@ -129,7 +126,7 @@ opsapp跟Isapi实现的功能大致一样，这个项目是专门用来提供给
 
     <a href="/articles/3146/" target="_blank" class="block_project_a">Qunar项目之Wwwhr-信息采集系统</a> -->
 
-####  3.9、newoa_api
+#### 3.9、newoa_api
 
 > <font size=4.5 color='red'>简述</font>
 
@@ -139,7 +136,7 @@ newoa_api是专门针对于PC端Newoa表单在移动端详情展示，主要用�
 
     <a href="/articles/34271/" target="_blank" class="block_project_a">Qunar项目之Newoa-api【Newoa审批Api】</a> -->
 
-####  3.10、opsbi
+#### 3.10、opsbi
 
 > <font size=4.5 color='red'>简述</font>
 
@@ -149,7 +146,7 @@ Opsbi是针对于Ops组造成故障的数据做的一个可视化web系统，数
 
     <a href="/articles/63144/" target="_blank" class="block_project_a">Qunar项目之Opsbi-Ops故障可视化bi系统</a> -->
 
-####  3.11、smsdb
+#### 3.11、smsdb
 
 > <font size=4.5 color='red'>简述</font>
 
@@ -159,7 +156,7 @@ smsd是一个针对于机票事业部短信收发做的一个项目，实现了�
 
     <a href="/articles/22299/" target="_blank" class="block_project_a">Qunar项目之Smsdb-短信狗</a> -->
 
-####  3.12、opstools-cron
+#### 3.12、opstools-cron
 
 > <font size=4.5 color='red'>简述</font>
 
@@ -169,9 +166,10 @@ Opstools-cron项目主要针对于其他项目有定时任务写的一个请求r
 
     <a href="/articles/9777/" target="_blank" class="block_project_a">Qunar项目之Opstools-cron【定时任务】</a> -->
 
-
 ### 4、发布
+
 #### 4.1、 提交代码
+
 ```
 1 git add .
 
@@ -182,7 +180,7 @@ Opstools-cron项目主要针对于其他项目有定时任务写的一个请求r
 4 git push origin master --tags
 ```
 
-####  4.2、自动化发布
+#### 4.2、自动化发布
 
 1 打开自动化发布url。
 
@@ -191,11 +189,11 @@ Opstools-cron项目主要针对于其他项目有定时任务写的一个请求r
 3 点击Qunar Build，选择QA【beta环境】，先进行beta环境发布，参数详解如下：
 
     - server_list_group：A
-    
+
     - tag_name：q-xxxxxxxx-xx
-    
+
     - server_list_group代表发布机器组，发哪个组写哪个组名即可，全部写ALL。
-    
+
     - tag_name为构建的tag名称。
 
   4 QA发布完成环境之后。
@@ -203,7 +201,9 @@ Opstools-cron项目主要针对于其他项目有定时任务写的一个请求r
   5 在选择OPS【线上环境】进行发布，建议发布一台检查一台的方式去进行发现线上环境。
 
 ### 5、项目启动
-####  5.1、常规
+
+#### 5.1、常规
+
 ```
 (sudo) python tools/install_venv.py
 
@@ -211,7 +211,9 @@ Opstools-cron项目主要针对于其他项目有定时任务写的一个请求r
 
 (sudo)  tools/with_venv.sh main --config-file 配置文件 -v
 ```
-####  5.2、调试
+
+#### 5.2、调试
+
 ```
 (sudo) virtualenv .venv
 
@@ -225,11 +227,13 @@ Opstools-cron项目主要针对于其他项目有定时任务写的一个请求r
 ```
 
 ### 6、supervisorctl管理
+
 登录服务器上切换到sudo用户，执行supervisorctl：
 
 ![](qunar_supervisorctl.png)
 
 常用命令说明：
+
 - status 查看项目运行状态
 - restart outage-www 重启outage-www 项目
 - start outage-www 启动outage-www 项目

@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="PyGo²个人博客">
 <meta property="og:description" content="简介             解决多命令command1，command1，command1…。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://pygo2.top/img_index/index/20190626%20-001.png">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20190626-001.jpg">
 <meta property="article:published_time" content="2019-06-26T12:26:09.000Z">
 <meta property="article:modified_time" content="2019-06-26T12:26:09.000Z">
 <meta property="article:author" content="mingliang.gao">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Linux番外篇">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://pygo2.top/img_index/index/20190626%20-001.png">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20190626-001.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -304,7 +304,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          215 字
+          221 字
         
       </span>
     
@@ -375,6 +375,7 @@
           </div>
 
 <span id="more"></span>
+
 <hr />
 
 <p>学习以下多命令一起执行：&amp;、&amp;&amp;、；、||。</p>
@@ -392,13 +393,14 @@
 <blockquote>
 <p>&amp;&amp;</p>
 </blockquote>
-<p>语法：command1 &amp;&amp; command2 [&amp;&amp; command3] …<br>命令之间使用 &amp;&amp; 连接，实现逻辑<font color="red" size=5>与</font>的功能，只有左边的命令执行成功，后面命令才继续执行。</p>
+<p>语法：command1 &amp;&amp; command2 [&amp;&amp; command3] …<br>命令之间使用 &amp;&amp; 连接，实现逻辑<font color="red" size=5>与<code>&lt;/font&gt;</code>的功能，只有左边的命令执行成功，后面命令才继续执行。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">touch</span> 1.txt &amp;&amp; <span class="hljs-built_in">rm</span> ~/Desktop/1.txt &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;rm success&quot;</span><br></code></pre></td></tr></table></figure>
+
 <p>先touch一个1.txt文件，接下来在rm删除，最后输出success。</p>
 <blockquote>
 <p>||</p>
 </blockquote>
-<p>语法：command1 || command2 [|| command3] …<br>命令之间使用 || 连接，实现逻辑<font color="red" size=5>或</font>的功能，只有左边的命令执行失败，后面命令才继续执行。</p>
+<p>语法：command1 || command2 [|| command3] …<br>命令之间使用 || 连接，实现逻辑<font color="red" size=5>或<code>&lt;/font&gt;</code>的功能，只有左边的命令执行失败，后面命令才继续执行。</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">las <span class="hljs-string">|| echo &quot;</span>无命令<span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
 
                 
