@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python">
+  
+    <meta name="description" content="Python模块系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python模块之企业微信消息">
+<meta property="og:url" content="http://pygo2.top/articles/33254/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="Python模块系列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/article_python_module.jpeg">
+<meta property="article:published_time" content="2022-09-06T13:39:24.000Z">
+<meta property="article:modified_time" content="2022-09-06T13:39:24.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python模块系列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/article_python_module.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python模块之企业微信消息 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python模块之企业微信消息"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-06 21:39" pubdate>
+          创建日期：2022-09-06 09:39:24（星期二）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Python模块之企业微信消息</h1>
+            
+            
+              <div class="markdown-body">
+                
+                
+<div class="post_cus_note">Python模块系列</div>
+
+
+<span id="more"></span>
+<hr />
+
+
+
+<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Python</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>企业微信消息通知<br>腾讯企业微信官网提供一整套WebHook API接口，内容相当丰富，可以实现内部、第三方等各种各样的功能<br>详情参考reference urls</p>
+<h4 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h4><p>运用requests模拟API请求，这里主要实现了2大请求：</p>
+<ul>
+<li>ACCESS TOKEN：认证token获取</li>
+<li>SEND MESSAGE：发送消息</li>
+</ul>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">qywx_lib = QYWXLib(<span class="hljs-attribute">corp_id</span>=企业号标识, <span class="hljs-attribute">secret</span>=管理组凭证密钥, <span class="hljs-attribute">agent_id</span>=机器人应用ID)<br>qywx_lib.send_to_user_by_markdown(to_user, message)<br></code></pre></td></tr></table></figure>
+<p>初始化必须的参数：</p>
+<ul>
+<li>corp_id: 企业号标识</li>
+<li>secret: 管理组凭证密钥</li>
+<li>agent_id: 机器人应用ID</li>
+</ul>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br></pre></td><td class="code"><pre><code class="hljs vim"># -*- coding: utf-<span class="hljs-number">8</span> -*-<br><br><span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>------------------------------------------------<br><br>describe:<br>    企业微信消息通知<br>    腾讯企业微信官网提供一整套WebHook API接口，内容相当丰富，可以实现内部、第三方等各种各样的功能<br>    详情参考reference urls<br><br>base_info:<br>    __author__ = <span class="hljs-string">&quot;PyGo&quot;</span><br>    __time__ = <span class="hljs-string">&quot;2022/9/14&quot;</span><br>    __version__ = <span class="hljs-string">&quot;v.1.0.0&quot;</span><br>    __mail__ = <span class="hljs-string">&quot;gaoming971366@163.com&quot;</span><br>    __project__ = <span class="hljs-string">&quot;quality-inspect&quot;</span><br><br>usage:<br>    qywx_lib = QYWXLib(corp_id=企业号标识, secret=管理组凭证密钥, agent_id=机器人应用ID)<br>    qywx_lib.send_to_user_by_markdown(to_user, message)<br><br>    初始化必须的参数：<br>        - corp_id: 企业号标识<br>        - secret: 管理组凭证密钥<br>        - agent_id: 机器人应用ID<br><br>design:<br>    运用requests模拟API请求，这里主要实现了<span class="hljs-number">2</span>大请求：<br>        - ACCESS TOKEN：认证token获取<br>        - SEND MESSAGE：发送消息<br><br>reference urls:<br>  - ACCESS TOKEN：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">91039</span><br>  - 发送应用消息：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">90236</span><br>  - 全局错误码：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">90313</span>#<span class="hljs-number">10649</span><br>  --------------------------------------------------------------------------------------<br>    企业微信API response：<br>    &#123;<br>      <span class="hljs-string">&quot;errcode&quot;</span> : <span class="hljs-number">0</span>,<br>      <span class="hljs-string">&quot;errmsg&quot;</span> : <span class="hljs-string">&quot;ok&quot;</span>,<br>      <span class="hljs-string">&quot;invaliduser&quot;</span> : <span class="hljs-string">&quot;userid1|userid2&quot;</span>,<br>      <span class="hljs-string">&quot;invalidparty&quot;</span> : <span class="hljs-string">&quot;partyid1|partyid2&quot;</span>,<br>      <span class="hljs-string">&quot;invalidtag&quot;</span>: <span class="hljs-string">&quot;tagid1|tagid2&quot;</span>,<br>      <span class="hljs-string">&quot;unlicenseduser&quot;</span> : <span class="hljs-string">&quot;userid3|userid4&quot;</span>,<br>      <span class="hljs-string">&quot;msgid&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>,<br>      <span class="hljs-string">&quot;response_code&quot;</span>: <span class="hljs-string">&quot;xyzxyz&quot;</span><br>    &#125;<br>  --------------------------------------------------------------------------------------<br>  - 错误码查询工具：https://<span class="hljs-keyword">open</span>.work.weixin.qq.<span class="hljs-keyword">com</span>/devtool/query<br>  - 发消息API参考：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">90236</span><br>  - MARKDOWN语法：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">90236</span>#%E6%<span class="hljs-number">94</span>%AF%E6%<span class="hljs-number">8</span>C%<span class="hljs-number">81</span>%E7%<span class="hljs-number">9</span>A%<span class="hljs-number">84</span>markdown%E8%AF%AD%E6%B3%<span class="hljs-number">95</span><br><br><br><span class="hljs-keyword">python</span> <span class="hljs-keyword">version</span>:<br>    <span class="hljs-keyword">python3</span><br><br><br>Enjoy the good time everyday！！!<br>Life <span class="hljs-keyword">is</span> short, I use <span class="hljs-keyword">python</span>.<br><br>------------------------------------------------<br><span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br><br># ------------------------------------------------------------<br># usage: /usr/bin/<span class="hljs-keyword">python</span> qywx_lib.<span class="hljs-keyword">py</span><br># ------------------------------------------------------------<br>import requests<br><br>from deploy.status import Status<br>from config import QYWX_SEND_MESSAGE, \<br>    QYWX_ACCESS_TOKEN, DEBUG<br>from deploy.logger import logger <span class="hljs-keyword">as</span> LOG<br><br><br>class QYWXLib(object):<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>    QYWX class<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>    def __init__(self, corp_id, secret, agent_id):<br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        Initialize parameter<br>        :param corp_id: 企业号标识<br>        :param secret: 管理组凭证密钥<br>        :param agent_id: 机器人应用ID<br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        <span class="hljs-keyword">if</span> DEBUG:<br>            LOG.<span class="hljs-keyword">debug</span>(<span class="hljs-string">&#x27;QYWX lib is loading.&#x27;</span>)<br>        self.CORP_ID = corp_id<br>        self.SECRET = secret<br>        self.AGENT_ID = agent_id<br>        self.token = self.__init_token()   # 每次实例化调用初始化access token<br><br>    def __init_token(self):<br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        Initialize access token<br>        :<span class="hljs-keyword">return</span>: <span class="hljs-built_in">string</span><br><br>        请求方式： GET（HTTPS）<br>        请求地址： https://qyapi.weixin.qq.<span class="hljs-keyword">com</span>/cgi-bin/gettoken?corpid=ID&amp;corpsecret=SECRET<br>            - ID：企业号标识<br>            - SECRET：管理组凭证密钥<br>        返回示例：<br>            &#123;<br>               <span class="hljs-string">&quot;errcode&quot;</span>: <span class="hljs-number">0</span>,<br>               <span class="hljs-string">&quot;errmsg&quot;</span>: <span class="hljs-string">&quot;ok&quot;</span>,<br>               <span class="hljs-string">&quot;access_token&quot;</span>: <span class="hljs-string">&quot;accesstoken000001&quot;</span>,<br>               <span class="hljs-string">&quot;expires_in&quot;</span>: <span class="hljs-number">7200</span><br>            &#125;<br>            - errcode：出错返回码，为<span class="hljs-number">0</span>表示成功，非<span class="hljs-number">0</span>表示调用失败<br>            - errmsg：返回码提示语<br>            - access_token：获取到的凭证，最长为<span class="hljs-number">512</span>字节<br>            - expires_in：凭证的有效时间（秒）<br><br>        ACCESS TOKEN API参考：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">91039</span><br><br>        TODO<br>        <span class="hljs-number">7200</span>秒（<span class="hljs-number">2</span>小时）后续优化为缓存机制，避免在有效期内频繁调用<br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        <span class="hljs-keyword">if</span> DEBUG:<br>            LOG.<span class="hljs-keyword">debug</span>(<span class="hljs-string">&#x27;QYWX lib start to apply access token.&#x27;</span>)<br>        data = &#123;<br>            <span class="hljs-string">&quot;corpid&quot;</span>: self.CORP_ID,<br>            <span class="hljs-string">&quot;corpsecret&quot;</span>: self.SECRET<br>        &#125;<br>        req = requests.<span class="hljs-built_in">get</span>(url=QYWX_ACCESS_TOKEN, params=data)<br>        <span class="hljs-keyword">res</span> = req.json()<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">res</span>.<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;errcode&quot;</span>) == <span class="hljs-number">0</span> <span class="hljs-built_in">and</span> <span class="hljs-keyword">res</span>.<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;errmsg&quot;</span>) == <span class="hljs-string">&quot;ok&quot;</span>:<br>            <span class="hljs-keyword">if</span> DEBUG:<br>                LOG.<span class="hljs-keyword">debug</span>(<span class="hljs-string">&#x27;QYWX lib access token apply success.&#x27;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">res</span>.<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;access_token&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            LOG.error(<span class="hljs-string">&#x27;QYWX lib access token apply failure: %s&#x27;</span> % <span class="hljs-keyword">res</span>.<span class="hljs-built_in">get</span>(<span class="hljs-string">&#x27;errmsg&#x27;</span>))<br>            <span class="hljs-keyword">return</span> None<br><br>    def check_token(self):<br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        check access token <span class="hljs-keyword">is</span> <span class="hljs-built_in">or</span> not available<br>        :<span class="hljs-keyword">return</span>: bool<br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        <span class="hljs-keyword">return</span> True <span class="hljs-keyword">if</span> self.token <span class="hljs-keyword">else</span> False<br><br>    def send_to_user_by_markdown(self, to_user: <span class="hljs-keyword">list</span>, content: str, **kwargs):<br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        用户私发消息 &gt;&gt;&gt; markdown语法消息体<br><br>        send message <span class="hljs-keyword">to</span> user <span class="hljs-keyword">list</span> by the content of markdown <span class="hljs-built_in">type</span> data<br>        :param to_user: 企业微信用户ID列表，列表类型参数<br>        :param content: markdown消息体<br>        :param kwargs: 其他key-value参数<br>        :<span class="hljs-keyword">return</span>: json<br><br><br>        请求方式：POST（HTTPS）<br>        请求地址： https://qyapi.weixin.qq.<span class="hljs-keyword">com</span>/cgi-bin/message/send?access_token=ACCESS_TOKEN<br>            - ACCESS_TOKEN：access token<br>        请求数据：<br>            &#123;<br>               <span class="hljs-string">&quot;touser&quot;</span> : <span class="hljs-string">&quot;UserID1|UserID2|UserID3&quot;</span>,<br>               <span class="hljs-string">&quot;toparty&quot;</span> : <span class="hljs-string">&quot;PartyID1|PartyID2&quot;</span>,<br>               <span class="hljs-string">&quot;totag&quot;</span> : <span class="hljs-string">&quot;TagID1 | TagID2&quot;</span>,<br>               <span class="hljs-string">&quot;msgtype&quot;</span>: <span class="hljs-string">&quot;markdown&quot;</span>,<br>               <span class="hljs-string">&quot;agentid&quot;</span> : <span class="hljs-number">1</span>,<br>               <span class="hljs-string">&quot;markdown&quot;</span>: &#123;<br>                    <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;&quot;</span><br>               &#125;,<br>               <span class="hljs-string">&quot;enable_duplicate_check&quot;</span>: <span class="hljs-number">0</span>,<br>               <span class="hljs-string">&quot;duplicate_check_interval&quot;</span>: <span class="hljs-number">1800</span><br>            &#125;<br>        参数说明：<br>            参数	         是否必须	            说明<br>            touser	        否	            成员ID列表（消息接收者，多个接收者用‘|’分隔，最多支持<span class="hljs-number">1000</span>个）。特殊情况：指定为@all，则向关注该企业应用的全部成员发送<br>            toparty	        否	            部门ID列表，多个接收者用‘|’分隔，最多支持<span class="hljs-number">100</span>个。当touser为@all时忽略本参数<br>            totag	        否	            标签ID列表，多个接收者用‘|’分隔，最多支持<span class="hljs-number">100</span>个。当touser为@all时忽略本参数<br>            msgtype	        是	            消息类型，此时固定为：markdown<br>            agentid	        是	            企业应用的id，整型。企业内部开发，可在应用的设置页面查看；第三方服务商，可通过接口 获取企业授权信息 获取该参数值<br>            content	        是	            markdown内容，最长不超过<span class="hljs-number">2048</span>个字节，必须是utf8编码<br>            enable_duplicate_check	否	    表示是否开启重复消息检查，<span class="hljs-number">0</span>表示否，<span class="hljs-number">1</span>表示是，默认<span class="hljs-number">0</span><br>            duplicate_check_interval	否	表示是否重复消息检查的时间间隔，默认<span class="hljs-number">1800</span>s，最大不超过<span class="hljs-number">4</span>小时<br>        返回示例：<br>            &#123;<br>              <span class="hljs-string">&quot;errcode&quot;</span> : <span class="hljs-number">0</span>,<br>              <span class="hljs-string">&quot;errmsg&quot;</span> : <span class="hljs-string">&quot;ok&quot;</span>,<br>              <span class="hljs-string">&quot;invaliduser&quot;</span> : <span class="hljs-string">&quot;userid1|userid2&quot;</span>,<br>              <span class="hljs-string">&quot;invalidparty&quot;</span> : <span class="hljs-string">&quot;partyid1|partyid2&quot;</span>,<br>              <span class="hljs-string">&quot;invalidtag&quot;</span>: <span class="hljs-string">&quot;tagid1|tagid2&quot;</span>,<br>              <span class="hljs-string">&quot;unlicenseduser&quot;</span> : <span class="hljs-string">&quot;userid3|userid4&quot;</span>,<br>              <span class="hljs-string">&quot;msgid&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>,<br>              <span class="hljs-string">&quot;response_code&quot;</span>: <span class="hljs-string">&quot;xyzxyz&quot;</span><br>            &#125;<br>            - errcode：返回码<br>            - errmsg：对返回码的文本描述内容<br>            - invaliduser：不合法的userid，不区分大小写，统一转为小写<br>            - invalidparty：不合法的partyid<br>            - invalidtag：不合法的标签id<br>            - unlicenseduser：没有基础接口许可(包含已过期)的userid<br>            - msgid：消息id，用于撤回应用消息<br>            - response_code：仅消息类型为“按钮交互型”，“投票选择型”和“多项选择型”的模板卡片消息返回，应用可使用response_code调用更新模版卡片消息接口，<span class="hljs-number">24</span>小时内有效，且只能使用一次<br><br>        发消息API参考：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">90236</span><br>        MARKDOWN语法：https://developer.work.weixin.qq.<span class="hljs-keyword">com</span>/document/path/<span class="hljs-number">90236</span>#%E6%<span class="hljs-number">94</span>%AF%E6%<span class="hljs-number">8</span>C%<span class="hljs-number">81</span>%E7%<span class="hljs-number">9</span>A%<span class="hljs-number">84</span>markdown%E8%AF%AD%E6%B3%<span class="hljs-number">95</span><br>        <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>        <span class="hljs-keyword">if</span> not self.token:<br>            <span class="hljs-keyword">return</span> Status(<span class="hljs-number">212</span>, <span class="hljs-string">&#x27;failure&#x27;</span>, <span class="hljs-string">&#x27;请检查access token是否获取成功&#x27;</span>, &#123;&#125;).json()<br>        <span class="hljs-keyword">if</span> not to_user:<br>            <span class="hljs-keyword">return</span> Status(<span class="hljs-number">212</span>, <span class="hljs-string">&#x27;failure&#x27;</span>, <span class="hljs-string">&#x27;缺少用户列表&#x27;</span>, &#123;&#125;).json()<br>        <span class="hljs-keyword">if</span> not isinstance(to_user, <span class="hljs-keyword">list</span>):<br>            <span class="hljs-keyword">return</span> Status(<span class="hljs-number">213</span>, <span class="hljs-string">&#x27;failure&#x27;</span>, <span class="hljs-string">&#x27;用户列表必须为List类型&#x27;</span>, &#123;&#125;).json()<br>        <span class="hljs-keyword">if</span> not content:<br>            <span class="hljs-keyword">return</span> Status(<span class="hljs-number">212</span>, <span class="hljs-string">&#x27;failure&#x27;</span>, <span class="hljs-string">&#x27;缺少消息内容&#x27;</span>, &#123;&#125;).json()<br><br>        url = <span class="hljs-string">&quot;%s?access_token=%s&quot;</span> % (QYWX_SEND_MESSAGE, self.token)<br>        data = &#123;<br>            <span class="hljs-string">&quot;touser&quot;</span>: <span class="hljs-string">&quot;|&quot;</span>.<span class="hljs-keyword">join</span>(to_user),<br>            <span class="hljs-string">&quot;msgtype&quot;</span>: <span class="hljs-string">&quot;markdown&quot;</span>,<br>            <span class="hljs-string">&quot;agentid&quot;</span>: self.AGENT_ID,<br>            <span class="hljs-string">&quot;markdown&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;content&quot;</span>: content<br>            &#125;,<br>            <span class="hljs-string">&quot;enable_duplicate_check&quot;</span>: <span class="hljs-number">0</span>,<br>            <span class="hljs-string">&quot;duplicate_check_interval&quot;</span>: <span class="hljs-number">1800</span><br>        &#125;<br>        req = requests.post(url=url, json=data)<br>        <span class="hljs-keyword">res</span> = req.json()<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">res</span>.<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;errcode&quot;</span>) == <span class="hljs-number">0</span> <span class="hljs-built_in">and</span> <span class="hljs-keyword">res</span>.<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;errmsg&quot;</span>) == <span class="hljs-string">&quot;ok&quot;</span>:<br>            <span class="hljs-keyword">return</span> Status(<span class="hljs-number">100</span>, <span class="hljs-string">&#x27;success&#x27;</span>, <span class="hljs-string">&#x27;成功&#x27;</span>, &#123;&#125;).json()<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> Status(<span class="hljs-number">501</span>, <span class="hljs-string">&#x27;failure&#x27;</span>, <span class="hljs-keyword">res</span>.<span class="hljs-built_in">get</span>(<span class="hljs-string">&#x27;errmsg&#x27;</span>), &#123;&#125;).json()<br></code></pre></td></tr></table></figure>
+
+<h4 id="官网API教程"><a href="#官网API教程" class="headerlink" title="官网API教程"></a>官网API教程</h4><ul>
+<li>ACCESS TOKEN：<a target="_blank" rel="noopener" href="https://developer.work.weixin.qq.com/document/path/91039">https://developer.work.weixin.qq.com/document/path/91039</a></li>
+<li>发送应用消息：<a target="_blank" rel="noopener" href="https://developer.work.weixin.qq.com/document/path/90236">https://developer.work.weixin.qq.com/document/path/90236</a></li>
+<li>全局错误码：<a target="_blank" rel="noopener" href="https://developer.work.weixin.qq.com/document/path/90313#10649">https://developer.work.weixin.qq.com/document/path/90313#10649</a></li>
+</ul>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ada">企业微信API response：<br>&#123;<br>  <span class="hljs-string">&quot;errcode&quot;</span> : 0,<br>  <span class="hljs-string">&quot;errmsg&quot;</span> : &quot;<span class="hljs-type">ok</span><span class="hljs-string">&quot;,</span><br><span class="hljs-string">  &quot;</span>invaliduser<span class="hljs-string">&quot; : &quot;</span>userid1|userid2<span class="hljs-string">&quot;,</span><br><span class="hljs-string">  &quot;</span>invalidparty<span class="hljs-string">&quot; : &quot;</span>partyid1|partyid2<span class="hljs-string">&quot;,</span><br><span class="hljs-string">  &quot;</span>invalidtag<span class="hljs-string">&quot;: &quot;</span>tagid1|tagid2<span class="hljs-string">&quot;,</span><br><span class="hljs-string">  &quot;</span>unlicenseduser<span class="hljs-string">&quot; : &quot;</span>userid3|userid4<span class="hljs-string">&quot;,</span><br><span class="hljs-string">  &quot;</span>msgid<span class="hljs-string">&quot;: &quot;</span>xxxx<span class="hljs-string">&quot;,</span><br><span class="hljs-string">  &quot;</span>response_code<span class="hljs-string">&quot;: &quot;</span>xyzxyz<span class="hljs-string">&quot;</span><br><span class="hljs-string">&#125;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>错误码查询工具：<a target="_blank" rel="noopener" href="https://open.work.weixin.qq.com/devtool/query">https://open.work.weixin.qq.com/devtool/query</a></li>
+<li>发消息API参考：<a target="_blank" rel="noopener" href="https://developer.work.weixin.qq.com/document/path/90236">https://developer.work.weixin.qq.com/document/path/90236</a></li>
+<li>MARKDOWN语法：<a target="_blank" rel="noopener" href="https://developer.work.weixin.qq.com/document/path/90236#%E6%94%AF%E6%8C%81%E7%9A%84markdown%E8%AF%AD%E6%B3%95">https://developer.work.weixin.qq.com/document/path/90236#%E6%94%AF%E6%8C%81%E7%9A%84markdown%E8%AF%AD%E6%B3%95</a></li>
+</ul>
+<h4 id="系列"><a href="#系列" class="headerlink" title="系列"></a>系列</h4><p><a href="http://pygo2.top/articles/26110/">Python模块之command系统命令</a><br><a href="http://pygo2.top/articles/19275/">Python模块之excel模块</a><br><a href="http://pygo2.top/articles/5145/">Python模块之logger日志</a><br><a href="http://pygo2.top/articles/61799/">Python模块之utils公共方法</a><br><a href="http://pygo2.top/articles/31232/">Python模块之watcher打点</a><br><a href="http://pygo2.top/articles/51787/">Python模块之config配置解析</a><br><a href="http://pygo2.top/articles/58292/">Python模块之dtalk钉钉消息</a><br><a href="http://pygo2.top/articles/33254/">Python模块之企业微信</a></p>
+<p>更多模块请参考文章TAG进行查看。</p>
+<p><font size=6.5 color='red'><em><strong>Python模块系列，持续更新中。。。。。。</strong></em></font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Python%E6%A8%A1%E5%9D%97%E7%B3%BB%E5%88%97/" class="print-no-link">#Python模块系列</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python模块之企业微信消息</div>
+      <div>http://pygo2.top/articles/33254/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/30542/" title="Oracle手工导入dat数据">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Oracle手工导入dat数据</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/58292/" title="Python模块之dtalk钉钉消息">
+                        <span class="hidden-mobile">Python模块之dtalk钉钉消息</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Windows, Server, 2012, R2, 安装, PLSQL">
+  
+    <meta name="description" content="实战部署系列教程：Windows安装PLSQL与配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows Server2012R2安装PLSQL">
+<meta property="og:url" content="http://pygo2.top/articles/47618/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="实战部署系列教程：Windows安装PLSQL与配置。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20220727-001.png">
+<meta property="article:published_time" content="2022-07-27T13:32:56.000Z">
+<meta property="article:modified_time" content="2022-07-27T13:32:56.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="部署教程系列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20220727-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Windows Server2012R2安装PLSQL || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows Server2012R2安装PLSQL"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-27 21:32" pubdate>
+          创建日期：2022-07-27 09:32:56（星期三）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Windows Server2012R2安装PLSQL</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>实战部署系列教程：<font color="blue" size="7">Windows安装PLSQL与配置</font>。</p>
+<span id="more"></span>
+<hr />
+
+<span class="label label-info">PLSQL</span> <span class="label label-primary">Windows</span> <span class="label label-default">Oracle</span>
+
+<h4 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h4><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务器系统</td>
+<td align="center">Windows Server2012 R2 Standard</td>
+</tr>
+<tr>
+<td align="center">PSQL</td>
+<td align="center">PSQL（32位）</td>
+</tr>
+<tr>
+<td align="center">Instant Client客户端实例</td>
+<td align="center">11.2.0.4.0（32位）</td>
+</tr>
+</tbody></table>
+<h4 id="材料准备"><a href="#材料准备" class="headerlink" title="材料准备"></a>材料准备</h4><ul>
+<li>PLSQL安装包（32位）</li>
+<li>Oracle Instant Client:instantclient包（32位）</li>
+</ul>
+<p><font size=5.5 color='red'>（需要配套，位数保持一致）</font></p>
+<p>一套工具baidu云盘下载：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">=====================================================================<br>链接：https://pan.baidu.com/s/1LuLaIxK4z7AQgNFHZhoTHw?pwd=4tgc<br>提取码：4tgc<br>=====================================================================<br></code></pre></td></tr></table></figure>
+<p>下载包含PLSQL（32位），Oracle Instant Client（32位、64位）</p>
+<h4 id="官网下载"><a href="#官网下载" class="headerlink" title="官网下载"></a>官网下载</h4><p>1、下载PLSQL，请自行下载PJ版本。</p>
+<p>2、下载Oracle instantclient包，打开Oracle官网Instant下载地址：<br><a target="_blank" rel="noopener" href="https://www.oracle.com/database/technologies/instant-client/downloads.html">https://www.oracle.com/database/technologies/instant-client/downloads.html</a><br>下载32位版本：<br><img src="/articles/47618/721662566764_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>3、进入32版本页面之后，ctrl+f页面搜索11.，下载11.2.0.4.0版本的包<br><img src="/articles/47618/731662566784_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>4、点击下载11.2.0.4.0包之后，Oracle会让注册一个用户，正常按注册流程走完注册成功后，会进行下载。<br>这里我32位和64位都下载了，以防连接时候出现版本问题。<br>64位下载的方式跟上面一样。</p>
+<p>5、下载好的PLSQL、Oracle Instant Client：<br><img src="/articles/47618/741662566803_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>1、PLSQL软件组成有3个部分，PLSQL安装包、中文语言包、注册信息<br><img src="/articles/47618/751662566846_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>2、直接点击plsqldev1106x32.exe进行安装，选择安装在D盘根目录，避免安装路径包含中文或者空格<br><img src="/articles/47618/761662566867_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>3、安装中文包:Language_zh_x86_x64.exe<br>PLSQL安装路径会自动识别，一直下一步即可。</p>
+<p>4、安装完点击桌面plsql快捷进行登录，点击取消直接先登录<br><img src="/articles/47618/771662566885_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>5、点击菜单帮助 -&gt; 注册 -&gt; 把注册信息填写，完成注册<br><img src="/articles/47618/781662566910_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>1、解压文件：instantclient-basic-nt-11.2.0.4.0.zip<br>把文件放在D盘根目录<br><img src="/articles/47618/801662566966_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>2、打开PLSQL，点击取消进行登录，点击菜单工具 -&gt; 首先项 -&gt; 连接<br><img src="/articles/47618/811662566980_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>3、配置以下内容，instantclient目录已实际为准<br>Oracle主目录：D:\instantclient_11_2<br>OCI库：D:\instantclient_11_2\oci.dll<br>其中，OCI库一定要选择根目录下的oci.dll【重点】</p>
+<p>4、应用 -&gt; 确定，关闭PLSQL</p>
+<p>5、配置TNS_ADMIN监听文件<br>在D:\instantclient_11_2\NETWORK\ADMIN目录找到tnsnames.ora文件。其实，这个tnsnames.ora文件是服务器数据库文件一样的，具体位置:<br><img src="/articles/47618/821662567000_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>如果没有自行创建一个或者直接把服务器上面那个文件复制出一份，写入以下内容。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">=========================================================<br><span class="hljs-comment"># tnsnames.ora Network Configuration File: D:\instantclient_11_2\NETWORK\ADMIN\tnsnames.ora</span><br><span class="hljs-comment"># Generated by Oracle configuration tools.</span><br><br>PAS =<br>  <span class="hljs-params">(<span class="hljs-attr">DESCRIPTION</span> =</span><br><span class="hljs-params">    (<span class="hljs-attr">ADDRESS</span> = (<span class="hljs-attr">PROTOCOL</span> = TCP)</span><span class="hljs-params">(<span class="hljs-attr">HOST</span> = 10.15.176.9)</span><span class="hljs-params">(<span class="hljs-attr">PORT</span> = 1521)</span>)<br>    <span class="hljs-params">(<span class="hljs-attr">CONNECT_DATA</span> =</span><br><span class="hljs-params">      (<span class="hljs-attr">SERVER</span> = DEDICATED)</span><br>      <span class="hljs-params">(<span class="hljs-attr">SERVICE_NAME</span> = PAS)</span><br>    )<br>  )<br></code></pre></td></tr></table></figure>
+<p>修改的配置值：</p>
+<blockquote>
+<p>IP</p>
+</blockquote>
+<p>10.15.176.9修改成数据库服务器IP，通过ip addr 或者 ifconfig（找到eth0网卡的ip）</p>
+<blockquote>
+<p>SERVICE_NAME</p>
+</blockquote>
+<p>通过SQPLUS获取当前数据库SERVICE_NAME，执行语句如下：<br>【数据库服务器】</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cos">su - oracle<br>sqlplus / <span class="hljs-keyword">as</span> /sysdba<br>show <span class="hljs-keyword">parameter</span> service_<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/47618/831662567037_.pic.jpg" srcset="/img/loading.gif" lazyload><br>修改完成后保存文件。</p>
+<p>6、环境变量配置<br>安装以后需要进行环境变量配置。<br>6.1 我的电脑（右键）-&gt;选择属性-&gt;高级系统设置-&gt;环境变量。<br><img src="/articles/47618/841662567109_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>6.2 环境变量配置<br>6.2.1 新建ORACLE_HOME变量<br>变量名：ORACLE_HOME<br>变量值：D:\instantclient_11_2<br><img src="/articles/47618/851662567125_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>6.2.2 新建NLS_LANG变量<br>变量名：NLS_LANG<br>变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK<br><img src="/articles/47618/861662567141_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>6.2.3 新建TNS_ADMIN变量<br>变量名：TNS_ADMIN<br>变量值：D:\instantclient_11_2\NETWORK\ADMIN<br><img src="/articles/47618/871662567157_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>7、测试PLSQL，输入相关信息登录。<br><img src="/articles/47618/881662567170_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="拓展问题"><a href="#拓展问题" class="headerlink" title="拓展问题"></a>拓展问题</h4><p>1、PLSQ出现了初始化错误，请检查32bits Oracle Client installed<br>如果使用了本教程提供的整套工具，应该是可以连接上的，需要PLSQL版本位数与instantclient位数保持一致。<br>如果需要提供一个32位Oracle Client包。</p>
+<p>2、NLS_LANG特殊说明<br>Oracle配置的用户NLS_LANG变量是：</p>
+<ul>
+<li>AMERICAN_AMERICA.ZHS16GBK<br>Windows服务器配置NLS_LANG变量</li>
+<li>SIMPLIFIED CHINESE_CHINA.ZHS16GBK<br>简单解释一下，NLS_LANG由三部分组成：<br>（一）语言：SIMPLIFIED CHINESE 或者 AMERICAN<br>影响的是中文还是英文提示<br>区域：CHINA 或者AMERICA<br>影响的是日期、数字、金融格式什么的<br>字符集：ZHS16GBK<br>都采用的ZHS16GBK字符集，只要保持这个一直，就可以保持数据库备份，到另一个数据库恢复，中文不会乱码<br>一定要按保持字符集一样</li>
+</ul>
+
+<div class="post_cus_note"> =========== END =========== </div>
+
+
+<h4 id="部署教程系列"><a href="#部署教程系列" class="headerlink" title="部署教程系列"></a>部署教程系列</h4><ul>
+<li>LINUX+ORACLE部署安装：<a href="http://pygo2.top/articles/40987/">http://pygo2.top/articles/40987/</a></li>
+<li>Linux安装JAVA1.7与配置：<a href="http://pygo2.top/articles/13502/">http://pygo2.top/articles/13502/</a></li>
+<li>Windows安装JAVA1.7与配置：<a href="http://pygo2.top/articles/1151/">http://pygo2.top/articles/1151/</a></li>
+<li>Windows安装Tomcat7与配置：<a href="http://pygo2.top/articles/2013/">http://pygo2.top/articles/2013/</a></li>
+<li>Windows安装PLSQL与配置：<a href="http://pygo2.top/articles/47618/">http://pygo2.top/articles/47618/</a></li>
+</ul>
+<p><font size=6.5 color='red'>部署系列持续更新中。。。。。。</font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Windows/" class="category-chain-item">Windows</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Oracle/" class="print-no-link">#Oracle</a>
+      
+        <a href="/tags/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B%E7%B3%BB%E5%88%97/" class="print-no-link">#部署教程系列</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows Server2012R2安装PLSQL</div>
+      <div>http://pygo2.top/articles/47618/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/40987/" title="Oracle数据库Redhat7.4部署安装">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Oracle数据库Redhat7.4部署安装</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/2013/" title="Windows Server2012R2安装TOMCAT">
+                        <span class="hidden-mobile">Windows Server2012R2安装TOMCAT</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

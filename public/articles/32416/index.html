@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python, Hadoop, Ubuntu, 大数据, Hadoop集群, VMware, java, JDK, 数据处理">
+  
+    <meta name="description" content="最近BigData貌似很火，本人也跟着一起凑凑热闹，尝试了本机部署Hadoop1.2.1版本，基于Hadoop1.2.1 + Python2.7 + Ubuntu15.10技术栈，讲述Hadoop集群的安装过程，有什么不准确之处可以留言，一起交流share。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu15.10系统安装Hadoop1.2.1集群">
+<meta property="og:url" content="http://pygo2.top/articles/32416/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="最近BigData貌似很火，本人也跟着一起凑凑热闹，尝试了本机部署Hadoop1.2.1版本，基于Hadoop1.2.1 + Python2.7 + Ubuntu15.10技术栈，讲述Hadoop集群的安装过程，有什么不准确之处可以留言，一起交流share。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20160920-001.png">
+<meta property="article:published_time" content="2016-09-20T10:34:25.000Z">
+<meta property="article:modified_time" content="2025-08-10T10:18:02.866Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python程序篇">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Hadoop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20160920-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Ubuntu15.10系统安装Hadoop1.2.1集群 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Ubuntu15.10系统安装Hadoop1.2.1集群"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2016-09-20 18:34" pubdate>
+          创建日期：2016-09-20 06:34:25（星期二）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Ubuntu15.10系统安装Hadoop1.2.1集群</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近BigData貌似很火，本人也跟着一起凑凑热闹，尝试了本机部署Hadoop1.2.1版本，基于Hadoop1.2.1 + Python2.7 + Ubuntu15.10技术栈，讲述Hadoop集群的安装过程，有什么不准确之处可以留言，一起交流<em><strong>share</strong></em>。</p>
+<span id="more"></span>
+
+<hr />
+
+<h2 id="1、摘要"><a href="#1、摘要" class="headerlink" title="1、摘要"></a>1、摘要</h2><p>由于Ubuntu对于Python的支持很好，个人也觉得Ubuntu确实不错，所以使用的是Ubuntu15.10系统，处理大数据采用Python + Hadoop的方式进行处理。</p>
+<h2 id="2、版本信息"><a href="#2、版本信息" class="headerlink" title="2、版本信息"></a>2、版本信息</h2><table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">vsersion</th>
+<th align="center">remark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Ubuntu</td>
+<td align="center">15.10</td>
+<td align="center">系统的版本</td>
+</tr>
+<tr>
+<td align="center">Python</td>
+<td align="center">2.7</td>
+<td align="center">开发语言</td>
+</tr>
+<tr>
+<td align="center">JDK</td>
+<td align="center">1.7</td>
+<td align="center">Hadoop运行的基础环境</td>
+</tr>
+<tr>
+<td align="center">Hadoop</td>
+<td align="center">1.2.1</td>
+<td align="center">大数据处理工具</td>
+</tr>
+<tr>
+<td align="center">VMware</td>
+<td align="center">6.0</td>
+<td align="center">虚拟机</td>
+</tr>
+</tbody></table>
+<h2 id="3、正文"><a href="#3、正文" class="headerlink" title="3、正文"></a>3、正文</h2><p>本文主要讲述hadoop集群的安装过程，尽量依次按步骤执行。</p>
+<h3 id="3-1、虚拟机安装"><a href="#3-1、虚拟机安装" class="headerlink" title="3.1、虚拟机安装"></a>3.1、虚拟机安装</h3><p>首先VMware上安装4台虚拟机，分别是Ubuntu15.10系统，具体安装百度即可so easy。安装时候对电脑的机器名直接命名为master，node01，node02，node03（1个主节点，3个子节点），接下来2-7的操作是针对于这4台虚拟机分别进行同样的操作。</p>
+<h3 id="3-2、创建hadoop用户组"><a href="#3-2、创建hadoop用户组" class="headerlink" title="3.2、创建hadoop用户组"></a>3.2、创建hadoop用户组</h3><p>命令：<em><strong>sudo addgroup hadoop</strong></em><br><img src="/articles/32416/addgroup.jpg" srcset="/img/loading.gif" lazyload alt="addgroup"></p>
+<h3 id="3-3、创建hadoop用户"><a href="#3-3、创建hadoop用户" class="headerlink" title="3.3、创建hadoop用户"></a>3.3、创建hadoop用户</h3><p>命令：<em><strong>sudo adduser -ingroup hadoop</strong></em><br><img src="/articles/32416/adduser.jpg" srcset="/img/loading.gif" lazyload alt="adduser"><br>回车后会提示输入新的UNIX密码，这是新建用户hadoop的密码，输入回车即可。如果不输入密码，回车后会重新提示输入密码，即密码不能为空。最后确认信息是否正确，如果没问题，输入 Y，回车即可。</p>
+<h3 id="3-4、添加hadoop-root权限"><a href="#3-4、添加hadoop-root权限" class="headerlink" title="3.4、添加hadoop root权限"></a>3.4、添加hadoop root权限</h3><p>命令：<em><strong>sudo gedit &#x2F;etc&#x2F;sudoers</strong></em><br><img src="/articles/32416/gedit.jpg" srcset="/img/loading.gif" lazyload alt="gedit"><br>打开sudoers 文件，在root	ALL&#x3D;(ALL:ALL) ALL这行下面添加：<br>hadoop	ALL&#x3D;(ALL:ALL) ALL<br>修改完保存关闭即可。<br>** 注：如果系统的gedit用不了，自行上网解决，这里给出的方案是用vi或vim。**</p>
+<h3 id="3-5、切换到hadoop用户"><a href="#3-5、切换到hadoop用户" class="headerlink" title="3.5、切换到hadoop用户"></a>3.5、切换到hadoop用户</h3><p>命令：<em><strong>su hadoop</strong></em>，输入密码即可登录hadoop用户。<br><img src="/articles/32416/su_hadoop.jpg" srcset="/img/loading.gif" lazyload alt="su_hadoop"></p>
+<h3 id="3-6、安装ssh"><a href="#3-6、安装ssh" class="headerlink" title="3.6、安装ssh"></a>3.6、安装ssh</h3><p>命令：<em><strong>sudo apt-get install openssh-server</strong></em><br><img src="/articles/32416/openssh.jpg" srcset="/img/loading.gif" lazyload alt="openssh"><br>安装完成后启动ssh服务，命令：<em><strong>sudo &#x2F;etc&#x2F;init.d&#x2F;ssh start</strong></em><br>查看ssh服务是否启动，命令：<em><strong>ps -ef | grep ssh</strong></em><br><img src="/articles/32416/grep.jpg" srcset="/img/loading.gif" lazyload alt="grep"><br>服务存在之后，设置实现ssh免密码登录，命令：<em><strong>ssh-keygen -t rsa -P “”</strong></em><br><img src="/articles/32416/ssh.jpg" srcset="/img/loading.gif" lazyload alt="ssh"><br>下面我们将公钥追加到authorized_keys中，它用户保存所有允许以当前用户身份登录到ssh客户端用户的公钥内容，命令：<br><em><strong>cat ~&#x2F;.ssh&#x2F;id_rsa.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys</strong></em><br><img src="/articles/32416/cat.jpg" srcset="/img/loading.gif" lazyload alt="cat"></p>
+<h3 id="3-7、登录ssh"><a href="#3-7、登录ssh" class="headerlink" title="3.7、登录ssh"></a>3.7、登录ssh</h3><p>命令：<em><strong>ssh localhost</strong></em>，退出，命令：<em><strong>exit</strong></em><br><img src="/articles/32416/ssh_localhost.jpg" srcset="/img/loading.gif" lazyload alt="ssh_localhost"></p>
+<h3 id="3-8、安装Java环境"><a href="#3-8、安装Java环境" class="headerlink" title="3.8、安装Java环境"></a>3.8、安装Java环境</h3><p>命令：<em><strong>sudo apt-get install openjdk-7-jdk</strong></em><br><img src="/articles/32416/install_java.jpg" srcset="/img/loading.gif" lazyload alt="install_java"><br>查看安装结果，输入命令：<em><strong>java -version</strong></em>，结果如下表示安装成功。<br><img src="/articles/32416/java_version.jpg" srcset="/img/loading.gif" lazyload alt="java_version"><br>注：java安装默认路径：&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java-7-openjdk-amd64<br>以上操作基于hadoop用户，并且每个电脑配置一致</p>
+<h3 id="3-9、hadoop配置"><a href="#3-9、hadoop配置" class="headerlink" title="3.9、hadoop配置"></a>3.9、hadoop配置</h3><pre><code class="hljs">正餐开始了，仔细看！！！
+</code></pre>
+<ul>
+<li><h4 id="3-9-1、hadoop-env配置："><a href="#3-9-1、hadoop-env配置：" class="headerlink" title="3.9.1、hadoop-env配置："></a>3.9.1、hadoop-env配置：</h4>进入到hadoop文件的conf文件夹，使用命令：<em><strong>sudo gedit hadoop-env.sh</strong></em><br><img src="/articles/32416/gedit_hadoop_env.jpg" srcset="/img/loading.gif" lazyload alt="gedit_hadoop_env"><br>添加以下信息到文件中，保存即可。<br>解释下内容：JAVA_HOME是java的安装路径，HADOOP_INSTALL是hadoop的安装路径，PATH是系统文件路径:</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">JAVA_HOME</span>=/usr/lib/jvm/java-7-openjdk-amd64<br><span class="hljs-built_in">export</span> <span class="hljs-attribute">HADOOP_INSTALL</span>=/usr/local/hadoop<br><span class="hljs-built_in">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:/usr/local/hadoop/bin<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/32416/hadoop_path.jpg" srcset="/img/loading.gif" lazyload alt="hadoop_path"></p>
+<ul>
+<li><h4 id="3-9-2、core-site-xml配置"><a href="#3-9-2、core-site-xml配置" class="headerlink" title="3.9.2、core-site.xml配置"></a>3.9.2、core-site.xml配置</h4>hadoop文件的conf文件夹，使用命令：<em><strong>sudo gedit core-site.xml</strong></em><br><img src="/articles/32416/gedit_core_site.jpg" srcset="/img/loading.gif" lazyload alt="gedit_core_site"><br>添加以下信息到文件中，保存即可。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>fs.default.name<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>hdfs:192.168.2.139:9000<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">final</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">final</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hadoop.tmp.dir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/home/hadoop/hadoop/tmp<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">description</span>&gt;</span>A base for other temporary directory<span class="hljs-tag">&lt;/<span class="hljs-name">description</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="3-9-3、hdfs-site-xml配置"><a href="#3-9-3、hdfs-site-xml配置" class="headerlink" title="3.9.3、hdfs-site.xml配置"></a>3.9.3、hdfs-site.xml配置</h4>hadoop文件的conf文件夹，使用命令：<em><strong>sudo gedit hdfs-site.xml</strong></em><br><img src="/articles/32416/gedit_hdfs_site.jpg" srcset="/img/loading.gif" lazyload alt="gedit_hdfs_site"><br>添加以下信息到文件中，保存即可。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>dfs.name.dir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/home/hadoop/hadoop/name<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">final</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">final</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>dfs.data.dir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/home/hadoop/hadoop/data<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">final</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">final</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>dfs.replication<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">final</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">final</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="3-9-4、mapred-site-xml配置"><a href="#3-9-4、mapred-site-xml配置" class="headerlink" title="3.9.4、mapred-site.xml配置"></a>3.9.4、mapred-site.xml配置</h4>hadoop文件的conf文件夹，使用命令：<em><strong>sudo gedit mapred-site.xml</strong></em><br><img src="/articles/32416/gedit_mapred_site.jpg" srcset="/img/loading.gif" lazyload alt="gedit_mapred_site"><br>添加以下信息到文件中，保存即可。</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;configuration&gt;</span><br>  <span class="hljs-section">&lt;property&gt;</span><br>    <span class="hljs-section">&lt;name&gt;</span><span class="hljs-attribute">mapred</span>.job.tracker&lt;/name&gt;<br>    <span class="hljs-section">&lt;value&gt;</span><span class="hljs-attribute">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">2</span>.<span class="hljs-number">139</span>:<span class="hljs-number">9001</span>&lt;/value&gt;<br>  <span class="hljs-section">&lt;/property&gt;</span><br><span class="hljs-section">&lt;/configuration&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="3-9-5、master和slaves配置"><a href="#3-9-5、master和slaves配置" class="headerlink" title="3.9.5、master和slaves配置"></a>3.9.5、master和slaves配置</h4>hadoop文件的conf文件夹，使用命令：<em><strong>sudo gedit master</strong></em>，<em><strong>sudo gedit slaves</strong></em><br><img src="/articles/32416/gedit_master_slaves.jpg" srcset="/img/loading.gif" lazyload alt="gedit_master_slaves"><br>在master文件中添加主节点计算机名称&#x2F;IP即可。<br>在slaves文件中添加子节点计算机名称&#x2F;IP即可。</li>
+</ul>
+<h3 id="3-10、复制hadoop"><a href="#3-10、复制hadoop" class="headerlink" title="3.10、复制hadoop"></a>3.10、复制hadoop</h3><p>把hadoop分别向其他机器上复制一份，放到相同目录。<br>命令：scp（自行百度用法，这里不做详述）</p>
+<h3 id="3-11、建立hadoop所需文件夹"><a href="#3-11、建立hadoop所需文件夹" class="headerlink" title="3.11、建立hadoop所需文件夹"></a>3.11、建立hadoop所需文件夹</h3><p>在每个机器上建立所需要的文件夹，在步骤8中有core中配置的hadoop.tmp.dir文件夹，hdfs中配置的dfs.data.dir文件夹，需要进行建立以及是hadoop用户，读写权限。<br>执行命令：<em><strong>sudo mkdir</strong></em></p>
+<h3 id="3-12、格式化namenode"><a href="#3-12、格式化namenode" class="headerlink" title="3.12、格式化namenode"></a>3.12、格式化namenode</h3><p>进入到hadoop&#x2F;bin目录，在主节点机器上执行命令：<em><strong>hadooop namenode -fomat</strong></em>，出现successfully字样成功，不成功大部分都是配置文件的问题。</p>
+<h3 id="3-13、启动hadoop"><a href="#3-13、启动hadoop" class="headerlink" title="3.13、启动hadoop"></a>3.13、启动hadoop</h3><p>在主节点机器上进入hadoop&#x2F;bin目录下，执行命令:<em><strong>hadoop-start.sh</strong></em>，分别会启动NameNode,Jobtracker,SecondaryNameNode,DataNodeTaskTracker</p>
+<h3 id="3-14、查看hadoop"><a href="#3-14、查看hadoop" class="headerlink" title="3.14、查看hadoop"></a>3.14、查看hadoop</h3><p>在主节点机器上执行命令：<em><strong>jps</strong></em>，在主节点机器上会出现以下进程<br><img src="/articles/32416/master_jps.jpg" srcset="/img/loading.gif" lazyload alt="master_jps"><br>在子节点机器上执行命令：<em><strong>jps</strong></em>，在子节点机器上会出现以下进程<br><img src="/articles/32416/slaves_jps.jpg" srcset="/img/loading.gif" lazyload alt="slaves_jps"></p>
+<h3 id="3-15、查看运行状态"><a href="#3-15、查看运行状态" class="headerlink" title="3.15、查看运行状态"></a>3.15、查看运行状态</h3><p>在浏览器中输入主机IP:50030，会出现hadoop运行状态。<br><img src="/articles/32416/hadoop.jpg" srcset="/img/loading.gif" lazyload alt="hadoop"></p>
+<h3 id="3-16、停止hadoop"><a href="#3-16、停止hadoop" class="headerlink" title="3.16、停止hadoop"></a>3.16、停止hadoop</h3><p>在主节点机器上进入到hadoop&#x2F;bin目录下，执行命令：<em><strong>stop-all.sh</strong></em>，这样hadoop停止运行。</p>
+<h2 id="4、建议"><a href="#4、建议" class="headerlink" title="4、建议"></a>4、建议</h2><p>程序这个东西就得多实践，不去写、不去运营，永远不知道会发生什么bug，本人也初学，有不对的希望大家谅解。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7%E9%9B%86/" class="category-chain-item">工具集</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Python%E7%A8%8B%E5%BA%8F%E7%AF%87/" class="print-no-link">#Python程序篇</a>
+      
+        <a href="/tags/Ubuntu/" class="print-no-link">#Ubuntu</a>
+      
+        <a href="/tags/Hadoop/" class="print-no-link">#Hadoop</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Ubuntu15.10系统安装Hadoop1.2.1集群</div>
+      <div>http://pygo2.top/articles/32416/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2016年9月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/59977/" title="Python内置函数:any与all">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python内置函数:any与all</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/9995/" title="Python处理ArcGIS多图层矢量裁剪">
+                        <span class="hidden-mobile">Python处理ArcGIS多图层矢量裁剪</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

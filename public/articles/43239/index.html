@@ -1,0 +1,845 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="hexo, next, Hexo, 美化, 插件, 博客, blog, TagCloud, 词云">
+  
+    <meta name="description" content="1、背景             偶然机会在一篇博客上发现TagCloud（启明博客忘记了），效果觉得不错，如上图，而且点击tag直接跳转到对应tag的文章列表，决定在自己的博客中也加上TagClooud。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Next添加TagCloud">
+<meta property="og:url" content="http://pygo2.top/articles/43239/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="1、背景             偶然机会在一篇博客上发现TagCloud（启明博客忘记了），效果觉得不错，如上图，而且点击tag直接跳转到对应tag的文章列表，决定在自己的博客中也加上TagClooud。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20190328-001.gif">
+<meta property="article:published_time" content="2019-03-28T11:29:01.000Z">
+<meta property="article:modified_time" content="2019-04-03T11:29:01.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Hexo插件">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20190328-001.gif">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Hexo+Next添加TagCloud || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hexo+Next添加TagCloud"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-03-28 19:29" pubdate>
+          创建日期：2019-03-28 07:29:01（星期四）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          726 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Hexo+Next添加TagCloud</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h4 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h4><div class="note note-success">
+            <p>偶然机会在一篇博客上发现TagCloud（启明博客忘记了），效果觉得不错，如上图，而且点击tag直接跳转到对应tag的文章列表，决定在自己的博客中也加上TagClooud。</p>
+          </div>
+
+<span id="more"></span>
+<hr />
+
+<p><img src="/articles/43239/article_tagcloud.gif" srcset="/img/loading.gif" lazyload></p>
+<h4 id="2、版本"><a href="#2、版本" class="headerlink" title="2、版本"></a>2、版本</h4><table>
+<thead>
+<tr>
+<th align="center">id</th>
+<th align="center">name</th>
+<th align="center">version</th>
+<th align="center">remark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Hexo</td>
+<td align="center">v3.8.0</td>
+<td align="center">系统版本</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">NextT.Pisces</td>
+<td align="center">v7.0.1</td>
+<td align="center">主题版本</td>
+</tr>
+</tbody></table>
+<h4 id="3、正文"><a href="#3、正文" class="headerlink" title="3、正文"></a>3、正文</h4><p>实现TagCloud主要用到了<em><strong>hexo-tag-cloud</strong></em>插件，下面详细介绍一下实现过程。</p>
+<blockquote>
+<p>安装hexo-tag-cloud<br>在blog根目录，执行以下命令：</p>
+</blockquote>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">npm <span class="hljs-keyword">install </span>hexo-tag-<span class="hljs-keyword">cloud </span>--save<br></code></pre></td></tr></table></figure>
+<p>执行完之后，在根目录的<em><strong>package.json</strong></em>文件中会自动加入安装的插件以及对应版本。</p>
+<blockquote>
+<p>sidebar.swig文件修改</p>
+</blockquote>
+<p>找到<em><strong>blog&#x2F;theme&#x2F;next&#x2F;layout&#x2F;_custom&#x2F;sidebar.swig</strong></em>文件，添加下列代码到文件中。</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name"><span class="hljs-name">if</span></span> site.tags.length &gt; 1 %&#125;</span><span class="language-xml"></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/js/tagcloud.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/js/tagcanvas.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;widget-wrap&quot;</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;widget-title&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-size:20px;text-align:center;color:#0080FF;margin:20px 0 0px;&quot;</span>&gt;</span>Tag Cloud<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myCanvasContainer&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;widget tagcloud&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-size:20px;&quot;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;220&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;200&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;resCanvas&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width=100%&quot;</span>&gt;</span></span><br><span class="language-xml">            </span><span class="hljs-template-variable">&#123;&#123; list_tags() &#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name"><span class="hljs-name">endif</span></span> %&#125;</span><br></code></pre></td></tr></table></figure>
+<p>也可以自定义Tag Cloud标题，加入自定义的样式。</p>
+<blockquote>
+<p>重启server</p>
+</blockquote>
+<p>执行完1、2步之后，需要重启服务，刷新主页，在sidebar处就会看见TagCloud。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">hexo <span class="hljs-selector-tag">g</span><br>hexo s<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Next配置文件</p>
+</blockquote>
+<p>在Next主题的_config.yml中，搜索<em><strong>tagcloud</strong></em>，发现一下代码：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># TagCloud settings for tags page.</span><br><span class="hljs-params">tagcloud:</span><br>  <span class="hljs-comment"># If true, font size, font color and amount of tags can be customized</span><br>  <span class="hljs-params">enable:</span> <span class="hljs-literal">true</span><br><br>  <span class="hljs-comment"># All values below are same as default, change them by yourself</span><br>  <span class="hljs-params">min:</span> <span class="hljs-number">12</span> <span class="hljs-comment"># min font size in px</span><br>  <span class="hljs-params">max:</span> <span class="hljs-number">36</span> <span class="hljs-comment"># max font size in px</span><br>  <span class="hljs-params">start:</span> <span class="hljs-string">&quot;#ccc&quot;</span> <span class="hljs-comment"># start color (hex, rgba, hsla or color keywords)</span><br>  <span class="hljs-params">end:</span> <span class="hljs-string">&quot;#111&quot;</span> <span class="hljs-comment"># end color (hex, rgba, hsla or color keywords)</span><br>  <span class="hljs-params">amount:</span> <span class="hljs-number">80</span> <span class="hljs-comment"># amount of tags, chage it if you have more than 200 tags</span><br></code></pre></td></tr></table></figure>
+<p>看配置信息是TagCloud的相关配置信息，但是配置了之后，我发现TagCloud没有做出相应的变化。然而你打开自己的tags标签页，就会发现配置的在这里生效了。</p>
+<h4 id="4、样式"><a href="#4、样式" class="headerlink" title="4、样式"></a>4、样式</h4><p>生成tag cloud之后，样式比较难看，但是在custome.styl文件加入自定义的样式，不生效。。。。。。郁闷，于是查看源码。<br>tagcloud.js：blog&#x2F;node_modules&#x2F;hexo-tag-cloud&#x2F;lib&#x2F;tagcloud.js<br>tagcanvas.js：blog&#x2F;node_modules&#x2F;hexo-tag-cloud&#x2F;lib&#x2F;tagcanvas.js<br>查看tagcloud.js文件，里面有需要的样式参数，修改参数重启服务即可。<br>我的自定义样式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br><span class="hljs-variable language_">window</span>.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">textFont</span> = <span class="hljs-string">&#x27;Brush Script MT&#x27;</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">textColour</span> = <span class="hljs-string">&#x27;black&#x27;</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">textHeight</span> = <span class="hljs-number">16</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">outlineMethod</span> = <span class="hljs-string">&#x27;block&#x27;</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">outlineColour</span> = <span class="hljs-string">&#x27;cornflowerblue&#x27;</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">maxSpeed</span> = <span class="hljs-number">0.03</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">minBrightness</span> = <span class="hljs-number">0.2</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">depth</span> = <span class="hljs-number">0.92</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">pulsateTo</span> = <span class="hljs-number">0.6</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">initial</span> = [<span class="hljs-number">0.1</span>,-<span class="hljs-number">0.1</span>];<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">decel</span> = <span class="hljs-number">0.98</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">reverse</span> = <span class="hljs-literal">true</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">hideTags</span> = <span class="hljs-literal">false</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">shadow</span> = <span class="hljs-string">&#x27;#ccf&#x27;</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">shadowBlur</span> = <span class="hljs-number">3</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">weight</span> = <span class="hljs-literal">false</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">imageScale</span> = <span class="hljs-literal">null</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">fadeIn</span> = <span class="hljs-number">1000</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">clickToFront</span> = <span class="hljs-number">600</span>;<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-title class_">Start</span>(<span class="hljs-string">&#x27;resCanvas&#x27;</span>);<br>        <span class="hljs-title class_">TagCanvas</span>.<span class="hljs-property">tc</span>[<span class="hljs-string">&#x27;resCanvas&#x27;</span>].<span class="hljs-title class_">Wheel</span>(<span class="hljs-literal">false</span>)<br>    &#125; <span class="hljs-keyword">catch</span>(e) &#123;<br>        <span class="hljs-comment">// console.log(e);</span><br>        <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;myCanvasContainer&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;none&#x27;</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>console.log我给注释掉了，这样控制台就看不到了。</p>
+<p><font color="red" size="5">记住，要重启服务。</font></p>
+<h4 id="5、学习"><a href="#5、学习" class="headerlink" title="5、学习"></a>5、学习</h4><p>hexo-tag-cloud官方：<a target="_blank" rel="noopener" href="https://github.com/MikeCoder/hexo-tag-cloud">https://github.com/MikeCoder/hexo-tag-cloud</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
+      
+        <a href="/tags/Hexo%E6%8F%92%E4%BB%B6/" class="print-no-link">#Hexo插件</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hexo+Next添加TagCloud</div>
+      <div>http://pygo2.top/articles/43239/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年3月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/16168/" title="我的英雄学院">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">我的英雄学院</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/62177/" title="Hexo+Next搜索优化（二）博客优化">
+                        <span class="hidden-mobile">Hexo+Next搜索优化（二）博客优化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

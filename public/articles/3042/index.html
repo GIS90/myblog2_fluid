@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Linux, git, gitea">
+  
+    <meta name="description" content="1、简介             最近基于项目管理文件的事情进行了一些探索，发现github不止可以用来更新、存储代码，也可以作为一个文件仓库存放项目的各类文件，对Github、Gitlab、Gogs、Gitea、Gitee进行了一些学习，也查下了网上对Gitea的呼吁声蛮大的，决定对测试服务器上进行部署使用，看看使用的效果咋样。学习对Gitea的安装与使用！！！。             Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitea代码库的环境搭建">
+<meta property="og:url" content="http://pygo2.top/articles/3042/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="1、简介             最近基于项目管理文件的事情进行了一些探索，发现github不止可以用来更新、存储代码，也可以作为一个文件仓库存放项目的各类文件，对Github、Gitlab、Gogs、Gitea、Gitee进行了一些学习，也查下了网上对Gitea的呼吁声蛮大的，决定对测试服务器上进行部署使用，看看使用的效果咋样。学习对Gitea的安装与使用！！！。             Git">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20220222-001.png">
+<meta property="article:published_time" content="2022-02-22T13:43:18.000Z">
+<meta property="article:modified_time" content="2022-02-22T13:43:18.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="gitea">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20220222-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Gitea代码库的环境搭建 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Gitea代码库的环境搭建"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-22 21:43" pubdate>
+          创建日期：2022-02-22 09:43:18（星期二）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Gitea代码库的环境搭建</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><div class="note note-primary">
+            <p>最近基于项目管理文件的事情进行了一些探索，发现github不止可以用来更新、存储代码，也可以作为一个文件仓库存放项目的各类文件，对Github、Gitlab、Gogs、Gitea、Gitee进行了一些学习，也查下了网上对Gitea的呼吁声蛮大的，决定对测试服务器上进行部署使用，看看使用的效果咋样。<br><font color='red' size=4.5>学习对Gitea的安装与使用</font>！！！。</p>
+          </div>
+
+<span class="label label-danger">Git</span> <span class="label label-info">Gitea</span> <span class="label label-primary">文件仓库</span>
+
+<span id="more"></span>
+<hr />
+
+<p>面对项目上建立文件管理仓库，首先想到的就是gitub，平常用这个管理代码项目也居多，但是对于安装集中式管理还是分布式管理当时也纠结了一下，对于统一管理SVN也还是不错的，但是个人更倾向与GIT，下面对于遇到的概念或者安装、部署都做一个记录说明。</p>
+<h3 id="2、版本管理"><a href="#2、版本管理" class="headerlink" title="2、版本管理"></a>2、版本管理</h3><h4 id="集中式版本控制"><a href="#集中式版本控制" class="headerlink" title="集中式版本控制"></a>集中式版本控制</h4><p>集中管理的服务器保存所有文件的修订版本，同步更新的时候，需要要先从中央服务器取得最新的版本，然后继续各种处理，最后，再把更新的内容推送给中央服务器。<br>典型的代表SVN，下面是结构图：<br><img src="/articles/3042/svn.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="分布式版本控制"><a href="#分布式版本控制" class="headerlink" title="分布式版本控制"></a>分布式版本控制</h4><p>分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库。既然每个人电脑上都有一个完整的版本库，那多个人如何协作呢？比方说你在自己电脑上改了文件A，你的同事也在他的电脑上改了文件A，这时，你们俩之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。<br><img src="/articles/3042/git.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3、仓库的选择"><a href="#3、仓库的选择" class="headerlink" title="3、仓库的选择"></a>3、仓库的选择</h3><p>之前的单位用的就是Gitlab用来管理内部代码，功能也十分优秀，但是对于几个人维护的项目有点过于强大，所以选择了Gitea小型，够用而且速度没得说。</p>
+<h4 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h4><p>全球最大的代码托管平台。</p>
+<h4 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h4><p>是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的Web服务。</p>
+<h4 id="Gogs"><a href="#Gogs" class="headerlink" title="Gogs"></a>Gogs</h4><p>目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发，并且支持所有平台，包括 Linux、Mac OS X、Windows 以及 ARM 平台。</p>
+<h4 id="Gitea"><a href="#Gitea" class="headerlink" title="Gitea"></a>Gitea</h4><p>Gogs的一个分支（28.8K）。</p>
+<h4 id="Gitee"><a href="#Gitee" class="headerlink" title="Gitee"></a>Gitee</h4><p>是开源中国（OSChina）推出的基于Git的代码托管服务，包括三个版本，分别是：社区版、企业版和高校版。</p>
+<h3 id="4、资源下载"><a href="#4、资源下载" class="headerlink" title="4、资源下载"></a>4、资源下载</h3><p>对于安装部署Gitea环境，需要提前准备好数据库、GitForWindows、Gitea这3个软件就可以，在项目上我选择了MariaDB数据库。</p>
+<ul>
+<li>Gitea：<a target="_blank" rel="noopener" href="https://dl.gitea.io/gitea">https://dl.gitea.io/gitea</a></li>
+<li>Mariadb数据库：<a target="_blank" rel="noopener" href="https://mariadb.org/download/?t=mariadb&o=true&p=mariadb&r=5.5.68">https://mariadb.org/download/?t=mariadb&amp;o=true&amp;p=mariadb&amp;r=5.5.68</a></li>
+<li>Git客户端：<a target="_blank" rel="noopener" href="https://gitforwindows.org/">https://gitforwindows.org/</a></li>
+</ul>
+<p>为了方便大家统一进行下载，也准备了网盘下载地址：<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1AUolZ1FrqLXvnVU1vRr2OA">https://pan.baidu.com/s/1AUolZ1FrqLXvnVU1vRr2OA</a><br>提取码: pa3s</p>
+<h3 id="5、安装"><a href="#5、安装" class="headerlink" title="5、安装"></a>5、安装</h3><blockquote>
+<p>数据库</p>
+</blockquote>
+<p>安装略。<br>初始化语句：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> gitea <span class="hljs-keyword">default</span> <span class="hljs-type">character</span> <span class="hljs-keyword">set</span> utf8 <span class="hljs-keyword">collate</span> utf8_general_ci;<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;gitea&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;123456&#x27;</span>;<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> gitea.* <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;gitea&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br>flush  <span class="hljs-keyword">privileges</span>;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>GitForWindows</p>
+</blockquote>
+<p>略。</p>
+<p>以上数据库与GitForWindows请自行安装部署，也很简单。</p>
+<blockquote>
+<p>Gitea</p>
+</blockquote>
+<p>Windows安装部署：<br>1.文件放在D:\gitea<br>2.启动：双击下载文件</p>
+<p>可选操作：加入系统服务。<br>添加服务：sc create gitea start&#x3D; auto binPath&#x3D; “&quot;D:\gitea\gitea.exe&quot; web –config \”D:\gitea\custom\conf\app.ini&quot;“<br>删除服务：sc delete gitea</p>
+<p>Linux安装部署：<br>1.下载<br>2.文件放在&#x2F;opt&#x2F;www&#x2F;gitea&#x2F;gitea<br>3.修改权限<br>chmod 777 gitea-1.x.x-linux-amd64<br>4.启动 &amp;&amp; 后台启动<br>nohup &#x2F;opt&#x2F;www&#x2F;gitea&#x2F;gitea web &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</p>
+<p>5.其它方式：<br><a target="_blank" rel="noopener" href="https://docs.gitea.io/zh-cn/linux-service/">https://docs.gitea.io/zh-cn/linux-service/</a></p>
+<h3 id="6、Gitea命令参数"><a href="#6、Gitea命令参数" class="headerlink" title="6、Gitea命令参数"></a>6、Gitea命令参数</h3><p>以下是Gitea命令参数的详情，常用的就是web、dump这2个命令，详情请参考官网：<a target="_blank" rel="noopener" href="https://docs.gitea.io/zh-cn/command-line/">https://docs.gitea.io/zh-cn/command-line/</a></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">COMMANDS:<br>   web              Start Gitea web server 启动服务<br>   serv             This <span class="hljs-keyword">command</span> <span class="hljs-title">should</span> <span class="hljs-title">only</span> <span class="hljs-title">be</span> <span class="hljs-title">called</span> <span class="hljs-title">by</span> <span class="hljs-title">SSH</span> <span class="hljs-title">shell</span><br>   hook             Delegate commands <span class="hljs-built_in">to</span> corresponding Git hooks<br>   dump             Dump Gitea <span class="hljs-built_in">files</span> <span class="hljs-keyword">and</span> database 备份<br>   cert             Generate self-signed certificate<br>   admin            Command <span class="hljs-built_in">line</span> interface <span class="hljs-built_in">to</span> perform common administrative operations<br>   generate         Command <span class="hljs-built_in">line</span> interface <span class="hljs-keyword">for</span> running generators<br>   migrate          Migrate <span class="hljs-keyword">the</span> database<br>   <span class="hljs-built_in">keys</span>             This <span class="hljs-keyword">command</span> <span class="hljs-title">queries</span> <span class="hljs-title">the</span> <span class="hljs-title">Gitea</span> <span class="hljs-title">database</span> <span class="hljs-title">to</span> <span class="hljs-title">get</span> <span class="hljs-title">the</span> <span class="hljs-title">authorized</span> <span class="hljs-title">command</span> <span class="hljs-title">for</span> <span class="hljs-title">a</span> <span class="hljs-title">given</span> <span class="hljs-title">ssh</span> <span class="hljs-title">key</span> <span class="hljs-title">fingerprint</span><br>   <span class="hljs-built_in">convert</span>          Convert <span class="hljs-keyword">the</span> database<br>   doctor           Diagnose problems<br>   manager          Manage <span class="hljs-keyword">the</span> running gitea <span class="hljs-built_in">process</span><br>   embedded         Extract embedded resources<br>   migrate-storage  Migrate <span class="hljs-keyword">the</span> storage<br>   docs             Output CLI documentation<br>   dump-repo        Dump <span class="hljs-keyword">the</span> repository <span class="hljs-built_in">from</span> git/github/gitea/gitlab dump其他仓库<br>   restore-repo     Restore <span class="hljs-keyword">the</span> repository <span class="hljs-built_in">from</span> disk<br>   help, h          Shows <span class="hljs-keyword">a</span> list <span class="hljs-keyword">of</span> commands <span class="hljs-keyword">or</span> help <span class="hljs-keyword">for</span> <span class="hljs-literal">one</span> <span class="hljs-keyword">command</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7、访问"><a href="#7、访问" class="headerlink" title="7、访问"></a>7、访问</h3><p>访问本机地址：127.0.0.1:3000<br>默认端口：3000</p>
+<p>初始化gitea，进行下一步系统配置。</p>
+<h3 id="8、配置"><a href="#8、配置" class="headerlink" title="8、配置"></a>8、配置</h3><blockquote>
+<p>数据库配置</p>
+</blockquote>
+<p><img src="/articles/3042/pz1.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>基本配置</p>
+</blockquote>
+<p><img src="/articles/3042/pz2.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>可选配置</p>
+</blockquote>
+<p><img src="/articles/3042/pz3.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>用户配置</p>
+</blockquote>
+<p><img src="/articles/3042/pz4.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>管理配置</p>
+</blockquote>
+<p><img src="/articles/3042/pz5.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="9、目录说明"><a href="#9、目录说明" class="headerlink" title="9、目录说明"></a>9、目录说明</h3><p>Gitea系统初始化成功会让自动建立一个管理员，对于上述配置后对应的目录也会自动生成。</p>
+<blockquote>
+<p>custom</p>
+</blockquote>
+<p>配置文件目录，包含项目全局、数据库、仓库存储位置、访问服务、服务等各项配置。</p>
+<blockquote>
+<p>data</p>
+</blockquote>
+<p>数据存放目录。</p>
+<blockquote>
+<p>log</p>
+</blockquote>
+<p>日志存储目录。</p>
+<blockquote>
+<p>gitea执行文件</p>
+</blockquote>
+<p>用于启动服务。</p>
+<h3 id="10、Gitea应用"><a href="#10、Gitea应用" class="headerlink" title="10、Gitea应用"></a>10、Gitea应用</h3><p>具体Gitea的使用也没什么难度，主要就是创建仓库、维护等操作，对于管理员有个管理权限，部署成功后接下来就是对Gitea的探索。<br>创建仓库：</p>
+<ul>
+<li>拥有者</li>
+<li>仓库名称</li>
+<li>描述</li>
+<li>模板</li>
+<li>工单标签</li>
+<li>.gitignore</li>
+<li>授权许可</li>
+<li>默认分支</li>
+<li>签名信任模型</li>
+</ul>
+<p><img src="/articles/3042/create.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="11、Git使用"><a href="#11、Git使用" class="headerlink" title="11、Git使用"></a>11、Git使用</h3><p>本来不打算介绍Git的使用了，但是把基础的操作功能记录下，对于初学者也可能比较友好，在Github上搞几个项目Git命令自然而然就会了，基础的功能还是比较好记的，有兴趣的人可以查查官网，命令超级多，而且参数也不少。</p>
+<blockquote>
+<p>GIT初始化仓库</p>
+</blockquote>
+<p>方式一：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">gitea创建仓库<br>git <span class="hljs-keyword">clone</span> <span class="hljs-title">仓库URL</span><br></code></pre></td></tr></table></figure>
+
+<p>方式二：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp">git <span class="hljs-keyword">init</span> 仓库名称<br>git remote <span class="hljs-keyword">add</span> origin 仓库URL<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>GIT提交暂缓区</p>
+</blockquote>
+<p>全量提交：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">git <span class="hljs-built_in">add</span> .<br></code></pre></td></tr></table></figure>
+<p>指定文件：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">git <span class="hljs-built_in">add</span> 指定文件<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>GIT提交本地仓库</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">git</span> commit -m “提交内容”<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>GIT提交远程仓库与更新</p>
+</blockquote>
+<p>提交远程仓库：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> -u <span class="hljs-built_in">origin</span> master<br></code></pre></td></tr></table></figure>
+<p>更新远程仓库：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git pull origin <span class="hljs-literal">master</span><br></code></pre></td></tr></table></figure>
+<p>这里主要介绍Gitea安装与使用，对于git命令的学习请参考下列学习地址。</p>
+<h3 id="12、学习参考"><a href="#12、学习参考" class="headerlink" title="12、学习参考"></a>12、学习参考</h3><ul>
+<li>GIT官网：<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">https://git-scm.com/book/zh/v2</a></li>
+<li>GIT基础学习：<a target="_blank" rel="noopener" href="https://www.runoob.com/manual/git-guide/">https://www.runoob.com/manual/git-guide/</a></li>
+<li>GIT菜鸟：<a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-basic-operations.html">https://www.runoob.com/git/git-basic-operations.html</a></li>
+</ul>
+<p><font color='red' size=4.5>每天坚持学习！</font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="category-chain-item">服务器</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/git/" class="print-no-link">#git</a>
+      
+        <a href="/tags/gitea/" class="print-no-link">#gitea</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Gitea代码库的环境搭建</div>
+      <div>http://pygo2.top/articles/3042/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/18147/" title="DB2死锁的处理过程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DB2死锁的处理过程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/17064/" title="ES6Async与Await方法的学习">
+                        <span class="hidden-mobile">ES6Async与Await方法的学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

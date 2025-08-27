@@ -1,0 +1,828 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python">
+  
+    <meta name="description" content="Python模块系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python模块之excel模块">
+<meta property="og:url" content="http://pygo2.top/articles/19275/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="Python模块系列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/article_python_module.jpeg">
+<meta property="article:published_time" content="2022-08-13T14:20:32.000Z">
+<meta property="article:modified_time" content="2022-08-13T14:20:32.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python模块系列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/article_python_module.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python模块之excel模块 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python模块之excel模块"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-13 22:20" pubdate>
+          创建日期：2022-08-13 10:20:32（星期六）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Python模块之excel模块</h1>
+            
+            
+              <div class="markdown-body">
+                
+                
+<div class="post_cus_note">Python模块系列</div>
+
+
+<span id="more"></span>
+<hr />
+
+
+
+
+<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Python</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>Excel表读取、写入工具<br>使用了xlrd、xlwt，Excel表格处理包进行开发的lib工具包</p>
+<ul>
+<li><p>read</p>
+</li>
+<li><p>write<br>其中，在写入模块加入了表格样式处理，使其生成的表格自带cell样式，更加美观</p>
+</li>
+</ul>
+<h4 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h4><p>利用Python包开发的表格工具包。</p>
+<ul>
+<li>xlrd: 表格读取包</li>
+<li>xlwt: 表格写入包</li>
+</ul>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">excel_lib = ExcelLib()<br><span class="hljs-comment"># 读取</span><br>excel_lib.read(read_file)<br><span class="hljs-comment"># 写入</span><br>excel_res = self.excel_lib.beau_write(<span class="hljs-attribute">excel_file</span>=excel_file, <span class="hljs-attribute">data</span>=inspect_list)<br></code></pre></td></tr></table></figure>
+
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br><span class="line">735</span><br><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">------------------------------------------------</span><br><span class="hljs-string"></span><br><span class="hljs-string">describe:</span><br><span class="hljs-string">    Excel表读取、写入工具</span><br><span class="hljs-string">    使用了xlrd、xlwt，Excel表格处理包进行开发的lib工具包</span><br><span class="hljs-string">    - read</span><br><span class="hljs-string">    - write</span><br><span class="hljs-string">    其中，在写入模块加入了表格样式处理，使其生成的表格自带cell样式，更加美观</span><br><span class="hljs-string"></span><br><span class="hljs-string">base_info:</span><br><span class="hljs-string">    __author__ = &quot;PyGo&quot;</span><br><span class="hljs-string">    __time__ = &quot;2022/9/15&quot;</span><br><span class="hljs-string">    __version__ = &quot;v.1.0.0&quot;</span><br><span class="hljs-string">    __mail__ = &quot;gaoming971366@163.com&quot;</span><br><span class="hljs-string">    __project__ = &quot;quality-inspect&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">usage:</span><br><span class="hljs-string">    excel_lib = ExcelLib()</span><br><span class="hljs-string">    # 读取</span><br><span class="hljs-string">    excel_lib.read(read_file)</span><br><span class="hljs-string">    # 写入</span><br><span class="hljs-string">    excel_res = self.excel_lib.beau_write(excel_file=excel_file, data=inspect_list)</span><br><span class="hljs-string"></span><br><span class="hljs-string">design:</span><br><span class="hljs-string">    - xlrd: 表格读取包</span><br><span class="hljs-string">    - xlwt: 表格写入包</span><br><span class="hljs-string">    利用Python包开发的表格工具包。</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">reference urls:</span><br><span class="hljs-string"></span><br><span class="hljs-string">python version:</span><br><span class="hljs-string">    python3</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">Enjoy the good time everyday！！!</span><br><span class="hljs-string">Life is short, I use python.</span><br><span class="hljs-string"></span><br><span class="hljs-string">------------------------------------------------</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># ------------------------------------------------------------</span><br><span class="hljs-comment"># usage: /usr/bin/python excel_lib.py</span><br><span class="hljs-comment"># ------------------------------------------------------------</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> xlwt<br><span class="hljs-keyword">import</span> xlrd<br><br><span class="hljs-keyword">from</span> deploy.utils <span class="hljs-keyword">import</span> get_now, mk_dirs<br><span class="hljs-keyword">from</span> deploy.status_msg <span class="hljs-keyword">import</span> StatusMsgs<br><span class="hljs-keyword">from</span> config <span class="hljs-keyword">import</span> RESULT_EXCEL, DEBUG<br><span class="hljs-keyword">from</span> deploy.logger <span class="hljs-keyword">import</span> logger <span class="hljs-keyword">as</span> LOG<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ExcelLib</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Excel class</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    <span class="hljs-comment"># 类常量参数</span><br>    DEFAULT_OLD_V_PREFIX = <span class="hljs-string">&#x27;.xls&#x27;</span><br>    DEFAULT_NEW_V_PREFIX = <span class="hljs-string">&#x27;.xlsx&#x27;</span><br>    DEFAULT_SHEET_NAME = <span class="hljs-string">&#x27;Sheet1&#x27;</span><br><br>    <span class="hljs-comment"># 表格样式 &gt; 文字横向方向</span><br>    HORZ_DICT = &#123;<br>        <span class="hljs-string">&#x27;left&#x27;</span>: <span class="hljs-number">0x01</span>,<br>        <span class="hljs-string">&#x27;center&#x27;</span>: <span class="hljs-number">0x02</span>,<br>        <span class="hljs-string">&#x27;right&#x27;</span>: <span class="hljs-number">0x03</span><br>    &#125;<br>    <span class="hljs-comment"># 表格样式 &gt; 文字纵向方向</span><br>    VERT_DICT = &#123;<br>        <span class="hljs-string">&#x27;top&#x27;</span>: <span class="hljs-number">0x00</span>,<br>        <span class="hljs-string">&#x27;center&#x27;</span>: <span class="hljs-number">0x01</span>,<br>        <span class="hljs-string">&#x27;bottom&#x27;</span>: <span class="hljs-number">0x02</span><br>    &#125;<br>    <span class="hljs-comment"># 表格样式 &gt; 单元格边框</span><br>    BORDER_LINES = &#123;<br>        <span class="hljs-string">&#x27;NO_LINE&#x27;</span>: xlwt.Borders.NO_LINE,<br>        <span class="hljs-string">&#x27;THIN&#x27;</span>: xlwt.Borders.THIN,<br>        <span class="hljs-string">&#x27;MEDIUM&#x27;</span>: xlwt.Borders.MEDIUM,<br>        <span class="hljs-string">&#x27;DASHED&#x27;</span>: xlwt.Borders.DASHED,<br>        <span class="hljs-string">&#x27;DOTTED&#x27;</span>: xlwt.Borders.DOTTED,<br>        <span class="hljs-string">&#x27;THICK&#x27;</span>: xlwt.Borders.THICK,<br>        <span class="hljs-string">&#x27;DOUBLE&#x27;</span>: xlwt.Borders.DOUBLE,<br>        <span class="hljs-string">&#x27;HAIR&#x27;</span>: xlwt.Borders.HAIR<br>    &#125;<br>    <span class="hljs-comment"># 表格样式 &gt; 单元格类型</span><br>    FORMATTER = [<br>        <span class="hljs-string">&#x27;general&#x27;</span>,<br>        <span class="hljs-string">&#x27;0&#x27;</span>,<br>        <span class="hljs-string">&#x27;0.00&#x27;</span>,<br>        <span class="hljs-string">&#x27;#,##0&#x27;</span>,<br>        <span class="hljs-string">&#x27;#,##0.00&#x27;</span>,<br>        <span class="hljs-string">&#x27;&quot;$&quot;#,##0_);(&quot;$&quot;#,##&#x27;</span>,<br>        <span class="hljs-string">&#x27;&quot;$&quot;#,##0_);[Red](&quot;$&quot;#,##&#x27;</span>,<br>        <span class="hljs-string">&#x27;&quot;$&quot;#,##0.00_);(&quot;$&quot;#,##&#x27;</span>,<br>        <span class="hljs-string">&#x27;&quot;$&quot;#,##0.00_);[Red](&quot;$&quot;#,##&#x27;</span>,<br>        <span class="hljs-string">&#x27;0%&#x27;</span>,<br>        <span class="hljs-string">&#x27;0.00%&#x27;</span>,<br>        <span class="hljs-string">&#x27;0.00E+00&#x27;</span>,<br>        <span class="hljs-string">&#x27;# ?/?&#x27;</span>,<br>        <span class="hljs-string">&#x27;# ??/??&#x27;</span>,<br>        <span class="hljs-string">&#x27;M/D/YY&#x27;</span>,<br>        <span class="hljs-string">&#x27;D-MMM-YY&#x27;</span>,<br>        <span class="hljs-string">&#x27;D-MMM&#x27;</span>,<br>        <span class="hljs-string">&#x27;MMM-YY&#x27;</span>,<br>        <span class="hljs-string">&#x27;h:mm AM/PM&#x27;</span>,<br>        <span class="hljs-string">&#x27;h:mm:ss AM/PM&#x27;</span>,<br>        <span class="hljs-string">&#x27;h:mm&#x27;</span>,<br>        <span class="hljs-string">&#x27;h:mm:ss&#x27;</span>,<br>        <span class="hljs-string">&#x27;M/D/YY h:mm&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(#,##0_);(#,##0)&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(#,##0_);[Red](#,##0)&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(#,##0.00_);(#,##0.00)&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(#,##0.00_);[Red](#,##0.00)&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(&quot;$&quot;* #,##0_);_(&quot;$&quot;* (#,##0);_(&quot;$&quot;* &quot;-&quot;_);_(@_)&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(* #,##0_);_(* (#,##0);_(* &quot;-&quot;_);_(@_)&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(&quot;$&quot;* #,##0.00_);_(&quot;$&quot;* (#,##0.00);_(&quot;$&quot;* &quot;-&quot;??_);_(@_)&#x27;</span>,<br>        <span class="hljs-string">&#x27;_(* #,##0.00_);_(* (#,##0.00);_(* &quot;-&quot;??_);_(@_)&#x27;</span>,<br>        <span class="hljs-string">&#x27;mm:ss&#x27;</span>,<br>        <span class="hljs-string">&#x27;[h]:mm:ss&#x27;</span>,<br>        <span class="hljs-string">&#x27;mm:ss.0&#x27;</span>,<br>        <span class="hljs-string">&#x27;##0.0E+0&#x27;</span>,<br>        <span class="hljs-string">&#x27;@&#x27;</span><br>    ]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, blank=<span class="hljs-number">0</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        class initialize parameters</span><br><span class="hljs-string">        :param blank: blank number</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> DEBUG:<br>            LOG.debug(<span class="hljs-string">&#x27;Excel lib is loading.&#x27;</span>)<br>        <span class="hljs-variable language_">self</span>.prefix_list = [<span class="hljs-string">&#x27;.xlsx&#x27;</span>, <span class="hljs-string">&#x27;.xls&#x27;</span>]<br>        <span class="hljs-variable language_">self</span>.blank = <span class="hljs-number">0</span>  <span class="hljs-comment"># 空行个数，默认值0行</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">set_style</span>(<span class="hljs-params">self, font=<span class="hljs-string">&#x27;Times New Roman&#x27;</span>, size=<span class="hljs-number">11</span>, color=<span class="hljs-number">0</span>, bgcolor=<span class="hljs-string">&#x27;white&#x27;</span>, horz=<span class="hljs-string">&#x27;left&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, **kwargs</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        set the excel cell style, to achieve customize style.</span><br><span class="hljs-string">        all parameters have default value.</span><br><span class="hljs-string">        parameters detail informations refer to the follow description.</span><br><span class="hljs-string">        :param font: font type</span><br><span class="hljs-string">            default value is &quot;Times New Roman&quot;</span><br><span class="hljs-string">            currently, the font is not use, font type function will be added later</span><br><span class="hljs-string">        :param size: font size</span><br><span class="hljs-string">            default value is 11</span><br><span class="hljs-string">        :param color: font color index</span><br><span class="hljs-string">            color value range is 0 ~ 100, default value is black(0)</span><br><span class="hljs-string">            this is only list 1-7:</span><br><span class="hljs-string">            0 黑 black</span><br><span class="hljs-string">            1 白 white</span><br><span class="hljs-string">            2 红 red</span><br><span class="hljs-string">            3 酸橙 lime</span><br><span class="hljs-string">            4 蓝 blue</span><br><span class="hljs-string">            5 黄 yellow</span><br><span class="hljs-string">            6 洋红 magenta</span><br><span class="hljs-string">            7 青 cyan</span><br><span class="hljs-string">        :param bgcolor: cell background</span><br><span class="hljs-string">            this value is english color, default value is white, color range:</span><br><span class="hljs-string">            aqua 0x31</span><br><span class="hljs-string">            black 0x08</span><br><span class="hljs-string">            blue 0x0C</span><br><span class="hljs-string">            blue_gray 0x36</span><br><span class="hljs-string">            bright_green 0x0B</span><br><span class="hljs-string">            brown 0x3C</span><br><span class="hljs-string">            coral 0x1D</span><br><span class="hljs-string">            cyan_ega 0x0F</span><br><span class="hljs-string">            dark_blue 0x12</span><br><span class="hljs-string">            dark_blue_ega 0x12</span><br><span class="hljs-string">            dark_green 0x3A</span><br><span class="hljs-string">            dark_green_ega 0x11</span><br><span class="hljs-string">            dark_purple 0x1C</span><br><span class="hljs-string">            dark_red 0x10</span><br><span class="hljs-string">            dark_red_ega 0x10</span><br><span class="hljs-string">            dark_teal 0x38</span><br><span class="hljs-string">            dark_yellow 0x13</span><br><span class="hljs-string">            gold 0x33</span><br><span class="hljs-string">            gray_ega 0x17</span><br><span class="hljs-string">            gray25 0x16</span><br><span class="hljs-string">            gray40 0x37</span><br><span class="hljs-string">            gray50 0x17</span><br><span class="hljs-string">            gray80 0x3F</span><br><span class="hljs-string">            green 0x11</span><br><span class="hljs-string">            ice_blue 0x1F</span><br><span class="hljs-string">            indigo 0x3E</span><br><span class="hljs-string">            ivory 0x1A</span><br><span class="hljs-string">            lavender 0x2E</span><br><span class="hljs-string">            light_blue 0x30</span><br><span class="hljs-string">            light_green 0x2A</span><br><span class="hljs-string">            light_orange 0x34</span><br><span class="hljs-string">            light_turquoise 0x29</span><br><span class="hljs-string">            light_yellow 0x2B</span><br><span class="hljs-string">            lime 0x32</span><br><span class="hljs-string">            magenta_ega 0x0E</span><br><span class="hljs-string">            ocean_blue 0x1E</span><br><span class="hljs-string">            olive_ega 0x13</span><br><span class="hljs-string">            olive_green 0x3B</span><br><span class="hljs-string">            orange 0x35</span><br><span class="hljs-string">            pale_blue 0x2C</span><br><span class="hljs-string">            periwinkle 0x18</span><br><span class="hljs-string">            pink 0x0E</span><br><span class="hljs-string">            plum 0x3D</span><br><span class="hljs-string">            purple_ega 0x14</span><br><span class="hljs-string">            red 0x0A</span><br><span class="hljs-string">            rose 0x2D</span><br><span class="hljs-string">            sea_green 0x39</span><br><span class="hljs-string">            silver_ega 0x16</span><br><span class="hljs-string">            sky_blue 0x28</span><br><span class="hljs-string">            tan 0x2F</span><br><span class="hljs-string">            teal 0x15</span><br><span class="hljs-string">            teal_ega 0x15</span><br><span class="hljs-string">            turquoise 0x0F</span><br><span class="hljs-string">            violet 0x14</span><br><span class="hljs-string">            white 0x09</span><br><span class="hljs-string">            yellow 0x0D</span><br><span class="hljs-string">        :param horz: cell horizontal（水平方向上）</span><br><span class="hljs-string">            default value is left</span><br><span class="hljs-string">            left = 0x01 左端对齐</span><br><span class="hljs-string">            center = 0x02 居中对齐</span><br><span class="hljs-string">            right = 0x03 右端对齐</span><br><span class="hljs-string">            if horz not in values dict, use default value(left)</span><br><span class="hljs-string">        :param vert: cell vertical（垂直方向上）</span><br><span class="hljs-string">            default value is center</span><br><span class="hljs-string">            top = 0x00 上端对齐</span><br><span class="hljs-string">            center = 0x01 居中对齐</span><br><span class="hljs-string">            bottom = 0x02 低端对齐</span><br><span class="hljs-string">            if vert not in values dict, use default value(center)</span><br><span class="hljs-string">        :param kwargs: other parameters, contain: bold, underline, italic, width, height, borders</span><br><span class="hljs-string">            bold: font bold</span><br><span class="hljs-string">                default is font no bold</span><br><span class="hljs-string">                value range is: True or False, default value is False</span><br><span class="hljs-string">            underline: font underline</span><br><span class="hljs-string">                default is font no underline</span><br><span class="hljs-string">                value range is: True or False, default value is False</span><br><span class="hljs-string">            italic: font italic</span><br><span class="hljs-string">                default is font no italic</span><br><span class="hljs-string">                value range is: True or False, default value is False</span><br><span class="hljs-string">            struck_out: font struck_out 字体删除符，字上加一横杠</span><br><span class="hljs-string">                default is font no struck_out</span><br><span class="hljs-string">                value range is: True or False, default value is False</span><br><span class="hljs-string">            width: cell width</span><br><span class="hljs-string">                default value is cell default width</span><br><span class="hljs-string">            height: cell height</span><br><span class="hljs-string">                default value is cell default height</span><br><span class="hljs-string">            borders: cell borders, contain left, right, top, bottom</span><br><span class="hljs-string">                default value is cell no borders</span><br><span class="hljs-string">                value range is True or False</span><br><span class="hljs-string">                border line, default is NO_LINE:</span><br><span class="hljs-string">                    NO_LINE = 0x00</span><br><span class="hljs-string">                    THIN    = 0x01</span><br><span class="hljs-string">                    MEDIUM  = 0x02</span><br><span class="hljs-string">                    DASHED  = 0x03</span><br><span class="hljs-string">                    DOTTED  = 0x04</span><br><span class="hljs-string">                    THICK   = 0x05</span><br><span class="hljs-string">                    DOUBLE  = 0x06</span><br><span class="hljs-string">                    HAIR    = 0x07</span><br><span class="hljs-string">                border color, default is 0x40.</span><br><span class="hljs-string">            borders_dict: customize to set border style</span><br><span class="hljs-string">                line: left, right, top, bottom</span><br><span class="hljs-string">                color: left, right, top, bottom</span><br><span class="hljs-string">                data frame:</span><br><span class="hljs-string">                    borders_dict = &#123;</span><br><span class="hljs-string">                        &#x27;line&#x27;: &#123;</span><br><span class="hljs-string">                            &#x27;top&#x27;: &#x27;THIN&#x27;,</span><br><span class="hljs-string">                            &#x27;bottom&#x27;: &#x27;THIN&#x27;,</span><br><span class="hljs-string">                            &#x27;left&#x27;: &#x27;THIN&#x27;,</span><br><span class="hljs-string">                            &#x27;right&#x27;: &#x27;THIN&#x27;</span><br><span class="hljs-string">                        &#125;,</span><br><span class="hljs-string">                        &#x27;color&#x27;: &#123;</span><br><span class="hljs-string">                            &#x27;top&#x27;: &#x27;0x40&#x27;,</span><br><span class="hljs-string">                            &#x27;bottom&#x27;: &#x27;0x40&#x27;,</span><br><span class="hljs-string">                            &#x27;left&#x27;: &#x27;0x40&#x27;,</span><br><span class="hljs-string">                            &#x27;right&#x27;: &#x27;0x40&#x27;</span><br><span class="hljs-string">                        &#125;,</span><br><span class="hljs-string">                    &#125;</span><br><span class="hljs-string">            warp: is or not auto wrap 自动换行</span><br><span class="hljs-string">                default value is False,</span><br><span class="hljs-string">                if True, cell value is auto wrap</span><br><span class="hljs-string">                if False, cell value is not warp</span><br><span class="hljs-string">            formatter: cell formatter</span><br><span class="hljs-string">                contain numbers, string, date, time and so on.</span><br><span class="hljs-string">                default value is general</span><br><span class="hljs-string">                detail scan FORMATTER values</span><br><span class="hljs-string">                    &#x27;general&#x27;,</span><br><span class="hljs-string">                    &#x27;0&#x27;,</span><br><span class="hljs-string">                    &#x27;0.00&#x27;,</span><br><span class="hljs-string">                    &#x27;#,##0&#x27;,</span><br><span class="hljs-string">                    &#x27;#,##0.00&#x27;,</span><br><span class="hljs-string">                    &#x27;&quot;$&quot;#,##0_);(&quot;$&quot;#,##&#x27;,</span><br><span class="hljs-string">                    &#x27;&quot;$&quot;#,##0_);[Red](&quot;$&quot;#,##&#x27;,</span><br><span class="hljs-string">                    &#x27;&quot;$&quot;#,##0.00_);(&quot;$&quot;#,##&#x27;,</span><br><span class="hljs-string">                    &#x27;&quot;$&quot;#,##0.00_);[Red](&quot;$&quot;#,##&#x27;,</span><br><span class="hljs-string">                    &#x27;0%&#x27;,</span><br><span class="hljs-string">                    &#x27;0.00%&#x27;,</span><br><span class="hljs-string">                    &#x27;0.00E+00&#x27;,</span><br><span class="hljs-string">                    &#x27;# ?/?&#x27;,</span><br><span class="hljs-string">                    &#x27;# ??/??&#x27;,</span><br><span class="hljs-string">                    &#x27;M/D/YY&#x27;,</span><br><span class="hljs-string">                    &#x27;D-MMM-YY&#x27;,</span><br><span class="hljs-string">                    &#x27;D-MMM&#x27;,</span><br><span class="hljs-string">                    &#x27;MMM-YY&#x27;,</span><br><span class="hljs-string">                    &#x27;h:mm AM/PM&#x27;,</span><br><span class="hljs-string">                    &#x27;h:mm:ss AM/PM&#x27;,</span><br><span class="hljs-string">                    &#x27;h:mm&#x27;,</span><br><span class="hljs-string">                    &#x27;h:mm:ss&#x27;,</span><br><span class="hljs-string">                    &#x27;M/D/YY h:mm&#x27;,</span><br><span class="hljs-string">                    &#x27;_(#,##0_);(#,##0)&#x27;,</span><br><span class="hljs-string">                    &#x27;_(#,##0_);[Red](#,##0)&#x27;,</span><br><span class="hljs-string">                    &#x27;_(#,##0.00_);(#,##0.00)&#x27;,</span><br><span class="hljs-string">                    &#x27;_(#,##0.00_);[Red](#,##0.00)&#x27;,</span><br><span class="hljs-string">                    &#x27;_(&quot;$&quot;* #,##0_);_(&quot;$&quot;* (#,##0);_(&quot;$&quot;* &quot;-&quot;_);_(@_)&#x27;,</span><br><span class="hljs-string">                    &#x27;_(* #,##0_);_(* (#,##0);_(* &quot;-&quot;_);_(@_)&#x27;,</span><br><span class="hljs-string">                    &#x27;_(&quot;$&quot;* #,##0.00_);_(&quot;$&quot;* (#,##0.00);_(&quot;$&quot;* &quot;-&quot;??_);_(@_)&#x27;,</span><br><span class="hljs-string">                    &#x27;_(* #,##0.00_);_(* (#,##0.00);_(* &quot;-&quot;??_);_(@_)&#x27;,</span><br><span class="hljs-string">                    &#x27;mm:ss&#x27;,</span><br><span class="hljs-string">                    &#x27;[h]:mm:ss&#x27;,</span><br><span class="hljs-string">                    &#x27;mm:ss.0&#x27;,</span><br><span class="hljs-string">                    &#x27;##0.0E+0&#x27;,</span><br><span class="hljs-string">                    &#x27;@&#x27;</span><br><span class="hljs-string"></span><br><span class="hljs-string">        :return: object</span><br><span class="hljs-string"></span><br><span class="hljs-string">        usge:</span><br><span class="hljs-string">            column_style = self.set_style(size=8, horz=&#x27;center&#x27;, vert=&#x27;center&#x27;, color=0, bgcolor=&#x27;ice_blue&#x27;, borders=True)</span><br><span class="hljs-string">            sheet.write(row, col, JG_ENUMS.get(jg), column_style)</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        style = xlwt.XFStyle()<br>        font = xlwt.Font()<br>        <span class="hljs-comment"># font: type</span><br>        <span class="hljs-comment"># font.name = font or &#x27;Times New Roman&#x27;</span><br>        <span class="hljs-comment"># font: size</span><br>        <span class="hljs-keyword">try</span>:<br>            size = <span class="hljs-built_in">int</span>(size)<br>        <span class="hljs-keyword">except</span>:<br>            size = <span class="hljs-number">11</span><br>        font.height = size * <span class="hljs-number">20</span><br>        <span class="hljs-comment"># font: color</span><br>        <span class="hljs-keyword">try</span>:<br>            color = <span class="hljs-built_in">int</span>(color)<br>        <span class="hljs-keyword">except</span>:<br>            color = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">finally</span>:<br>            <span class="hljs-keyword">if</span> color &gt; <span class="hljs-number">100</span>: color = <span class="hljs-number">0</span><br>        font.colour_index = color<br>        <span class="hljs-comment"># font: bold</span><br>        bold = kwargs.get(<span class="hljs-string">&#x27;bold&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> bold <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]:<br>            bold = <span class="hljs-literal">False</span><br>        font.bold = bold<br>        <span class="hljs-comment"># font: underline</span><br>        underline = kwargs.get(<span class="hljs-string">&#x27;underline&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> underline <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]:<br>            underline = <span class="hljs-literal">False</span><br>        font.underline = underline<br>        <span class="hljs-comment"># font: italic</span><br>        italic = kwargs.get(<span class="hljs-string">&#x27;italic&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> italic <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]:<br>            italic = <span class="hljs-literal">False</span><br>        font.italic = italic<br>        <span class="hljs-comment"># font: struck_out</span><br>        struck_out = kwargs.get(<span class="hljs-string">&#x27;struck_out&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> struck_out <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]:<br>            struck_out = <span class="hljs-literal">False</span><br>        font.struck_out = struck_out<br>        style.font = font<br><br>        <span class="hljs-comment"># align: horz</span><br>        horz_v = <span class="hljs-variable language_">self</span>.HORZ_DICT.get(horz.lower())<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> horz_v: horz_v = <span class="hljs-number">0x02</span><br>        <span class="hljs-comment"># align: vert</span><br>        vert_v = <span class="hljs-variable language_">self</span>.VERT_DICT.get(vert.lower())<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> vert_v: vert_v = <span class="hljs-number">0x01</span><br>        align = xlwt.Alignment()<br>        align.horz = horz_v<br>        align.vert = vert_v<br>        <span class="hljs-comment"># align: wrap</span><br>        wrap = kwargs.get(<span class="hljs-string">&#x27;wrap&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> wrap <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]:<br>            wrap = <span class="hljs-literal">False</span><br>        align.wrap = wrap<br>        style.alignment = align<br><br>        <span class="hljs-comment"># background color</span><br>        pattern = xlwt.Pattern()<br>        pattern.pattern = xlwt.Pattern.SOLID_PATTERN<br>        <span class="hljs-keyword">try</span>:<br>            pattern.pattern_fore_colour = xlwt.Style.colour_map[bgcolor]<br>        <span class="hljs-keyword">except</span>:<br>            pattern.pattern_fore_colour = xlwt.Style.colour_map[<span class="hljs-string">&#x27;white&#x27;</span>]<br>        style.pattern = pattern<br><br>        <span class="hljs-comment"># borders</span><br>        is_border = kwargs.get(<span class="hljs-string">&#x27;borders&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> is_border <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]:<br>            is_border = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> is_border:<br>            border = xlwt.Borders()<br>            border.top = xlwt.Borders.THIN  <span class="hljs-comment"># 上</span><br>            border.bottom = xlwt.Borders.THIN  <span class="hljs-comment"># 下</span><br>            border.left = xlwt.Borders.THIN  <span class="hljs-comment"># 左</span><br>            border.right = xlwt.Borders.THIN  <span class="hljs-comment"># 右</span><br>            border.left_colour = <span class="hljs-number">0x40</span><br>            border.right_colour = <span class="hljs-number">0x40</span><br>            border.top_colour = <span class="hljs-number">0x40</span><br>            border.bottom_colour = <span class="hljs-number">0x40</span><br>            style.borders = border<br>        borders_dict = kwargs.get(<span class="hljs-string">&#x27;borders_dict&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> borders_dict:<br>            border = xlwt.Borders()<br>            <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> borders_dict.get(<span class="hljs-string">&#x27;line&#x27;</span>).items():<br>                <span class="hljs-keyword">if</span> k == <span class="hljs-string">&#x27;top&#x27;</span>:<br>                    border.top = <span class="hljs-variable language_">self</span>.BORDER_LINES.get(v.upper()) <span class="hljs-keyword">if</span> v.upper() <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.BORDER_LINES.keys() \<br>                        <span class="hljs-keyword">else</span> xlwt.Borders.NO_LINE<br>                <span class="hljs-keyword">elif</span> k == <span class="hljs-string">&#x27;bottom&#x27;</span>:<br>                    border.bottom = <span class="hljs-variable language_">self</span>.BORDER_LINES.get(v.upper()) <span class="hljs-keyword">if</span> v.upper() <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.BORDER_LINES.keys() \<br>                        <span class="hljs-keyword">else</span> xlwt.Borders.NO_LINE<br>                <span class="hljs-keyword">elif</span> k == <span class="hljs-string">&#x27;left&#x27;</span>:<br>                    border.left = <span class="hljs-variable language_">self</span>.BORDER_LINES.get(v.upper()) <span class="hljs-keyword">if</span> v.upper() <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.BORDER_LINES.keys() \<br>                        <span class="hljs-keyword">else</span> xlwt.Borders.NO_LINE<br>                <span class="hljs-keyword">elif</span> k == <span class="hljs-string">&#x27;right&#x27;</span>:<br>                    border.right = <span class="hljs-variable language_">self</span>.BORDER_LINES.get(v.upper()) <span class="hljs-keyword">if</span> v.upper() <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.BORDER_LINES.keys() \<br>                        <span class="hljs-keyword">else</span> xlwt.Borders.NO_LINE<br>            border.left_colour = <span class="hljs-number">0x40</span><br>            border.right_colour = <span class="hljs-number">0x40</span><br>            border.top_colour = <span class="hljs-number">0x40</span><br>            border.bottom_colour = <span class="hljs-number">0x40</span><br>            style.borders = border<br><br>        <span class="hljs-comment"># formatter</span><br>        num_format_str = kwargs.get(<span class="hljs-string">&#x27;formatter&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;general&#x27;</span><br>        <span class="hljs-keyword">if</span> num_format_str <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.FORMATTER:<br>            num_format_str = <span class="hljs-string">&#x27;general&#x27;</span><br>        style.num_format_str = num_format_str<br>        <span class="hljs-keyword">return</span> style<br><br><span class="hljs-meta">    @staticmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">format_res</span>(<span class="hljs-params">status_id: <span class="hljs-built_in">int</span>, message: <span class="hljs-built_in">str</span>, data: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">dict</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        方法请求结果格式化</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-string">&#x27;status_id&#x27;</span>: status_id,<br>            <span class="hljs-string">&#x27;message&#x27;</span>: message <span class="hljs-keyword">if</span> message <span class="hljs-keyword">else</span> StatusMsgs.get(status_id),<br>            <span class="hljs-string">&#x27;data&#x27;</span>: data<br>        &#125;<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_headers</span>(<span class="hljs-params">self, excel_file</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        get the headers information of excel file</span><br><span class="hljs-string">        :param excel_file: excel file real path</span><br><span class="hljs-string">        :return: dict</span><br><span class="hljs-string">        result content:</span><br><span class="hljs-string">            sheets: dict sheet base info, contain something. such as row.col.index.name</span><br><span class="hljs-string">            number sheet: int sheet number</span><br><span class="hljs-string">            names: sheets name dict</span><br><span class="hljs-string">            columns: sheet columns dict</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># default value</span><br>        res = &#123;<span class="hljs-string">&#x27;sheets&#x27;</span>: &#123;&#125;, <span class="hljs-string">&#x27;nsheet&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;names&#x27;</span>: &#123;&#125;, <span class="hljs-string">&#x27;columns&#x27;</span>: &#123;&#125;&#125;<br>        <span class="hljs-comment"># not exist excel file</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> excel_file \<br>                <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.exists(excel_file):<br>            <span class="hljs-keyword">return</span> res<br><br>        excel = xlrd.open_workbook(excel_file)<br>        nsheets = excel.nsheets<br>        <span class="hljs-comment"># sheet_names = excel.sheet_names()     # 获取所有excel sheet名称列表</span><br>        sheets_dict = <span class="hljs-built_in">dict</span>()<br>        names_dict = <span class="hljs-built_in">dict</span>()<br>        columns_dict = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, nsheets, <span class="hljs-number">1</span>):<br>            sheet = excel.sheet_by_index(i)<br>            names_dict[<span class="hljs-built_in">str</span>(i)] = sheet.name<br>            <span class="hljs-comment"># sheet：row行数 col列数 index索引 name名称</span><br>            sheets_dict[<span class="hljs-built_in">str</span>(i)] = &#123;<span class="hljs-string">&#x27;row&#x27;</span>: sheet.nrows, <span class="hljs-string">&#x27;col&#x27;</span>: sheet.ncols, <span class="hljs-string">&#x27;index&#x27;</span>: i, <span class="hljs-string">&#x27;name&#x27;</span>: sheet.name&#125;<br>            <span class="hljs-keyword">try</span>:<br>                <span class="hljs-comment"># sheet column：key：value格式</span><br>                row_values_0 = sheet.row_values(<span class="hljs-number">0</span>)<br>                new_column = <span class="hljs-built_in">list</span>()<br>                <span class="hljs-keyword">for</span> _k, _v <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(row_values_0):<br>                    new_column.append(&#123;<span class="hljs-string">&#x27;key&#x27;</span>: <span class="hljs-built_in">str</span>(_k), <span class="hljs-string">&#x27;value&#x27;</span>: <span class="hljs-built_in">str</span>(_v)&#125;)<br>                columns_dict[<span class="hljs-built_in">str</span>(i)] = new_column<br>            <span class="hljs-keyword">except</span>:<br>                <span class="hljs-keyword">pass</span><br>        <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&#x27;sheets&#x27;</span>: sheets_dict, <span class="hljs-string">&#x27;nsheet&#x27;</span>: nsheets, <span class="hljs-string">&#x27;names&#x27;</span>: names_dict, <span class="hljs-string">&#x27;columns&#x27;</span>: columns_dict&#125;<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">check_real_file</span>(<span class="hljs-params">self, real_file: <span class="hljs-built_in">str</span>, _<span class="hljs-built_in">type</span>=<span class="hljs-number">1</span>, clean=<span class="hljs-literal">False</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        生成存储excel文件的绝对路径，以及新文件名称</span><br><span class="hljs-string">        加了文件已存在的check</span><br><span class="hljs-string">        结果采用绝对路径+新文件名称，新文件名称</span><br><span class="hljs-string">        如果存在用新的时间戳创建文件</span><br><span class="hljs-string">        generate to store real path of excel file</span><br><span class="hljs-string">        if file exist dir, the file name rename file name + now(%Y-%m-%d-%H-%M-%S)</span><br><span class="hljs-string">        the result is path file</span><br><span class="hljs-string">        :param clean: 是否删除已存在</span><br><span class="hljs-string">        :param real_file: all path excel file</span><br><span class="hljs-string">        :param _type: excel file version type</span><br><span class="hljs-string">        :return: sting</span><br><span class="hljs-string"></span><br><span class="hljs-string">        _type为默认格式：</span><br><span class="hljs-string">            - 1为.xls</span><br><span class="hljs-string">            - 2为.xlsx</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> _<span class="hljs-built_in">type</span> <span class="hljs-keyword">or</span> _<span class="hljs-built_in">type</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]:    <span class="hljs-comment"># 默认xls</span><br>            _<span class="hljs-built_in">type</span> = <span class="hljs-number">1</span><br><br>        <span class="hljs-comment"># 存在 &amp;&amp; 删除</span><br>        <span class="hljs-keyword">if</span> clean <span class="hljs-keyword">and</span> os.path.exists(real_file):<br>            os.remove(real_file)<br>            <span class="hljs-keyword">return</span> real_file<br><br>        <span class="hljs-comment"># 文件已存在，加上时间戳</span><br>        <span class="hljs-keyword">if</span> os.path.exists(real_file):<br>            file_name = <span class="hljs-string">&#x27;%s%s&#x27;</span> % (get_now(<span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;%Y-%m-%d-%H-%M-%S&quot;</span>), <span class="hljs-variable language_">self</span>.DEFAULT_OLD_V_PREFIX)<br>            real_file = os.path.join(<span class="hljs-variable language_">self</span>._default_folder(), file_name)<br>            <span class="hljs-keyword">return</span> real_file<br>        <span class="hljs-keyword">return</span> real_file<br><br><span class="hljs-meta">    @staticmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_default_folder</span>():<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        new excel file folder</span><br><span class="hljs-string">        :return: string</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(RESULT_EXCEL):<br>            mk_dirs(RESULT_EXCEL)<br>        <span class="hljs-keyword">return</span> RESULT_EXCEL<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">read</span>(<span class="hljs-params">self, read_file: <span class="hljs-built_in">str</span>, sheet: <span class="hljs-built_in">int</span> = <span class="hljs-number">0</span>, rows: <span class="hljs-built_in">list</span> = [], columns: <span class="hljs-built_in">list</span> = [], **kwargs</span>) -&gt; <span class="hljs-built_in">dict</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        read excel data</span><br><span class="hljs-string">        :param read_file: excel文件abs全路径</span><br><span class="hljs-string">        :param sheet: 读取的sheet数，从0开始，default value is 0</span><br><span class="hljs-string">        :param rows: 读取数据的rows行列表，如果为空，默认读取全部行</span><br><span class="hljs-string">        :param columns: 读取数据的columns列列表，如果为空，默认读取全部列</span><br><span class="hljs-string">        :param kwargs: 读取excel数据的其他参数配置</span><br><span class="hljs-string">            request_title: 读取的表格是否包含title行，默认是true（bool类型）</span><br><span class="hljs-string">            response_title: 返回的数据是否包含title说明，默认是true（bool类型）</span><br><span class="hljs-string"></span><br><span class="hljs-string">        :return: dict result</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># ================== parameters check start ==================</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> read_file <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.exists(read_file) \<br>                <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.isfile(read_file):<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<br>                <span class="hljs-number">206</span>, <span class="hljs-string">&#x27;读取的excel数据不存在&#x27;</span>, &#123;&#125;)<br>        request_title = <span class="hljs-literal">False</span> <span class="hljs-keyword">if</span> kwargs.get(<span class="hljs-string">&#x27;request_title&#x27;</span>) <span class="hljs-keyword">is</span> <span class="hljs-literal">False</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">True</span><br>        <span class="hljs-comment"># 初始化数据读取开始的行数</span><br>        start_row = <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> request_title <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br>        response_title = <span class="hljs-literal">False</span> <span class="hljs-keyword">if</span> kwargs.get(<span class="hljs-string">&#x27;response_title&#x27;</span>) <span class="hljs-keyword">is</span> <span class="hljs-literal">False</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">True</span><br>        excel_object = xlrd.open_workbook(filename=read_file)   <span class="hljs-comment"># xlrd可以读取xls、xlsx</span><br>        excel_sheet_names = excel_object.sheet_names()<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">str</span>(sheet):          <span class="hljs-comment"># 添加无sheet index，默认读取首页</span><br>            sheet = <span class="hljs-number">0</span><br>        <span class="hljs-comment"># 添加sheet为整型处理</span><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(sheet, <span class="hljs-built_in">int</span>):<br>                sheet = <span class="hljs-built_in">int</span>(sheet)<br>        <span class="hljs-keyword">except</span>:<br>            sheet = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> sheet &gt; <span class="hljs-built_in">len</span>(excel_sheet_names) <span class="hljs-keyword">or</span> sheet &lt; <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<br>                <span class="hljs-number">207</span>, <span class="hljs-string">&#x27;读取的sheet页不存在&#x27;</span>, &#123;&#125;)<br>        excel_sheet = excel_object.sheet_by_index(sheet)<br>        <span class="hljs-comment"># 读取指定行</span><br>        new_rows = <span class="hljs-built_in">list</span>()<br>        <span class="hljs-keyword">if</span> rows:<br>            <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> rows:<br>                <span class="hljs-keyword">try</span>:<br>                    new_rows.append(<span class="hljs-built_in">int</span>(r))<br>                <span class="hljs-keyword">except</span>: <span class="hljs-keyword">pass</span><br>        <span class="hljs-comment"># 读取指定列</span><br>        new_cols = <span class="hljs-built_in">list</span>()<br>        <span class="hljs-keyword">if</span> columns:<br>            <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> columns:<br>                <span class="hljs-keyword">try</span>:<br>                    new_cols.append(<span class="hljs-built_in">int</span>(c))<br>                <span class="hljs-keyword">except</span>: <span class="hljs-keyword">pass</span><br>        <span class="hljs-comment"># ================== parameters check end ==================</span><br><br>        <span class="hljs-comment"># 指定行</span><br>        read_rows = new_rows <span class="hljs-keyword">if</span> new_rows <span class="hljs-keyword">else</span> <span class="hljs-built_in">range</span>(start_row, excel_sheet.nrows, <span class="hljs-number">1</span>)<br>        <span class="hljs-comment"># 指定列</span><br>        read_cols = new_cols <span class="hljs-keyword">if</span> new_cols <span class="hljs-keyword">else</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, excel_sheet.ncols, <span class="hljs-number">1</span>)<br>        <span class="hljs-comment"># 读取表头</span><br>        resp_header = <span class="hljs-built_in">list</span>()<br>        <span class="hljs-keyword">if</span> response_title <span class="hljs-keyword">and</span> request_title:<br>            <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> read_cols:<br>                <span class="hljs-keyword">if</span> col &lt; <span class="hljs-number">0</span>: <span class="hljs-keyword">continue</span><br>                <span class="hljs-comment"># TODO 是否添加空标题、重复标题等标题判断</span><br>                <span class="hljs-comment"># 目前，定位空活着列值重复均可以</span><br>                <span class="hljs-comment"># if not excel_sheet.cell_value(0, col) or excel_sheet.cell_value(0, col) in resp_header:</span><br>                <span class="hljs-comment">#     return self.format_res(</span><br>                <span class="hljs-comment">#         208, &#x27;读取的第%s列值为空&#x27; % col, &#123;&#125;)</span><br>                resp_header.append(excel_sheet.cell_value(<span class="hljs-number">0</span>, col))<br>        <span class="hljs-comment"># 读取表数据</span><br>        resp_data = <span class="hljs-built_in">list</span>()<br>        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> read_rows:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> row: <span class="hljs-keyword">continue</span><br>            _d = <span class="hljs-built_in">list</span>()<br>            <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> read_cols:<br>                <span class="hljs-keyword">if</span> col &lt; <span class="hljs-number">0</span>: <span class="hljs-keyword">continue</span><br>                _d.append(excel_sheet.cell_value(row, col))<br>            <span class="hljs-keyword">if</span> _d: resp_data.append(_d)<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<br>            <span class="hljs-number">100</span>, <span class="hljs-string">&#x27;success&#x27;</span>, &#123;<span class="hljs-string">&#x27;header&#x27;</span>: resp_header, <span class="hljs-string">&#x27;data&#x27;</span>: resp_data&#125;)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">write</span>(<span class="hljs-params">self, excel_file, data, sheet=<span class="hljs-string">&quot;Sheet1&quot;</span>, **kwargs</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        写入的通用方法，xlwt、xlrd:</span><br><span class="hljs-string">            .xls表格行数限制65535</span><br><span class="hljs-string">        写入的数据为list格式，里面的元素也为list类型数据，以元素list顺序进行表格row的写入</span><br><span class="hljs-string"></span><br><span class="hljs-string">        use xlwt、xlrd to merge excel, it are to deal .xls、.xlsx formatter excel file</span><br><span class="hljs-string">        the deal excel style is cell values(row + col)</span><br><span class="hljs-string">        :param excel_file: excel file, if not exist to create</span><br><span class="hljs-string">        :param data: excel data</span><br><span class="hljs-string">        :param sheet: excel sheet name</span><br><span class="hljs-string">        :param kwargs: multiple parameters, is dict type</span><br><span class="hljs-string">            - title: 是否为标题，如果是标题样式采用标题样式</span><br><span class="hljs-string">            - start_row: 写入excel的起始行，默认为0</span><br><span class="hljs-string">            - *** extra parameters ***</span><br><span class="hljs-string">        :return: json object</span><br><span class="hljs-string">            status_id: result id, except status_id is 1 is success, others is failure</span><br><span class="hljs-string">            message: the result message</span><br><span class="hljs-string">            data:</span><br><span class="hljs-string">                path: the new excel path + name, real path</span><br><span class="hljs-string">                name: the new excel file name, not contain path</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># if not excel file, auto rename by timestamp</span><br>        <span class="hljs-comment"># new excel file format xlrd xlwt: xls</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> excel_file:<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<span class="hljs-number">214</span>, <span class="hljs-string">&#x27;请求参数为file必须信息&#x27;</span>, &#123;&#125;)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> data:<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<span class="hljs-number">401</span>, <span class="hljs-string">&#x27;数据不存在&#x27;</span>, &#123;&#125;)<br><br>        <span class="hljs-keyword">try</span>:<br>            new_excel = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>            new_sheet = new_excel.add_sheet(sheet <span class="hljs-keyword">or</span> <span class="hljs-variable language_">self</span>.DEFAULT_SHEET_NAME, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br>            start_row = kwargs.get(<span class="hljs-string">&#x27;start_row&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>    <span class="hljs-comment"># 写入的起始行</span><br>            row = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> _d <span class="hljs-keyword">in</span> data:<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> _d: <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(_d), <span class="hljs-number">1</span>):<br>                    new_sheet.write((start_row + row), col, _d[col])    <span class="hljs-comment"># 单元格的方式写入</span><br>                row += <span class="hljs-number">1</span><br>            <span class="hljs-comment"># excel_file = self.check_real_file(excel_file, clean=True)</span><br>            new_excel.save(excel_file)<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<br>                <span class="hljs-number">100</span>, <span class="hljs-string">&#x27;success&#x27;</span>, &#123;<span class="hljs-string">&#x27;name&#x27;</span>: os.path.split(excel_file)[<span class="hljs-number">1</span>], <span class="hljs-string">&#x27;path&#x27;</span>: excel_file&#125;)<br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<span class="hljs-number">998</span>, <span class="hljs-built_in">str</span>(e), &#123;&#125;)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">beau_write</span>(<span class="hljs-params">self, excel_file, data, sheet_name=<span class="hljs-string">&quot;Sheet1&quot;</span>, **kwargs</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        针对于质量考核检查结果直接带样式的表格，xlwt、xlrd:</span><br><span class="hljs-string">            .xls表格行数限制65535</span><br><span class="hljs-string">        特殊方法，写死数据以及样式</span><br><span class="hljs-string"></span><br><span class="hljs-string">        use xlwt、xlrd to merge excel, it are to deal .xls、.xlsx formatter excel file</span><br><span class="hljs-string">        the deal excel style is cell values(row + col)</span><br><span class="hljs-string">        :param excel_file: excel file, if not exist to create</span><br><span class="hljs-string">        :param data: excel data</span><br><span class="hljs-string">        :param sheet_name: excel sheet name</span><br><span class="hljs-string">        :param kwargs: multiple parameters, is dict type</span><br><span class="hljs-string">            - *** extra parameters ***</span><br><span class="hljs-string">        :return: json object</span><br><span class="hljs-string">            status_id: result id, except status_id is 1 is success, others is failure</span><br><span class="hljs-string">            message: the result message</span><br><span class="hljs-string">            data:</span><br><span class="hljs-string">                path: the new excel path + name, real path</span><br><span class="hljs-string">                name: the new excel file name, not contain path</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># if not excel file, auto rename by timestamp</span><br>        <span class="hljs-comment"># new excel file format xlrd xlwt: xls</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> excel_file:<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<span class="hljs-number">214</span>, <span class="hljs-string">&#x27;请求参数为Excel file必须信息&#x27;</span>, &#123;&#125;)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> data:<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<span class="hljs-number">401</span>, <span class="hljs-string">&#x27;数据不存在&#x27;</span>, &#123;&#125;)<br><br>        <span class="hljs-keyword">try</span>:<br>            new_excel = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>            new_sheet = new_excel.add_sheet(sheet_name <span class="hljs-keyword">or</span> <span class="hljs-variable language_">self</span>.DEFAULT_SHEET_NAME, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>            <span class="hljs-comment"># initialize cell style</span><br>            headline_border = &#123;<br>                <span class="hljs-string">&#x27;line&#x27;</span>: &#123;<br>                    <span class="hljs-string">&#x27;top&#x27;</span>: <span class="hljs-string">&#x27;NO_LINE&#x27;</span>,<br>                    <span class="hljs-string">&#x27;bottom&#x27;</span>: <span class="hljs-string">&#x27;DASHED&#x27;</span>,<br>                    <span class="hljs-string">&#x27;left&#x27;</span>: <span class="hljs-string">&#x27;NO_LINE&#x27;</span>,<br>                    <span class="hljs-string">&#x27;right&#x27;</span>: <span class="hljs-string">&#x27;NO_LINE&#x27;</span><br>                &#125;<br>            &#125;<br>            headline_style = <span class="hljs-variable language_">self</span>.set_style(size=<span class="hljs-number">16</span>, horz=<span class="hljs-string">&#x27;center&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, bold=<span class="hljs-literal">True</span>,<br>                                            borders_dict=headline_border, wrap=<span class="hljs-literal">True</span>)<br>            title_style = <span class="hljs-variable language_">self</span>.set_style(size=<span class="hljs-number">10</span>, bold=<span class="hljs-literal">True</span>, horz=<span class="hljs-string">&#x27;center&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, color=<span class="hljs-number">1</span>,<br>                                         bgcolor=<span class="hljs-string">&#x27;periwinkle&#x27;</span>, borders=<span class="hljs-literal">True</span>)<br>            column_style = <span class="hljs-variable language_">self</span>.set_style(size=<span class="hljs-number">8</span>, bold=<span class="hljs-literal">True</span>, horz=<span class="hljs-string">&#x27;center&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, color=<span class="hljs-number">0</span>, bgcolor=<span class="hljs-string">&#x27;ice_blue&#x27;</span>,<br>                                          borders=<span class="hljs-literal">True</span>)<br>            cell_style = <span class="hljs-variable language_">self</span>.set_style(size=<span class="hljs-number">8</span>, horz=<span class="hljs-string">&#x27;center&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, borders=<span class="hljs-literal">True</span>)<br>            cell_per_style = <span class="hljs-variable language_">self</span>.set_style(size=<span class="hljs-number">8</span>, horz=<span class="hljs-string">&#x27;center&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, borders=<span class="hljs-literal">True</span>, formatter=<span class="hljs-string">&#x27;0.00%&#x27;</span>)<br>            special_cell_style = <span class="hljs-variable language_">self</span>.set_style(size=<span class="hljs-number">8</span>, horz=<span class="hljs-string">&#x27;center&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, bgcolor=<span class="hljs-string">&#x27;yellow&#x27;</span>, borders=<span class="hljs-literal">True</span>)<br>            special_per_style = <span class="hljs-variable language_">self</span>.set_style(size=<span class="hljs-number">8</span>, horz=<span class="hljs-string">&#x27;center&#x27;</span>, vert=<span class="hljs-string">&#x27;center&#x27;</span>, bgcolor=<span class="hljs-string">&#x27;yellow&#x27;</span>, borders=<span class="hljs-literal">True</span>,<br>                                               formatter=<span class="hljs-string">&#x27;0.00%&#x27;</span>)<br>            <span class="hljs-comment"># excel title</span><br>            new_sheet.write_merge(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;项目编号&quot;</span>, title_style)<br>            new_sheet.write_merge(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;项目名称&quot;</span>, title_style)<br>            new_sheet.write_merge(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-string">&quot;测试记录&quot;</span>, title_style)<br>            new_sheet.write_merge(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-string">&quot;工资确认单&quot;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;提交次数&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;版本&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-string">&#x27;用户&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-string">&#x27;时间&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>, <span class="hljs-string">&#x27;备注&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">7</span>, <span class="hljs-string">&#x27;提交次数&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">8</span>, <span class="hljs-string">&#x27;版本&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">9</span>, <span class="hljs-string">&#x27;用户&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;时间&#x27;</span>, title_style)<br>            new_sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>, <span class="hljs-string">&#x27;备注&#x27;</span>, title_style)<br><br>            start_row = <span class="hljs-number">2</span>    <span class="hljs-comment"># 数据写入的起始行</span><br>            row = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> _d <span class="hljs-keyword">in</span> data:<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> _d: <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(_d), <span class="hljs-number">1</span>):<br>                    style = column_style <span class="hljs-keyword">if</span> col &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> cell_style<br>                    new_sheet.write((start_row + row), col, _d[col], style)    <span class="hljs-comment"># 单元格的方式写入</span><br>                row += <span class="hljs-number">1</span><br>            <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            end write and save</span><br><span class="hljs-string">            &quot;&quot;&quot;</span><br><br>            <span class="hljs-comment"># 设置列宽, 256为基准数</span><br>            <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>]:<br>                new_sheet.col(col).width_mismatch = <span class="hljs-literal">True</span><br>                new_sheet.col(col).width = <span class="hljs-number">256</span> * <span class="hljs-number">24</span>  <span class="hljs-comment"># 标准256 * 12</span><br>            <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]:<br>                new_sheet.col(col).width_mismatch = <span class="hljs-literal">True</span><br>                new_sheet.col(col).width = <span class="hljs-number">256</span> * <span class="hljs-number">18</span>  <span class="hljs-comment"># 标准256 * 12</span><br>            <span class="hljs-comment"># 设置行高, 20为基准数 50为50磅</span><br>            he_rows = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]<br>            <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> he_rows:<br>                new_sheet.row(row).height_mismatch = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 标题</span><br>                new_sheet.row(row).height = <span class="hljs-number">20</span> * <span class="hljs-number">20</span><br><br>            <span class="hljs-comment"># excel_file = self.check_real_file(excel_file, clean=True)</span><br>            new_excel.save(excel_file)<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<br>                <span class="hljs-number">100</span>, <span class="hljs-string">&#x27;success&#x27;</span>, &#123;<span class="hljs-string">&#x27;name&#x27;</span>: os.path.split(excel_file)[<span class="hljs-number">1</span>], <span class="hljs-string">&#x27;path&#x27;</span>: excel_file&#125;)<br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.format_res(<span class="hljs-number">998</span>, <span class="hljs-built_in">str</span>(e), &#123;&#125;)<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="系列"><a href="#系列" class="headerlink" title="系列"></a>系列</h4><p><a href="http://pygo2.top/articles/26110/">Python模块之command系统命令</a><br><a href="http://pygo2.top/articles/19275/">Python模块之excel模块</a><br><a href="http://pygo2.top/articles/5145/">Python模块之logger日志</a><br><a href="http://pygo2.top/articles/61799/">Python模块之utils公共方法</a><br><a href="http://pygo2.top/articles/31232/">Python模块之watcher打点</a><br><a href="http://pygo2.top/articles/51787/">Python模块之config配置解析</a><br><a href="http://pygo2.top/articles/58292/">Python模块之dtalk钉钉消息</a><br><a href="http://pygo2.top/articles/33254/">Python模块之企业微信</a></p>
+<p>更多模块请参考文章TAG进行查看。</p>
+<p><font size=6.5 color='red'><em><strong>Python模块系列，持续更新中。。。。。。</strong></em></font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Python%E6%A8%A1%E5%9D%97%E7%B3%BB%E5%88%97/" class="print-no-link">#Python模块系列</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python模块之excel模块</div>
+      <div>http://pygo2.top/articles/19275/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/5145/" title="Python模块之logger日志">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python模块之logger日志</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/26110/" title="Python模块之command系统命令">
+                        <span class="hidden-mobile">Python模块之command系统命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

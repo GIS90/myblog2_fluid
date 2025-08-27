@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python, Packages, pip, install, update, 安装, 包, 管理">
+  
+    <meta name="description" content="1、简介             12pip is the package installer for Python.You can use pip to install packages from the Python Package Index and other indexes.官网说明：pip是Python包管理工具，主要用于包的查找、下载、安装、卸载的功能。当前版本：V19.3.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之pip包管理">
+<meta property="og:url" content="http://pygo2.top/articles/54341/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="1、简介             12pip is the package installer for Python.You can use pip to install packages from the Python Package Index and other indexes.官网说明：pip是Python包管理工具，主要用于包的查找、下载、安装、卸载的功能。当前版本：V19.3.1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20171224-001.png">
+<meta property="article:published_time" content="2017-12-24T02:58:52.000Z">
+<meta property="article:modified_time" content="2018-03-24T02:58:52.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="PIP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20171224-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python之pip包管理 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python之pip包管理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2017-12-24 10:58" pubdate>
+          创建日期：2017-12-24 10:58:52（星期日）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          695 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Python之pip包管理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><div class="note note-primary">
+            <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">pip <span class="hljs-keyword">is</span> the <span class="hljs-keyword">package</span> <span class="hljs-title">installer for Python.</span><br>You can <span class="hljs-keyword">use</span> pip to install packages from the Python <span class="hljs-keyword">Package</span> <span class="hljs-title">Index and other indexes.</span><br></code></pre></td></tr></table></figure>官网说明：pip是Python包管理工具，主要用于包的查找、下载、安装、卸载的功能。当前版本：<font size=6.5 color='red'>V19.3.1</font>
+          </div>
+
+<span id="more"></span>
+
+<h3 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h3><p>本人主要使用MacOX、Centos7系统，关于安装，这里介绍2种方式。</p>
+<blockquote>
+<p>curl</p>
+</blockquote>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-comment"># 下载安装脚本</span><br><span class="hljs-string">curl</span> <span class="hljs-string">https</span>://<span class="hljs-string">bootstrap</span>.<span class="hljs-string">pypa</span>.<span class="hljs-string">io</span>/<span class="hljs-built_in">get-pip.py</span> -<span class="hljs-string">o</span> <span class="hljs-built_in">get-pip.py</span><br><br><span class="hljs-comment"># 运行安装脚本</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">python</span> <span class="hljs-built_in">get-pip.py</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>easy_install</p>
+</blockquote>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">easy_install pip</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3、参数说明"><a href="#3、参数说明" class="headerlink" title="3、参数说明"></a>3、参数说明</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs sql">[root<span class="hljs-variable">@bash</span> <span class="hljs-operator">~</span>]# pip <span class="hljs-comment">--help</span><br><br>Usage:<br>  pip <span class="hljs-operator">&lt;</span>command<span class="hljs-operator">&gt;</span> [options]<br><br>Commands:<br>  install                     Install packages.<br>  download                    Download packages.<br>  uninstall                   Uninstall packages.<br>  freeze                      Output installed packages <span class="hljs-keyword">in</span> requirements format.<br>  list                        List installed packages.<br>  <span class="hljs-keyword">show</span>                        <span class="hljs-keyword">Show</span> information about installed packages.<br>  <span class="hljs-keyword">check</span>                       Verify installed packages have compatible dependencies.<br>  config                      Manage <span class="hljs-keyword">local</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">global</span> configuration.<br>  <span class="hljs-keyword">search</span>                      <span class="hljs-keyword">Search</span> PyPI <span class="hljs-keyword">for</span> packages.<br>  wheel                       Build wheels <span class="hljs-keyword">from</span> your requirements.<br>  hash                        Compute hashes <span class="hljs-keyword">of</span> package archives.<br>  completion                  A helper command used <span class="hljs-keyword">for</span> command completion.<br>  debug                       <span class="hljs-keyword">Show</span> information useful <span class="hljs-keyword">for</span> debugging.<br>  help                        <span class="hljs-keyword">Show</span> help <span class="hljs-keyword">for</span> commands.<br><br>General Options:<br>  <span class="hljs-operator">-</span>h, <span class="hljs-comment">--help                  Show help.</span><br>  <span class="hljs-comment">--isolated                  Run pip in an isolated mode, ignoring environment variables and user configuration.</span><br>  <span class="hljs-operator">-</span>v, <span class="hljs-comment">--verbose               Give more output. Option is additive, and can be used up to 3 times.</span><br>  <span class="hljs-operator">-</span>V, <span class="hljs-comment">--version               Show version and exit.</span><br>  <span class="hljs-operator">-</span>q, <span class="hljs-comment">--quiet                 Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING, ERROR, and CRITICAL logging levels).</span><br>  <span class="hljs-comment">--log &lt;path&gt;                Path to a verbose appending log.</span><br>  <span class="hljs-comment">--proxy &lt;proxy&gt;             Specify a proxy in the form [user:passwd@]proxy.server:port.</span><br>  <span class="hljs-comment">--retries &lt;retries&gt;         Maximum number of retries each connection should attempt (default 3 times).</span><br>  <span class="hljs-comment">--timeout &lt;sec&gt;             Set the socket timeout (default 90.0 seconds).</span><br>  <span class="hljs-comment">--exists-action &lt;action&gt;    Default action when a path already exists: (s)witch, (i)gnore, (w)ipe, (b)ackup, (a)bort.</span><br>  <span class="hljs-comment">--trusted-host &lt;hostname&gt;   Mark this host as trusted, even though it does not have valid or any HTTPS.</span><br>  <span class="hljs-comment">--cert &lt;path&gt;               Path to alternate CA bundle.</span><br>  <span class="hljs-comment">--client-cert &lt;path&gt;        Path to SSL client certificate, a single file containing the private key and the certificate in PEM format.</span><br>  <span class="hljs-comment">--cache-dir &lt;dir&gt;           Store the cache data in &lt;dir&gt;.</span><br>  <span class="hljs-comment">--no-cache-dir              Disable the cache.</span><br>  <span class="hljs-comment">--disable-pip-version-check</span><br>                              Don<span class="hljs-string">&#x27;t periodically check PyPI to determine whether a new version of pip is available for download. Implied with --no-index.</span><br><span class="hljs-string">  --no-color                  Suppress colored output</span><br></code></pre></td></tr></table></figure>
+<p>参数说明略，在下面有具体使用。</p>
+<h3 id="4、基础使用"><a href="#4、基础使用" class="headerlink" title="4、基础使用"></a>4、基础使用</h3><p>基于上面的详细参数，列举一下常用的命令。</p>
+<h4 id="4-1、安装包"><a href="#4-1、安装包" class="headerlink" title="4.1、安装包"></a>4.1、安装包</h4><blockquote>
+<p>基础安装</p>
+</blockquote>
+<p>使用此命令，默认安装源的最新版本。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> numpy<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装指定版本</p>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pip</span> install numpy==<span class="hljs-number">1</span>.<span class="hljs-number">14</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>大于指定版本</p>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pip</span> install numpy&gt;=<span class="hljs-number">1</span>.<span class="hljs-number">14</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>requirements文件安装</p>
+</blockquote>
+<p>requirements.txt为指定的路径文件。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> -r requirements.txt<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-2、卸载"><a href="#4-2、卸载" class="headerlink" title="4.2、卸载"></a>4.2、卸载</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">pip uninstall numpy</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-3、升级包"><a href="#4-3、升级包" class="headerlink" title="4.3、升级包"></a>4.3、升级包</h4><p>直接升级指定的包。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> -U numpy<br><br>pip <span class="hljs-keyword">install</span> --upgrade numpy<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-4、查看已安装的包"><a href="#4-4、查看已安装的包" class="headerlink" title="4.4、查看已安装的包"></a>4.4、查看已安装的包</h4><blockquote>
+<p>包&#x3D;&#x3D;版本</p>
+</blockquote>
+<p>执行这个命令，可以获取项目能run的包相关信息，把这些信息直接写到<em><strong>requirements.txt</strong></em>文件，方便项目迁移以及在其他环境运行。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[root@bash ~]</span><span class="hljs-comment"># pip freeze</span><br><br><span class="hljs-attr">alembic</span>==<span class="hljs-number">0.9</span>.<span class="hljs-number">9</span><br><span class="hljs-attr">altgraph</span>==<span class="hljs-number">0.10</span>.<span class="hljs-number">2</span><br><span class="hljs-attr">amqp</span>==<span class="hljs-number">2.2</span>.<span class="hljs-number">2</span><br><span class="hljs-attr">aniso8601</span>==<span class="hljs-number">1.2</span>.<span class="hljs-number">1</span><br><span class="hljs-attr">anyjson</span>==<span class="hljs-number">0.3</span>.<span class="hljs-number">3</span><br><span class="hljs-attr">appnope</span>==<span class="hljs-number">0.1</span>.<span class="hljs-number">0</span><br><span class="hljs-attr">asn1crypto</span>==<span class="hljs-number">0.24</span>.<span class="hljs-number">0</span><br><span class="hljs-attr">aspy.yaml</span>==<span class="hljs-number">1.1</span>.<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>包以及版本</p>
+</blockquote>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ada">[root@bash ~]# pip list<br><br><span class="hljs-keyword">Package</span>                                <span class="hljs-title">Version</span><br><span class="hljs-comment">-------------------------------------- -------------</span><br>alembic                                <span class="hljs-number">0.9</span>.<span class="hljs-number">9</span><br>altgraph                               <span class="hljs-number">0.10</span>.<span class="hljs-number">2</span><br>amqp                                   <span class="hljs-number">2.2</span>.<span class="hljs-number">2</span><br>aniso8601                              <span class="hljs-number">1.2</span>.<span class="hljs-number">1</span><br>anyjson                                <span class="hljs-number">0.3</span>.<span class="hljs-number">3</span><br>appnope                                <span class="hljs-number">0.1</span>.<span class="hljs-number">0</span><br>asn1crypto                             <span class="hljs-number">0.24</span>.<span class="hljs-number">0</span><br>aspy.yaml                              <span class="hljs-number">1.1</span>.<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看指定包信息</p>
+</blockquote>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs nix">[root@bash ~]<span class="hljs-comment"># pip show numpy</span><br><br><span class="hljs-params">Name:</span> numpy<br><span class="hljs-params">Version:</span> <span class="hljs-number">1.8</span>.<span class="hljs-number">0</span>rc1<br><span class="hljs-params">Summary:</span> <span class="hljs-params">NumPy:</span> array processing for numbers, strings, records, and objects.<br><span class="hljs-params">Home-page:</span> http:<span class="hljs-symbol">//www.numpy.org</span><br><span class="hljs-params">Author:</span> NumPy Developers<br><span class="hljs-params">Author-email:</span> numpy-discussion@scipy.org<br><span class="hljs-params">License:</span> BSD<br><span class="hljs-params">Location:</span> <span class="hljs-symbol">/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python</span><br><span class="hljs-params">Requires:</span><br><span class="hljs-params">Required-by:</span> wordcloud, matplotlib<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-5、搜索"><a href="#4-5、搜索" class="headerlink" title="4.5、搜索"></a>4.5、搜索</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">pip search numpy</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-6、查看版本"><a href="#4-6、查看版本" class="headerlink" title="4.6、查看版本"></a>4.6、查看版本</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">[root@bash ~]<span class="hljs-comment"># pip --version</span><br><br>pip <span class="hljs-number">19.2</span>.<span class="hljs-number">3</span> from <span class="hljs-regexp">/Library/</span>Python<span class="hljs-regexp">/2.7/</span>site-packages/pip (python <span class="hljs-number">2.7</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="5、配置"><a href="#5、配置" class="headerlink" title="5、配置"></a>5、配置</h3><blockquote>
+<p>建立pip配置文件</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> ~/.pip<br><span class="hljs-built_in">cd</span> ~/.pip<br><span class="hljs-built_in">touch</span> pip.conf<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>编辑pip配置文件</p>
+</blockquote>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> ~/.pip/pip.<span class="hljs-keyword">conf</span><br></code></pre></td></tr></table></figure>
+
+<p>本人配置文件：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[global]</span><br><span class="hljs-attr">index-url</span>=http://pypi.douban.com/simple<br><span class="hljs-attr">timeout</span>=<span class="hljs-number">90</span><br><span class="hljs-attr">disable-pip-version-check</span>=<span class="hljs-literal">true</span><br><span class="hljs-attr">retries</span>=<span class="hljs-number">3</span><br><span class="hljs-attr">cache-dir</span>=~/.pip/cache/<br><span class="hljs-attr">download-cache</span>=~/.pip/cache<br><span class="hljs-attr">ignore-installed</span>=<span class="hljs-literal">true</span><br><span class="hljs-attr">no-dependencies</span>=<span class="hljs-literal">yes</span><br><br><span class="hljs-section">[install]</span><br><span class="hljs-attr">trusted-host</span> = pypi.douban.com<br><br><span class="hljs-section">[list]</span><br><span class="hljs-attr">format</span>=columns<br></code></pre></td></tr></table></figure>
+
+<h3 id="6、常用命令"><a href="#6、常用命令" class="headerlink" title="6、常用命令"></a>6、常用命令</h3><blockquote>
+<p>安装指定源指定包</p>
+</blockquote>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">pip install dateutil -i http://pypi.python<span class="hljs-meta">.org</span>/simple --trusted-host pypi.python<span class="hljs-meta">.org</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装下载wheel包</p>
+</blockquote>
+<p>whl包文件下载地址：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python</span> -m pip install Pillow-<span class="hljs-number">4</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>-cp27-cp27m-win_amd64.whl<br></code></pre></td></tr></table></figure>
+
+<h3 id="7、学习参考"><a href="#7、学习参考" class="headerlink" title="7、学习参考"></a>7、学习参考</h3><p>官网：</p>
+<ul>
+<li>pip官网：<a target="_blank" rel="noopener" href="https://pypi.org/project/pip/">https://pypi.org/project/pip/</a></li>
+<li>whl包下载地址：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></li>
+</ul>
+<p>pip源：</p>
+<ul>
+<li>清华大学：<a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></li>
+<li>阿里云：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></li>
+<li>豆瓣：<a target="_blank" rel="noopener" href="http://pypi.douban.com/simple/">http://pypi.douban.com/simple/</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/PIP/" class="print-no-link">#PIP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python之pip包管理</div>
+      <div>http://pygo2.top/articles/54341/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2017年12月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/26903/" title="初学Atom">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">初学Atom</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/38673/" title="Linux学习之增强篇-awk">
+                        <span class="hidden-mobile">Linux学习之增强篇-awk</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Atom, 编辑器, python, 开发, 代码 IDE, 插件">
+  
+    <meta name="description" content="日常开发中习惯了Pycharm，但是平常记录点什么东西，最好要有一个自己的文本编译器，比如：sublime、vscode、notepad等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学Atom">
+<meta property="og:url" content="http://pygo2.top/articles/26903/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="日常开发中习惯了Pycharm，但是平常记录点什么东西，最好要有一个自己的文本编译器，比如：sublime、vscode、notepad等等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/201800310-001.png">
+<meta property="article:published_time" content="2018-03-10T13:57:16.000Z">
+<meta property="article:modified_time" content="2025-08-13T00:34:57.728Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="IDE">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Atom">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/201800310-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>初学Atom || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="初学Atom"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2018-03-10 21:57" pubdate>
+          创建日期：2018-03-10 09:57:16（星期六）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">初学Atom</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>日常开发中习惯了Pycharm，但是平常记录点什么东西，最好要有一个自己的文本编译器，比如：sublime、vscode、notepad等等。</p>
+<span id="more"></span>
+<hr />
+
+<h3 id="1、介绍"><a href="#1、介绍" class="headerlink" title="1、介绍"></a>1、介绍</h3><p>下面介绍一下我用的atom，安装以及其他的设置我不做介绍了，网上教程一大推，主要介绍一下我用的几个插件：<br>查看安装的包【<strong>apm list</strong>】<br> <img src="/articles/26903/chuxueatom_list.jpg" srcset="/img/loading.gif" lazyload alt="apm list"></p>
+<h3 id="2、常用快捷键"><a href="#2、常用快捷键" class="headerlink" title="2、常用快捷键"></a>2、常用快捷键</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+<th>级别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shift+command+p</td>
+<td>功能查找命令行</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>shift+command+o</td>
+<td>打开目录</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>command+,</td>
+<td>配置</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>shift+commadn+d</td>
+<td>复制当前行到下一行</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>shift+control+k</td>
+<td>删除光标所在当前行</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>command+\</td>
+<td>显示或隐藏目录树</td>
+<td>🌟🌟</td>
+</tr>
+<tr>
+<td>ctrl-0</td>
+<td>目录树与文本编辑区切换（切换到目录树：a新增【add】m修改【modify】delete删除）</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>alt+left</td>
+<td>单词开始</td>
+<td>🌟🌟</td>
+</tr>
+<tr>
+<td>alt+right</td>
+<td>单词结束</td>
+<td>🌟🌟</td>
+</tr>
+<tr>
+<td>command+left</td>
+<td>行开始</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>command+right</td>
+<td>行结束</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>command+up</td>
+<td>文件开始</td>
+<td>🌟🌟</td>
+</tr>
+<tr>
+<td>command+down</td>
+<td>文件结束</td>
+<td>🌟🌟</td>
+</tr>
+<tr>
+<td>command-b</td>
+<td>打开文件之间的切换</td>
+<td>🌟🌟</td>
+</tr>
+<tr>
+<td>command-t</td>
+<td>目录文件之间的切换</td>
+<td>🌟🌟</td>
+</tr>
+<tr>
+<td>command-r</td>
+<td>查找与替换</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>shift+command+r</td>
+<td>项目查找与替换</td>
+<td>🌟🌟🌟</td>
+</tr>
+<tr>
+<td>command+&#x2F;</td>
+<td>注释</td>
+<td>🌟🌟🌟</td>
+</tr>
+</tbody></table>
+<h3 id="3、基础插件"><a href="#3、基础插件" class="headerlink" title="3、基础插件"></a>3、基础插件</h3><ul>
+<li><h4 id="3-1、activate-power-mode"><a href="#3-1、activate-power-mode" class="headerlink" title="3.1、activate-power-mode"></a>3.1、activate-power-mode</h4></li>
+</ul>
+<p>【功能】: 敲代码炫酷效果<br>【快捷键】: 无<br>【简述】: 怎么说呢，这个插件对于实际开发没有卵用，but可以装B，足以。<br><img src="/articles/26903/chuxueatom_power.jpg" srcset="/img/loading.gif" lazyload alt="activate-power-mode"></p>
+<ul>
+<li><h4 id="3-2、atom-beautify"><a href="#3-2、atom-beautify" class="headerlink" title="3.2、atom-beautify"></a>3.2、atom-beautify</h4></li>
+</ul>
+<p>【功能】: 格式化当前文件<br>【快捷键】: control + option + b<br>【简述】: 可以格式化当前文件，前提是这个文件可以被识别，如果你的文件不带后缀直接去格式化，会warning，建议保存完文件在进行格式化。直接快捷键control + option + b格式化，插件会自动识别，记不得快捷键格式化可以先shift + command + p调出命令行查找，在入beautify editor，也可以直接输入beautify + 计算机语言【例如：python】，确认既可以。</p>
+<ul>
+<li><h4 id="3-3、autocomplete-paths"><a href="#3-3、autocomplete-paths" class="headerlink" title="3.3、autocomplete-paths"></a>3.3、autocomplete-paths</h4></li>
+</ul>
+<p>【功能】: 补全路径<br>【快捷键】: 无<br>【简述】: 在写代码时候，有时需要写文件路径，装上此插件，会自动完善文件路径，不过相信没有几个真正上线的project会写死文件路径吧。</p>
+<ul>
+<li><h4 id="3-4、autocomplete-python"><a href="#3-4、autocomplete-python" class="headerlink" title="3.4、autocomplete-python"></a>3.4、autocomplete-python</h4></li>
+</ul>
+<p>【功能】: python补全<br>【快捷键】: 无<br>【简述】: 不多说，python开发者必备，前提是你在.py文件中进行。</p>
+<ul>
+<li><h4 id="3-5、autosave"><a href="#3-5、autosave" class="headerlink" title="3.5、autosave"></a>3.5、autosave</h4></li>
+</ul>
+<p>【功能】: 自动保存<br>【快捷键】: 无<br>【简介】: 如果你是个懒人，跟我一样，最好安装这个插件。</p>
+<ul>
+<li><h4 id="3-6、file-icons"><a href="#3-6、file-icons" class="headerlink" title="3.6、file-icons"></a>3.6、file-icons</h4></li>
+</ul>
+<p>【功能】: 文件类型icon<br>【快捷键】: 无<br>【简介】: 左侧目录文件类型icon显示。</p>
+<ul>
+<li><h4 id="3-7、highlight-selected"><a href="#3-7、highlight-selected" class="headerlink" title="3.7、highlight-selected"></a>3.7、highlight-selected</h4></li>
+</ul>
+<p>【功能】: 高亮选中<br>【快捷键】: 无<br>【简介】: 高亮选中字符，同时所有相同字符高亮。</p>
+<ul>
+<li><h4 id="3-8、hyperclick"><a href="#3-8、hyperclick" class="headerlink" title="3.8、hyperclick"></a>3.8、hyperclick</h4></li>
+</ul>
+<p>【功能】: 方法跳转<br>【快捷键】: command + click左键<br>【简介】: 用于方法跳转，用完之后，暂时我不知道怎么跳转回去，有知道的可以留言进行交流。</p>
+<ul>
+<li><h4 id="3-9、minimap-minimap-highlight-selected"><a href="#3-9、minimap-minimap-highlight-selected" class="headerlink" title="3.9、minimap &amp;&amp; minimap-highlight-selected"></a>3.9、minimap &amp;&amp; minimap-highlight-selected</h4></li>
+</ul>
+<p>【功能】: minimap显示<br>【快捷键】: 无<br>【简介】: 以一个minimap进行显示当前的文件内容，方便进行拖拽，加minimap-highlight-selected插件，方便你在选中一个之后在minimap中进行查看，位置可以配置。</p>
+<ul>
+<li><h4 id="3-10、platformio-ide-terminal"><a href="#3-10、platformio-ide-terminal" class="headerlink" title="3.10、platformio-ide-terminal"></a>3.10、platformio-ide-terminal</h4></li>
+</ul>
+<p>【功能】: terminal工具<br>【快捷键】: 新建：shift + command + T; 关闭：shift + command + X; 前一个：shift + command + J; 后一个：shift + command + K<br>【简介】: 方便控制台直接在atom中使用，省去切换。如果忘记快捷键，还是建议shift + command + p进行关键字terminal搜索，一目了然。</p>
+<ul>
+<li><h4 id="3-11、project-manager"><a href="#3-11、project-manager" class="headerlink" title="3.11、project-manager"></a>3.11、project-manager</h4></li>
+</ul>
+<p>【功能】: project存储<br>【快捷键】: add: shift + command + O;list：control + command + p<br>【简介】: 新open一个atom是不记录上次的文件的，引用插件可以把project进行存储，每次方便进行打开。还是那句话，如果忘记快捷键，还是议shift + command + p进行关键字project搜索，一目了然。</p>
+<ul>
+<li><h4 id="3-12、script"><a href="#3-12、script" class="headerlink" title="3.12、script"></a>3.12、script</h4></li>
+</ul>
+<p>【功能】: 脚本执行<br>【快捷键】: 执行：command + i; 关闭问题view：control + w; 选中执行: shift command + i<br>【简介】: 如果因为atom不能直接执行你写的脚本发愁，那么这个插件就完美的解决你的问题。当然还有一个其他的解决办法就是shift + command + t调用terminal去执行。显示还是command + i方便，哈哈。</p>
+<ul>
+<li><h4 id="3-13、markdown"><a href="#3-13、markdown" class="headerlink" title="3.13、markdown"></a>3.13、markdown</h4></li>
+</ul>
+<p>【功能】: markdown编辑<br>【快捷键】: shift + control + m 显示md效果<br>【简介】:<br>markdown-image-paste 图片处理<br>markdown-preview-plus 预览效果<br>markdown-scroll-sync 同步滚动<br>markdown-table-editor 表格处理</p>
+<h3 id="4、学习"><a href="#4、学习" class="headerlink" title="4、学习"></a>4、学习</h3><p>快捷键大全：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e33f864981bb">https://www.jianshu.com/p/e33f864981bb</a></p>
+<h3 id="5、建议"><a href="#5、建议" class="headerlink" title="5、建议"></a>5、建议</h3><p>Atom可以集成git插件，以及flake8，但是我觉得还是这2个命令还是在item2上去敲，这2个命令必须得日常所用，敲得多熟悉的也就越深，玩python的人，当然是linux的基础命令都得熟悉。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7%E9%9B%86/" class="category-chain-item">工具集</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/IDE/" class="print-no-link">#IDE</a>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Atom/" class="print-no-link">#Atom</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>初学Atom</div>
+      <div>http://pygo2.top/articles/26903/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2018年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/13042/" title="LDAP-ERROR:DSID-03150F01">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LDAP-ERROR:DSID-03150F01</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/54341/" title="Python之pip包管理">
+                        <span class="hidden-mobile">Python之pip包管理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

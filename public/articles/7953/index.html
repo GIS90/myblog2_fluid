@@ -1,0 +1,913 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="hexo, next, Hexo, 美化, 插件, 博客, blog, valine, 留言板, 菜单栏">
+  
+    <meta name="description" content="1、简述             blog菜单栏添加留言板功能，欢迎大家留言交流。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo菜单栏添加留言板-Valine">
+<meta property="og:url" content="http://pygo2.top/articles/7953/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="1、简述             blog菜单栏添加留言板功能，欢迎大家留言交流。。。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20181208-001.png">
+<meta property="article:published_time" content="2018-12-08T12:44:08.000Z">
+<meta property="article:modified_time" content="2019-01-08T12:44:08.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Hexo插件">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20181208-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Hexo菜单栏添加留言板-Valine || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hexo菜单栏添加留言板-Valine"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2018-12-08 20:44" pubdate>
+          创建日期：2018-12-08 08:44:08（星期六）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          895 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Hexo菜单栏添加留言板-Valine</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1、简述"><a href="#1、简述" class="headerlink" title="1、简述"></a>1、简述</h3><div class="note note-success">
+            <p>blog菜单栏添加留言板功能，欢迎大家留言交流。。。</p>
+          </div>
+
+<span id="more"></span>
+<hr />
+
+<p><em><strong>My blog</strong></em>文章添加留言功能，除此之外还在菜单栏添加一个专门用来留言的message pad，用来<em><strong>share</strong></em>文章中简称mp。查看next主题config.yml文件以及google了一下，发现居然配置5中默认的评论系统。。。<em><strong>next</strong></em>这么变态吗？提供1～2就好了，5个是怎么回事啊，还得花时间去整理<em><strong>compare</strong></em>，以下仅代表个人观点。</p>
+<h3 id="2、评论系统"><a href="#2、评论系统" class="headerlink" title="2、评论系统"></a>2、评论系统</h3><table>
+<thead>
+<tr>
+<th align="center">id</th>
+<th align="center">type</th>
+<th align="left">desc</th>
+<th align="center">remark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">valine</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://valine.js.org/">https://valine.js.org</a></td>
+<td align="center">🌟🌟🌟</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">disqus</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c4f65ebe23ad">https://www.jianshu.com/p/c4f65ebe23ad</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">changyan</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5246d020da25">https://www.jianshu.com/p/5246d020da25</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">gitment</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://github.com/imsun/gitment">https://github.com/imsun/gitment</a></td>
+<td align="center">🌟</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">gitalk</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://gitalk.github.io/">https://gitalk.github.io</a></td>
+<td align="center">🌟</td>
+</tr>
+</tbody></table>
+<h4 id="2-1、效果图"><a href="#2-1、效果图" class="headerlink" title="2.1、效果图"></a>2.1、效果图</h4><blockquote>
+<p>valine</p>
+</blockquote>
+<img src="valine.png" srcset="/img/loading.gif" lazyload style="border:3px solid black"/>
+> disqus
+
+<img src="disqus.png" srcset="/img/loading.gif" lazyload style="border:3px solid black"/>
+> changyan
+
+<img src="changyan.png" srcset="/img/loading.gif" lazyload style="border:3px solid black"/>
+> gitment
+
+<img src="gitment.png" srcset="/img/loading.gif" lazyload style="border:3px solid black"/>
+> gitalk
+
+<img src="gitalk.png" srcset="/img/loading.gif" lazyload style="border:3px solid black"/>
+
+<p><em><strong>总结：</strong></em><font color="#dd0000" size="4">单从效果图上来看，我倾向于gitment、gitalk、changyan，简单整洁。</font></p>
+<h4 id="2-2、功能性"><a href="#2-2、功能性" class="headerlink" title="2.2、功能性"></a>2.2、功能性</h4><p>这里不想说明了，直接给出结论。。。干货</p>
+<p><em><strong>总结：</strong></em><font color="#dd0000" size="4">除了valine，其他4个评论均需要强制登录一个指定的账号才可以进行评论发布，令人太不爽了。</font></p>
+<h3 id="3、Valine"><a href="#3、Valine" class="headerlink" title="3、Valine"></a>3、Valine</h3><pre><code class="hljs">主要基于账号的问题，我选择Valine，起码大家都可以参与，没有限制。
+</code></pre>
+<h4 id="3-1、注册LeanCloud"><a href="#3-1、注册LeanCloud" class="headerlink" title="3.1、注册LeanCloud"></a>3.1、注册LeanCloud</h4><p>注册LeanCloud，将数据托管给第三方，直接登录账号使用，很方便。注册地址：<a target="_blank" rel="noopener" href="https://leancloud.cn/">注册Leancloud(官方)</a></p>
+<blockquote>
+<p>注册</p>
+</blockquote>
+<img src="leancloud_zhuce.png" srcset="/img/loading.gif" lazyload style="border:3px solid blue"/>
+> 创建应用
+
+<img src="leancloud_newapp.png" srcset="/img/loading.gif" lazyload style="border:3px solid blue"/>
+> 设置应用
+
+<img src="leancloud_setting.png" srcset="/img/loading.gif" lazyload style="border:3px solid blue"/>
+> 应用key
+
+<img src="leancloud_key.png" srcset="/img/loading.gif" lazyload style="border:3px solid blue"/>
+
+
+<h4 id="3-2、next配置"><a href="#3-2、next配置" class="headerlink" title="3.2、next配置"></a>3.2、next配置</h4><p>打开next的配置：theme&#x2F;next&#x2F;_config.yml，搜索：# Valine</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">valine:</span><br>  <span class="hljs-params">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version.</span><br>  <span class="hljs-params">appid:</span> XXXX <span class="hljs-comment"># your leancloud application appid</span><br>  <span class="hljs-params">appkey:</span> XXXX <span class="hljs-comment"># your leancloud application appkey</span><br>  <span class="hljs-params">notify:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># mail notifier, See: https://github.com/xCss/Valine/wiki</span><br>  <span class="hljs-params">verify:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Verification code</span><br>  <span class="hljs-params">placeholder:</span> 欢迎吐槽 ！ <span class="hljs-comment"># comment box placeholder</span><br>  <span class="hljs-params">avatar:</span> mm <span class="hljs-comment"># gravatar style</span><br>  <span class="hljs-params">guest_info:</span> nick,mail <span class="hljs-comment"># link custom comment header</span><br>  <span class="hljs-params">pageSize:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># pagination size</span><br>  <span class="hljs-params">language:</span> <span class="hljs-comment"># language, available values: en, zh-cn</span><br>  <span class="hljs-params">visitor:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors&#x27; for counter compatibility. Article reading statistic https://valine.js.org/visitor.html</span><br>  <span class="hljs-params">comment_count:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># if false, comment count will only be displayed in post page, not in home page</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>enable：是否开启Valine评论</li>
+<li>appid：leancloud应用上App ID</li>
+<li>appkey：leancloud应用上App Key</li>
+<li>notify &amp;&amp; verify：是否开启邮件提醒，leancloud &amp;&amp; github valine使用有详细介绍，具体查看文档(<a target="_blank" rel="noopener" href="https://valine.js.org/notify.html">https://valine.js.org/notify.html</a>)</li>
+<li>placeholder：评论区默认文字</li>
+<li>avatar：头像设置(<a target="_blank" rel="noopener" href="https://valine.js.org/avatar.html">https://valine.js.org/avatar.html</a>)</li>
+<li>guest_info：评论区用户选填的基本信息</li>
+<li>pageSize：一页评论的数据</li>
+<li>language：语言设置，默认zh-cn</li>
+<li>visitor：还不知道，欢迎大家留言告诉我，哈ヾﾉ≧∀≦)o哈</li>
+<li>comment_count：是否展示评论总数</li>
+</ul>
+<h3 id="4、评论生效"><a href="#4、评论生效" class="headerlink" title="4、评论生效"></a>4、评论生效</h3><p><em><strong>注册 &amp;&amp; 配置</strong></em>搞完了之后，并不是立马看到效果，需要：</p>
+<pre><code class="hljs">hexo g
+hexo server -p 8888
+</code></pre>
+<p>从心打开blog，奇迹出现了。。。哈哈哈，<em><strong><font color="#dd0000">一起都是自己的功劳，并不是什么奇迹，只要努力，成功离你就会不远</font></strong></em>。</p>
+<h3 id="5、禁用评论"><a href="#5、禁用评论" class="headerlink" title="5、禁用评论"></a>5、禁用评论</h3><p>但是，我其实就是想在菜单栏添加个留言板功能，不想再blog文章中添加这个功能，简单。打开文章，在最上面的设置中加入</p>
+<pre><code class="hljs">comments: true
+</code></pre>
+<p>从新g-&gt;server，奇迹再次发生。。。如果想都关闭评论，这个需要在已经发布的文章中分别设置，暂时没有找到简单的方法。不能在以后每篇文章中每次都设置，好麻烦，只想需要要设置一次。当然有方法，blog&#x2F;scaffolds&#x2F;post.md文件设置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> &#123;&#123; <span class="hljs-string">title</span> &#125;&#125;<br><span class="hljs-attr">desc:</span><br><span class="hljs-attr">date:</span> &#123;&#123; <span class="hljs-string">date</span> &#125;&#125;<br><span class="hljs-attr">updated:</span> &#123;&#123; <span class="hljs-string">date</span> &#125;&#125;<br><span class="hljs-attr">categories:</span><br><span class="hljs-attr">tags:</span><br><span class="hljs-attr">comments:</span> <span class="hljs-literal">false</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="6、留言板"><a href="#6、留言板" class="headerlink" title="6、留言板"></a>6、留言板</h3><p><em><strong>终于进入主题了，菜单栏添加单独一栏留言板功能。</strong></em></p>
+<blockquote>
+<p>添加page</p>
+</blockquote>
+<pre><code class="hljs">hexo new page messagepad
+</code></pre>
+<blockquote>
+<p>留言板</p>
+</blockquote>
+<p>对page messagepad的index.md进行编辑加入自定义的东西。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">欢迎大家留言</span><br><span class="hljs-meta">---</span><br><span class="hljs-type">![messagepad.png](messagepad.png)</span><br><span class="hljs-string">&lt;div</span> <span class="hljs-string">class=&quot;ds-recent-visitors&quot;</span> <span class="hljs-string">data-num-items=&quot;28&quot;</span> <span class="hljs-string">data-avatar-size=&quot;42&quot;</span> <span class="hljs-string">id=&quot;ds-recent-visitors&quot;&gt;&lt;/div&gt;</span><br></code></pre></td></tr></table></figure>
+<p>继续见证奇迹吧。</p>
+<h3 id="7、Suggestion"><a href="#7、Suggestion" class="headerlink" title="7、Suggestion"></a>7、Suggestion</h3><p><em><strong><font color="#dd0000" size="5">真正的成功并非一朝一夕，水滴石穿，努力吧，少年们！！！</font></strong></em></p>
+<pre><code class="hljs">到此收工，一个完美的菜单栏留言板功能share献给大家。
+</code></pre>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
+      
+        <a href="/tags/Hexo%E6%8F%92%E4%BB%B6/" class="print-no-link">#Hexo插件</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hexo菜单栏添加留言板-Valine</div>
+      <div>http://pygo2.top/articles/7953/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2018年12月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/8728/" title="Hexo博文展示并排等多样式图片">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hexo博文展示并排等多样式图片</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/41065/" title="Next主题优化-增强篇（Gemini）">
+                        <span class="hidden-mobile">Next主题优化-增强篇（Gemini）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

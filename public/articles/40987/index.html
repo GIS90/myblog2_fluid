@@ -1,0 +1,1055 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Oracle, 安装">
+  
+    <meta name="description" content="Redhat7.4服务器安装Oracle11g数据库，详细实践版本。 Oracle 数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle数据库Redhat7.4部署安装">
+<meta property="og:url" content="http://pygo2.top/articles/40987/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="Redhat7.4服务器安装Oracle11g数据库，详细实践版本。 Oracle 数据库">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20220803-001.jpg">
+<meta property="article:published_time" content="2022-08-03T14:21:53.000Z">
+<meta property="article:modified_time" content="2022-08-03T14:21:53.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="部署教程系列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20220803-001.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Oracle数据库Redhat7.4部署安装 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Oracle数据库Redhat7.4部署安装"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-03 22:21" pubdate>
+          创建日期：2022-08-03 10:21:53（星期三）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Oracle数据库Redhat7.4部署安装</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Redhat7.4服务器安装Oracle11g数据库，详细实践版本。</p>
+<span class="label label-primary">Oracle</span> <span class="label label-info">数据库</span>
+
+<span id="more"></span>
+<hr />
+
+<h3 id="1、版本说明"><a href="#1、版本说明" class="headerlink" title="1、版本说明"></a>1、版本说明</h3><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务器系统</td>
+<td align="center">Redhat7.4</td>
+</tr>
+<tr>
+<td align="center">Oracle</td>
+<td align="center">11g Enterprise Edition</td>
+</tr>
+</tbody></table>
+<p>接下来是部署安装的过程，都是重要步骤。</p>
+
+<div class="post_cus_note">====== 部署开始 ======</div>
+
+
+
+<h3 id="2、Oracle安装"><a href="#2、Oracle安装" class="headerlink" title="2、Oracle安装"></a>2、Oracle安装</h3><h4 id="2-1、Oracle用户【root用户】"><a href="#2-1、Oracle用户【root用户】" class="headerlink" title="2.1、Oracle用户【root用户】"></a>2.1、Oracle用户【root用户】</h4><p>对于到手的Linux服务器，Oracle存在自主创建或者已经被创建的情况，分别进行操作说明。</p>
+<blockquote>
+<p>情况一：创建用户</p>
+</blockquote>
+<p>1.创建oracle用户组</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">groupadd oinstall</span><br><span class="hljs-attribute">groupadd dba</span><br></code></pre></td></tr></table></figure>
+
+<p>2.创建oracle用户</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">seradd oracle -<span class="hljs-selector-tag">g</span> oinstall -<span class="hljs-selector-tag">G</span> dba -m  -s /bin/bash<br></code></pre></td></tr></table></figure>
+
+<p>3.设置oracle用户密码</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">passwd oracle</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>情况二： Oracle用户已存在</p>
+</blockquote>
+<p>1.创建用户租<br>groupadd oinstall<br>groupadd dba<br>2.修改oracle用户所属组<br>usermod -g oinstall -G dba -s &#x2F;bin&#x2F;bash oracle<br>id oracle<br>出现的结果是oracle用户是属于oinstall、dba2个组<br>3.把oracle用户目录重新赋予权限：<br>chown -R oracle:oinstall &#x2F;home&#x2F;oracle</p>
+<h4 id="2-2、Package安装【root用户】"><a href="#2-2、Package安装【root用户】" class="headerlink" title="2.2、Package安装【root用户】"></a>2.2、Package安装【root用户】</h4><p>安装所必须的包，执行以下命令：</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">yum install  binutils  elfutils</span><span class="hljs-literal">-</span><span class="hljs-comment">libelf   elfutils</span><span class="hljs-literal">-</span><span class="hljs-comment">libelf</span><span class="hljs-literal">-</span><span class="hljs-comment">devel  gcc</span><span class="hljs-literal">-</span><span class="hljs-comment">c</span><span class="hljs-literal">++</span>   <span class="hljs-comment">glibc  glibc</span><span class="hljs-literal">-</span><span class="hljs-comment">common</span><br> <span class="hljs-comment">glibc</span><span class="hljs-literal">-</span><span class="hljs-comment">devel  glibc</span><span class="hljs-literal">-</span><span class="hljs-comment">headers   libaio  libaio</span><span class="hljs-literal">-</span><span class="hljs-comment">devel   libgcc  libstdc</span><span class="hljs-literal">++</span>   <span class="hljs-comment">libstdc</span><span class="hljs-literal">++-</span><span class="hljs-comment">devel    make</span><br> <span class="hljs-comment">sysstat  unixODBC  unixODBC</span><span class="hljs-literal">-</span><span class="hljs-comment">devel</span><br></code></pre></td></tr></table></figure>
+<p>如果服务器没连内网，需要从安装盘安装以上的包。挂截光盘，将系统对应的系统盘插入光驱后，运行以下命令：<br>1.挂载系统盘</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /mnt/cdrom<br>mount –t auto –o ro /dev/cdrom /mnt/cdrom<br></code></pre></td></tr></table></figure>
+<p>2.配置源文件</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">vim /etc/yum.repos.d/<span class="hljs-built_in">Server</span>.repo<br></code></pre></td></tr></table></figure>
+<p>3.更改配置，在以上文件中输入以下内容：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[dvd]</span><br><span class="hljs-attr">Name</span>=localyum<br><span class="hljs-attr">Baseurl</span>=file:///mnt/cdrom<br><span class="hljs-attr">Enabled</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">Gpgcheck</span>=<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<p>保存退出，在进行yum包安装。</p>
+<h4 id="2-3、调整OS内核参数【root用户】"><a href="#2-3、调整OS内核参数【root用户】" class="headerlink" title="2.3、调整OS内核参数【root用户】"></a>2.3、调整OS内核参数【root用户】</h4><p>设置原则：<br>kernel.shmmax设为物理内存大小(如果系统已设置了足够大就无需再设置了，参考值为最小需求)</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># vi /etc/sysctl.conf</span><br><span class="hljs-comment">#------------------------------------------</span><br><span class="hljs-attr">kernel.shmall</span> = <span class="hljs-number">16777216</span><br><span class="hljs-attr">kernel.shmmax</span> = <span class="hljs-number">68719476735</span><br><span class="hljs-attr">kernel.shmmni</span> = <span class="hljs-number">4096</span><br><span class="hljs-attr">kernel.sem</span> = <span class="hljs-number">500</span> <span class="hljs-number">2048000</span> <span class="hljs-number">500</span> <span class="hljs-number">4096</span><br><span class="hljs-attr">kernel.randomize_va_space</span>=<span class="hljs-number">0</span><br><span class="hljs-attr">fs.aio-max-nr</span> = <span class="hljs-number">1048576</span><br><span class="hljs-attr">fs.file-max</span> = <span class="hljs-number">6815744</span><br><span class="hljs-attr">fs.aio-max-nr</span> = <span class="hljs-number">1048576</span><br><span class="hljs-attr">net.ipv4.ip_local_port_range</span> = <span class="hljs-number">9000</span> <span class="hljs-number">65500</span><br><span class="hljs-attr">net.core.rmem_default</span> = <span class="hljs-number">262144</span><br><span class="hljs-attr">net.core.rmem_max</span> = <span class="hljs-number">4194304</span><br><span class="hljs-attr">net.core.wmem_default</span> = <span class="hljs-number">262144</span><br><span class="hljs-attr">net.core.wmem_max</span> = <span class="hljs-number">1048586</span><br><span class="hljs-comment">#------------------------------------------</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/articles/40987/331662561426_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>运行命令使参数立即生效</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">sysctl  -<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-4、配置PAM模块文件【root用户】"><a href="#2-4、配置PAM模块文件【root用户】" class="headerlink" title="2.4、配置PAM模块文件【root用户】"></a>2.4、配置PAM模块文件【root用户】</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">vim</span> /etc/security/limits.conf<br><span class="hljs-comment">#------------------------------------------</span><br><span class="hljs-attribute">oracle</span> soft nproc <span class="hljs-number">2047</span><br><span class="hljs-attribute">oracle</span> hard nproc <span class="hljs-number">16384</span><br><span class="hljs-attribute">oracle</span> soft nofile <span class="hljs-number">1024</span><br><span class="hljs-attribute">oracle</span> hard nofile <span class="hljs-number">65536</span><br><span class="hljs-comment">#------------------------------------------</span><br></code></pre></td></tr></table></figure>
+<p><img src="/articles/40987/341662561512_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="2-5、建立必须目录和文件【root用户】"><a href="#2-5、建立必须目录和文件【root用户】" class="headerlink" title="2.5、建立必须目录和文件【root用户】"></a>2.5、建立必须目录和文件【root用户】</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span>  –p  /u01/app/oracle<br><span class="hljs-built_in">chown</span>  -R  oracle:oinstall  /u01/<br></code></pre></td></tr></table></figure>
+<p>建立完之后可以tree以下，如果没有<em><strong>yum tree</strong></em>安装tree命令，用来查看目录树结构，推荐。</p>
+<h4 id="2-6、设置oracle用户环境变量【oracle用户】"><a href="#2-6、设置oracle用户环境变量【oracle用户】" class="headerlink" title="2.6、设置oracle用户环境变量【oracle用户】"></a>2.6、设置oracle用户环境变量【oracle用户】</h4><p>如果服务器有多网卡, 注意设置ORACLE_HOSTNAME为某网卡IP对应的主机名, 参照&#x2F;etc&#x2F;hosts文件.<br>切换到oracle 用户 编辑.bash_profile文件为以下内容。<br>切换到oracle用户<br>命令：su  -  oracle</p>
+<p>编辑配置文件<br>命令如下：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-variable">$vim</span> /home/oracle/.bash_profile<br><span class="hljs-comment"># --------------------------------------------------</span><br><span class="hljs-comment"># oracle config</span><br>umask 022<br><span class="hljs-attribute">ORACLE_HOSTNAME</span>=VM_176_9_linux<br><span class="hljs-attribute">ORACLE_BASE</span>=/u01/app/oracle<br><span class="hljs-attribute">ORACLE_HOME</span>=/u01/app/oracle/product/11.2.0/dbhome_1<br><span class="hljs-attribute">ORACLE_SID</span>=orcl<br><span class="hljs-attribute">LD_LIBRARY_PATH</span>=<span class="hljs-variable">$ORACLE_HOME</span>/lib<br><span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$HOME/bin:$ORACLE_HOME/bin:$ORACLE_HOME/jdk/bin:$LD_LIBRARY_PATH<br><br><span class="hljs-built_in">export</span> ORACLE_HOME<br><span class="hljs-built_in">export</span> ORACLE_SID<br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH<br><span class="hljs-built_in">export</span> PATH<br><br><span class="hljs-attribute">LC_ALL</span>=<span class="hljs-string">&quot;en_US&quot;</span><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">NLS_LANG</span>=<span class="hljs-string">&quot;AMERICAN_AMERICA.ZHS16GBK&quot;</span><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">NLS_DATE_FORMAT</span>=<span class="hljs-string">&quot;YYYY-MM-DD HH24:MI:SS&quot;</span><br><span class="hljs-comment"># --------------------------------------------------</span><br></code></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>ORACLE_HOSTNAM：本机名称</li>
+<li>ORACLE_BASE：Oracle安装根目录</li>
+<li>ORACLE_HOME：Oracle软件安装目录</li>
+<li>ORACLE_SID：Oracle SID</li>
+<li>LD_LIBRARY_PATH：Oracle lib包</li>
+<li>NLS_LANG：NLS编码设置，先这么设置，后面有一个拓展 专门说明。</li>
+</ul>
+<p><img src="/articles/40987/351662561646_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>再运行以下命令使配置立即生效。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /home/oracle/.bash_profile<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-7、配置cvu-config文件【oracle用户】"><a href="#2-7、配置cvu-config文件【oracle用户】" class="headerlink" title="2.7、配置cvu_config文件【oracle用户】"></a>2.7、配置cvu_config文件【oracle用户】</h4><p>1.解压Oracle包，进入Oracle解压后目录database&#x2F;stage&#x2F;cvu&#x2F;cv&#x2F;admin，备份 cvu_config 文件：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-keyword">cp</span> cvu_config backup_cvu_config<br></code></pre></td></tr></table></figure>
+<p>2.编辑 cvu_config 并且改动以下行内容（添加cvu_config配置信息的时候建议手动输入，复制的时候出现|【不知什么原因】）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">CV_ASSUME_DISTID</span>=OEL4 <span class="hljs-keyword">to</span> <span class="hljs-attribute">CV_ASSUME_DISTID</span>=OEL6<br></code></pre></td></tr></table></figure>
+<p>3.保存文件。</p>
+<h4 id="2-8、配置响应文件【oracle用户】"><a href="#2-8、配置响应文件【oracle用户】" class="headerlink" title="2.8、配置响应文件【oracle用户】"></a>2.8、配置响应文件【oracle用户】</h4><p>在ORACLE安装软件的response目录里有各种响应文件模板，我们需要将配置响应文件的参数以匹配当前环境</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ vi /home/oracle/database/response/db_install.rsp<br><br><span class="hljs-comment">#--------------------------------------------------------------------</span><br><span class="hljs-comment"># 注意!不要更改以下参数,否则安装会报错!</span><br>oracle.install.<span class="hljs-attribute">responseFileVersion</span>=/oracle/install/rspfmt_dbinstall_response_schema_v11_2_0<br><br><span class="hljs-comment">#以下参数根据实际情况更改,ORACLE_HOSTNAME的值由hostname命令获得</span><br>oracle.install.<span class="hljs-attribute">option</span>=INSTALL_DB_SWONLY<br><span class="hljs-attribute">ORACLE_HOSTNAME</span>=服务器名称<br><span class="hljs-attribute">INVENTORY_LOCATION</span>=/u01/app/oracle/oraInventory<br><span class="hljs-attribute">UNIX_GROUP_NAME</span>=oinstall<br><span class="hljs-attribute">SELECTED_LANGUAGES</span>=en,zh_CN<br>oracle.install.db.<span class="hljs-attribute">InstallEdition</span>=EE<br>oracle.install.db.<span class="hljs-attribute">DBA_GROUP</span>=dba<br>oracle.install.db.<span class="hljs-attribute">OPER_GROUP</span>=dba<br><span class="hljs-attribute">DECLINE_SECURITY_UPDATES</span>=<span class="hljs-literal">true</span><br><span class="hljs-attribute">ORACLE_HOME</span>=/u01/app/oracle/product/11.2.0/dbhome_1<br><span class="hljs-attribute">ORACLE_BASE</span>=/u01/app/oracle<br><span class="hljs-comment">#--------------------------------------------------------------------</span><br></code></pre></td></tr></table></figure>
+<p>各参数含义如下:<br>-silent 表示以静默方式安装,不会有任何提示<br>-force 允许安装到一个非空目录<br>-noconfig 表示不运行配置助手netca<br>-responseFile 表示使用哪个响应文件,必需使用绝对路径<br>oracle.install.responseFileVersion 响应文件模板的版本,该参数不要更改<br>oracle.install.option 安装选项,本例只安装oracle软件,<br>DECLINE_SECURITY_UPDATES 是否需要在线安全更新,该参数不要更改<br>ORACLE_HOSTNAME 安装主机名<br>UNIX_GROUP_NAME oracle用户用于安装软件的组名<br>INVENTORY_LOCATION oracle产品清单目录<br>SELECTED_LANGUAGES oracle运行语言环境,一般选en，zh_CN<br>ORACLE_HOME Oracle安装目录<br>ORACLE_BASE oracle基础目录<br>oracle.install.db.InstallEdition 安装版本类型,一般是企业版<br>oracle.install.db.isCustomInstall 是否定制安装,默认Partitioning,OLAP,RAT都选上了<br>oracle.install.db.customComponents 定制安装组件列表:除了以上默认的,可加上Label Security和Database Vault<br>oracle.install.db.DBA_GROUP oracle用户用于授予OSDBA权限的组名<br>oracle.install.db.OPER_GROUP oracle用户用于授予OSOPER权限的组名</p>
+<h4 id="2-9、执行安装脚本"><a href="#2-9、执行安装脚本" class="headerlink" title="2.9、执行安装脚本"></a>2.9、执行安装脚本</h4><p>【一定要oracle用户执行】【一定要oracle用户执行】【一定要oracle用户执行】<br>命令：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">.<span class="hljs-regexp">/runInstaller  -silent  -force  -noconfig  -responseFile  /</span>home<span class="hljs-regexp">/oracle/</span>db_install.rsp<br></code></pre></td></tr></table></figure>
+<p>其中后面的db_install.rsp为上一步配置的响应文件的路径。</p>
+<p><img src="/articles/40987/361662561936_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>执行成功后会出现以上界面，会提示需要要ROOT用户下执行脚本，然后再回来上图界面按回车完成安装。</p>
+<h4 id="2-10、运行orainstRoot-sh和root-sh完成安装"><a href="#2-10、运行orainstRoot-sh和root-sh完成安装" class="headerlink" title="2.10、运行orainstRoot.sh和root.sh完成安装"></a>2.10、运行orainstRoot.sh和root.sh完成安装</h4><p>【一定要root用户执行】【一定要root用户执行】【一定要root用户执行】<br>切换到root用户执行脚本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">/u01/app/oraInventory/orainstRoot.sh<br>/u01/app/oracle/product/11.2.0/dbhome_1/root.sh<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/40987/371662561966_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>然后再回到安装界面按回车，提示安装成功，至此数据库已经安装完成。</p>
+<h4 id="2-11、检查安装文件【root用户】"><a href="#2-11、检查安装文件【root用户】" class="headerlink" title="2.11、检查安装文件【root用户】"></a>2.11、检查安装文件【root用户】</h4><blockquote>
+<p>1.文件一：$ORACLE_HOME&#x2F;bin&#x2F;oracle</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$ORACLE_HOME</span>/bin<br>ll | grep oracle<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/40987/381662562021_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>2.文件二：$ORACLE_HOME&#x2F;rdbms&#x2F;lib&#x2F;config.o</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$ORACLE_HOME</span>/rdbms/lib/<br>ll | grep config<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/40987/391662562045_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>确认上面的2个文件大小一定要大于0，不然后面后出现ORA-12547:TNS:list contact。<br>如果出现上述情况，可以把&#x2F;u01&#x2F;app&#x2F;oracle&#x2F;oraInventory目录删除，重新进行安装。</p>
+
+<div class="post_cus_note">数据库安装完成</div>
+
+
+
+<h3 id="3、PAS数据库安装"><a href="#3、PAS数据库安装" class="headerlink" title="3、PAS数据库安装"></a>3、PAS数据库安装</h3><h4 id="3-1、静默配置监听程序【oracle用户】"><a href="#3-1、静默配置监听程序【oracle用户】" class="headerlink" title="3.1、静默配置监听程序【oracle用户】"></a>3.1、静默配置监听程序【oracle用户】</h4><p>通过response文件运行netca, 生成sqlnet.ora和listener.ora文件, 位于$ORACLE_HOME&#x2F;network&#x2F;admin目录下<br>命令：$ $ORACLE_HOME&#x2F;bin&#x2F;netca &#x2F;silent &#x2F;responsefile &#x2F;home&#x2F;oracle&#x2F;netca.rsp<br><img src="/articles/40987/401662562189_.pic.jpg" srcset="/img/loading.gif" lazyload><br>如果发生以下错误：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs stata">=========================================================<br><span class="hljs-variable">$ORACLE_HOME</span>/bin/netca /silent /responsefile /home/oracle/database/response/netca.rspUnsatisfiedLinkError exception loading native library: njni11<br>java.lang.UnsatisfiedLinkError: /u01/<span class="hljs-keyword">app</span>/oracle/product/11.2.0/dbhome_1/lib/libnjni11.<span class="hljs-keyword">so</span>: libaio.<span class="hljs-keyword">so</span>.1: cannot <span class="hljs-keyword">open</span> shared object <span class="hljs-keyword">file</span>: <span class="hljs-keyword">No</span> such <span class="hljs-keyword">file</span> or directory<br>java.lang.UnsatisfiedLinkError: jniGetOracleHome<br>	at oracle.<span class="hljs-keyword">net</span>.common.NetGetEnv.jniGetOracleHome(Native Method)<br>	at oracle.<span class="hljs-keyword">net</span>.common.NetGetEnv.getOracleHome(Unknown Source)<br>	at oracle.<span class="hljs-keyword">net</span>.<span class="hljs-keyword">ca</span>.NetCALogger.getOracleHome(NetCALogger.java:230)<br>	at oracle.<span class="hljs-keyword">net</span>.<span class="hljs-keyword">ca</span>.NetCALogger.initOracleParameters(NetCALogger.java:215)<br>	at oracle.<span class="hljs-keyword">net</span>.<span class="hljs-keyword">ca</span>.NetCALogger.initLogger(NetCALogger.java:130)<br>	at oracle.<span class="hljs-keyword">net</span>.<span class="hljs-keyword">ca</span>.NetCA.main(NetCA.java:427)<br><br><span class="hljs-keyword">Error</span>: jniGetOracleHome<br>=========================================================<br></code></pre></td></tr></table></figure>
+<p>解决方案：<br>缺少lib包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">find /u01 -name libaio.so.1<br><span class="hljs-built_in">cp</span> /u01/app/oracle/product/11.2.0/dbhome_1/lib/stubs/libaio.so.1 /u01/app/oracle/product/11.2.0/dbhome_1/lib<br></code></pre></td></tr></table></figure>
+<p>在执行上述命令，成功<br>创建PAS数据库实例</p>
+<h4 id="3-2、配置建库响应文件-dbca-rsp【oracle用户】"><a href="#3-2、配置建库响应文件-dbca-rsp【oracle用户】" class="headerlink" title="3.2、配置建库响应文件 dbca.rsp【oracle用户】"></a>3.2、配置建库响应文件 dbca.rsp【oracle用户】</h4><p>打开安装目录下的response文件夹下的dbca.rsp ，修改以下参数</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs makefile">$vim  /home/oracle/database/response/dbca.rsp<br>GDBNAME = <span class="hljs-string">&quot;pas&quot;</span><br>SID = <span class="hljs-string">&quot;orcl&quot;</span><br>SYSPASSWORD = <span class="hljs-string">&quot;pas&quot;</span><br>SYSTEMPASSWORD = <span class="hljs-string">&quot;pas&quot;</span><br>SYSMANPASSWORD = <span class="hljs-string">&quot;pas&quot;</span><br>DBSNMPPASSWORD = <span class="hljs-string">&quot;pas&quot;</span><br>CHARACTERSET = <span class="hljs-string">&quot;ZHS16GBK&quot;</span><br>MEMORYPERCENTAGE = <span class="hljs-string">&quot;40&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="3-3、创建数据库实例【oracle用户】"><a href="#3-3、创建数据库实例【oracle用户】" class="headerlink" title="3.3、创建数据库实例【oracle用户】"></a>3.3、创建数据库实例【oracle用户】</h4><p>Oracle用户下执行以下命令：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-variable">$ORACLE_HOME</span><span class="hljs-regexp">/bin/</span>dbca -silent -responseFile <span class="hljs-regexp">/home/</span>oracle<span class="hljs-regexp">/database/</span>response/dbca.rsp<br></code></pre></td></tr></table></figure>
+<p>注意,dbca.rsp为上一步配置的响应文件的路径。<br><img src="/articles/40987/411662562292_.pic.jpg" srcset="/img/loading.gif" lazyload><br>待提示成功后，数据库实例创建完毕。<br><img src="/articles/40987/dbca.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="3-4、创建数据文件路径"><a href="#3-4、创建数据文件路径" class="headerlink" title="3.4、创建数据文件路径"></a>3.4、创建数据文件路径</h4><p>1.创建目录，切换至实例用户窗口中输入如下命令，将下列脚本中的SNPAS批量替换成你的数据库名称，同时需要检查实例目录上否有足够空间的磁盘(真实环境至少剩余空间需要500G以上 df 检查磁盘空间)<br><em><strong>【文件位置根据服务器实际空间以及位置进行修改，oracle对目录具有读写权限】</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">su - oracle<br><span class="hljs-built_in">mkdir</span> -p  /data/SNPAS/PAS_DATA/PAS_SPACE_DATA<br><span class="hljs-built_in">mkdir</span> -p  /data/SNPAS/PAS_DATA/PAS_SPACE_IDX<br><span class="hljs-built_in">mkdir</span> -p  /data/SNPAS/PAS_DATA/PAS_SPACE_TMP<br><span class="hljs-built_in">mkdir</span> -p  /data/SNPAS/PAS_BACKUP<br><span class="hljs-built_in">mkdir</span> -p  /data/SNPAS/PAS_DATA_SRC<br><span class="hljs-built_in">mkdir</span> -p  /data/SNPAS/PAS_ARCH_LOG<br></code></pre></td></tr></table></figure>
+
+<p>2.创建成功之后的目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /data/SNPAS<br>tree<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/40987/SNPAS.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="3-5、创建表空间【oracle用户】"><a href="#3-5、创建表空间【oracle用户】" class="headerlink" title="3.5、创建表空间【oracle用户】"></a>3.5、创建表空间【oracle用户】</h4><p>查看当前实例：select instance_name from v$instance;<br>切换为需要的实例：export ORACLE_SID&#x3D;SID名称<br>以管理员身份通过SQLPLUS登录ORACLE<br>$ ORACLE_HOME&#x2F;bin&#x2F;sqlplus &#x2F; as sysdba<br><img src="/articles/40987/421662562514_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="3-6、表空间创建"><a href="#3-6、表空间创建" class="headerlink" title="3.6、表空间创建"></a>3.6、表空间创建</h4><p>表空间特殊说明：</p>
+<ul>
+<li>【1.表空间存储目录以上一步建立的路径为准】</li>
+<li>【2.初始化表空间文件的大小可以为10G，后期自动增长】</li>
+<li>【3.11g普通表空间文件大小最大32G】</li>
+</ul>
+<blockquote>
+<p>创建TBS_MXZ表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs gradle">SQL&gt;CREATE TABLESPACE <span class="hljs-string">&quot;TBS_MXZ&quot;</span><br>  LOGGING DATAFILE<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_MXZ1.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G,<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_MXZ2.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G,<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_MXZ3.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G,<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_MXZ4.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G,<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_MXZ5.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G<br>   autoextend on<br>   <span class="hljs-keyword">next</span> <span class="hljs-number">1</span>G<br>   maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建TBS_NBZZ表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs gradle">SQL&gt; CREATE TABLESPACE <span class="hljs-string">&quot;TBS_NBZZ&quot;</span><br>  LOGGING DATAFILE<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_NBZZ1.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G,<br><span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_NBZZ2.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G,<br><span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_NBZZ3.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G,<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_NBZZ4.dbf&#x27;</span> <span class="hljs-keyword">SIZE</span> <span class="hljs-number">10</span>G<br>   autoextend on<br>   <span class="hljs-keyword">next</span> <span class="hljs-number">1</span>G<br>   maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建TBS_JXDX表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLESPACE</span> &quot;TBS_JXDX&quot;<br>  LOGGING DATAFILE<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_JXDX1.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G,<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_JXDX2.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G<br>   autoextend <span class="hljs-keyword">on</span><br>   next <span class="hljs-number">1</span>G<br>   maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建TBS_JKSJ表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLESPACE</span> &quot;TBS_JKSJ&quot;<br>  LOGGING DATAFILE<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_JKSJ1.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G<br>   autoextend <span class="hljs-keyword">on</span><br>   next <span class="hljs-number">1</span>G<br>   maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建TBS_LSB表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLESPACE</span> &quot;TBS_LSB&quot;<br>  LOGGING DATAFILE<br>  <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_LSB1.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G<br>   autoextend <span class="hljs-keyword">on</span><br>   next <span class="hljs-number">1</span>G<br>   maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建TBS_PAS表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt; <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLESPACE</span> &quot;TBS_PAS&quot;<br> LOGGING DATAFILE<br> <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_PAS1.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G,<br> <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_DATA/TBS_PAS2.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G<br>  autoextend <span class="hljs-keyword">on</span><br>  next <span class="hljs-number">1</span>G<br>  maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建TBS_IDX表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLESPACE</span> &quot;TBS_IDX&quot;<br>LOGGING DATAFILE<br><span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_IDX/TBS_IDX1.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G,<br><span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_IDX/TBS_IDX2.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G<br> autoextend <span class="hljs-keyword">on</span><br> next <span class="hljs-number">1</span>G<br> maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建TBS_TMP表空间文件【sqlplus】</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TEMPORARY</span> <span class="hljs-keyword">TABLESPACE</span> TBS_TMP<br>  TEMPFILE<br>   <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_TMP/TBS_TMP1.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G,<br>   <span class="hljs-string">&#x27;/data/SNPAS/PAS_DATA/PAS_SPACE_TMP/TBS_TMP2.dbf&#x27;</span> SIZE <span class="hljs-number">10</span>G<br>   autoextend <span class="hljs-keyword">on</span><br>   next <span class="hljs-number">1</span>G<br>   maxsize unlimited;<br></code></pre></td></tr></table></figure>
+
+<p>表空间说明与配置建议:</p>
+<table>
+<thead>
+<tr>
+<th>表空间名称</th>
+<th>表空间作用</th>
+<th>表空间大小配置建议</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TBS_MXZ</td>
+<td>存放明细账数据</td>
+<td>100G-200G</td>
+<td></td>
+</tr>
+<tr>
+<td>TBS_NBZZ</td>
+<td>存放内部总账数据</td>
+<td>100G以上</td>
+<td></td>
+</tr>
+<tr>
+<td>TBS_JXDX</td>
+<td>存放绩效对象数据</td>
+<td>30G</td>
+<td></td>
+</tr>
+<tr>
+<td>TBS_JKSJ</td>
+<td>存放接口数据</td>
+<td>10G</td>
+<td></td>
+</tr>
+<tr>
+<td>TBS_LSB</td>
+<td>存放临时表数据</td>
+<td>10G</td>
+<td></td>
+</tr>
+<tr>
+<td>TBS_PAS</td>
+<td>存放一些基础表的表空间，例如权限、参数、业绩关系、业绩指标、考核方案等</td>
+<td>30G</td>
+<td></td>
+</tr>
+<tr>
+<td>TBS_IDX</td>
+<td>存放索引数据</td>
+<td>30G</td>
+<td></td>
+</tr>
+<tr>
+<td>TBS_TMP</td>
+<td>临时表空间</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="3-7、创建PAS用户【sqlplus】"><a href="#3-7、创建PAS用户【sqlplus】" class="headerlink" title="3.7、创建PAS用户【sqlplus】"></a>3.7、创建PAS用户【sqlplus】</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">su</span> - oracle<br>sqlplus / <span class="hljs-keyword">as</span> sysdba<br></code></pre></td></tr></table></figure>
+<p>以管理员身份通过SQLPLUS登录ORACLE，执行以下命令</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt; <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> PAS IDENTIFIED <span class="hljs-keyword">BY</span> pas<br><span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">TABLESPACE</span> &quot;TBS_PAS&quot;<br><span class="hljs-keyword">TEMPORARY</span> <span class="hljs-keyword">TABLESPACE</span> &quot;TBS_TMP&quot;;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-8、PAS用户授权【sqlplus】"><a href="#3-8、PAS用户授权【sqlplus】" class="headerlink" title="3.8、PAS用户授权【sqlplus】"></a>3.8、PAS用户授权【sqlplus】</h4><p>以管理员身份通过SQLPLUS登录ORACLE，执行以下命令</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> &quot;JAVAUSERPRIV&quot; <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> &quot;RESOURCE&quot; <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> &quot;DBA&quot; <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> &quot;JAVASYSPRIV&quot; <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> &quot;CONNECT&quot; <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> PAS <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">ROLE</span> &quot;JAVAUSERPRIV&quot;,&quot;RESOURCE&quot;,&quot;DBA&quot;,&quot;JAVASYSPRIV&quot;,&quot;CONNECT&quot;;<br><br><span class="hljs-comment">-- SYSTEM PRIVILEGES</span><br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">ANY</span> <span class="hljs-keyword">INDEX</span> <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">ANY</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">GRANT</span> UNLIMITED <span class="hljs-keyword">TABLESPACE</span> <span class="hljs-keyword">TO</span> PAS <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">on</span> SYS.DBA_DATA_FILES <span class="hljs-keyword">to</span> PAS;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">on</span> SYS.DBA_FREE_SPACE <span class="hljs-keyword">to</span> PAS;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">on</span> SYS.DBA_TABLESPACES <span class="hljs-keyword">to</span> PAS;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">grant</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">session</span> <span class="hljs-keyword">to</span> PAS;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">grant</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">sequence</span> <span class="hljs-keyword">to</span> PAS;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">grant</span> <span class="hljs-keyword">drop</span> <span class="hljs-keyword">any</span> <span class="hljs-keyword">sequence</span> <span class="hljs-keyword">to</span> PAS;<br><span class="hljs-keyword">SQL</span>&gt;<span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">any</span> <span class="hljs-keyword">dictionary</span> <span class="hljs-keyword">to</span> pas;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-9、配置数据库参数【sqlplus】"><a href="#3-9、配置数据库参数【sqlplus】" class="headerlink" title="3.9、配置数据库参数【sqlplus】"></a>3.9、配置数据库参数【sqlplus】</h4><p>下面是数据库的基本参数建议配置，可根据实际情况按需修改，需以sys用户登录数据库,<br>$sqlplus &#x2F; as sysdba;</p>
+<ul>
+<li><p>1.设置SGA大小，建议为物理内存的40%<br>SQL&gt;alter system set sga_max_size&#x3D;20G  scope&#x3D;both<br>   alter system set sga_target&#x3D;20G scope&#x3D;spfile;</p>
+</li>
+<li><p>2.设置PGA大小，建议为物理内存10%<br>SQL&gt;alter system set pga_aggregate_target&#x3D;5G scope&#x3D;both;<br><img src="/articles/40987/431662562733_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>3.设置最大进程数，PROCESSE&#x3D;1500<br>SQL&gt; alter system set processes&#x3D;1500  scope&#x3D;spfile;<br><img src="/articles/40987/441662562761_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>4.设置最大游标数OPEN_CURSORS&#x3D;300<br>SQL&gt; alter system set open_cursors&#x3D;1000 scope&#x3D;both;<br><img src="/articles/40987/451662562766_.pic.jpg" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+
+<div class="post_cus_note">====== 部署完成 ======</div>
+
+
+
+<h3 id="4、部署教程系列"><a href="#4、部署教程系列" class="headerlink" title="4、部署教程系列"></a>4、部署教程系列</h3><ul>
+<li>LINUX+ORACLE部署安装：<a href="http://pygo2.top/articles/40987/">http://pygo2.top/articles/40987/</a></li>
+<li>Linux安装JAVA1.7与配置：<a href="http://pygo2.top/articles/13502/">http://pygo2.top/articles/13502/</a></li>
+<li>Windows安装JAVA1.7与配置：<a href="http://pygo2.top/articles/1151/">http://pygo2.top/articles/1151/</a></li>
+<li>Windows安装Tomcat7与配置：<a href="http://pygo2.top/articles/2013/">http://pygo2.top/articles/2013/</a></li>
+<li>Windows安装PLSQL与配置：<a href="http://pygo2.top/articles/47618/">http://pygo2.top/articles/47618/</a></li>
+</ul>
+<p><font size=6.5 color='red'>部署系列持续更新中。。。。。。</font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Oracle/" class="print-no-link">#Oracle</a>
+      
+        <a href="/tags/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B%E7%B3%BB%E5%88%97/" class="print-no-link">#部署教程系列</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Oracle数据库Redhat7.4部署安装</div>
+      <div>http://pygo2.top/articles/40987/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/26110/" title="Python模块之command系统命令">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python模块之command系统命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/47618/" title="Windows Server2012R2安装PLSQL">
+                        <span class="hidden-mobile">Windows Server2012R2安装PLSQL</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> mingliang.gao
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
