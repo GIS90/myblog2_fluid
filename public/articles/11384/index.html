@@ -1,0 +1,945 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Rsync, rsync, 命令, 参数, 安装, 搭建, 环境, crontab, yum">
+  
+    <meta name="description" content="项目上有需要对服务器之间的数据进行同步备份需求，想到了之前在Qunar使用过的开源同步软件RSYNC，这里做个简单的基础使用说明，主要是安装与配置。               RSYNC 数据同步 服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rsync安装与配置">
+<meta property="og:url" content="http://pygo2.top/articles/11384/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="项目上有需要对服务器之间的数据进行同步备份需求，想到了之前在Qunar使用过的开源同步软件RSYNC，这里做个简单的基础使用说明，主要是安装与配置。               RSYNC 数据同步 服务器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20210408-001.jpg">
+<meta property="article:published_time" content="2021-04-08T13:24:12.000Z">
+<meta property="article:modified_time" content="2021-04-08T13:24:12.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Rsync">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20210408-001.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Rsync安装与配置 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Rsync安装与配置"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-04-08 21:24" pubdate>
+          创建日期：2021-04-08 09:24:12（星期四）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Rsync安装与配置</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <div class="note note-primary">
+            <p>项目上有需要对服务器之间的数据进行同步备份需求，想到了之前在Qunar使用过的开源同步软件RSYNC，这里做个简单的基础使用说明，主要是安装与配置。</p>
+          </div>
+
+
+
+<span class="label label-primary">RSYNC</span> <span class="label label-default">数据同步</span> <span class="label label-danger">服务器</span>
+
+<span id="more"></span>
+<hr />
+
+<p>RSYNC一款开源的数据备份软件，主要有一下几个特点：</p>
+<ul>
+<li>跨平台，支持Windows与Linux双向同步</li>
+<li>采用1服务端-N客户端运行模式，实现多台服务器同时请求</li>
+<li>与其他命令结合使用方便，例如crontab、sersync（实时同步）</li>
+<li>操作简单，安装完成后修改配置即可运行</li>
+<li>实现增量&#x2F;全量备份</li>
+</ul>
+<p>之前使用是基于Linux系统的sersync+sync搭建的实时同步环境，当前项目上没不需要实时同步数据的要求，所以只搭建了rsync的使用，由于项目上有其他比较着急的事情，后续准备再升级到实时同步环境。</p>
+<p><img src="/articles/11384/article_rsync.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="1、环境简介"><a href="#1、环境简介" class="headerlink" title="1、环境简介"></a>1、环境简介</h3><table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">NAME</th>
+<th align="center">SYSTEM</th>
+<th align="left">DESC</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">server1</td>
+<td align="center">RedHAT6.4</td>
+<td align="left">数据源服务器，用于做备份的SERVER</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">server2</td>
+<td align="center">Windows Server 2008 R2</td>
+<td align="left">主要做备份的服务器，安装rsync客户端</td>
+</tr>
+</tbody></table>
+<p>项目上数据源的服务器是Linux的，用来说备份的Server端，这个是不可以更改的系统类型，其他服务器是Windows的，用来做备份的Client。</p>
+<h3 id="2、下载地址"><a href="#2、下载地址" class="headerlink" title="2、下载地址"></a>2、下载地址</h3><ul>
+<li>Windows：<a target="_blank" rel="noopener" href="https://www.itefix.net/cwrsync">https://www.itefix.net/cwrsync</a></li>
+<li>Linux：<a target="_blank" rel="noopener" href="https://rsync.samba.org/">https://rsync.samba.org/</a></li>
+</ul>
+<p>Windows需要下载cwrsync软件包，官网下载即可。<br>Linux安装采用在线安装，也可以下载源码包进行离线安装，均可。</p>
+<h3 id="3、安装"><a href="#3、安装" class="headerlink" title="3、安装"></a>3、安装</h3><p>关于安装对于系统的不同分别进行说明，其中Linux的安装讲3种方式安装，一些Linux的基础命令使用还是需要掌握的，不会的童鞋需要恶补一下了，废话不说，咱们开始整。</p>
+<blockquote>
+<p>Linux</p>
+</blockquote>
+<h4 id="3-1、在线安装"><a href="#3-1、在线安装" class="headerlink" title="3.1、在线安装"></a>3.1、在线安装</h4><p>前提保证服务器连网，可以充分使用yum。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># 查询yum源是否有rsync软件</span><br><span class="hljs-attribute">yum</span> search rsync<br></code></pre></td></tr></table></figure>
+<p>使用search进行查找，如果没有，需要进行yum源的设置；如果有，进行install安装即可。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">yum -y <span class="hljs-keyword">install</span> rsync<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-2、离线安装"><a href="#3-2、离线安装" class="headerlink" title="3.2、离线安装"></a>3.2、离线安装</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//</span>download.samba.org<span class="hljs-regexp">/pub/</span>rsync<span class="hljs-regexp">/src/</span>rsync-<span class="hljs-number">3.2</span>.<span class="hljs-number">3</span>.tar.gz<br>tar -zxvf rsync-<span class="hljs-number">3.2</span>.<span class="hljs-number">3</span>.tar.gz<br>.<span class="hljs-regexp">/configure --prefix=/u</span>sr<span class="hljs-regexp">/local/</span>rsync<br>make<br>make install<br></code></pre></td></tr></table></figure>
+<p>使用wget或者官网下载rsync源码包，并移动到服务器上进行解压与安装，具体命令如上。</p>
+<h4 id="3-3、镜像安装"><a href="#3-3、镜像安装" class="headerlink" title="3.3、镜像安装"></a>3.3、镜像安装</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mount</span> -o loop /root/mingliang.gao/rhel-server-<span class="hljs-number">6</span>.<span class="hljs-number">4</span>-x86_64-dvd.iso /mnt/<br><span class="hljs-attribute">cd</span> /mnt/Packages<br><span class="hljs-attribute">ls</span> -l | grep rsync<br><span class="hljs-attribute">rpm</span> -ivh rsync-<span class="hljs-number">3</span>.<span class="hljs-number">0</span>.<span class="hljs-number">6</span>-<span class="hljs-number">9</span>.el6.x86_64.rpm<br><span class="hljs-attribute">umount</span> /mnt/<br></code></pre></td></tr></table></figure>
+<p>镜像安装有个弊端，就是需要下载与服务器系统版本一致的ios镜像包，移动到服务器进行挂载、安装。</p>
+
+<div class="post_cus_note">安装建议</div>
+
+<p>关于Linux的安装，建议使用在线安装&gt;镜像安装&gt;离线安装，如果是内网不能连网的情况考虑镜像安装与离线安装，离线安装rpm方式需要一定的依赖，如果是一台新的服务器而且还不能连网，安装起来很费劲，不建议使用源码安装。</p>
+<blockquote>
+<p>Windows</p>
+</blockquote>
+<p>Windows安装客户端比较简单，直接官网进行下载：<a target="_blank" rel="noopener" href="https://www.itefix.net/cwrsync">https://www.itefix.net/cwrsync</a><br><img src="/articles/11384/cwrsync.png" srcset="/img/loading.gif" lazyload></p>
+<p>下载好的包进行解压，把对应的路径加入系统PATH即可。</p>
+<h3 id="4、配置"><a href="#4、配置" class="headerlink" title="4、配置"></a>4、配置</h3><p>配置主要是基于Server端进行配置，需要开启服务，Client进行数据获取，主要配置的操作如下：</p>
+<ul>
+<li><p>mkdir -p &#x2F;etc&#x2F;rsyncd</p>
+</li>
+<li><p>cd &#x2F;etc&#x2F;rsyncd</p>
+</li>
+<li><p>rsyncd.passwd配置文件<br>  touch rsyncd.conf<br>  粘贴下面的内容到rsyncd.conf配置文件</p>
+  <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-comment"># /etc/rsyncd: configuration file for rsync daemon mode</span><br><span class="hljs-comment"># See rsyncd.conf man page for more options.</span><br>port = <span class="hljs-number">873</span><br>uid = root<br>gid = root<br><span class="hljs-keyword">use</span> <span class="hljs-keyword">chroot</span> = yes<br><span class="hljs-keyword">read</span> only = <span class="hljs-keyword">no</span><br><span class="hljs-keyword">write</span> only = <span class="hljs-keyword">no</span><br><span class="hljs-comment"># IP白名单</span><br>hosts allow = *<br>hosts deny = *<br>max connections = <span class="hljs-number">4</span><br><span class="hljs-comment"># motd file = /etc/rsyncd/rsyncd.motd</span><br>pid file = <span class="hljs-regexp">/var/run</span><span class="hljs-regexp">/rsyncd.pid</span><br><span class="hljs-regexp">lock file = /</span>var/run/rsyncd.lock<br>transfer logging = yes<br><span class="hljs-keyword">log</span> <span class="hljs-keyword">format</span> = <span class="hljs-variable">%t</span> <span class="hljs-variable">%a</span> <span class="hljs-variable">%m</span> <span class="hljs-variable">%f</span> <span class="hljs-variable">%b</span><br><span class="hljs-keyword">log</span> file = <span class="hljs-regexp">/var/l</span>og/rsync.log<br>exclude = lost+found/<br>timeout = <span class="hljs-number">900</span><br>ignore nonreadable = yes<br>dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2<br>list = <span class="hljs-keyword">no</span><br>ignore errors<br>auth users = root<br>secrets file = <span class="hljs-regexp">/etc/rs</span>yncd/rsyncd.passwd<br><br><span class="hljs-comment"># 数据路径配置</span><br>[gtp]<br>path = <span class="hljs-regexp">/home/g</span>tp/data<br></code></pre></td></tr></table></figure>
+<p>  主要更改[gtp]数据模块配置与hosts allow</p>
+</li>
+<li><p>rsyncd.passwd<br>  touch rsyncd.passwd<br>  内容：root:Root123（服务器连接的用户、用户密码，用英文:分割）</p>
+</li>
+<li><p>chmod 600 rsyncd.passwd</p>
+<p>  <font color='red'>重点，需要设置文件的600模式，其他模式不允许。</font></p>
+</li>
+</ul>
+<h3 id="5、配置文件说明"><a href="#5、配置文件说明" class="headerlink" title="5、配置文件说明"></a>5、配置文件说明</h3><blockquote>
+<p>全局参数</p>
+</blockquote>
+<ul>
+<li>port：服务端口，默认873</li>
+<li>uid：用什么用户运行</li>
+<li>gid：运行用户所属组</li>
+<li>use chroot：若为 true，则 rsync 在传输文件之前首先chroot到 path 参数所指定的目录下。这样做的原因是实现额外的安全防护，但是缺点是需要 root 权限，并且不能备份指向 path 外部的符号连接所指向的目录文件。</li>
+<li>motd file：同步开始打印的内容</li>
+<li>pid file：rsync进程的.pid文件，文件里面存放PID</li>
+<li>lock file：rsync进程的.lock文件</li>
+</ul>
+<blockquote>
+<p>模块参数</p>
+</blockquote>
+<ul>
+<li>hosts allow：IP白名单，*或者注释代表全部允许</li>
+<li>hosts deny：IP黑名单，不允许同步的IP</li>
+<li>max connections：最大连接数量，0为无限制</li>
+<li>transfer logging：使rsync配置的记录日志文件</li>
+<li>log format：日志格式</li>
+<li>log file：日志</li>
+<li>exclude：排除哪些目录不同步</li>
+<li>timeout：一次连接的最大时长</li>
+<li>ignore nonreadable：</li>
+<li>dont compress：用来指定在传输之前不进行压缩处理的文件格式</li>
+<li>list：指定当客户请求列出可以使用的模块列表时，该模块是否应该被列出。如果设置该选项为 false，可以创建隐藏的模块</li>
+<li>ignore errors：可以忽略一些无关的IO错误</li>
+<li>auth users：授权的用户，需要与发起方保持一致，多个用户用,分隔</li>
+<li>secrets file：密钥文件，里面是服务器连接的用户、用户密码</li>
+</ul>
+<blockquote>
+<p>数据模块格式</p>
+</blockquote>
+<p>可以定义多个，格式如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[模块名称]</span><br><span class="hljs-attr">path</span> = 具体路径<br><span class="hljs-attr">comment</span> = 同步数据模型的描述<br></code></pre></td></tr></table></figure>
+<p>官网rsync配置文件参数说明：<a target="_blank" rel="noopener" href="https://download.samba.org/pub/rsync/rsyncd.conf.5">https://download.samba.org/pub/rsync/rsyncd.conf.5</a></p>
+<h3 id="6、运行"><a href="#6、运行" class="headerlink" title="6、运行"></a>6、运行</h3><blockquote>
+<p>Linux服务端</p>
+</blockquote>
+<ul>
+<li>检查端口</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">netstat</span> -nltp|grep <span class="hljs-number">873</span> 或者 lsof -i:<span class="hljs-number">873</span><br></code></pre></td></tr></table></figure>
+<pre><code class="hljs">服务端默认的端口是873，先check下服务器的873是否被占用，如果没有直接启动服务即可；被占用需要更改上面的配置文件中的port进行端口更换再进行启动。
+</code></pre>
+<ul>
+<li>运行</li>
+</ul>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">rsync</span> <span class="hljs-literal">--</span><span class="hljs-comment">daemon</span> <span class="hljs-literal">--</span><span class="hljs-comment">config=/etc/rsyncd/rsyncd</span><span class="hljs-string">.</span><span class="hljs-comment">conf</span><br></code></pre></td></tr></table></figure>
+<pre><code class="hljs">启动服务。
+</code></pre>
+<ul>
+<li>查看</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">ps</span> -ef | <span class="hljs-keyword">grep</span> rsync<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Windows客户端</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rsync --port 873 -avzP --password-file=/cygdrive/D/cwRsync/rsyncd.passwd root@16.19.209.68::newgtp /cygdrive/E/newdata<br></code></pre></td></tr></table></figure>
+<p>如果出现没有发现rsync命令，就是没有把rsync的安装路径加入系统PATH。不想加入系统PATH就把rsync的路径补全，采用路径+rsync的方式运行。</p>
+<p>参数说明：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">-<span class="hljs-keyword">a</span>, <span class="hljs-comment">--archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD</span><br>-v, <span class="hljs-comment">--verbose 详细模式输出</span><br><span class="hljs-comment">--progress 在传输时现实传输过程</span><br>-z, <span class="hljs-comment">--compress 对备份的文件在传输时进行压缩处理</span><br><span class="hljs-comment">--delete 删除那些DST中SRC没有的文件</span><br><span class="hljs-comment">--config=FILE 指定其他的配置文件，不使用默认的rsyncd.conf文件</span><br><span class="hljs-comment">--password-file=FILE 从FILE中得到密码</span><br><span class="hljs-comment">--port=PORT 指定其他的rsync服务端口</span><br><span class="hljs-comment">--existing 仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件</span><br><span class="hljs-comment">--partial 保留那些因故没有完全传输的文件，以是加快随后的再次传输</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7、其他"><a href="#7、其他" class="headerlink" title="7、其他"></a>7、其他</h3><blockquote>
+<p>umount问题：umount: &#x2F;mnt: device is busy.</p>
+</blockquote>
+<p>解决方案：<br>fuser -m &#x2F;mnt&#x2F; 查看使用文件的进程id<br>kill或者exit、重新ssh<br>重新umount</p>
+<blockquote>
+<p>重新启动</p>
+</blockquote>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs perl">ps -ef | <span class="hljs-keyword">grep</span> rsync<br><span class="hljs-keyword">kill</span> 进程ID<br>rsync --daemon --config=<span class="hljs-regexp">/etc/rs</span>yncd/rsyncd.conf<br></code></pre></td></tr></table></figure>
+
+<h3 id="8、学习参考"><a href="#8、学习参考" class="headerlink" title="8、学习参考"></a>8、学习参考</h3><p>yum命令与源设置：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/71906253">https://zhuanlan.zhihu.com/p/71906253</a><br>Linux编译详解：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tinywan/p/7230039.html">https://www.cnblogs.com/tinywan/p/7230039.html</a><br>rsync安装：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/champaign/p/9082137.html">https://www.cnblogs.com/champaign/p/9082137.html</a><br>rsync参数：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/koushuige/p/9162920.html">https://www.cnblogs.com/koushuige/p/9162920.html</a><br>rsync配置文件参数说明：<a target="_blank" rel="noopener" href="https://download.samba.org/pub/rsync/rsyncd.conf.5">https://download.samba.org/pub/rsync/rsyncd.conf.5</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7%E9%9B%86/" class="category-chain-item">工具集</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Rsync/" class="print-no-link">#Rsync</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Rsync安装与配置</div>
+      <div>http://pygo2.top/articles/11384/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年4月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/22710/" title="Rsync命令参数详解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rsync命令参数详解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/36343/" title="域名切换">
+                        <span class="hidden-mobile">域名切换</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

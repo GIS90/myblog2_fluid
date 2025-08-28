@@ -17,9 +17,9 @@ module.exports = (hexo) => {
       dataConfig = data.fluid_config;
     } else if (!configFromRoot(hexo)) {
       if (isZh) {
-        hexo.log.warn('[Fluid] 推荐你使用覆盖配置功能: https://hexo.fluid-dev.com/docs/guide/#%E8%A6%86%E7%9B%96%E9%85%8D%E7%BD%AE');
+        //hexo.log.warn('[Fluid] 推荐你使用覆盖配置功能: https://hexo.fluid-dev.com/docs/guide/#%E8%A6%86%E7%9B%96%E9%85%8D%E7%BD%AE');
       } else {
-        hexo.log.warn('[Fluid] It is recommended that you use override configuration: https://hexo.fluid-dev.com/docs/en/guide/#override-configuration');
+        //hexo.log.warn('[Fluid] It is recommended that you use override configuration: https://hexo.fluid-dev.com/docs/en/guide/#override-configuration');
       }
     }
     if (data && isNotEmptyObject(data.fluid_static_prefix)) {

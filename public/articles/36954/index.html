@@ -1,0 +1,882 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="hexo, next, Hexo, 美化, 插件, 博客, blog, plug, 插件, hexo-tag-echarts, hexo-admin, hexo-blog-encrypt">
+  
+    <meta name="description" content="插件持续更新中～～～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo拓展-插件篇">
+<meta property="og:url" content="http://pygo2.top/articles/36954/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="插件持续更新中～～～">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20190126-001.png">
+<meta property="article:published_time" content="2019-01-26T15:30:04.000Z">
+<meta property="article:modified_time" content="2019-07-26T15:30:04.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Hexo美化">
+<meta property="article:tag" content="Hexo插件">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20190126-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Hexo拓展-插件篇 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hexo拓展-插件篇"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-01-26 23:30" pubdate>
+          创建日期：2019-01-26 11:30:04（星期六）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          877 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Hexo拓展-插件篇</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><font color="red" size="5"><em><strong>插件持续更新中～～～</strong></em></font></p>
+<span id="more"></span>
+<hr />
+
+<h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><div class="note note-success">
+            <blockquote><p>网站安装了许多插件，<strong>hexo-symbols-count-time、hexo-tag-cloud、hexo-helper-live2d</strong>等等，不止给站点增加了很多强大的功能以及给博文美化方面添加了不少样式、便利，我也一一记录下了常用的插件并写成文章发表。<br>但是去Hexo官方，看了一下插件，居然有290多个，也不能想Next主题内置的tags功能一样，每个都去尝试一下，起码把自己尝试的记录下来，与大家一起进行分享。</p></blockquote>
+          </div>
+
+
+
+
+<h3 id="2、正文"><a href="#2、正文" class="headerlink" title="2、正文"></a>2、正文</h3><h4 id="2-1、hexo-tag-echarts"><a href="#2-1、hexo-tag-echarts" class="headerlink" title="2.1、hexo-tag-echarts"></a>2.1、hexo-tag-echarts</h4><blockquote>
+<p>作用</p>
+</blockquote>
+<p>集成echart到博客中，用于数据展示，非常好用。</p>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<p><img src="/articles/36954/hexo-tag-echarts.png" srcset="/img/loading.gif" lazyload alt="hexo-tag-echarts"></p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<pre><code class="hljs"><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">&#123;% echarts <span class="hljs-number">400</span> <span class="hljs-string">&#x27;85%&#x27;</span> %&#125;<br>&#123;<br>    color: [<span class="hljs-string">&#x27;#F39C12&#x27;</span>],<br>    tooltip : &#123;<br>        <span class="hljs-keyword">trigger</span>: <span class="hljs-string">&#x27;axis&#x27;</span>,<br>        axisPointer : &#123;            // 坐标轴指示器，坐标轴触发有效<br>            <span class="hljs-keyword">type</span> : <span class="hljs-string">&#x27;shadow&#x27;</span>        // 默认为直线，可选为：<span class="hljs-string">&#x27;line&#x27;</span> | <span class="hljs-string">&#x27;shadow&#x27;</span><br>        &#125;<br>    &#125;,<br>    grid: &#123;<br>        left: <span class="hljs-string">&#x27;3%&#x27;</span>,<br>        right: <span class="hljs-string">&#x27;4%&#x27;</span>,<br>        bottom: <span class="hljs-string">&#x27;3%&#x27;</span>,<br>        containLabel: <span class="hljs-keyword">true</span><br>    &#125;,<br>    xAxis : [<br>        &#123;<br>            <span class="hljs-keyword">type</span> : <span class="hljs-string">&#x27;category&#x27;</span>,<br>            data : [<span class="hljs-string">&#x27;Python&#x27;</span>,<span class="hljs-string">&#x27;Linux&#x27;</span>,<span class="hljs-string">&#x27;Hexo&#x27;</span>,<span class="hljs-string">&#x27;LDAP&#x27;</span>,<span class="hljs-string">&#x27;娱乐&#x27;</span>,<span class="hljs-string">&#x27;影视说&#x27;</span>,<span class="hljs-string">&#x27;旅行记&#x27;</span>,<span class="hljs-string">&#x27;其他&#x27;</span>],<br>            axisTick: &#123;<br>                alignWithLabel: <span class="hljs-keyword">true</span><br>            &#125;<br>        &#125;<br>    ],<br>    yAxis : [<br>        &#123;<br>            <span class="hljs-keyword">type</span> : <span class="hljs-string">&#x27;value&#x27;</span><br>        &#125;<br>    ],<br>    series : [<br>        &#123;<br>            <span class="hljs-type">name</span>:<span class="hljs-string">&#x27;直接访问&#x27;</span>,<br>            <span class="hljs-keyword">type</span>:<span class="hljs-string">&#x27;bar&#x27;</span>,<br>            barWidth: <span class="hljs-string">&#x27;60%&#x27;</span>,<br>            data: [<span class="hljs-number">9</span>, <span class="hljs-number">2</span>, <span class="hljs-number">17</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>]<br>        &#125;<br>    ]<br>&#125;;<br>&#123;% endecharts %&#125;<br></code></pre></td></tr></table></figure>
+</code></pre>
+<blockquote>
+<p><font size="4" color="red"><strong>补充</strong></font></p>
+</blockquote>
+<p>hexo-tag-echarts安装 ：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-tag-echarts3 <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure>
+
+<p>hexo-tag-echarts说明：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>|| 展示的数据需要自己进行计算。<br><span class="hljs-symbol">2 </span>|| echarts-endecharts 需要<span class="hljs-number">2</span>个参数：容器高度、相对宽度。<br><span class="hljs-symbol">3 </span>|| 这个插件的js有点问题，需要加些代码到文件：node_modules/hexo-tag-echarts/echarts-template.html，具体请查看官方手册。<br></code></pre></td></tr></table></figure>
+<p>hexo-tag-echarts资料 ：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">hexo-tag-echarts3：https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/kchen0x/</span>hexo-tag-echarts3<br>echart：https:<span class="hljs-regexp">//</span>echarts.baidu.com<span class="hljs-regexp">/examples/</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2、-hexo-admin"><a href="#2-2、-hexo-admin" class="headerlink" title="2.2、 hexo-admin"></a>2.2、 hexo-admin</h4><blockquote>
+<p>作用</p>
+</blockquote>
+<pre><code class="hljs">hexo站点的后台管理。
+</code></pre>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<pre><code class="hljs">![hexo-admin](hexo-admin.png)
+</code></pre>
+<blockquote>
+<p>部署</p>
+</blockquote>
+<ul>
+<li>安装插件  <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-admin</span><br></code></pre></td></tr></table></figure></li>
+<li>启动服务  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo s</span><br></code></pre></td></tr></table></figure></li>
+<li>生成密码<br>  打开<em><strong><a target="_blank" rel="noopener" href="http://127.0.0.1:8888/admin/">http://127.0.0.1:8888/admin/</a></strong></em>，找到<strong>setting</strong>菜单栏，找到<em><strong>Setup authentification here</strong></em>，点击-&gt;输入用户名、密码、密钥，在最下面有生成的配置信息。</li>
+<li>配置<br>  打开blog&#x2F;_config.yml文件，把上面生成的信息新增到配置文件最后。  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># admin后台user、password</span><br>admin:<br>  username: pygo<br>  password_hash: <span class="hljs-variable">$2a</span><span class="hljs-variable">$10</span><span class="hljs-variable">$h6ZFY9yMv</span>.wIhd0aPQ<span class="hljs-regexp">/O4eB3k/</span>zFiBj3aH0Zou8T9QK<span class="hljs-regexp">/H8e/</span>Y/hUO<br>  secret: wuyananismywife<br></code></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p><font size="4" color="red"><strong>补充</strong></font></p>
+</blockquote>
+<p> hexo-admin说明：<br> <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>|| 切记是Hexo站点配置文件。<br></code></pre></td></tr></table></figure><br>hexo-admin资料：<br> <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/jaredly/</span>hexo-admin<br></code></pre></td></tr></table></figure></p>
+<h4 id="2-3、hexo-blog-encrypt"><a href="#2-3、hexo-blog-encrypt" class="headerlink" title="2.3、hexo-blog-encrypt"></a>2.3、hexo-blog-encrypt</h4><blockquote>
+<p>作用</p>
+</blockquote>
+<pre><code class="hljs">文章加密。
+</code></pre>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<pre><code class="hljs">![hexo-blog-encrypt](hexo-blog-encrypt.png)
+</code></pre>
+<blockquote>
+<p>部署</p>
+</blockquote>
+<ul>
+<li>安装插件  <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-blog-encrypt</span><br></code></pre></td></tr></table></figure></li>
+<li>Hexo配置<br>  打开Hexo站点配置文件：blog&#x2F;_config.yml，新增配置：  <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 文章加密功能</span><br><span class="hljs-params">encrypt:</span><br>    <span class="hljs-params">enable:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure></li>
+<li>文章配置<br>  打开一篇需要进行加密的.md文件，在顶部描述加入以下代码：  <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">password: <span class="hljs-number">0803</span><br><span class="hljs-keyword">abstract</span>: &lt;div <span class="hljs-keyword">class</span>=&quot;<span class="hljs-symbol">article_encrypt_abstract</span>&quot;&gt;暂不公开，请勿打扰 ～&lt;<span class="hljs-symbol">font</span> <span class="hljs-symbol">size</span>=&quot;<span class="hljs-symbol">5</span>&quot; <span class="hljs-symbol">color</span>=&quot;<span class="hljs-symbol">red</span>&quot;&gt;【状态：加密】&lt;/<span class="hljs-symbol">font</span>&gt;&lt;/<span class="hljs-symbol">div</span>&gt;<br><span class="hljs-symbol">message: </span>密码提示：生日<br></code></pre></td></tr></table></figure>
+<pre><code class="hljs">  + password：博客密码
+  + abstract：home主页显示的文字提示
+  + message：查看博客，密码输入框上面的描述性文字
+</code></pre>
+</li>
+<li>启动服务  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo s</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p><font size="4" color="red"><strong>补充</strong></font></p>
+</blockquote>
+<p>hexo-blog-encrypt说明：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>|| 切记是Hexo站点配置文件。<br></code></pre></td></tr></table></figure>
+<p> hexo-blog-encrypt资料：<br> <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/MikeCoder/</span>hexo-blog-encrypt<span class="hljs-regexp">/blob/m</span>aster/ReadMe.zh.md<br></code></pre></td></tr></table></figure></p>
+<blockquote>
+<p><font size="4" color="red"><strong>自定义样式</strong></font></p>
+</blockquote>
+<p>关于加密的abstract &amp;&amp; message样式比较难看，本人自定义了的样式，参考如下：<br>    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs css">// 加密abstract样式<br><span class="hljs-selector-class">.article_encrypt_abstract</span> &#123;<br>    <span class="hljs-attribute">text-align</span>: center;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-number">#FFBE3D</span>;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">28px</span>;<br>    -webkit-<span class="hljs-selector-tag">text</span>-<span class="hljs-attribute">stroke</span>: <span class="hljs-number">1.2px</span> <span class="hljs-number">#000000</span>;<br>&#125;<br>// 加密message样式<br><span class="hljs-selector-class">.hbe-input-container</span> <span class="hljs-selector-tag">label</span> &#123;<br>    <span class="hljs-attribute">color</span>: deeppink<span class="hljs-meta">!important</span>;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">32px</span><span class="hljs-meta">!important</span>;<br>    <span class="hljs-attribute">text-shadow</span>: -<span class="hljs-number">1px</span> <span class="hljs-number">0</span> black, <span class="hljs-number">0</span> <span class="hljs-number">1px</span> black, <span class="hljs-number">1px</span> <span class="hljs-number">0</span> black, <span class="hljs-number">0</span> -<span class="hljs-number">1px</span> black;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>自定义样式文件：<strong>blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;css&#x2F;_custom&#x2F;custom.styl</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
+      
+        <a href="/tags/Hexo%E7%BE%8E%E5%8C%96/" class="print-no-link">#Hexo美化</a>
+      
+        <a href="/tags/Hexo%E6%8F%92%E4%BB%B6/" class="print-no-link">#Hexo插件</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hexo拓展-插件篇</div>
+      <div>http://pygo2.top/articles/36954/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年1月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/42646/" title="Hexo+Next搜索优化（一）google搜索">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hexo+Next搜索优化（一）google搜索</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/18454/" title="权力的游戏">
+                        <span class="hidden-mobile">权力的游戏</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

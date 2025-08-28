@@ -1,0 +1,1002 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="etherpad, 在线, 协作, 编辑, 多用户, 文本, web">
+  
+    <meta name="description" content="简介             官网：Etherpad is a highly customizable Open Source online editor providing collaborative editing in really real-time.个人翻译：Etherpad是一款定制、开源的在线编辑器，提供实时协作编辑。             etherpad 在线协作 文本编辑 多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Etherpad在线协作编辑">
+<meta property="og:url" content="http://pygo2.top/articles/7544/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="简介             官网：Etherpad is a highly customizable Open Source online editor providing collaborative editing in really real-time.个人翻译：Etherpad是一款定制、开源的在线编辑器，提供实时协作编辑。             etherpad 在线协作 文本编辑 多">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20191224-003.jpg">
+<meta property="article:published_time" content="2019-12-24T07:24:47.000Z">
+<meta property="article:modified_time" content="2019-12-24T07:24:47.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="运维工具">
+<meta property="article:tag" content="etherpad">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20191224-003.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Etherpad在线协作编辑 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Etherpad在线协作编辑"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-12-24 15:24" pubdate>
+          创建日期：2019-12-24 03:24:47（星期二）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Etherpad在线协作编辑</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><div class="note note-primary">
+            <p>官网：Etherpad is a highly customizable Open Source online editor providing collaborative editing in really real-time.</p><p>个人翻译：Etherpad是一款定制、开源的在线编辑器，提供实时协作编辑。</p>
+          </div>
+
+<span class="label label-default">etherpad</span> <span class="label label-primary">在线协作</span> <span class="label label-success">文本编辑</span> <span class="label label-info">多用户</span>
+
+<span id="more"></span>
+<hr />
+
+<p><img src="/articles/7544/article_etherpad.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="1、版本"><a href="#1、版本" class="headerlink" title="1、版本"></a>1、版本</h3><p><img src="/articles/7544/version.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h3><p>本人实践的机器是阿里云服务器，系统是：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs makefile">[mingliang.gao@VM_0_16_centos ~]$ cat /etc/*release*<br><br>CentOS Linux release 7.5.1804 (Core)<br>Derived from Red Hat Enterprise Linux 7.5 (Source)<br>NAME=<span class="hljs-string">&quot;CentOS Linux&quot;</span><br>VERSION=<span class="hljs-string">&quot;7 (Core)&quot;</span><br>ID=<span class="hljs-string">&quot;centos&quot;</span><br>ID_LIKE=<span class="hljs-string">&quot;rhel fedora&quot;</span><br>VERSION_ID=<span class="hljs-string">&quot;7&quot;</span><br>PRETTY_NAME=<span class="hljs-string">&quot;CentOS Linux 7 (Core)&quot;</span><br>ANSI_COLOR=<span class="hljs-string">&quot;0;31&quot;</span><br>CPE_NAME=<span class="hljs-string">&quot;cpe:/o:centos:centos:7&quot;</span><br>HOME_URL=<span class="hljs-string">&quot;https://www.centos.org/&quot;</span><br>BUG_REPORT_URL=<span class="hljs-string">&quot;https://bugs.centos.org/&quot;</span><br><br>CENTOS_MANTISBT_PROJECT=<span class="hljs-string">&quot;CentOS-7&quot;</span><br>CENTOS_MANTISBT_PROJECT_VERSION=<span class="hljs-string">&quot;7&quot;</span><br>REDHAT_SUPPORT_PRODUCT=<span class="hljs-string">&quot;centos&quot;</span><br>REDHAT_SUPPORT_PRODUCT_VERSION=<span class="hljs-string">&quot;7&quot;</span><br><br>CentOS Linux release 7.5.1804 (Core)<br>CentOS Linux release 7.5.1804 (Core)<br><span class="hljs-section">cpe:/o:centos:centos:7</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-1、node环境"><a href="#2-1、node环境" class="headerlink" title="2.1、node环境"></a>2.1、node环境</h4><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># 安装</span><br>yum install -y nodejs<br><br><span class="hljs-comment"># check</span><br><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2、依赖包"><a href="#2-2、依赖包" class="headerlink" title="2.2、依赖包"></a>2.2、依赖包</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">yum install curl <span class="hljs-keyword">vim</span> gcc-<span class="hljs-keyword">c</span>++ <span class="hljs-keyword">make</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-3、MariaDB数据库安装与配置"><a href="#2-3、MariaDB数据库安装与配置" class="headerlink" title="2.3、MariaDB数据库安装与配置"></a>2.3、MariaDB数据库安装与配置</h4><blockquote>
+<p>安装</p>
+</blockquote>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">yum install mariadb-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+<p>执行过程略，在安装过程中会让出现root密码等设置，具体请参考文章最后的MariaDB安装与配置，进行下一步启动。</p>
+<blockquote>
+<p>启动</p>
+</blockquote>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment"># 开启mariadb数据库</span><br><span class="hljs-params">system</span>ctl start mariadb.service<br><br><span class="hljs-comment"># 设置开机自动启动</span><br><span class="hljs-params">system</span>ctl enable mariadb.service<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>首次安装</p>
+</blockquote>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">[root@VM_0_16_centos conf.d]#  mysql_secure_installation<br><br><span class="hljs-symbol">NOTE:</span> RUNNING ALL PARTS <span class="hljs-keyword">OF</span> THIS SCRIPT <span class="hljs-built_in">IS</span> RECOMMENDED <span class="hljs-keyword">FOR</span> ALL MariaDB<br>      SERVERS <span class="hljs-keyword">IN</span> PRODUCTION USE!  PLEASE READ <span class="hljs-keyword">EACH</span> <span class="hljs-keyword">STEP</span> CAREFULLY!<br><br><span class="hljs-keyword">In</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MariaDB <span class="hljs-keyword">to</span> secure it, we<span class="hljs-comment">&#x27;ll need the current</span><br>password <span class="hljs-keyword">for</span> the root user.  <span class="hljs-keyword">If</span> you<span class="hljs-comment">&#x27;ve just installed MariaDB, and</span><br>you haven<span class="hljs-comment">&#x27;t set the root password yet, the password will be blank,</span><br>so you should just press enter here.<br><br>Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):<br><span class="hljs-keyword">ERROR</span> <span class="hljs-number">1045</span> (<span class="hljs-number">28000</span>): Access denied <span class="hljs-keyword">for</span> user <span class="hljs-comment">&#x27;root&#x27;@&#x27;localhost&#x27; (using password: YES)</span><br>Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):<br><span class="hljs-keyword">ERROR</span> <span class="hljs-number">1045</span> (<span class="hljs-number">28000</span>): Access denied <span class="hljs-keyword">for</span> user <span class="hljs-comment">&#x27;root&#x27;@&#x27;localhost&#x27; (using password: YES)</span><br>Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):<br>OK, successfully used password, moving <span class="hljs-keyword">on</span>...<br><br>Setting the root password ensures that nobody can log <span class="hljs-keyword">into</span> the MariaDB<br>root user without the proper authorisation.<br><br><span class="hljs-keyword">Set</span> root password? [Y/n] y<br><span class="hljs-built_in">New</span> password:<br>Re-enter <span class="hljs-built_in">new</span> password:<br>Password updated successfully!<br>Reloading privilege tables..<br> ... Success!<br><br><br><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, a MariaDB installation has an anonymous user, allowing anyone<br><span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MariaDB without having <span class="hljs-keyword">to</span> have a user account created <span class="hljs-keyword">for</span><br>them.  This <span class="hljs-built_in">is</span> intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-built_in">and</span> <span class="hljs-keyword">to</span> make the installation<br>go a bit smoother.  You should remove them before moving <span class="hljs-keyword">into</span> a<br>production environment.<br><br>Remove anonymous users? [Y/n] n<br> ... skipping.<br><br>Normally, root should only be allowed <span class="hljs-keyword">to</span> connect <span class="hljs-keyword">from</span> <span class="hljs-comment">&#x27;localhost&#x27;.  This</span><br>ensures that someone cannot guess at the root password <span class="hljs-keyword">from</span> the network.<br><br>Disallow root login remotely? [Y/n] n<br> ... skipping.<br><br><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, MariaDB comes <span class="hljs-keyword">with</span> a database named <span class="hljs-comment">&#x27;test&#x27; that anyone can</span><br>access.  This <span class="hljs-built_in">is</span> also intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-built_in">and</span> should be removed<br>before moving <span class="hljs-keyword">into</span> a production environment.<br><br>Remove test database <span class="hljs-built_in">and</span> access <span class="hljs-keyword">to</span> it? [Y/n] n<br> ... skipping.<br><br>Reloading the privilege tables will ensure that all changes made so far<br>will <span class="hljs-keyword">take</span> effect immediately.<br><br>Reload privilege tables now? [Y/n] y<br> ... Success!<br><br>Cleaning up...<br><br>All done!  <span class="hljs-keyword">If</span> you<span class="hljs-comment">&#x27;ve completed all of the above steps, your MariaDB</span><br>installation should now be secure.<br><br>Thanks <span class="hljs-keyword">for</span> <span class="hljs-keyword">using</span> MariaDB!<br></code></pre></td></tr></table></figure>
+<p>完成初始化设置，主要是root密码的设置最重要。</p>
+<blockquote>
+<p>连接</p>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mysql</span> -h <span class="hljs-number">127.0.0.1</span> -P <span class="hljs-number">3306</span> -u root -p<br></code></pre></td></tr></table></figure>
+<p>具体mysql命令怎么使用这里也不做解释，不知道的请自行查资料。</p>
+<blockquote>
+<p>配置</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">MariaDB [(<span class="hljs-keyword">none</span>)]&gt; <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> etherpad;<br>MariaDB [(<span class="hljs-keyword">none</span>)]&gt; <span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;etherpad&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;123456&#x27;</span>;<br>MariaDB [(<span class="hljs-keyword">none</span>)]&gt; <span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> etherpad.* <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;etherpad&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br>MariaDB [(<span class="hljs-keyword">none</span>)]&gt; FLUSH <span class="hljs-keyword">PRIVILEGES</span>;<br>MariaDB [(<span class="hljs-keyword">none</span>)]&gt; \q<br></code></pre></td></tr></table></figure>
+<p>在这里操作是创建etherpad数据库，以及etherpad用户并分配etherpad用户有访问etherpad数据库的权限，用户名：etherpad，密码：123456。<br>关于数据库、用户、密码自己定义，在etherpad安装与配置中需要用户。</p>
+<h4 id="2-4、创建linux用户"><a href="#2-4、创建linux用户" class="headerlink" title="2.4、创建linux用户"></a>2.4、创建linux用户</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adduser etherpad</span><br></code></pre></td></tr></table></figure>
+<p>用户启动使用etherpad程序，我之前没有建立用户，直接用root去启动，会提示：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ada">[root@VM_0_16_centos opt]# bash /opt/etherpad/etherpad-lite/bin/run.sh<br>You shouldn<span class="hljs-symbol">&#x27;t</span> start Etherpad as root!<br>Please <span class="hljs-keyword">type</span> <span class="hljs-type">&#x27;Etherpad </span>rocks my socks&#x27; <span class="hljs-keyword">or</span> supply the &#x27;<span class="hljs-comment">--root&#x27; argument if you still want to start it as root</span><br></code></pre></td></tr></table></figure>
+<p>也可以在启动的命令后面加上–root进行启动，但是既然etherpad不让用root，那就新建一个就好了。</p>
+
+<div class="post_cus_note">准备工作已经完毕。。。。。。</div>
+
+
+<h4 id="2-5、下载etherpad"><a href="#2-5、下载etherpad" class="headerlink" title="2.5、下载etherpad"></a>2.5、下载etherpad</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">su root<br><span class="hljs-built_in">mkdir</span> -p /opt/www/etherpad<br><span class="hljs-built_in">cd</span> /opt/www/etherpad<br>git <span class="hljs-built_in">clone</span> https://github.com/ether/etherpad-lite<br></code></pre></td></tr></table></figure>
+<p>切换etherpad用户，如果没有git命令的用户进行安装，文章最后有相关参考。<br>把etherpad放在自己想要放的目录。</p>
+<h4 id="2-6、文件授权-所属者"><a href="#2-6、文件授权-所属者" class="headerlink" title="2.6、文件授权 + 所属者"></a>2.6、文件授权 + 所属者</h4><p>root用户。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> 755 -R etherpad-lite<br><span class="hljs-built_in">chown</span> -R etherpad:etherpad etherpad-lite<br><br><span class="hljs-comment"># 查看用户名称与组</span><br><span class="hljs-built_in">id</span> 用户<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-7、配置文件"><a href="#2-7、配置文件" class="headerlink" title="2.7、配置文件"></a>2.7、配置文件</h4><blockquote>
+<p>创建配置文件</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> ./etherpad-lite/settings.json.template ./etherpad-lite/settings.json<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>编辑配置</p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim .<span class="hljs-regexp">/etherpad-lite/</span>settings.json<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Ip配置<br>在配置中搜索<em><strong>0.0.0.0</strong></em>，在文件88行，<em><strong>IP</strong></em>0.0.0.0改成127.0.0.1只能本机访问，完了在用nginx做个反向代理即可，<em><strong>PORT</strong></em>端口改成自己设置的端口，去掉注释，配置更改如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;ip&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">9002</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>数据库配置<br>在配置中搜索<em><strong>dbType</strong></em>，在文件144行，这里用的信息都是在数据库安装配置中设置的配置，写清楚即可，去掉注释，配置更改如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;dbType&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mysql&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;dbSettings&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;user&quot;</span><span class="hljs-punctuation">:</span>     <span class="hljs-string">&quot;etherpad&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;host&quot;</span><span class="hljs-punctuation">:</span>     <span class="hljs-string">&quot;localhost&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span>     <span class="hljs-number">3306</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;database&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;etherpad&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;charset&quot;</span><span class="hljs-punctuation">:</span>  <span class="hljs-string">&quot;utf8mb4&quot;</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>代理配置<br>trustProxy设置为true。</p>
+</li>
+<li><p>管理员<br>在配置中搜索<em><strong>password</strong></em>，在文件365行，这里用的信息都是在数据库安装配置中设置的配置，去掉注释，配置更改如下：</p>
+</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">&quot;users&quot;: &#123;<br>  &quot;admin&quot;: &#123;<br>    // <span class="hljs-number">1</span>) &quot;password&quot; can be replaced <span class="hljs-keyword">with</span> &quot;hash&quot; <span class="hljs-keyword">if</span> you install ep_hash_auth<br>    // <span class="hljs-number">2</span>) please note that <span class="hljs-keyword">if</span> <span class="hljs-keyword">password</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">null</span>, the <span class="hljs-keyword">user</span> will <span class="hljs-keyword">not</span> be created<br>    &quot;password&quot;: &quot;admin&quot;,<br>    &quot;is_admin&quot;: <span class="hljs-keyword">true</span><br>  &#125;,<br>  &quot;user&quot;: &#123;<br>    // <span class="hljs-number">1</span>) &quot;password&quot; can be replaced <span class="hljs-keyword">with</span> &quot;hash&quot; <span class="hljs-keyword">if</span> you install ep_hash_auth<br>    // <span class="hljs-number">2</span>) please note that <span class="hljs-keyword">if</span> <span class="hljs-keyword">password</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">null</span>, the <span class="hljs-keyword">user</span> will <span class="hljs-keyword">not</span> be created<br>    &quot;password&quot;: &quot;user&quot;,<br>    &quot;is_admin&quot;: <span class="hljs-keyword">false</span><br>  &#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>保存配置</p>
+</blockquote>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs clojure"><span class="hljs-symbol">:wq</span><br><br><span class="hljs-symbol">:X</span><br></code></pre></td></tr></table></figure>
+<p>用哪个都可以，vim保存并退出。</p>
+<h4 id="2-8、Etherpad安装依赖"><a href="#2-8、Etherpad安装依赖" class="headerlink" title="2.8、Etherpad安装依赖"></a>2.8、Etherpad安装依赖</h4><p>root用户执行。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">bash .<span class="hljs-regexp">/etherpad-lite/</span>bin/installDeps.sh<br></code></pre></td></tr></table></figure>
+<p>安装一下etherpad所需要的依赖包。</p>
+<ul>
+<li>npm更新</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">curl -L https://npmjs.<span class="hljs-keyword">com</span>/install.<span class="hljs-keyword">sh</span> | <span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>nodejs更新：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiashan17/p/6907537.html">https://www.cnblogs.com/xiashan17/p/6907537.html</a><br>安装n管理工具，进行nodejs版本安装、选择。<br>安装指定版本node：</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">n</span> install node/<span class="hljs-number">13</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<p>安装完之后：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">installing</span> : node-v13.<span class="hljs-number">3</span>.<span class="hljs-number">0</span><br>   <span class="hljs-attribute">mkdir</span> : /usr/local/n/versions/node/<span class="hljs-number">13</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span><br>   <span class="hljs-attribute">fetch</span> : https://nodejs.org/dist/v13.<span class="hljs-number">3</span>.<span class="hljs-number">0</span>/node-v13.<span class="hljs-number">3</span>.<span class="hljs-number">0</span>-linux-x64.tar.xz<br><span class="hljs-attribute">installed</span> : v13.<span class="hljs-number">3</span>.<span class="hljs-number">0</span> (with npm <span class="hljs-number">6</span>.<span class="hljs-number">13</span>.<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+<p>处理完以上问题，在重新安装依赖。</p>
+<h4 id="2-9、启动"><a href="#2-9、启动" class="headerlink" title="2.9、启动"></a>2.9、启动</h4><p>etherpad用户。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">./etherpad-lite/bin/<span class="hljs-keyword">run</span>.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+<p>用etherpad用户直接执行上面命令。</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs prolog">[root@localhost ~]#/opt/etherpad/etherpad-lite/bin/run.sh<br><br><span class="hljs-symbol">Ensure</span> that all dependencies are up to date...  <span class="hljs-symbol">If</span> this is the first time you have run <span class="hljs-symbol">Etherpad</span> please be patient.<br>audited <span class="hljs-number">13370</span> packages in <span class="hljs-number">5.363</span>s<br><br><span class="hljs-number">8</span> packages are looking for funding<br>  run <span class="hljs-string">`npm fund`</span> for details<br><br>found <span class="hljs-number">5</span> vulnerabilities (<span class="hljs-number">3</span> low, <span class="hljs-number">2</span> high)<br>  run <span class="hljs-string">`npm audit fix`</span> to fix them, or <span class="hljs-string">`npm audit`</span> for details<br><span class="hljs-symbol">Clearing</span> minified cache...<br><span class="hljs-symbol">Started</span> <span class="hljs-symbol">Etherpad</span>...<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.215</span>] [<span class="hljs-symbol">DEBUG</span>] console - <span class="hljs-symbol">Running</span> on <span class="hljs-symbol">Node</span> v12<span class="hljs-number">.14</span><span class="hljs-number">.0</span> (minimum required <span class="hljs-symbol">Node</span> version: <span class="hljs-number">8.9</span><span class="hljs-number">.0</span>)<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.324</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">All</span> relative paths will be interpreted relative to the identified <span class="hljs-symbol">Etherpad</span> base dir: /opt/etherpad/etherpad-lite<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.324</span>] [<span class="hljs-symbol">DEBUG</span>] <span class="hljs-symbol">AbsolutePaths</span> - <span class="hljs-symbol">Relative</span> path <span class="hljs-string">&quot;settings.json&quot;</span> can be rewritten to <span class="hljs-string">&quot;/opt/etherpad/etherpad-lite/settings.json&quot;</span><br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.325</span>] [<span class="hljs-symbol">DEBUG</span>] <span class="hljs-symbol">AbsolutePaths</span> - <span class="hljs-symbol">Relative</span> path <span class="hljs-string">&quot;credentials.json&quot;</span> can be rewritten to <span class="hljs-string">&quot;/opt/etherpad/etherpad-lite/credentials.json&quot;</span><br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.331</span>] [<span class="hljs-symbol">INFO</span>] console - settings loaded from: /opt/etherpad/etherpad-lite/settings.json<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.331</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">No</span> credentials file found in /opt/etherpad/etherpad-lite/credentials.json. <span class="hljs-symbol">Ignoring</span>.<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.332</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">Using</span> skin <span class="hljs-string">&quot;colibris&quot;</span> in dir: /opt/etherpad/etherpad-lite/src/static/skins/colibris<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.332</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">Session</span> key loaded from: /opt/etherpad/etherpad-lite/<span class="hljs-symbol">SESSIONKEY</span>.txt<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.381</span>] [<span class="hljs-symbol">ERROR</span>] console - (node:<span class="hljs-number">25518</span>) [<span class="hljs-symbol">DEP0126</span>] <span class="hljs-symbol">DeprecationWarning</span>: timers.active() is deprecated. <span class="hljs-symbol">Please</span> use timeout.refresh() instead.<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.382</span>] [<span class="hljs-symbol">ERROR</span>] console - (node:<span class="hljs-number">25518</span>) [<span class="hljs-symbol">DEP0096</span>] <span class="hljs-symbol">DeprecationWarning</span>: timers.unenroll() is deprecated. <span class="hljs-symbol">Please</span> use clearTimeout instead.<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">21.831</span>] [<span class="hljs-symbol">INFO</span>] <span class="hljs-symbol">APIHandler</span> - <span class="hljs-symbol">Api</span> key file read from: <span class="hljs-string">&quot;/opt/etherpad/etherpad-lite/APIKEY.txt&quot;</span><br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">22.139</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">Installed</span> plugins: ep_align@<span class="hljs-number">0.0</span><span class="hljs-number">.24</span>, ep_image_upload@<span class="hljs-number">1.0</span><span class="hljs-number">.12</span><br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">22.142</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">Report</span> bugs at https://github.com/ether/etherpad-lite/issues<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">22.143</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">Your</span> <span class="hljs-symbol">Etherpad</span> version is <span class="hljs-number">1.8</span><span class="hljs-number">.0</span> (<span class="hljs-number">5</span>bcc5a3)<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">22.228</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">You</span> can access your <span class="hljs-symbol">Etherpad</span> instance at http://<span class="hljs-number">192.168</span><span class="hljs-number">.151</span><span class="hljs-number">.64</span>:<span class="hljs-number">9001</span>/<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">22.228</span>] [<span class="hljs-symbol">INFO</span>] console - <span class="hljs-symbol">The</span> plugin admin page is at http://<span class="hljs-number">192.168</span><span class="hljs-number">.151</span><span class="hljs-number">.64</span>:<span class="hljs-number">9001</span>/admin/plugins<br>[<span class="hljs-number">2019</span><span class="hljs-number">-12</span><span class="hljs-number">-28</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">22.228</span>] [<span class="hljs-symbol">WARN</span>] console - <span class="hljs-symbol">Etherpad</span> is running in <span class="hljs-symbol">Development</span> mode.  <span class="hljs-symbol">This</span> mode is slower for users and less secure than production mode.  <span class="hljs-symbol">You</span> should set the <span class="hljs-symbol">NODE_ENV</span> environment variable to production by using: export <span class="hljs-symbol">NODE_ENV</span>=production<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-10、访问"><a href="#2-10、访问" class="headerlink" title="2.10、访问"></a>2.10、访问</h4><p>在浏览器上直接访问：<a href="http://IP:PORT，服务器IP">http://IP:PORT，服务器IP</a> + 配置的PORT端口。</p>
+
+<div class="post_cus_note">列举一下可能遇到的问题</div>
+
+
+<h3 id="3、常见问题"><a href="#3、常见问题" class="headerlink" title="3、常见问题"></a>3、常见问题</h3><blockquote>
+<p>端口设置</p>
+</blockquote>
+<p>如果在浏览器访问，提示服务不可以用，那么检查一下服务器防火墙问题。</p>
+<ul>
+<li>检查端口是否开通</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">root@localhost</span> <span class="hljs-string">~</span>]<span class="hljs-comment">#firewall-cmd --list-all</span><br><span class="hljs-string">public</span> <span class="hljs-string">(active)</span><br>  <span class="hljs-attr">target:</span> <span class="hljs-string">default</span><br>  <span class="hljs-attr">icmp-block-inversion:</span> <span class="hljs-literal">no</span><br>  <span class="hljs-attr">interfaces:</span> <span class="hljs-string">enp3s0</span><br>  <span class="hljs-attr">sources:</span><br>  <span class="hljs-attr">services:</span> <span class="hljs-string">dhcpv6-client</span> <span class="hljs-string">mysql</span> <span class="hljs-string">ssh</span><br>  <span class="hljs-attr">ports:</span> <span class="hljs-number">3306</span><span class="hljs-string">/tcp</span> <span class="hljs-number">8090</span><span class="hljs-string">/tcp</span> <span class="hljs-number">80</span><span class="hljs-string">/tcp</span> <span class="hljs-number">10000</span><span class="hljs-string">/tcp</span> <span class="hljs-number">9001</span><span class="hljs-string">/tcp</span><br>  <span class="hljs-attr">protocols:</span><br>  <span class="hljs-attr">masquerade:</span> <span class="hljs-literal">no</span><br>  <span class="hljs-attr">forward-ports:</span><br>  <span class="hljs-attr">source-ports:</span><br>  <span class="hljs-attr">icmp-blocks:</span><br>  <span class="hljs-attr">rich rules:</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>开放端口</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">firewall-cmd <span class="hljs-attribute">--zone</span>=public <span class="hljs-attribute">--add-port</span>=9001/tcp --permanent<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>重启服务</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl restart firewalld</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>npm版本</p>
+</blockquote>
+<p>在安装etherpad依赖包或者其他包的时候，有的也许会提示<em><strong>node版本过低</strong></em>，更新下就好，这里推荐用n去更新。</p>
+<p>文章最后有相关参考。</p>
+<blockquote>
+<p>etherpad依赖脚本不可执行</p>
+</blockquote>
+<p>如果遇到***&#x2F;opt&#x2F;www&#x2F;etherpad&#x2F;etherpad-lite&#x2F;bin&#x2F;run.sh***脚本不被执行，那么将脚本改变读、写、执行的权限。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">chmod <span class="hljs-number">777</span> <span class="hljs-regexp">/opt/</span>www<span class="hljs-regexp">/etherpad/</span>etherpad-lite<span class="hljs-regexp">/bin/</span>run.sh<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="4、插件配置"><a href="#4、插件配置" class="headerlink" title="4、插件配置"></a>4、插件配置</h3><p>在这里，是主要配置etherpad的插件，有几个还是蛮好用，具体配置在下面有解释，访问Ip:Port&#x2F;admin，账号密码就是在etherpad配置的那个。</p>
+<p><img src="/articles/7544/search_plugin.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-1、align"><a href="#4-1、align" class="headerlink" title="4.1、align"></a>4.1、align</h4><p>作用：文字左、中、右对齐插件。</p>
+<blockquote>
+<p>查找</p>
+</blockquote>
+<p>在搜索出查找<em><strong>align</strong></em>。</p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<p>搜索到之后进行<em><strong>install</strong></em>安装。</p>
+<blockquote>
+<p>配置</p>
+</blockquote>
+<p>打开Settings找到toolbar，去掉toolbar的注视，在414行添加以下内容：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[“alignLeft”, “alignCenter”, “alignJustify”, “alignRight”]</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结果</p>
+</blockquote>
+<p><img src="/articles/7544/align.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-2、image-upload"><a href="#4-2、image-upload" class="headerlink" title="4.2、image_upload"></a>4.2、image_upload</h4><p>作用：图片上传功能。</p>
+<blockquote>
+<p>查找</p>
+</blockquote>
+<p>在搜索出查找<em><strong>image</strong></em>。</p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<p>搜索到之后进行<em><strong>install</strong></em>安装。</p>
+<blockquote>
+<p>配置</p>
+</blockquote>
+<p>打开Settings找到toolbar，在415行添加以下内容：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><br>  <span class="hljs-string">&quot;toolbar&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;left&quot;</span>: [<br>      [<span class="hljs-string">&quot;bold&quot;</span>, <span class="hljs-string">&quot;italic&quot;</span>, <span class="hljs-string">&quot;underline&quot;</span>, <span class="hljs-string">&quot;strikethrough&quot;</span>],<br>      [<span class="hljs-string">&quot;orderedlist&quot;</span>, <span class="hljs-string">&quot;unorderedlist&quot;</span>, <span class="hljs-string">&quot;indent&quot;</span>, <span class="hljs-string">&quot;outdent&quot;</span>],<br>      [<span class="hljs-string">&quot;undo&quot;</span>, <span class="hljs-string">&quot;redo&quot;</span>],<br>      [<span class="hljs-string">&quot;clearauthorship&quot;</span>],<br>      [<span class="hljs-string">&quot;alignLeft&quot;</span>, <span class="hljs-string">&quot;alignCenter&quot;</span>, <span class="hljs-string">&quot;alignJustify&quot;</span>, <span class="hljs-string">&quot;alignRight&quot;</span>],<br>      [<span class="hljs-string">&quot;addImage&quot;</span>]<br>    ],<br>    <span class="hljs-string">&quot;right&quot;</span>: [<br>      [<span class="hljs-string">&quot;importexport&quot;</span>, <span class="hljs-string">&quot;timeslider&quot;</span>, <span class="hljs-string">&quot;savedrevision&quot;</span>],<br>      [<span class="hljs-string">&quot;settings&quot;</span>, <span class="hljs-string">&quot;embed&quot;</span>],<br>      [<span class="hljs-string">&quot;showusers&quot;</span>]<br>    ],<br>    <span class="hljs-string">&quot;timeslider&quot;</span>: [<br>      [<span class="hljs-string">&quot;timeslider_export&quot;</span>, <span class="hljs-string">&quot;timeslider_returnToPad&quot;</span>]<br>    ]<br>  &#125;,<br><br><br><br><span class="hljs-string">&quot;ep_image_upload&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;fileTypes&quot;</span>: [<span class="hljs-string">&quot;jpeg&quot;</span>,<span class="hljs-string">&quot;jpg&quot;</span>,<span class="hljs-string">&quot;bmp&quot;</span>,<span class="hljs-string">&quot;gif&quot;</span>,<span class="hljs-string">&quot;png&quot;</span>],<br>      <span class="hljs-string">&quot;maxFileSize&quot;</span>: <span class="hljs-number">5000000</span><br>&#125;,<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结果</p>
+</blockquote>
+<p><img src="/articles/7544/image-upload.png" srcset="/img/loading.gif" lazyload></p>
+<p><font size=6.5 color='red'>插件根据自己的需求制定。。。。。。</font></p>
+<h3 id="5、额外脚本"><a href="#5、额外脚本" class="headerlink" title="5、额外脚本"></a>5、额外脚本</h3><p>我把启动与杀死进程做成了.sh脚本，具体如下：</p>
+<blockquote>
+<p>start</p>
+</blockquote>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts">nohup <span class="hljs-keyword">/opt/</span>www<span class="hljs-keyword">/etherpad/</span>etherpad-lite<span class="hljs-keyword">/bin/</span>run.sh&gt;<span class="hljs-keyword">/dev/</span>null  <span class="hljs-number">2</span>&gt;<span class="hljs-variable">&amp;1</span> &amp;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>end</p>
+</blockquote>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">ps -ef | <span class="hljs-keyword">grep</span> etherpad | <span class="hljs-keyword">grep</span> -v <span class="hljs-keyword">grep</span> | awk -F <span class="hljs-string">&quot; &quot;</span> <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="hljs-keyword">kill</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>nohub无此命令</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 切换用户</span><br>su root<br><br><span class="hljs-comment"># 安装</span><br>yum install coreutils<br><br><span class="hljs-comment"># check</span><br><span class="hljs-built_in">which</span> nohub<br></code></pre></td></tr></table></figure>
+
+<h3 id="6、nginx域名配置"><a href="#6、nginx域名配置" class="headerlink" title="6、nginx域名配置"></a>6、nginx域名配置</h3><p>nginx配置：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">[root@VM_0_16_centos nginx]<span class="hljs-comment"># cat /etc/nginx/conf.d/etherpad.conf</span><br>server &#123;<br>    listen  9001;<br>    server_name     _;<br><br>    access_log  <span class="hljs-string">/var/log/nginx/etherpad9001.access.log</span>  main;<br><br>    location / &#123;<br>         proxy_pass http:<span class="hljs-string">//127.0.0.1</span><span class="hljs-function">:9002</span>/;<br>         proxy_<span class="hljs-keyword">set</span>_header Host $host;<br>         proxy_<span class="hljs-keyword">set</span>_header X-Real-IP $remote_addr;<br>         proxy_<span class="hljs-keyword">set</span>_header X-Real-PORT $remote_port;<br>         proxy_<span class="hljs-keyword">set</span>_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>    &#125;<br><br>    error_page 404 <span class="hljs-string">/error.html</span>;<br>    location = <span class="hljs-string">/40x.html</span> &#123;<br><br>    &#125;<br><br>    error_page 500 502 503 504 <span class="hljs-string">/error.html</span>;<br>    location = <span class="hljs-string">/50x.html</span> &#123;<br><br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>因为本人的域名还在审核中，这里用ip进行访问。</p>
+<div class="note note-danger">
+            <p>说明一下：本人的服务器是腾讯云服务器，所以在配置nginx监听的IP是外网IP、端口是9001，在etherpad配置里面配置内网IP以及端口是9002。</p>
+          </div>
+
+<h3 id="7、测试地址"><a href="#7、测试地址" class="headerlink" title="7、测试地址"></a>7、测试地址</h3><p><a target="_blank" rel="noopener" href="http://121.4.56.169:9001/">http://121.4.56.169:9001/</a></p>
+<h3 id="8、学习参考"><a href="#8、学习参考" class="headerlink" title="8、学习参考"></a>8、学习参考</h3><ul>
+<li>官网：<a target="_blank" rel="noopener" href="https://etherpad.org/">https://etherpad.org/</a></li>
+<li>Github：<a target="_blank" rel="noopener" href="https://github.com/ether/etherpad-lite">https://github.com/ether/etherpad-lite</a></li>
+<li>MariaDB安装：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/85ad52c88399">https://www.jianshu.com/p/85ad52c88399</a></li>
+<li>Git安装：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f19d1473c3e1">https://www.jianshu.com/p/f19d1473c3e1</a></li>
+<li>node与npm更新：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ad99f605499">https://www.jianshu.com/p/2ad99f605499</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7%E9%9B%86/" class="category-chain-item">工具集</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7/" class="print-no-link">#运维工具</a>
+      
+        <a href="/tags/etherpad/" class="print-no-link">#etherpad</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Etherpad在线协作编辑</div>
+      <div>http://pygo2.top/articles/7544/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年12月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/12867/" title="Github热门的Python项目推荐">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Github热门的Python项目推荐</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/2901/" title="圣诞节【&lt;font color=&#34;#00BB00&#34; size=&#34;15&#34;&gt;西方节&lt;/font&gt;】">
+                        <span class="hidden-mobile">圣诞节【&lt;font color=&#34;#00BB00&#34; size=&#34;15&#34;&gt;西方节&lt;/font&gt;】</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

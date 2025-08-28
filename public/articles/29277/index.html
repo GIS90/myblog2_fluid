@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="VUE, 插件, driver, 向导">
+  
+    <meta name="description" content="在开发OpenTool开源工具的时候，在个人中心部分有一个向导，上网查了一下用driver.js，记录一下各项用到的内容，挺好用的VUE插件，推荐。              VUE 插件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE插件之driver.js">
+<meta property="og:url" content="http://pygo2.top/articles/29277/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="在开发OpenTool开源工具的时候，在个人中心部分有一个向导，上网查了一下用driver.js，记录一下各项用到的内容，挺好用的VUE插件，推荐。              VUE 插件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20220424-001.jpg">
+<meta property="article:published_time" content="2022-04-24T02:03:11.000Z">
+<meta property="article:modified_time" content="2022-04-24T02:03:11.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="VUE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20220424-001.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>VUE插件之driver.js || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="VUE插件之driver.js"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-24 10:03" pubdate>
+          创建日期：2022-04-24 10:03:11（星期日）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          793 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">VUE插件之driver.js</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <div class="note note-success">
+            <p>在开发OpenTool开源工具的时候，在个人中心部分有一个向导，上网查了一下用driver.js，记录一下各项用到的内容，挺好用的VUE插件，推荐。</p>
+          </div>
+
+
+<span class="label label-primary">VUE</span> <span class="label label-info">插件</span>
+
+<span id="more"></span>
+<hr />
+
+<h4 id="1、作用"><a href="#1、作用" class="headerlink" title="1、作用"></a>1、作用</h4><p>用于开发Web页面功能操作向导，官网介绍的很明确，而且也没啥难点，直接贴上代码了。</p>
+<h4 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">npm <span class="hljs-keyword">install</span> -S driver.js<br></code></pre></td></tr></table></figure>
+
+<h4 id="3、VUE代码"><a href="#3、VUE代码" class="headerlink" title="3、VUE代码"></a>3、VUE代码</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;app-container&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;guide-opr-container&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;el-icon-position&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;primary&quot;</span> @<span class="hljs-attr">click.prevent.stop</span>=<span class="hljs-string">&quot;guide&quot;</span>&gt;</span><br>        开启向导<br>      <span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;guide-data-container&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;guide-data-container&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">aside</span>&gt;</span><br>        The guide page is useful for some people who entered the project for the first time. You can briefly introduce the<br>        features of the project<br>      <span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Driver</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;driver.js&#x27;</span> <span class="hljs-comment">// import driver.js</span></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;driver.js/dist/driver.min.css&#x27;</span> <span class="hljs-comment">// import driver.js css</span></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> steps <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./guide/steps.js&#x27;</span></span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Guide&#x27;</span>,</span><br><span class="language-javascript">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">      <span class="hljs-attr">driver</span>: <span class="hljs-literal">null</span></span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;,</span><br><span class="language-javascript">  <span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-comment">// parameter config</span></span><br><span class="language-javascript">    <span class="hljs-comment">// 官网API：https://www.npmjs.com/package/driver.js</span></span><br><span class="language-javascript">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">driver</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Driver</span>(&#123;</span><br><span class="language-javascript">        <span class="hljs-attr">className</span>: <span class="hljs-string">&#x27;scoped-class&#x27;</span>, <span class="hljs-comment">// className to wrap driver.js popover</span></span><br><span class="language-javascript">        <span class="hljs-attr">animate</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 是否设置动画</span></span><br><span class="language-javascript">        <span class="hljs-attr">opacity</span>: <span class="hljs-number">0.7</span>, <span class="hljs-comment">// 背景不透明度（0表示只有弹出框，没有覆盖）</span></span><br><span class="language-javascript">        <span class="hljs-attr">padding</span>: <span class="hljs-number">0</span>, <span class="hljs-comment">// 元素与边缘之间的距离</span></span><br><span class="language-javascript">        <span class="hljs-attr">allowClose</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 单击覆盖是否应关闭</span></span><br><span class="language-javascript">        <span class="hljs-attr">overlayClickNext</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// 点击覆盖是否应该下一步移动</span></span><br><span class="language-javascript">        <span class="hljs-attr">stageBackground</span>: <span class="hljs-string">&#x27;#ffffff&#x27;</span>, <span class="hljs-comment">// default: #ffffff，突出显示元素的背景色</span></span><br><span class="language-javascript">        <span class="hljs-attr">showButtons</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 页脚中是否显示控制按钮</span></span><br><span class="language-javascript">        <span class="hljs-attr">keyboardControl</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 允许通过键盘进行控制（退出关闭，箭头键移动）</span></span><br><span class="language-javascript">        <span class="hljs-attr">doneBtnText</span>: <span class="hljs-string">&#x27;完成&#x27;</span>, <span class="hljs-comment">// 完成按钮文本</span></span><br><span class="language-javascript">        <span class="hljs-attr">closeBtnText</span>: <span class="hljs-string">&#x27;关闭&#x27;</span>, <span class="hljs-comment">// 关闭按钮文本</span></span><br><span class="language-javascript">        <span class="hljs-attr">prevBtnText</span>: <span class="hljs-string">&#x27;上一步&#x27;</span>, <span class="hljs-comment">// 上一步按钮文本</span></span><br><span class="language-javascript">        <span class="hljs-attr">nextBtnText</span>: <span class="hljs-string">&#x27;下一步&#x27;</span>, <span class="hljs-comment">// 下一步按钮文本</span></span><br><span class="language-javascript">        <span class="hljs-attr">onHighlightStarted</span>: <span class="hljs-function">(<span class="hljs-params">Element</span>) =&gt;</span> &#123;&#125;, <span class="hljs-comment">// 当元素即将高亮显示时调用</span></span><br><span class="language-javascript">        <span class="hljs-attr">onHighlighted</span>: <span class="hljs-function">(<span class="hljs-params">Element</span>) =&gt;</span> &#123;&#125;, <span class="hljs-comment">// 当元素完全高亮显示时调用</span></span><br><span class="language-javascript">        <span class="hljs-attr">onDeselected</span>: <span class="hljs-function">(<span class="hljs-params">Element</span>) =&gt;</span> &#123; <span class="hljs-comment">// 取消选择元素时调用</span></span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">onDeselected</span>(<span class="hljs-title class_">Element</span>)</span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript">        <span class="hljs-attr">onReset</span>: <span class="hljs-function">(<span class="hljs-params">Element</span>) =&gt;</span> &#123;&#125;, <span class="hljs-comment">// 将要清除覆盖时调用</span></span><br><span class="language-javascript">        <span class="hljs-attr">onNext</span>: <span class="hljs-function">(<span class="hljs-params">Element</span>) =&gt;</span> &#123;&#125;, <span class="hljs-comment">// 在任何步骤上移动到下一步时调用</span></span><br><span class="language-javascript">        <span class="hljs-attr">onPrevious</span>: <span class="hljs-function">(<span class="hljs-params">Element</span>) =&gt;</span> &#123;&#125; <span class="hljs-comment">// 在任何步骤上移动到上一步时调用</span></span><br><span class="language-javascript">    &#125;)</span><br><span class="language-javascript">  &#125;,</span><br><span class="language-javascript">  <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">guide</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">driver</span>.<span class="hljs-title function_">defineSteps</span>(steps)</span><br><span class="language-javascript">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">driver</span>.<span class="hljs-title function_">start</span>()</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><span class="language-css"></span><br><span class="language-css"><span class="hljs-selector-class">.guide-data-container</span> &#123;</span><br><span class="language-css">  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;</span><br><span class="language-css">&#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="4、Steps代码"><a href="#4、Steps代码" class="headerlink" title="4、Steps代码"></a>4、Steps代码</h4><p>需要在同等目录下建立一个guide文件夹，再建立一个steps.js文件，用来存放向导的数据，根据不同的模块定制不同的js文件。</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs nsis">const steps = [<br>  &#123;<br>    element: <span class="hljs-string">&#x27;#sidebar-container&#x27;</span>,<br>    popover: &#123;<br>      title: <span class="hljs-string">&#x27;系统菜单&#x27;</span>,<br>      description: <span class="hljs-string">&#x27;系统功能菜单列表，分为一级菜单、二级菜单&#x27;</span>,<br>      position: <span class="hljs-string">&#x27;right&#x27;</span>, // position: <span class="hljs-literal">left</span>, <span class="hljs-literal">left</span>-center, <span class="hljs-literal">left</span>-<span class="hljs-literal">bottom</span>, <span class="hljs-literal">top</span>,<br>      // <span class="hljs-literal">top</span>-center, <span class="hljs-literal">top</span>-<span class="hljs-literal">right</span>, <span class="hljs-literal">right</span>, <span class="hljs-literal">right</span>-center, <span class="hljs-literal">right</span>-<span class="hljs-literal">bottom</span>,<br>      // <span class="hljs-literal">bottom</span>, <span class="hljs-literal">bottom</span>-center, <span class="hljs-literal">bottom</span>-<span class="hljs-literal">right</span>, mid-center<br>      offset: <span class="hljs-number">20</span><br>    &#125;,<br>    padding: <span class="hljs-number">0</span><br>  &#125;,<br>  &#123;<br>    element: <span class="hljs-string">&#x27;#guide-opr-container&#x27;</span>,<br>    popover: &#123;<br>      title: <span class="hljs-string">&#x27;导航菜单&#x27;</span>,<br>      description: <span class="hljs-string">&#x27;打开&amp;&amp;关闭导航菜单&#x27;</span>,<br>      position: <span class="hljs-string">&#x27;bottom&#x27;</span>, // position: <span class="hljs-literal">left</span>, <span class="hljs-literal">left</span>-center, <span class="hljs-literal">left</span>-<span class="hljs-literal">bottom</span>, <span class="hljs-literal">top</span>,<br>      // <span class="hljs-literal">top</span>-center, <span class="hljs-literal">top</span>-<span class="hljs-literal">right</span>, <span class="hljs-literal">right</span>, <span class="hljs-literal">right</span>-center, <span class="hljs-literal">right</span>-<span class="hljs-literal">bottom</span>,<br>      // <span class="hljs-literal">bottom</span>, <span class="hljs-literal">bottom</span>-center, <span class="hljs-literal">bottom</span>-<span class="hljs-literal">right</span>, mid-center<br>      offset: <span class="hljs-number">20</span><br>    &#125;,<br>    padding: <span class="hljs-number">0</span><br>  &#125;,<br>  &#123;<br>    element: <span class="hljs-string">&#x27;#guide-data-container&#x27;</span>,<br>    popover: &#123;<br>      title: <span class="hljs-string">&#x27;数据域&#x27;</span>,<br>      description: <span class="hljs-string">&#x27;系统定制功能的数据展示域&#x27;</span>,<br>      position: <span class="hljs-string">&#x27;bottom&#x27;</span>,<br>      offset: <span class="hljs-number">0</span><br>    &#125;,<br>    padding: <span class="hljs-number">0</span><br>  &#125;<br>]<br><br>export default steps<br></code></pre></td></tr></table></figure>
+
+<h4 id="5、学习参考"><a href="#5、学习参考" class="headerlink" title="5、学习参考"></a>5、学习参考</h4><p>driver.js官网：<a target="_blank" rel="noopener" href="https://kamranahmed.info/driver.js/#single-element-no-popover">https://kamranahmed.info/driver.js/#single-element-no-popover</a><br>npm查询：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/driver.js">https://www.npmjs.com/package/driver.js</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-chain-item">前端开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/VUE/" class="print-no-link">#VUE</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>VUE插件之driver.js</div>
+      <div>http://pygo2.top/articles/29277/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/2813/" title="VUE插件driver.js闪一下问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VUE插件driver.js闪一下问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/52857/" title="VUE之Props传值参数">
+                        <span class="hidden-mobile">VUE之Props传值参数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

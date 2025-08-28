@@ -1,0 +1,814 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python">
+  
+    <meta name="description" content="Python模块系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python模块之utils公共方法">
+<meta property="og:url" content="http://pygo2.top/articles/61799/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="Python模块系列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/article_python_module.jpeg">
+<meta property="article:published_time" content="2022-08-24T14:54:36.000Z">
+<meta property="article:modified_time" content="2022-08-24T14:54:36.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python模块系列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/article_python_module.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python模块之utils公共方法 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python模块之utils公共方法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-24 22:54" pubdate>
+          创建日期：2022-08-24 10:54:36（星期三）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Python模块之utils公共方法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                
+<div class="post_cus_note">Python模块系列</div>
+
+
+<span id="more"></span>
+<hr />
+
+
+
+<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Python</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>公共方法模块。</p>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">------------------------------------------------</span><br><span class="hljs-string"></span><br><span class="hljs-string">describe:</span><br><span class="hljs-string">    utils method</span><br><span class="hljs-string"></span><br><span class="hljs-string">base_info:</span><br><span class="hljs-string">    __author__ = &quot;PyGo&quot;</span><br><span class="hljs-string">    __time__ = &quot;2022/9/14&quot;</span><br><span class="hljs-string">    __version__ = &quot;v.1.0.0&quot;</span><br><span class="hljs-string">    __mail__ = &quot;gaoming971366@163.com&quot;</span><br><span class="hljs-string">    __project__ = &quot;quality-inspect&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">usage:</span><br><span class="hljs-string"></span><br><span class="hljs-string">design:</span><br><span class="hljs-string"></span><br><span class="hljs-string">reference urls:</span><br><span class="hljs-string"></span><br><span class="hljs-string">python version:</span><br><span class="hljs-string">    python3</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">Enjoy the good time everyday！！!</span><br><span class="hljs-string">Life is short, I use python.</span><br><span class="hljs-string"></span><br><span class="hljs-string">------------------------------------------------</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># ------------------------------------------------------------</span><br><span class="hljs-comment"># usage: /usr/bin/python utils.py</span><br><span class="hljs-comment"># ------------------------------------------------------------</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> inspects<br><span class="hljs-keyword">import</span> hashlib<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime, timedelta<br><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps<br><span class="hljs-keyword">from</span> deploy.logger <span class="hljs-keyword">import</span> logger <span class="hljs-keyword">as</span> LOG<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_cur_folder</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # get current folder, solve is or not frozen of the script</span><br><span class="hljs-string">    :return: the file current folder</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">getattr</span>(sys, <span class="hljs-string">&quot;frozen&quot;</span>, <span class="hljs-literal">False</span>):<br>        <span class="hljs-keyword">return</span> os.path.dirname(os.path.abspath(__file__))<br>    <span class="hljs-keyword">else</span>:<br>        cur_folder = os.path.dirname(inspects.getfile(inspects.currentframe()))<br>        <span class="hljs-keyword">return</span> os.path.abspath(cur_folder)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">md5</span>(<span class="hljs-params">v</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # md5加密</span><br><span class="hljs-string">    :param v: value</span><br><span class="hljs-string">    :return: md5 value</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(v, <span class="hljs-built_in">str</span>):<br>        v = v.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>    <span class="hljs-keyword">return</span> hashlib.md5(v).hexdigest()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">s2d</span>(<span class="hljs-params">s, fmt=<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 字符串转日期</span><br><span class="hljs-string">    :param s: string type time</span><br><span class="hljs-string">    :param fmt: transfer to formatter</span><br><span class="hljs-string">    :return: datetime type time</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> datetime.strptime(s, fmt)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">d2s</span>(<span class="hljs-params">d, fmt=<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 日期转字符串</span><br><span class="hljs-string">    :param d: datetime type time</span><br><span class="hljs-string">    :param fmt: transfer to formatter</span><br><span class="hljs-string">    :return: string type time</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> d.strftime(fmt)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">d2ts</span>(<span class="hljs-params">d</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 日期转ts</span><br><span class="hljs-string">    :param d: datetime type parameter</span><br><span class="hljs-string">    :return: time.time type</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> time.mktime(d.timetuple())<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">s2ts</span>(<span class="hljs-params">s, <span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 字符串转ts</span><br><span class="hljs-string">    :param s: sting type parameter</span><br><span class="hljs-string">    :return: time.time type</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    d = s2d(s, <span class="hljs-built_in">format</span>)<br>    <span class="hljs-keyword">return</span> d2ts(d)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dura_date</span>(<span class="hljs-params">d1, d2, need_d=<span class="hljs-literal">False</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # get datetime1 and datatime difference 时间差</span><br><span class="hljs-string">    :param d1: datetime parameter 1</span><br><span class="hljs-string">    :param d2: datetime parameter 2</span><br><span class="hljs-string">    :param need_d: is or not need hours, minutes, seconds</span><br><span class="hljs-string">    :return: result 1: seconds</span><br><span class="hljs-string">    result 2: hours, minutes, seconds</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(d1) <span class="hljs-keyword">is</span> <span class="hljs-built_in">str</span>:<br>        d1 = s2d(d1)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(d2) <span class="hljs-keyword">is</span> <span class="hljs-built_in">str</span>:<br>        d2 = s2d(d2)<br>    d = d2 - d1<br>    <span class="hljs-keyword">if</span> need_d <span class="hljs-keyword">is</span> <span class="hljs-literal">False</span>:<br>        seconds = d.seconds<br>        mins = seconds / <span class="hljs-number">60.00</span><br>        hours = mins / <span class="hljs-number">60.00</span><br>        <span class="hljs-keyword">return</span> seconds, mins, hours<br>    <span class="hljs-keyword">return</span> d<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_now_time</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 获取当前时间</span><br><span class="hljs-string">    :return: to return the now of datetime type</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> datetime.now()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_now_date</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 获取当前日期</span><br><span class="hljs-string">    :return: to return the now of date type</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> datetime.now().date()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_now</span>(<span class="hljs-params"><span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 获取当前时间str</span><br><span class="hljs-string">    :return: to return the now of string type</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> d2s(datetime.now(), <span class="hljs-built_in">format</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_week_day</span>(<span class="hljs-params">date</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 获取weekday</span><br><span class="hljs-string">    :param date: date</span><br><span class="hljs-string">    :return: week</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    weekdaylist = (<span class="hljs-string">&#x27;星期一&#x27;</span>, <span class="hljs-string">&#x27;星期二&#x27;</span>, <span class="hljs-string">&#x27;星期三&#x27;</span>, <span class="hljs-string">&#x27;星期四&#x27;</span>, <span class="hljs-string">&#x27;星期五&#x27;</span>, <span class="hljs-string">&#x27;星期六&#x27;</span>, <span class="hljs-string">&#x27;星期天&#x27;</span>)<br>    weekday = weekdaylist[date.weekday()]<br>    <span class="hljs-keyword">return</span> weekday<br><br><br><span class="hljs-comment"># 计时器</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">timeer</span>(<span class="hljs-params">fn</span>):<br><span class="hljs-meta">    @wraps(<span class="hljs-params">fn</span>)</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_wrapper</span>(<span class="hljs-params">*args, **kwargs</span>):<br>        start = datetime.now()<br>        res = fn(*args, **kwargs)<br>        end = datetime.now()<br>        LOG.info(<span class="hljs-string">&#x27;@timeer %s is run: %s&#x27;</span> % (fn.__name__, (end-start).seconds))<br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-keyword">return</span> _wrapper<br><br><br><span class="hljs-comment"># 真实IP</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_real_ip</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    flask api request object</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> request.headers.getlist(<span class="hljs-string">&quot;X-Forwarded-For&quot;</span>):<br>        ip = request.remote_addr<br>    <span class="hljs-keyword">else</span>:<br>        ip = request.headers.getlist(<span class="hljs-string">&quot;X-Forwarded-For&quot;</span>)[<span class="hljs-number">0</span>]<br>    <span class="hljs-keyword">return</span> ip<br><br><br><span class="hljs-comment"># rtx-id by request config</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_rtx_id</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    flask api request object</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> request.headers.get(<span class="hljs-string">&quot;X-Rtx-Id&quot;</span>) \<br>        <span class="hljs-keyword">if</span> request.headers.get(<span class="hljs-string">&quot;X-Rtx-Id&quot;</span>) <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;&#x27;</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">mk_dirs</span>(<span class="hljs-params">path</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # mdkirs folder 建立文件夹（递归）</span><br><span class="hljs-string">    :param path: to make folder path</span><br><span class="hljs-string">    :return: path</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    os.makedirs(path)<br>    <span class="hljs-keyword">return</span> path<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_base_dir</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 获取项目base目录（deploy）</span><br><span class="hljs-string">    :return: deploy base path</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> os.path.dirname(get_cur_folder())<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">v2decimal</span>(<span class="hljs-params">x, y</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 保留小数</span><br><span class="hljs-string">    :param x: value</span><br><span class="hljs-string">    :param y: point decimal</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> x:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">if</span> x.find(<span class="hljs-string">&#x27;.&#x27;</span>) &gt; <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">round</span>(x, y)<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(x)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_month_list</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    static method</span><br><span class="hljs-string">    # 获取月份list</span><br><span class="hljs-string">    :return: list data</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> [<span class="hljs-string">u&#x27;1月&#x27;</span>, <span class="hljs-string">u&#x27;2月&#x27;</span>, <span class="hljs-string">u&#x27;3月&#x27;</span>, <span class="hljs-string">u&#x27;4月&#x27;</span>, <span class="hljs-string">u&#x27;5月&#x27;</span>, <span class="hljs-string">u&#x27;6月&#x27;</span>,<br>            <span class="hljs-string">u&#x27;7月&#x27;</span>, <span class="hljs-string">u&#x27;8月&#x27;</span>, <span class="hljs-string">u&#x27;9月&#x27;</span>, <span class="hljs-string">u&#x27;10月&#x27;</span>, <span class="hljs-string">u&#x27;11月&#x27;</span>, <span class="hljs-string">u&#x27;12月&#x27;</span>]<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">filename2md5</span>(<span class="hljs-params">rtx_id: <span class="hljs-built_in">str</span> = <span class="hljs-literal">None</span>, file_name: <span class="hljs-built_in">str</span> = <span class="hljs-literal">None</span>, _<span class="hljs-built_in">type</span>: <span class="hljs-built_in">str</span> = <span class="hljs-string">&#x27;file&#x27;</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    get local store file name by md5 value</span><br><span class="hljs-string">    获取本地存储文件名称md5</span><br><span class="hljs-string">    :param rtx_id: rtx id</span><br><span class="hljs-string">    :param file_name: file name</span><br><span class="hljs-string">    :param _type: file type, is file,image, and so on.</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    result is tuple</span><br><span class="hljs-string">    param1: md5 value no suffix</span><br><span class="hljs-string">    param2: md5 value have suffix</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    file_names = os.path.splitext(file_name)<br>    suffix = (file_names[<span class="hljs-number">1</span>]).lower() <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(file_names) &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;&#x27;</span><br>    _v = file_name + get_now() + _<span class="hljs-built_in">type</span> + rtx_id <span class="hljs-keyword">if</span> rtx_id \<br>        <span class="hljs-keyword">else</span> file_name + get_now() + _<span class="hljs-built_in">type</span><br>    md5_v = md5(_v)<br>    <span class="hljs-keyword">return</span> md5_v, md5_v + suffix <span class="hljs-keyword">if</span> suffix <span class="hljs-keyword">else</span> md5_v<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">check_length</span>(<span class="hljs-params">data, limit=<span class="hljs-number">10</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    check data length</span><br><span class="hljs-string">    :param data: check data</span><br><span class="hljs-string">    :param limit: length limit</span><br><span class="hljs-string"></span><br><span class="hljs-string">    return True or False</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> data:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) &lt;= limit <span class="hljs-keyword">else</span> <span class="hljs-literal">False</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_day_week_date</span>(<span class="hljs-params">query_date</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    get query day current week</span><br><span class="hljs-string">    :param query_date: query day, is str</span><br><span class="hljs-string"></span><br><span class="hljs-string">    return dict</span><br><span class="hljs-string">    format:</span><br><span class="hljs-string">        - start_time</span><br><span class="hljs-string">        - end_time</span><br><span class="hljs-string">        - [星期一date, 星期二date, 星期三date, 星期四date, 星期五date, 星期六date, 星期日date]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> query_date:<br>        query_date = get_now_date()<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(query_date, <span class="hljs-built_in">str</span>):<br>        query_date = s2d(query_date, fmt=<span class="hljs-string">&quot;%Y-%m-%d&quot;</span>)<br>    current_week = query_date.isoweekday()  <span class="hljs-comment"># 当前时间所在本周第几天</span><br>    start_week_date = (query_date - timedelta(days=current_week - <span class="hljs-number">1</span>))<br>    end_week_date = (query_date + timedelta(days=<span class="hljs-number">7</span> - current_week))<br>    _week = <span class="hljs-built_in">list</span>()<br>    <span class="hljs-keyword">for</span> day_num <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">7</span>, <span class="hljs-number">1</span>):<br>        _week.append(d2s(start_week_date + timedelta(days=day_num), fmt=<span class="hljs-string">&quot;%Y-%m-%d&quot;</span>))<br>    _res = &#123;<br>        <span class="hljs-string">&quot;start_week_date&quot;</span>: d2s(start_week_date, fmt=<span class="hljs-string">&quot;%Y-%m-%d&quot;</span>),  <span class="hljs-comment"># 本周起始日期</span><br>        <span class="hljs-string">&quot;end_week_date&quot;</span>: d2s(end_week_date, fmt=<span class="hljs-string">&quot;%Y-%m-%d&quot;</span>),      <span class="hljs-comment"># 本周结束日期</span><br>        <span class="hljs-string">&quot;week_date&quot;</span>: _week                   <span class="hljs-comment"># 本周日期列表</span><br><br>    &#125;<br>    <span class="hljs-keyword">return</span> _res<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">ping</span>(<span class="hljs-params">ip: <span class="hljs-built_in">str</span>, **kwargs</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    insect to ping the ip connection</span><br><span class="hljs-string"></span><br><span class="hljs-string">    :param ip: the target ip or 域名</span><br><span class="hljs-string">    :param kwargs: the ping other parameters</span><br><span class="hljs-string">    :return: bool</span><br><span class="hljs-string"></span><br><span class="hljs-string">    **kwargs:</span><br><span class="hljs-string">        -a             将地址解析为主机名。</span><br><span class="hljs-string">        -n count       要发送的回显请求数。</span><br><span class="hljs-string">        -l size        发送缓冲区大小。</span><br><span class="hljs-string">        -w timeout     等待每次回复的超时时间(毫秒)。</span><br><span class="hljs-string"></span><br><span class="hljs-string">    usage:</span><br><span class="hljs-string">        ping(ip=&#x27;www.baidu.com&#x27;, n=4, w=2000, l=32)</span><br><span class="hljs-string">        or</span><br><span class="hljs-string">        ping(ip=&#x27;127.0.0.1&#x27;, n=4, w=2000, l=32)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    param default value:</span><br><span class="hljs-string">        - count: 4</span><br><span class="hljs-string">        - size: 32</span><br><span class="hljs-string">        - timeout: 2000</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    cmd = [<span class="hljs-string">&#x27;ping&#x27;</span>]<br>    <span class="hljs-comment"># **kwargs &gt; ping &gt; a</span><br>    <span class="hljs-keyword">if</span> kwargs.get(<span class="hljs-string">&#x27;a&#x27;</span>):<br>        cmd.append(<span class="hljs-string">&#x27;-a&#x27;</span>)<br>    <span class="hljs-comment"># **kwargs &gt; ping &gt; n</span><br>    <span class="hljs-keyword">if</span> kwargs.get(<span class="hljs-string">&#x27;n&#x27;</span>) <span class="hljs-keyword">or</span> kwargs.get(<span class="hljs-string">&#x27;count&#x27;</span>):<br>        count = kwargs.get(<span class="hljs-string">&#x27;n&#x27;</span>) <span class="hljs-keyword">or</span> kwargs.get(<span class="hljs-string">&#x27;count&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">4</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(count, <span class="hljs-built_in">int</span>):<br>            count = <span class="hljs-number">4</span><br>        <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">0</span>:<br>            cmd.append(<span class="hljs-string">&#x27;-n %s&#x27;</span> % count)<br>    <span class="hljs-comment"># **kwargs &gt; ping &gt; l</span><br>    <span class="hljs-keyword">if</span> kwargs.get(<span class="hljs-string">&#x27;l&#x27;</span>) <span class="hljs-keyword">or</span> kwargs.get(<span class="hljs-string">&#x27;size&#x27;</span>):<br>        size = kwargs.get(<span class="hljs-string">&#x27;l&#x27;</span>) <span class="hljs-keyword">or</span> kwargs.get(<span class="hljs-string">&#x27;size&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">32</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(size, <span class="hljs-built_in">int</span>):<br>            size = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> size &gt; <span class="hljs-number">0</span>:<br>            cmd.append(<span class="hljs-string">&#x27;-l %s&#x27;</span> % size)<br>    <span class="hljs-comment"># **kwargs &gt; ping &gt; w</span><br>    <span class="hljs-keyword">if</span> kwargs.get(<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">or</span> kwargs.get(<span class="hljs-string">&#x27;timeout&#x27;</span>):<br>        timeout = kwargs.get(<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">or</span> kwargs.get(<span class="hljs-string">&#x27;timeout&#x27;</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">2000</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(timeout, <span class="hljs-built_in">int</span>):<br>            timeout = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> timeout &gt; <span class="hljs-number">0</span>:<br>            cmd.append(<span class="hljs-string">&#x27;-w %s&#x27;</span> % timeout)<br>    cmd.append(ip)<br>    cmd_str = <span class="hljs-string">&#x27; &#x27;</span>.join(cmd)<br>    ret_res = subprocess.call(cmd_str, shell=<span class="hljs-literal">True</span>, stdin=subprocess.PIPE, stdout=subprocess.PIPE,<br>                              stderr=subprocess.PIPE)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span> <span class="hljs-keyword">if</span> ret_res == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">False</span><br></code></pre></td></tr></table></figure>
+
+
+<h4 id="系列"><a href="#系列" class="headerlink" title="系列"></a>系列</h4><p><a href="http://pygo2.top/articles/26110/">Python模块之command系统命令</a><br><a href="http://pygo2.top/articles/19275/">Python模块之excel模块</a><br><a href="http://pygo2.top/articles/5145/">Python模块之logger日志</a><br><a href="http://pygo2.top/articles/61799/">Python模块之utils公共方法</a><br><a href="http://pygo2.top/articles/31232/">Python模块之watcher打点</a><br><a href="http://pygo2.top/articles/51787/">Python模块之config配置解析</a><br><a href="http://pygo2.top/articles/58292/">Python模块之dtalk钉钉消息</a><br><a href="http://pygo2.top/articles/33254/">Python模块之企业微信</a></p>
+<p>更多模块请参考文章TAG进行查看。</p>
+<p><font size=6.5 color='red'><em><strong>Python模块系列，持续更新中。。。。。。</strong></em></font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Python%E6%A8%A1%E5%9D%97%E7%B3%BB%E5%88%97/" class="print-no-link">#Python模块系列</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python模块之utils公共方法</div>
+      <div>http://pygo2.top/articles/61799/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/31232/" title="Python模块之watcher打点">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python模块之watcher打点</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/5145/" title="Python模块之logger日志">
+                        <span class="hidden-mobile">Python模块之logger日志</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,1182 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="hexo, next, Hexo, 美化, 插件, 博客, blog, note, tabs, cq, button, label, exturl, fullimage, grouppicture, include_raw, pdf, mermaid">
+  
+    <meta name="description" content="Hexo美化 Gemini Next主题优化  目标：美化博文 背景             发布博客有段时间了，而且陆陆续续写了一些文章，但页面样式都比较简单，只是单一的MarkDown语法，难道是Hexo + Next + MarkDown只能写出简单样式的文章？有点不相信，于是去Next官方。看了一些使用文档，查看了***内建标签***，原来Next可以让简单样式的文章可以变得那么好看，总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Next主题优化-内置tags篇">
+<meta property="og:url" content="http://pygo2.top/articles/25933/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="Hexo美化 Gemini Next主题优化  目标：美化博文 背景             发布博客有段时间了，而且陆陆续续写了一些文章，但页面样式都比较简单，只是单一的MarkDown语法，难道是Hexo + Next + MarkDown只能写出简单样式的文章？有点不相信，于是去Next官方。看了一些使用文档，查看了***内建标签***，原来Next可以让简单样式的文章可以变得那么好看，总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20181226-001.png">
+<meta property="article:published_time" content="2018-12-26T14:15:34.000Z">
+<meta property="article:modified_time" content="2018-12-26T14:15:34.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Hexo美化">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20181226-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Next主题优化-内置tags篇 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Next主题优化-内置tags篇"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2018-12-26 22:15" pubdate>
+          创建日期：2018-12-26 10:15:34（星期三）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Next主题优化-内置tags篇</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span class="label label-primary">Hexo美化</span> <span class="label label-primary">Gemini</span> <span class="label label-info">Next主题优化</span>
+
+<p><font color="#dd0000" size="4">目标：</font><font color="blue" size="6">美化博文</font></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><div class="note note-success">
+            <p>发布博客有段时间了，而且陆陆续续写了一些文章，但页面样式都比较简单，只是单一的MarkDown语法，难道是<em><strong>Hexo + Next + MarkDown</strong></em>只能写出简单样式的文章？有点不相信，于是去<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/">Next官方</a>。看了一些使用文档，查看了***<font color="#dd0000" size="4">内建标签</font>***，原来Next可以让简单样式的文章可以变得那么好看，总结了一下分享出来。</p>
+          </div>
+
+<span id="more"></span>
+
+<hr />
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Next主题使用的***<font color="#dd0000" size="5">内置tag</font>***，官方都已经写好js，直接使用对应的语法糖加入到文章中，就可以实现多样式、多功能的效果。下面分别说明了一下本人博客Hexo+Next的版本，如果有加入对应tag没有效果的，可以留言给我，一起交流一起学习。</p>
+<p><font color="#dd0000" size="4">Next主题内置tag样式都是本人经过实践得出，原创之作，欢迎大家进行转载。</font></p>
+<h3 id="版本介绍"><a href="#版本介绍" class="headerlink" title="版本介绍"></a>版本介绍</h3><table>
+<thead>
+<tr>
+<th align="center">id</th>
+<th align="center">name</th>
+<th align="center">version</th>
+<th align="center">remark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Hexo</td>
+<td align="center">v3.8.0</td>
+<td align="center">系统版本</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">NextT.Pisces</td>
+<td align="center">v7.0.1</td>
+<td align="center">主题版本</td>
+</tr>
+</tbody></table>
+<p><em><strong><font color="#dd0000" size="4">内置tag文件位置：blog&#x2F;themes&#x2F;next&#x2F;scripts&#x2F;tags。</font></strong></em></p>
+<h3 id="Tags"><a href="#Tags" class="headerlink" title="Tags"></a>Tags</h3><p>内置tags的js文件一共有12个，在这里我只讲解本人实践的tag。</p>
+<ol>
+<li><h4 id="tabs"><a href="#tabs" class="headerlink" title="tabs"></a>tabs</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>提供了一个tabs页样式标签，可以进行切换。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">tabs</span> t_code_1 %&#125;</span><span class="language-xml"></span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- tab 标题一 --&gt;</span></span><br><span class="language-xml">tab1</span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- endtab --&gt;</span></span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- tab 标题二 --&gt;</span></span><br><span class="language-xml">tab2</span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- endtab --&gt;</span></span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- tab 标题三 --&gt;</span></span><br><span class="language-xml">tab3</span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- endtab --&gt;</span></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endtabs</span> %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置</p>
+</blockquote>
+<p>打开Next配置文件：blog&#x2F;theme&#x2F;next&#x2F;_config.yml，搜索<font size="4" color="red"><em><strong>tabs</strong></em></font>，更改代码如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># tabs相关配置</span><br><span class="hljs-params">tabs:</span><br>  <span class="hljs-params">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-params">transition:</span><br>    <span class="hljs-params">tabs:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-params">labels:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-params">border_radius:</span> <span class="hljs-number">5</span>  <span class="hljs-comment"># tab圆角设置</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">tabs</span> t1 %&#125;</span><span class="language-xml"></span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- tab 标题一 --&gt;</span></span><br><span class="language-xml">tab1</span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- endtab --&gt;</span></span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- tab 标题二 --&gt;</span></span><br><span class="language-xml">tab2</span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- endtab --&gt;</span></span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- tab 标题三 --&gt;</span></span><br><span class="language-xml">tab3</span><br><span class="language-xml"><span class="hljs-comment">&lt;!-- endtab --&gt;</span></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endtabs</span> %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>tabs-endtabs 是<em><strong>tab tag</strong></em>语法糖。</li>
+<li>tab-endtab 是tabs里一个完整的tab，多个tab只需要更换标题、内容即可。</li>
+</ul>
+<ol start="2">
+<li><h4 id="cq-centerquote"><a href="#cq-centerquote" class="headerlink" title="cq &amp;&amp; centerquote"></a>cq &amp;&amp; centerquote</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>文本居中、引用样式。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">cq</span> %&#125;</span><span class="language-xml"></span><br><span class="language-xml">一个爱老婆的Python程序猿。。。。。。</span><br><span class="language-xml">**PyGo²**</span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endcq</span> %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>cq-endcq 是<em><strong>cq tag</strong></em>语法糖。</li>
+<li>cq与centerquote等价。</li>
+</ul>
+<ol start="3">
+<li><h4 id="note"><a href="#note" class="headerlink" title="note"></a>note</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p><strong>内置note</strong>标签。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">note</span> default %&#125;</span><span class="language-xml"></span><br><span class="language-xml">default 提示块标签</span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endnote</span> %&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">note</span> primary %&#125;</span><span class="language-xml"></span><br><span class="language-xml">primary 提示块标签</span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endnote</span> %&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">note</span> success %&#125;</span><span class="language-xml"></span><br><span class="language-xml">success 提示块标签</span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endnote</span> %&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">note</span> info %&#125;</span><span class="language-xml"></span><br><span class="language-xml">info 提示块标签</span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endnote</span> %&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">note</span> warning %&#125;</span><span class="language-xml"></span><br><span class="language-xml">warning 提示块标签</span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endnote</span> %&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">note</span> danger %&#125;</span><span class="language-xml"></span><br><span class="language-xml">danger 提示块标签</span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">endnote</span> %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置</p>
+</blockquote>
+<p>打开Next配置文件：blog&#x2F;theme&#x2F;next&#x2F;_config.yml，搜索<font size="4" color="red"><em><strong>Note tag</strong></em></font>，更改代码如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># note tag 相关配置</span><br><span class="hljs-params">note:</span><br>  <span class="hljs-params">style:</span> flat<br>  <span class="hljs-params">icons:</span> <span class="hljs-literal">true</span>   <span class="hljs-comment"># 是否启用图标</span><br>  <span class="hljs-params">border_radius:</span> <span class="hljs-number">3</span>  <span class="hljs-comment">#圆角设置</span><br>  <span class="hljs-params">light_bg_offset:</span> <span class="hljs-number">0</span>     设置<span class="hljs-number">0</span>为里面内容为note样式包含<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例</p>
+</blockquote>
+<div class="note note-info">
+            <p>default<br>提示块标签</p>
+          </div>
+
+<div class="note note-primary">
+            <p>primary<br>提示块标签</p>
+          </div>
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>note-endnote 是<em><strong>cq tag</strong></em>语法糖。</li>
+<li>样式：default、primary、success、info、warning、danger，示例中我只展示了2种。</li>
+</ul>
+<ol start="4">
+<li><h4 id="label"><a href="#label" class="headerlink" title="label"></a>label</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p><strong>内置label</strong>标签。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mel">&#123;% label <span class="hljs-keyword">default</span>@default %&#125;<br>&#123;% label primary@primary %&#125;<br>&#123;% label success@success %&#125;<br>&#123;% label info@info %&#125;<br>&#123;% label <span class="hljs-keyword">warning</span>@warning %&#125;<br>&#123;% label danger@danger %&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例</p>
+</blockquote>
+<span class="label label-default">default</span> <span class="label label-primary">primary</span> <span class="label label-success">success</span>
+<HR />
+<span class="label label-info">info</span> <span class="label label-warning">warning</span> <span class="label label-danger">danger</span>
+
+<HR />
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stata">- <span class="hljs-keyword">label</span> 是***<span class="hljs-keyword">label</span> tag***语法糖，不需要加endlabel标识结束。<br>- @符号前面是<span class="hljs-keyword">label</span>样式。<br>- @符号后面是<span class="hljs-keyword">label</span>内容。<br>- 说明<span class="hljs-keyword">label</span>需要2个参数，有兴趣的可以查看：blog/themes/next/scripts/tags/<span class="hljs-keyword">label</span>.js<br><br><span class="hljs-keyword">args</span> = <span class="hljs-keyword">args</span>.join(&#x27; &#x27;).<span class="hljs-keyword">split</span>(&#x27;@&#x27;);<br><span class="hljs-keyword">var</span> classes = <span class="hljs-keyword">args</span>[0] || &#x27;default&#x27;;<br><span class="hljs-keyword">var</span> text    = <span class="hljs-keyword">args</span>[1] || &#x27;&#x27;;<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><h4 id="button-btn"><a href="#button-btn" class="headerlink" title="button &amp;&amp; btn"></a>button &amp;&amp; btn</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p><strong>内置button</strong>标签。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">&#123;% btn https<span class="hljs-punctuation">:</span><span class="hljs-comment">//www.baidu.com, 百度首页, download fa-lg fa-fw %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">btn</span> https://www.baidu.com, 百度首页, download fa-lg fa-fw, 百度首页标题 %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>btn 是<em><strong>btn tag</strong></em>语法糖，不需要加endbtn标识结束。</li>
+<li>这个标签需要4个参数: url地址、button文本内容、button icon、button title。</li>
+<li>第四个参数我试了，没什么效果，有了解的小伙伴欢迎留言。</li>
+<li>这个按钮的样式跟Next主题样式一致，因为按钮样式本人优化过，所以在示例中的button与Next默认样式不一致。</li>
+<li>说明button需要4个参数，有兴趣的可以查看：blog&#x2F;themes&#x2F;next&#x2F;scripts&#x2F;tags&#x2F;button.js</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">args</span> = <span class="hljs-keyword">args</span>.<span class="hljs-keyword">join</span>(<span class="hljs-string">&#x27; &#x27;</span>).split(<span class="hljs-string">&#x27;,&#x27;</span>);<br><span class="hljs-keyword">var</span> url   = <span class="hljs-keyword">args</span>[<span class="hljs-number">0</span>];<br><span class="hljs-keyword">var</span> text  = <span class="hljs-keyword">args</span>[<span class="hljs-number">1</span>] || <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-keyword">var</span> icon  = <span class="hljs-keyword">args</span>[<span class="hljs-number">2</span>] || <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-keyword">var</span> title = <span class="hljs-keyword">args</span>[<span class="hljs-number">3</span>] || <span class="hljs-string">&#x27;&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>btn与button等价。</li>
+</ul>
+<ol start="6">
+<li><h4 id="exturl-extlink-过时，不建议使用"><a href="#exturl-extlink-过时，不建议使用" class="headerlink" title="exturl &amp;&amp; extlink(过时，不建议使用)"></a><del>exturl &amp;&amp; extlink(过时，不建议使用)</del></h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>外链街功能。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">exturl</span> https://www.baidu.com 百度首页 %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">exturl</span> https://www.baidu.com 百度首页 %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>exturl 是<em><strong>exturl tag</strong></em>语法糖，不需要加endexturl标识结束。</li>
+<li>看js文件，这个标签需要5个参数: url地址、url文本内容、urltitle、url item、0、结束位置，其中url文本内容是个列表。</li>
+<li>说明button需要4个参数，有兴趣的可以查看：blog&#x2F;themes&#x2F;next&#x2F;scripts&#x2F;tags&#x2F;exturl.js</li>
+</ul>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> exturl = <span class="hljs-string">&#x27;exturl&#x27;</span>;<br><span class="hljs-keyword">var</span> url    = <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-keyword">var</span> <span class="hljs-built_in">text</span>   = [];<br><span class="hljs-keyword">var</span> title  = <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-keyword">var</span> item   = <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-keyword">var</span> i      = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">var</span> len    = args.<span class="hljs-built_in">length</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>exturl与extlink等价。</li>
+</ul>
+<div class="note note-info">
+            <p>特殊说明</p>
+          </div>
+<p>在md文档中写完此标签，怎么重启，刷新，发现外链都不管用，研究了好一会儿，我在这里就不买官司了，直接看解决方法：</p>
+<ul>
+<li>打开Next主题的配置文件，搜索<em><strong>exturl</strong></em></li>
+<li>更改代码如下</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">exturl:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>重新启动服务 &amp;&amp; 刷新。</li>
+</ul>
+<ol start="7">
+<li><h4 id="fi-fullimage"><a href="#fi-fullimage" class="headerlink" title="fi &amp;&amp; fullimage"></a>fi &amp;&amp; fullimage</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>全像显示图片。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">fi</span> /images/article_wdyxxy.jpg %&#125;</span><span class="language-xml"></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;next_youhua_avatar.gif&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;border:1.5px solid blue&quot;</span>/&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">&#123;% <span class="hljs-keyword">fi</span> /images/article_wdyxxy.jpg %&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>fi 是<em><strong>fullimage tag</strong></em>语法糖，无对应的end结束。</li>
+<li>fi与fullimagee等价。</li>
+<li>我试了几个发现这个<em><strong>fi tag</strong></em>与正常*<strong>imag</strong>标签没什么区别，上面示例代码中给出了，效果图是一样的。</li>
+</ul>
+<ol start="8">
+<li><h4 id="gp-grouppicture"><a href="#gp-grouppicture" class="headerlink" title="gp &amp;&amp; grouppicture"></a>gp &amp;&amp; grouppicture</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>多格局显示图片。</p>
+<div class="note note-info">
+            <p>这里不做简述，请查看博文：hexo博文展示并排等多样式图片</p>
+          </div>
+
+<ol start="9">
+<li><h4 id="include-raw"><a href="#include-raw" class="headerlink" title="include_raw"></a>include_raw</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>引用html文件，是把部分html代码单独写在一个html文件里面，通过<strong>tag</strong>标签把文件引入的语法，需要可以看最下面的官方说明。</p>
+<ol start="10">
+<li><h4 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>通过<strong>pdf tag</strong>标签把pdf文件引入页面中。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">pdf</span> /images/PythonStudy.pdf %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置</p>
+</blockquote>
+<ul>
+<li>安装theme-next-pdf</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd blog<span class="hljs-regexp">/themes/</span><span class="hljs-keyword">next</span><br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/theme-next/</span>theme-<span class="hljs-keyword">next</span>-pdf source<span class="hljs-regexp">/lib/</span>pdf<br></code></pre></td></tr></table></figure>
+
+<p>打开Next配置文件：blog&#x2F;theme&#x2F;next&#x2F;_config.yml，搜索<font size="4" color="red">pdf</font>，更改代码如下：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-meta"># pdf相关配置</span><br><span class="hljs-meta"># See: https:<span class="hljs-comment">//github.com/theme-next/theme-next-pdf</span></span><br><span class="hljs-symbol">pdf:</span><br><span class="hljs-symbol">  enable:</span> true<br><span class="hljs-symbol">  height:</span> <span class="hljs-number">500</span>px  <span class="hljs-meta"># 设置默认高度</span><br><span class="hljs-symbol">  pdfobject:</span><br><span class="hljs-symbol">    cdn:</span> <span class="hljs-comment">//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>新建目录，如果想要把文件单独存放一个目录，那么需要在blog&#x2F;public目录下新建目录；如果不想新建，可以把文件放在blog&#x2F;public&#x2F;images目录下，这个目录是单独用来存放站点图片之用的目录。<ul>
+<li>在<em><strong>pdf tag</strong></em>，参数的路径写上上面新建的。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<pre><code class="hljs">&#123;% pdf /publicfiles/PythonStudy.pdf %&#125;
+</code></pre>
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>pdf 是<em><strong>pdftag</strong></em>语法糖，无对应的end结束。</li>
+</ul>
+<div class="note note-info">
+            <p>建议：<br>    建议少用此标签，因为页面如果加载大文件会很慢。</p>
+          </div>
+
+
+
+<ol start="11">
+<li><h4 id="mermaid"><a href="#mermaid" class="headerlink" title="mermaid"></a>mermaid</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>用了好几个翻译都解释“美人鱼”，但是实现的效果类似于word、excel、ppt里面的架构图，通过<strong>mermaid tag</strong>标签把架构图引入页面中。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs coq">&#123;% mermaid graph TD %&#125;<br>A[Christmas] --&gt;|<span class="hljs-type">Get</span> money| <span class="hljs-type">B</span>(Go shopping)<br>B --&gt; C&#123;<span class="hljs-keyword">Let</span> me thinksssss&lt;br/&gt;ssssssssssssssssssssss&#125;<br>C --&gt;|<span class="hljs-type">One</span>| <span class="hljs-type">D</span>[Laptop]<br>C --&gt;|<span class="hljs-type">Two</span>| <span class="hljs-type">E</span>[iPhone]<br>C --&gt;|<span class="hljs-type">Three</span>| <span class="hljs-type">F</span>[Car]<br>&#123;% endmermaid %&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置</p>
+</blockquote>
+<ul>
+<li>打开Next配置文件：blog&#x2F;theme&#x2F;next&#x2F;_config.yml，搜索<font size="4" color="red"><em><strong>mermaid</strong></em></font>，更改代码如下：</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># Mermaid tag</span><br><span class="hljs-params">mermaid:</span><br>  <span class="hljs-params">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-comment"># Available themes: default | dark | forest | neutral</span><br>  <span class="hljs-params">theme:</span> forest   <span class="hljs-comment"># 主题</span><br>  <span class="hljs-params">cdn:</span> <span class="hljs-operator">//</span>cdn.jsdelivr.net<span class="hljs-operator">/</span>npm<span class="hljs-operator">/</span>mermaid@<span class="hljs-number">8</span><span class="hljs-operator">/</span>dist<span class="hljs-operator">/</span>mermaid.min.js<br></code></pre></td></tr></table></figure>
+<p>关于架构图的样式取决于theme参数，每个样式我都试了一下，还是forest最漂亮。</p>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs coq">&#123;% mermaid graph TD %&#125;<br>A[Christmas] --&gt;|<span class="hljs-type">Get</span> money| <span class="hljs-type">B</span>(Go shopping)<br>B --&gt; C&#123;<span class="hljs-keyword">Let</span> me thinksssss&lt;br/&gt;ssssssssssssssssssssss&#125;<br>C --&gt;|<span class="hljs-type">One</span>| <span class="hljs-type">D</span>[Laptop]<br>C --&gt;|<span class="hljs-type">Two</span>| <span class="hljs-type">E</span>[iPhone]<br>C --&gt;|<span class="hljs-type">Three</span>| <span class="hljs-type">F</span>[Car]<br>&#123;% endmermaid %&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>mermaid-endmermaid 是<em><strong>mermaid tag</strong></em>语法糖。</li>
+<li>例子我就采用官方的例子了，没自己去写，官方有好几种写法、样式，需要的请查阅官方资料。</li>
+</ul>
+<ol start="12">
+<li><h4 id="video"><a href="#video" class="headerlink" title="video"></a>video</h4></li>
+</ol>
+<blockquote>
+<p>功能</p>
+</blockquote>
+<p>html对视频的引用。</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">video</span> url %&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">video</span> /publicfiles/xiao6.mp4 %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置</p>
+</blockquote>
+<ul>
+<li>我在blog&#x2F;public目录下新建了publicfiles一个目录用来存放上面<strong>pdf&amp;&amp;video</strong>用到的文件。</li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight twig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs twig"><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">video</span> /publicfiles/xiao<span class="hljs-number">6</span>.mp<span class="hljs-number">4</span> <span class="hljs-template-tag">%&#125;</span><br></code></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>语法糖</p>
+</blockquote>
+<ul>
+<li>video 是<em><strong>video tag</strong></em>语法糖，无endvideo结束。</li>
+<li>如果是引用视频，找到视频资源，直接写上url地址即可。</li>
+</ul>
+<div class="note note-success">
+            <p>已解决问题</p>
+          </div>
+
+<p>开启服务运用的是debug模式，方便进行调试，在启用的时候，发现服务报了好多<em><strong>WARNING</strong></em>，总结下来方便大家解决问题。</p>
+<blockquote>
+<p><code>exturl</code> and <code>extlink</code> tag will not longer be supported.</p>
+</blockquote>
+<p>翻译出来就是将不再支持<code>exturl</code>和’extlink&#96;的标记，在我的blog很少用到，用到的会用<em><strong>button tag</strong></em>进行代替。</p>
+<blockquote>
+<p>Tabs block must have unique name!</p>
+</blockquote>
+<p>找到tabs-endtabs内置标签，在tabs后面加上tab一个名字，而且要<em><strong>unique</strong></em>。</p>
+<div class="note note-warning">
+            <p>未解决问题</p>
+          </div>
+
+<p>在文章编写过程中遇到了一些问题，先记录下来，以后解决在来修改。</p>
+<ul>
+<li>在tab里面放```代码块```，不生效。</li>
+<li>button与exturl共存在同一页面，并启动exturl配置，发现button样式没了，可能是我自己瞎改button造成的原因，问题解决中。</li>
+</ul>
+<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>Next中文官方：<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/tag-plugins.html">http://theme-next.iissnan.com/tag-plugins.html</a><br>Next Tag官方：<a target="_blank" rel="noopener" href="https://hexo.io/docs/tag-plugins.html">https://hexo.io/docs/tag-plugins.html</a><br>botton：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/button/">https://theme-next.org/docs/tag-plugins/button/</a><br>note：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/note/">https://theme-next.org/docs/tag-plugins/note/</a><br>tabs：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/tabs/">https://theme-next.org/docs/tag-plugins/tabs/</a><br>cq：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/">https://theme-next.org/docs/tag-plugins/</a><br>label：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/label/">https://theme-next.org/docs/tag-plugins/label/</a><br>exturl：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/exturl/">https://theme-next.org/docs/tag-plugins/exturl/</a><br>fullimage：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/full-image">https://theme-next.org/docs/tag-plugins/full-image</a><br>group-pictures：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/group-pictures">https://theme-next.org/docs/tag-plugins/group-pictures</a><br>pdf tag：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/pdf">https://theme-next.org/docs/tag-plugins/pdf</a><br>theme-next-pdf：<a target="_blank" rel="noopener" href="https://github.com/theme-next/theme-next-pdf">https://github.com/theme-next/theme-next-pdf</a><br>mermaid：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/mermaid/">https://theme-next.org/docs/tag-plugins/mermaid/</a><br>video：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/video">https://theme-next.org/docs/tag-plugins/video</a></p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>到这里，Next内置的tag都实践完毕，根据需要使用上述tags，给博文带来了不一样的视觉效果以及便利，欢迎大家转载，一起交流使用。</p>
+<p><em><strong><font color="blue" size="5">最好的开始就是从现在开始！！！</font></strong></em></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
+      
+        <a href="/tags/Hexo%E7%BE%8E%E5%8C%96/" class="print-no-link">#Hexo美化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Next主题优化-内置tags篇</div>
+      <div>http://pygo2.top/articles/25933/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2018年12月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/37795/" title="hexo添加鼠标点击效果">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hexo添加鼠标点击效果</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/26442/" title="Live2d喵星人模型s">
+                        <span class="hidden-mobile">Live2d喵星人模型s</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

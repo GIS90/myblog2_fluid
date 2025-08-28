@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="hexo, next, Hexo, 美化, 插件, 博客, blog, 外观, 样式, 站点背景图, 文章阴影边框, sidebar圆角, 站点背景图, 阅读全文, post-block圆角, back-to-top">
+  
+    <meta name="description" content="Hexo美化 Gemini Next主题优化   简介             基本用Hexo + Next把网站搭建起来用run了，而且Next在theme中github关注量最高，但是在样式上还是有些。。。。。。此博文用来记录对Next主题的一些样式上的更改，持续更新中～。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Next主题优化-美化篇（Gemini）">
+<meta property="og:url" content="http://pygo2.top/articles/3412/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="Hexo美化 Gemini Next主题优化   简介             基本用Hexo + Next把网站搭建起来用run了，而且Next在theme中github关注量最高，但是在样式上还是有些。。。。。。此博文用来记录对Next主题的一些样式上的更改，持续更新中～。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20181103-001.jpg">
+<meta property="article:published_time" content="2018-11-03T02:00:31.000Z">
+<meta property="article:modified_time" content="2019-11-03T02:00:31.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Hexo美化">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20181103-001.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Next主题优化-美化篇（Gemini） || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Next主题优化-美化篇（Gemini）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2018-11-03 10:00" pubdate>
+          创建日期：2018-11-03 10:00:31（星期六）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Next主题优化-美化篇（Gemini）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span class="label label-default">Hexo美化</span> <span class="label label-primary">Gemini</span> <span class="label label-info">Next主题优化</span> 
+
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><div class="note note-success">
+            <p>基本用Hexo + Next把网站搭建起来用<strong>run</strong>了，而且Next在theme中github关注量最高，但是在样式上还是有些。。。。。。此博文用来记录对Next主题的一些样式上的更改，<font size="4" color="red"><em><strong>持续更新中～</strong></em></font>。</p>
+          </div>
+
+<span id="more"></span>
+<hr />
+
+<h3 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h3><table>
+<thead>
+<tr>
+<th align="center">id</th>
+<th align="center">name</th>
+<th align="center">version</th>
+<th align="center">remark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Hexo</td>
+<td align="center">v3.8.0</td>
+<td align="center">系统版本</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">NextT.Pisces</td>
+<td align="center">v7.0.1</td>
+<td align="center">主题版本</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Theme</td>
+<td align="center">Gemini</td>
+<td align="center">主题样式</td>
+</tr>
+</tbody></table>
+<h3 id="正菜"><a href="#正菜" class="headerlink" title="正菜"></a>正菜</h3><p><font size="4.5" color="red"><em><strong>社会程序猿，人好话不多！！！</strong></em></font></p>
+<ol>
+<li><h4 id="sidebar圆角"><a href="#sidebar圆角" class="headerlink" title="sidebar圆角"></a>sidebar圆角</h4><p> 打开<em><strong>blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;css&#x2F;_variables&#x2F;Gemini.styl</strong></em>，搜索<em><strong>border-radius</strong></em>，在**_variables**目录下有Next主题的4种theme，用哪个修改哪个，修改代码：</p>
+ <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-meta"><span class="hljs-keyword">$border</span>-radius-inner              = 16px</span><br><span class="hljs-meta"><span class="hljs-keyword">$border</span>-radius                    = 16px</span><br></code></pre></td></tr></table></figure>
+<p> 我的修改完了，现在下面站点简介的sidebar，上面的圆角居然有背景色，继续进行优化修改。<br> 打开文件<em><strong>blog\themes\next\source\css_custom\custom.styl</strong></em>（只能说这个文件太NB了，里面可以放置整个站点的style css，very NB），新增代码：</p>
+ <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs maxima">// sidebar css<br>.sidebar&#123;<br>    <span class="hljs-built_in">background</span>-<span class="hljs-built_in">color</span>:<span class="hljs-built_in">transparent</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p> 把sidebar背景色设置成透明。</p>
+</li>
+<li><h4 id="站点背景图"><a href="#站点背景图" class="headerlink" title="站点背景图"></a>站点背景图</h4><p> Next主题加上背景图，让博客变得更美观，很简单。</p>
+<ul>
+<li><p>找到一张背景图，把图片放到以下文件中并命名background.jpg：<br> 位置：blog&#x2F;public&#x2F;images&#x2F;</p>
+</li>
+<li><p>打开<em><strong>blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;css&#x2F;_custom&#x2F;custom.styl</strong></em>此文件，加入以下代码在文件最上面：</p>
+</li>
+</ul>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">// 背景图<br><span class="hljs-selector-tag">body</span> &#123;<br>    <span class="hljs-attribute">background</span>:<span class="hljs-built_in">url</span>(<span class="hljs-string">/images/background.jpg</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p> 刷新，样式可以根据自己的需要对图片进行进行调整。</p>
+</li>
+<li><h4 id="文章阴影边框"><a href="#文章阴影边框" class="headerlink" title="文章阴影边框"></a>文章阴影边框</h4><p> 位置：blog\themes\next\source\css_custom\custom.styl<br> 打开上述文件，添加如下代码：</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css">// 主页文章添加阴影效果<br><span class="hljs-selector-class">.post</span> &#123;<br>   <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0px</span>;<br>   <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">60px</span>;<br>   <span class="hljs-attribute">padding</span>: <span class="hljs-number">25px</span>;<br>   -webkit-<span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">5px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">250</span>, <span class="hljs-number">128</span>, <span class="hljs-number">114</span>, <span class="hljs-number">1.5</span>);<br>   -moz-<span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">5px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">202</span>, <span class="hljs-number">203</span>, <span class="hljs-number">204</span>, .<span class="hljs-number">5</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>webkit-box-shadow：控制边框的样式<br> <img src="/articles/3412/next_youhua_border.png" srcset="/img/loading.gif" lazyload alt="阴影边框"></li>
+</ul>
+</li>
+<li><h4 id="阅读全文特效"><a href="#阅读全文特效" class="headerlink" title="阅读全文特效"></a><strong>阅读全文</strong>特效</h4><p> 位置：blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;css&#x2F;_variables&#x2F;Pisces.styl<br> 打开上述文件，搜索<font size="4" color="red"><em><strong>Button</strong></em></font>，更改代码如下：</p>
+ <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mel">$btn-<span class="hljs-keyword">default</span>-radius           = <span class="hljs-number">15</span>px<br>$btn-<span class="hljs-keyword">default</span>-bg               = black<br>$btn-<span class="hljs-keyword">default</span>-<span class="hljs-keyword">color</span>            = white<br>$btn-<span class="hljs-keyword">default</span>-border-<span class="hljs-keyword">color</span>     = blue<br>$btn-<span class="hljs-keyword">default</span>-hover-<span class="hljs-keyword">color</span>      = red<br>$btn-<span class="hljs-keyword">default</span>-hover-bg         = yellow<br></code></pre></td></tr></table></figure>
+<p> <img src="/articles/3412/next_youhua_button.gif" srcset="/img/loading.gif" lazyload alt="阅读全文"></p>
+</li>
+<li><h4 id="文章底部-号标签"><a href="#文章底部-号标签" class="headerlink" title="文章底部#号标签"></a>文章底部#号标签</h4><p> 位置：blog&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.swig<br> 打开配置文件，搜索<font size="4" color="red"><em><strong>“tag”</strong></em></font>，将# 更改代码如下：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa fa-tag&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>即可。<br></code></pre></td></tr></table></figure>
+<p> 同理，<a target="_blank" rel="noopener" href="https://fontawesome.com/v4.7.0/icons/">icon</a>也可以根据自己选取。标签暂时还是有下划线的，如果想要想去掉下滑线并添加自己的样式，添加代码到如下文件：<br> 位置：blog\themes\next\source\css_custom\custom.styl</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.posts-expand</span> <span class="hljs-selector-class">.post-tags</span> <span class="hljs-selector-tag">a</span> &#123;<br>    <span class="hljs-attribute">border-bottom</span>: none;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">18px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><h4 id="post透明"><a href="#post透明" class="headerlink" title="post透明"></a>post透明</h4><p> 位置：blog&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.swig<br> 新增代码：</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.content</span> &#123;<br>    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">22px</span>;<br>    <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.9</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p> 我只调整了post部分，没有调整sidebar的透明度，如果需要设置，添加代码如下：</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.sidebar</span>&#123;<br>    <span class="hljs-attribute">background-color</span>:transparent;<br>    <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.9</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><h4 id="post-block圆角"><a href="#post-block圆角" class="headerlink" title="post-block圆角"></a>post-block圆角</h4><p> 设置主页每个文章块的圆角，还是样式自定义文件，添加代码：</p>
+ <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs maxima">.post-<span class="hljs-built_in">block</span> &#123;<br>    <span class="hljs-built_in">border</span>-<span class="hljs-built_in">radius</span> : 12px;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p> <img src="/articles/3412/next_meihua_post.png" srcset="/img/loading.gif" lazyload alt="主页博文块样式"></p>
+</li>
+<li><h4 id="back-to-top样式更改"><a href="#back-to-top样式更改" class="headerlink" title="back-to-top样式更改"></a>back-to-top样式更改</h4><p> 修改回到顶部的按钮样式。</p>
+<ul>
+<li>配置<br> 位置：blog\themes\next\source\css_custom\custom.styl<br> 打开上述文件，开启back-to-top功能，修改如下代码：</li>
+</ul>
+ <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">back2top:</span><br>  <span class="hljs-params">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-comment"># Back to top in sidebar.</span><br>  <span class="hljs-params">sidebar:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-comment"># Scroll percent label in b2t button.</span><br>  <span class="hljs-params">scrollpercent:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>样式修改<br> 位置：blog\themes\next\source\css_custom\custom.styl<br> 打开上述文件，添加如下代码：</li>
+</ul>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.back-to-top</span> &#123;<br>  <span class="hljs-attribute">right</span>: <span class="hljs-number">60px</span>;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">70px</span>;  //图片素材宽度<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">350px</span>;  //图片素材高度<br>  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">bottom</span>: unset;<br>  <span class="hljs-attribute">transition</span>: all .<span class="hljs-number">5s</span> ease-in-out;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&quot;/images/scroll.png&quot;</span>);<br><br>  //隐藏箭头图标<br>  &gt; <span class="hljs-selector-tag">i</span> &#123;<br>    <span class="hljs-attribute">display</span>: none;<br>  &#125;<br><br>  &amp;<span class="hljs-selector-class">.back-to-top-on</span> &#123;<br>    <span class="hljs-attribute">bottom</span>: unset;<br>    <span class="hljs-attribute">top</span>: <span class="hljs-number">0px</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h4 id="代码块样式"><a href="#代码块样式" class="headerlink" title="代码块样式"></a>代码块样式</h4><p> 位置：blog\themes\next_config.yml<br> 打开上述文件，搜索<strong>highlight_theme</strong>，更改代码如下：</p>
+ <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq"># Available values: normal | <span class="hljs-type">night</span> | <span class="hljs-type">night</span> eighties | <span class="hljs-type">night</span> blue | <span class="hljs-type">night</span> bright<br># https://github.com/chriskempson/tomorrow-theme<br>highlight_theme: night bright<br></code></pre></td></tr></table></figure>
+<p> 主题有很多，根据自己的喜好定义。</p>
+</li>
+<li><h4 id="标题样式修改"><a href="#标题样式修改" class="headerlink" title="标题样式修改"></a>标题样式修改</h4><p>位置：blog\themes\next\source\css_custom\custom.styl<br>打开上述文件，添加如下代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">// 标题<br><span class="hljs-selector-class">.post-title</span> &#123;<br>    <span class="hljs-attribute">color</span>: black;<br>    <span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">12px</span>;<br>    <span class="hljs-attribute">font-family</span>: Comic Sans MS;<br>    <span class="hljs-attribute">text-shadow</span>: -<span class="hljs-number">1px</span> -<span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#fff</span>, <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">#000</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>样式根据自己的喜好做相关调整。</p>
+</li>
+</ol>
+<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><ul>
+<li>在Hexo配置、博文Title都可以加入<em><strong>font、div</strong></em>等等这样的标签。</li>
+<li>在修改样式的时候，浏览器调试模式，找到对应的<em><strong>class</strong></em>，全项目搜索，找到对应的文件，直接进行修改，但不建议这么做。</li>
+<li>可以把样式修改在自定义样式文件：<em><strong>blog\themes\next\source\css_custom\custom.styl</strong></em>（只能说这个文件太NB了，里面可以放置整个站点的style css，very NB）。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
+      
+        <a href="/tags/Hexo%E7%BE%8E%E5%8C%96/" class="print-no-link">#Hexo美化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Next主题优化-美化篇（Gemini）</div>
+      <div>http://pygo2.top/articles/3412/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2018年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/46750/" title="hexo文章添加版权声明">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hexo文章添加版权声明</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/33202/" title="Hexo新增tags、categories、自定义菜单栏页">
+                        <span class="hidden-mobile">Hexo新增tags、categories、自定义菜单栏页</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

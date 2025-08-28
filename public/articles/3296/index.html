@@ -1,0 +1,880 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Mysql, MariaDB, 安装, 配置, mysql_secure_installation, grants">
+  
+    <meta name="description" content="MariaDB 配置 user  前言             在腾讯云上的服务器到期了，又重新买了一个3年的，需要把项目、数据库、管理工具都得迁移新的机器，本篇主要讲MariaDB的安装、初始化以及一些配置，后续会给出一个云服务器环境初始化的讲解。简单说下Mysql与MariaDB的不同：MySQL创始人担心MySQL被Oracle收购后使用MySQL收费，于是基于MySQL6.0研发的分支研发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MariaDB安装与配置">
+<meta property="og:url" content="http://pygo2.top/articles/3296/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="MariaDB 配置 user  前言             在腾讯云上的服务器到期了，又重新买了一个3年的，需要把项目、数据库、管理工具都得迁移新的机器，本篇主要讲MariaDB的安装、初始化以及一些配置，后续会给出一个云服务器环境初始化的讲解。简单说下Mysql与MariaDB的不同：MySQL创始人担心MySQL被Oracle收购后使用MySQL收费，于是基于MySQL6.0研发的分支研发">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20201123-001.png">
+<meta property="article:published_time" content="2020-11-23T15:38:32.000Z">
+<meta property="article:modified_time" content="2020-11-23T15:38:32.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20201123-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>MariaDB安装与配置 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MariaDB安装与配置"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-11-23 23:38" pubdate>
+          创建日期：2020-11-23 11:38:32（星期一）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          928 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MariaDB安装与配置</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span class="label label-default">MariaDB</span> <span class="label label-success">配置</span> <span class="label label-info">user</span>
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><div class="note note-primary">
+            <p>在腾讯云上的服务器到期了，又重新买了一个3年的，需要把项目、数据库、管理工具都得迁移新的机器，本篇主要讲MariaDB的安装、初始化以及一些配置，后续会给出一个云服务器环境初始化的讲解。<br>简单说下Mysql与MariaDB的不同：MySQL创始人担心MySQL被Oracle收购后使用MySQL收费，于是基于MySQL6.0研发的分支研发了MariaDB，开源、性能、操作等与MySQL一样。</p>
+          </div>
+
+
+<span id="more"></span>
+<hr />
+
+<h3 id="1、系统说明"><a href="#1、系统说明" class="headerlink" title="1、系统说明"></a>1、系统说明</h3><table>
+<thead>
+<tr>
+<th align="center">Name</th>
+<th align="center">Version</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务器</td>
+<td align="center">Centos7.5x64</td>
+</tr>
+<tr>
+<td align="center">MariaDB</td>
+<td align="center">5.5.68</td>
+</tr>
+</tbody></table>
+<h3 id="2、正文"><a href="#2、正文" class="headerlink" title="2、正文"></a>2、正文</h3><h4 id="2-1、安装"><a href="#2-1、安装" class="headerlink" title="2.1、安装"></a>2.1、安装</h4><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">yum -y install mariadb mariadb-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>mariadb为客户端</li>
+<li>mariadb-server服务端</li>
+</ul>
+<blockquote>
+<p>安装指定版本</p>
+</blockquote>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># yum 查询 &amp;&amp; 安装</span><br>yum list <span class="hljs-string">| grep mariadb</span><br>yum <span class="hljs-punctuation">-</span>y install mariadb<span class="hljs-punctuation">-</span>server.x86_64<br><br><span class="hljs-meta"># rpm 不建议使用</span><br>rpm <span class="hljs-punctuation">-</span>qa <span class="hljs-string">| grep mariadb</span><br>rpm <span class="hljs-punctuation">-</span>ivh xxxxx<br></code></pre></td></tr></table></figure>
+<h4 id="2-2、开启服务"><a href="#2-2、开启服务" class="headerlink" title="2.2、开启服务"></a>2.2、开启服务</h4><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment"># 开启服务</span><br><span class="hljs-params">system</span>ctl start mariadb<br><span class="hljs-comment"># 设置为开机自启动服务</span><br><span class="hljs-params">system</span>ctl enable mariadb<br></code></pre></td></tr></table></figure>
+<p>Centos7之后，服务管理用systemctl。</p>
+<h4 id="2-3、初始化配置"><a href="#2-3、初始化配置" class="headerlink" title="2.3、初始化配置"></a>2.3、初始化配置</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">mysql_secure_installation</span><br></code></pre></td></tr></table></figure>
+<p>执行数据库初始化命令：</p>
+<ul>
+<li>Enter current password for root (enter for none):<br>回车就行，初始化的时候root密码默认是空的。</li>
+<li>Set root password? [Y&#x2F;n]<br>是否设置root用户密码，输入y</li>
+<li>New password:</li>
+<li>Re-enter new password:<br>输入2次root密码，2次不一样会让重新输入。</li>
+<li>Remove anonymous users? [Y&#x2F;n]<br>是否移除匿名用户，输入 y</li>
+<li>Disallow root login remotely? [Y&#x2F;n]<br>是否拒绝root远程登录，建议输入y，毕竟是root，为了数据安全，为每个数据库创建指定用户，在创建一个总的用户来进行操作，后续会给出相关配置。</li>
+<li>Remove test database and access to it? [Y&#x2F;n]<br>是否删除test数据库，输入y，不需要测试数据库。</li>
+<li>Reload privilege tables now? [Y&#x2F;n]<br>重新加载权限表，输入y。</li>
+</ul>
+<h4 id="2-4、测试"><a href="#2-4、测试" class="headerlink" title="2.4、测试"></a>2.4、测试</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">mysql -u root -<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+<p>输入密码即可。</p>
+<h4 id="2-5、配置UTF-8字符"><a href="#2-5、配置UTF-8字符" class="headerlink" title="2.5、配置UTF-8字符"></a>2.5、配置UTF-8字符</h4><p>切换root用户，vim操作。</p>
+<blockquote>
+<p>&#x2F;etc&#x2F;my.cnf</p>
+</blockquote>
+<p>在[mysqld]标签下添加</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">init_connect=<span class="hljs-string">&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span><br>init_connect=<span class="hljs-string">&#x27;SET NAMES utf8&#x27;</span><br><span class="hljs-type">character</span>-<span class="hljs-keyword">set</span>-<span class="hljs-keyword">server</span>=utf8<br><span class="hljs-keyword">collation</span>-<span class="hljs-keyword">server</span>=utf8_unicode_ci<br>skip-<span class="hljs-type">character</span>-<span class="hljs-keyword">set</span>-client-handshake<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>&#x2F;etc&#x2F;my.cnf.d&#x2F;client.cnf</p>
+</blockquote>
+<p>在[client]标签下添加</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">default</span><span class="hljs-operator">-</span><span class="hljs-type">character</span><span class="hljs-operator">-</span><span class="hljs-keyword">set</span><span class="hljs-operator">=</span>utf8<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>&#x2F;etc&#x2F;my.cnf.d&#x2F;mysql-clients.cnf</p>
+</blockquote>
+<p>在[mysql]标签下添加</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">default</span><span class="hljs-operator">-</span><span class="hljs-type">character</span><span class="hljs-operator">-</span><span class="hljs-keyword">set</span><span class="hljs-operator">=</span>utf8<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>重启服务</p>
+</blockquote>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl restart mariadb</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看字符集</p>
+</blockquote>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">show <span class="hljs-keyword">variables</span> like <span class="hljs-comment">&quot;%character%&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/3296/2.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">show <span class="hljs-keyword">variables</span> like <span class="hljs-comment">&quot;%collation%&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p><img src="/articles/3296/1.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="2-6、创建用户"><a href="#2-6、创建用户" class="headerlink" title="2.6、创建用户"></a>2.6、创建用户</h4><p>上面说过了，创建一个新的用户用来管理或者连接所有数据，这个账号可以作为管理账号，以后创建每一个数据库都对应创建一个用户，分配指定权限，用于数据隔离。创建用户之前在Mysql常用命令中我已经总结了，在这里直接干命令了。<br>连接数据库：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;mingliang.gao&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;密码&#x27;</span>;<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> *.* <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;mingliang.gao&#x27;</span>;<br># 授权root访问，建议禁止<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> *.* <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;密码&#x27;</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">OPTION</span>;<br>flush  <span class="hljs-keyword">privileges</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>创建一个mingliang.gao的用户，%代表可以远程连接。</li>
+<li>授权所有数据库*所有表对mingliang.gao用户，第一个星号为数据库，第二个为表内容，常用的就是第一个星号改成对应分配的数据以及用户。</li>
+</ul>
+<h4 id="2-7、开启远程连接"><a href="#2-7、开启远程连接" class="headerlink" title="2.7、开启远程连接"></a>2.7、开启远程连接</h4><p>云服务器都是禁用端口访问的，所以需要开启，这里用到了firewall-cmd命令，不清楚的可以baidu一下。<br>Root用户操作：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 查看所有防火墙信息</span><br><span class="hljs-attribute">firewall</span>-cmd --list-<span class="hljs-literal">all</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">sudo</span>] <span class="hljs-attr">password for mingliang.gao:</span><br><span class="hljs-string">public</span><br>  <span class="hljs-attr">target:</span> <span class="hljs-string">default</span><br>  <span class="hljs-attr">icmp-block-inversion:</span> <span class="hljs-literal">no</span><br>  <span class="hljs-attr">interfaces:</span><br>  <span class="hljs-attr">sources:</span><br>  <span class="hljs-attr">services:</span> <span class="hljs-string">dhcpv6-client</span> <span class="hljs-string">ssh</span><br>  <span class="hljs-attr">ports:</span> <span class="hljs-number">3306</span><span class="hljs-string">/tcp</span><br>  <span class="hljs-attr">protocols:</span><br>  <span class="hljs-attr">masquerade:</span> <span class="hljs-literal">no</span><br>  <span class="hljs-attr">forward-ports:</span><br>  <span class="hljs-attr">source-ports:</span><br>  <span class="hljs-attr">icmp-blocks:</span><br>  <span class="hljs-attr">rich rules:</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-comment"># 添加端口</span><br><span class="hljs-string">firewall-cmd</span> <span class="hljs-built_in">--zone=public</span> <span class="hljs-built_in">--add-port=3306/tcp</span> <span class="hljs-built_in">--permanent</span><br><br><span class="hljs-comment"># 加载或者重启</span><br><span class="hljs-string">firewall-cmd</span> <span class="hljs-built_in">--reload</span><br><span class="hljs-string">systemctl</span> <span class="hljs-string">restart</span> <span class="hljs-string">firewalld</span><br></code></pre></td></tr></table></figure>
+<p>添加完需要reload或者重启服务，在进行list-all查询，在本机或者其他机器可以进行连接了。</p>
+<h3 id="3、结束语"><a href="#3、结束语" class="headerlink" title="3、结束语"></a>3、结束语</h3><p>后续会出一篇关于云服务器初始化环境的文章。</p>
+<hr />
+
+<p><font size=6.5 color='red'>既然决定了在技术道路上走下去，就要坚持，致自己。。。。。。</font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Mysql/" class="print-no-link">#Mysql</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MariaDB安装与配置</div>
+      <div>http://pygo2.top/articles/3296/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年11月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/49695/" title="Linux云服务器环境初始化">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux云服务器环境初始化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/48352/" title="Windows常用命令">
+                        <span class="hidden-mobile">Windows常用命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
