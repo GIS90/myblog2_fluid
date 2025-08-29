@@ -7,8 +7,6 @@ index_img: /img/img_photo.png
 <div style="font-style: italic;font-size: 35px;font-weight:800;color: red;"> 持续更新中～～～～～～🥰</div>
 
 
-
-
 {% raw %}
 <div class="post_cus_note">2025-05-01【哈尔滨五一亲子游】</div>
 {% endraw %}
