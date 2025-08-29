@@ -9,8 +9,7 @@ keywords: 旅行, 巴厘岛, 美食, 蜜月, 海, 日落, 蓝梦岛, 恶魔之�
 abbrlink: 23626
 date: 2019-05-09 15:25:49
 updated: 2019-05-09 15:25:49
-abstract: <div class="article_encrypt_abstract">暂不公开，请勿打扰 ～<font size="5" color="red">【状态：加密】</font></div>
-sticky: 1000
+sticky: 666
 ---
 在即将结束北京的奋斗之旅，准备提前来次蜜月旅游，带上媳妇巴厘岛二人蜜月。
 
