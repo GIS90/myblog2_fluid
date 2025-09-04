@@ -24,7 +24,7 @@ updated: 2019-05-24 10:12:04
 #### 第三季度
 {% gi 3 3 %}
  ![7月](/img_index/qita/baicizhan/202507.jpg)
- ![8月](/img_index/qita/baicizhan/undaka.jpg)
+ ![8月](/img_index/qita/baicizhan/202508.jpg)
  ![9月](/img_index/qita/baicizhan/undaka.jpg)
 {% endgi %}
 
