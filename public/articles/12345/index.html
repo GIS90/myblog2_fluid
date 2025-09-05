@@ -1,0 +1,970 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python, Linux, Hexo, 技术, 影视说, 娱乐, 旅行记, 博客, 代码, 生活, 人生, 分享">
+  
+    <meta name="description" content="SVN (Subversion) 是一个流行的集中式版本控制系统，广泛应用于软件开发、文档管理等领域。除了SVN就是git了，之前的文章介绍过git命令了，本教程将介绍SVN的基本概念和常用命令，帮助您快速掌握SVN的使用方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🔧SVN 命令教程">
+<meta property="og:url" content="http://pygo2.top/articles/12345/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="SVN (Subversion) 是一个流行的集中式版本控制系统，广泛应用于软件开发、文档管理等领域。除了SVN就是git了，之前的文章介绍过git命令了，本教程将介绍SVN的基本概念和常用命令，帮助您快速掌握SVN的使用方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20250905-001.jpg">
+<meta property="article:published_time" content="2025-09-05T15:30:00.000Z">
+<meta property="article:modified_time" content="2025-09-05T15:30:00.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="命令工具">
+<meta property="article:tag" content="SVN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20250905-001.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>🔧SVN 命令教程 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="🔧SVN 命令教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-05 23:30" pubdate>
+          创建日期：2025-09-05 11:30:00（星期五）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">🔧SVN 命令教程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><code>SVN</code> (Subversion) 是一个流行的集中式版本控制系统，广泛应用于软件开发、文档管理等领域。除了SVN就是git了，之前的文章介绍过git命令了，本教程将介绍SVN的基本概念和常用命令，帮助您快速掌握SVN的使用方法。</p>
+<span id="more"></span>
+<hr />
+
+<h2 id="1、安装-SVN"><a href="#1、安装-SVN" class="headerlink" title="1、安装 SVN"></a>1、安装 SVN</h2><h3 id="1-1、Windows"><a href="#1-1、Windows" class="headerlink" title="1.1、Windows"></a>1.1、Windows</h3><p>前往<strong>SVN</strong>官网或 <strong>TortoiseSVN</strong>官网下载安装程序并安装，下载地址：</p>
+<ul>
+<li>SVN：<a target="_blank" rel="noopener" href="https://sliksvn.com/download/">https://sliksvn.com/download/</a></li>
+<li>TortoiseSVN：<a target="_blank" rel="noopener" href="https://tortoisesvn.net/downloads.html">https://tortoisesvn.net/downloads.html</a></li>
+</ul>
+<h3 id="1-2、macOS"><a href="#1-2、macOS" class="headerlink" title="1.2、macOS"></a>1.2、macOS</h3><p>使用 Homebrew 安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">brew install svn<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3、Linux-Ubuntu-Debian"><a href="#1-3、Linux-Ubuntu-Debian" class="headerlink" title="1.3、Linux (Ubuntu&#x2F;Debian)"></a>1.3、Linux (Ubuntu&#x2F;Debian)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install subversion<br></code></pre></td></tr></table></figure>
+
+<p>安装完成后，可以使用以下命令检查SVN版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn --version<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2、SVN-基本概念"><a href="#2、SVN-基本概念" class="headerlink" title="2、SVN 基本概念"></a>2、SVN 基本概念</h2><p>在开始使用SVN命令之前，先了解几个基本概念：</p>
+<ul>
+<li><strong>工作副本（Working Copy）</strong>：用户本地编辑的代码目录</li>
+<li><strong>仓库（Repository）</strong>：存储所有版本历史的中央服务器</li>
+<li><strong>提交（Commit）</strong>：将本地修改保存到仓库</li>
+<li><strong>更新（Update）</strong>：从仓库获取最新版本</li>
+<li><strong>冲突（Conflict）</strong>：多人同时修改同一文件导致的冲突</li>
+<li><strong>分支（Branch）</strong>：独立的开发线</li>
+<li><strong>合并（Merge）</strong>：将一个分支的更改应用到另一个分支</li>
+</ul>
+<h2 id="3、基本命令操作"><a href="#3、基本命令操作" class="headerlink" title="3、基本命令操作"></a>3、基本命令操作</h2><h3 id="3-1、检出仓库（Checkout）"><a href="#3-1、检出仓库（Checkout）" class="headerlink" title="3.1、检出仓库（Checkout）"></a>3.1、检出仓库（Checkout）</h3><p>从服务器检出一个工作副本到本地：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn checkout [URL] [本地目录]<br></code></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn checkout https://svn.example.com/repos/myproject ./myproject<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-2、更新工作副本（Update）"><a href="#3-2、更新工作副本（Update）" class="headerlink" title="3.2、更新工作副本（Update）"></a>3.2、更新工作副本（Update）</h3><p>更新本地工作副本到最新版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn update<br></code></pre></td></tr></table></figure>
+
+<p>更新到指定版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn update -r [版本号]<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-3、查看状态（Status）"><a href="#3-3、查看状态（Status）" class="headerlink" title="3.3、查看状态（Status）"></a>3.3、查看状态（Status）</h3><p>查看工作副本中文件的状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn status<br></code></pre></td></tr></table></figure>
+
+<p>输出中的状态码含义：</p>
+<ul>
+<li><code>A</code>：已添加</li>
+<li><code>C</code>：存在冲突</li>
+<li><code>D</code>：已删除</li>
+<li><code>M</code>：已修改</li>
+<li><code>?</code>：不在版本控制中</li>
+</ul>
+<h3 id="3-4、添加文件（Add）"><a href="#3-4、添加文件（Add）" class="headerlink" title="3.4、添加文件（Add）"></a>3.4、添加文件（Add）</h3><p>将新文件添加到版本控制：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn add [文件/目录]<br></code></pre></td></tr></table></figure>
+
+<p>添加所有未跟踪文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn add --force .<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-5、提交更改（Commit）"><a href="#3-5、提交更改（Commit）" class="headerlink" title="3.5、提交更改（Commit）"></a>3.5、提交更改（Commit）</h3><p>将本地修改提交到服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn commit -m <span class="hljs-string">&quot;提交信息&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-6、查看日志（Log）"><a href="#3-6、查看日志（Log）" class="headerlink" title="3.6、查看日志（Log）"></a>3.6、查看日志（Log）</h3><p>查看提交历史：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn <span class="hljs-built_in">log</span><br></code></pre></td></tr></table></figure>
+
+<p>查看特定文件的历史：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn <span class="hljs-built_in">log</span> [文件路径]<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-7、比较差异（Diff）"><a href="#3-7、比较差异（Diff）" class="headerlink" title="3.7、比较差异（Diff）"></a>3.7、比较差异（Diff）</h3><p>比较工作副本与版本库的差异：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn diff<br></code></pre></td></tr></table></figure>
+
+<p>比较两个版本之间的差异：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn diff -r [版本1]:[版本2]<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-8、撤销修改（Revert）"><a href="#3-8、撤销修改（Revert）" class="headerlink" title="3.8、撤销修改（Revert）"></a>3.8、撤销修改（Revert）</h3><p>撤销工作副本中的修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn revert [文件/目录]<br></code></pre></td></tr></table></figure>
+
+<p>撤销所有修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn revert --recursive .<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、文件管理命令"><a href="#4、文件管理命令" class="headerlink" title="4、文件管理命令"></a>4、文件管理命令</h2><h3 id="4-1、复制文件（Copy）"><a href="#4-1、复制文件（Copy）" class="headerlink" title="4.1、复制文件（Copy）"></a>4.1、复制文件（Copy）</h3><p>在版本控制下复制文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn copy [源文件] [目标文件]<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2、移动-重命名文件（Move）"><a href="#4-2、移动-重命名文件（Move）" class="headerlink" title="4.2、移动&#x2F;重命名文件（Move）"></a>4.2、移动&#x2F;重命名文件（Move）</h3><p>移动或重命名文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn move [源文件] [目标文件]<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-3、删除文件（Delete）"><a href="#4-3、删除文件（Delete）" class="headerlink" title="4.3、删除文件（Delete）"></a>4.3、删除文件（Delete）</h3><p>从版本控制中删除文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn delete [文件/目录]<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-4、查看文件内容（Cat）"><a href="#4-4、查看文件内容（Cat）" class="headerlink" title="4.4、查看文件内容（Cat）"></a>4.4、查看文件内容（Cat）</h3><p>查看指定版本的文件内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn <span class="hljs-built_in">cat</span> -r [版本号] [文件路径]<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-5、查看文件历史（Blame）"><a href="#4-5、查看文件历史（Blame）" class="headerlink" title="4.5、查看文件历史（Blame）"></a>4.5、查看文件历史（Blame）</h3><p>查看文件每行的修改记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn blame [文件路径]<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5、分支与合并"><a href="#5、分支与合并" class="headerlink" title="5、分支与合并"></a>5、分支与合并</h2><h3 id="5-1、创建分支（Branch）"><a href="#5-1、创建分支（Branch）" class="headerlink" title="5.1、创建分支（Branch）"></a>5.1、创建分支（Branch）</h3><p>创建一个新分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn copy [URL/trunk] [URL/branches/新分支名] -m <span class="hljs-string">&quot;创建分支说明&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-2、切换分支（Switch）"><a href="#5-2、切换分支（Switch）" class="headerlink" title="5.2、切换分支（Switch）"></a>5.2、切换分支（Switch）</h3><p>切换到其他分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn switch [URL/branches/分支名]<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-3、合并分支（Merge）"><a href="#5-3、合并分支（Merge）" class="headerlink" title="5.3、合并分支（Merge）"></a>5.3、合并分支（Merge）</h3><p>将分支合并到主干：</p>
+<ol>
+<li>首先切换到主干目录：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn switch [URL/trunk]<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>然后执行合并操作：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn merge [URL/branches/分支名]<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>解决冲突后提交：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn commit -m <span class="hljs-string">&quot;合并分支到主干&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-4、标记版本（Tag）"><a href="#5-4、标记版本（Tag）" class="headerlink" title="5.4、标记版本（Tag）"></a>5.4、标记版本（Tag）</h3><p>为特定版本创建标签：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn copy [URL/trunk] [URL/tags/标签名] -m <span class="hljs-string">&quot;创建标签说明&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6、冲突解决"><a href="#6、冲突解决" class="headerlink" title="6、冲突解决"></a>6、冲突解决</h2><p>当多人同时修改同一文件时，可能会发生冲突。以下是解决冲突的步骤：</p>
+<ol>
+<li>首先查看冲突文件：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn status<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>冲突的文件会显示为 <code>C</code> 状态，打开文件查看冲突标记：</li>
+</ol>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">&lt;&lt;&lt;&lt;&lt;&lt;&lt; .mine<br><span class="hljs-section">你的修改内容</span><br><span class="hljs-section">=======</span><br>其他人的修改内容<br>&gt;&gt;&gt;&gt;&gt;&gt;&gt; .rXXX<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>编辑文件，手动解决冲突</p>
+</li>
+<li><p>标记冲突已解决：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn resolved [冲突文件]<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>最后提交解决冲突后的文件：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn commit -m <span class="hljs-string">&quot;解决冲突&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7、SVN-配置"><a href="#7、SVN-配置" class="headerlink" title="7、SVN 配置"></a>7、SVN 配置</h2><h3 id="7-1、设置全局用户信息"><a href="#7-1、设置全局用户信息" class="headerlink" title="7.1、设置全局用户信息"></a>7.1、设置全局用户信息</h3><p>配置SVN全局用户名和邮箱：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn config --global user.name <span class="hljs-string">&quot;你的名字&quot;</span><br>svn config --global user.email <span class="hljs-string">&quot;你的邮箱&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-2、忽略文件"><a href="#7-2、忽略文件" class="headerlink" title="7.2、忽略文件"></a>7.2、忽略文件</h3><p>创建或编辑 <code>.svnignore</code> 文件，添加不需要版本控制的文件或目录：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-comment">*.log</span><br><span class="hljs-comment">*.tmp</span><br>node_modules/<br>build/<br></code></pre></td></tr></table></figure>
+
+<p>然后将 <code>.svnignore</code> 文件添加到版本控制：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn propset svn:ignore -F .svnignore .<br>svn commit -m <span class="hljs-string">&quot;添加忽略规则&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8、高级命令"><a href="#8、高级命令" class="headerlink" title="8、高级命令"></a>8、高级命令</h2><h3 id="8-1、查看版本库信息（Info）"><a href="#8-1、查看版本库信息（Info）" class="headerlink" title="8.1、查看版本库信息（Info）"></a>8.1、查看版本库信息（Info）</h3><p>查看工作副本或URL的信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn info<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-2、清理工作副本（Cleanup）"><a href="#8-2、清理工作副本（Cleanup）" class="headerlink" title="8.2、清理工作副本（Cleanup）"></a>8.2、清理工作副本（Cleanup）</h3><p>当SVN操作中断时，使用此命令清理工作副本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn cleanup<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-3、导出文件（Export）"><a href="#8-3、导出文件（Export）" class="headerlink" title="8.3、导出文件（Export）"></a>8.3、导出文件（Export）</h3><p>导出一个不包含 <code>.svn</code> 目录的干净副本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn <span class="hljs-built_in">export</span> [URL] [本地目录]<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-4、创建补丁（Diff）"><a href="#8-4、创建补丁（Diff）" class="headerlink" title="8.4、创建补丁（Diff）"></a>8.4、创建补丁（Diff）</h3><p>生成差异补丁文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn diff &gt; changes.patch<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-5、应用补丁（Patch）"><a href="#8-5、应用补丁（Patch）" class="headerlink" title="8.5、应用补丁（Patch）"></a>8.5、应用补丁（Patch）</h3><p>使用 svn-apply 或系统 patch 命令应用补丁：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">patch -p0 &lt; changes.patch<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9、SVN-钩子脚本"><a href="#9、SVN-钩子脚本" class="headerlink" title="9、SVN 钩子脚本"></a>9、SVN 钩子脚本</h2><p>SVN钩子脚本是在特定事件发生时自动执行的脚本。常见的钩子脚本包括：</p>
+<ul>
+<li><strong>pre-commit</strong>：提交前执行，可用于代码检查</li>
+<li><strong>post-commit</strong>：提交后执行，可用于自动部署</li>
+<li><strong>pre-revprop-change</strong>：修改版本属性前执行</li>
+</ul>
+<p>钩子脚本通常放置在版本库的 <code>hooks</code> 目录下。</p>
+<h2 id="10、📚参考资料"><a href="#10、📚参考资料" class="headerlink" title="10、📚参考资料"></a>10、📚参考资料</h2><ul>
+<li>SVN 官方文档：<a target="_blank" rel="noopener" href="https://subversion.apache.org/docs/">https://subversion.apache.org/docs/</a></li>
+<li>SVN 中文教程：<a target="_blank" rel="noopener" href="https://www.runoob.com/svn/svn-tutorial.html">https://www.runoob.com/svn/svn-tutorial.html</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7%E9%9B%86/" class="category-chain-item">工具集</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/" class="print-no-link">#命令工具</a>
+      
+        <a href="/tags/SVN/" class="print-no-link">#SVN</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>🔧SVN 命令教程</div>
+      <div>http://pygo2.top/articles/12345/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/23818/" title="Linux学习之增强篇-split">
+                        <span class="hidden-mobile">Linux学习之增强篇-split</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
