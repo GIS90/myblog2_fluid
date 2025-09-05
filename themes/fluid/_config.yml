@@ -1025,7 +1025,9 @@ links:
     - { title: "Utools", intro: "集成海量插件，办公必备，提升生产力", link: "https://www.u-tools.cn/index.html", avatar: "/img_index/icon/tool.png"}
     - { title: "PDF24", intro: "一款完全免费的 PDF 全能工具箱，提供在线和离线工具，支持编辑、转换、OCR 等强大功能，简单易用无广", link: "https://www.pdf24.org", avatar: "/img_index/icon/pdf.png"}
     - { title: "Alger Music", intro: "免费听歌，VIP不再看广告，支持多平台安装", link: "https://donate.alger.fun/download", avatar: "/img_index/icon/music.png"}
-    - { title: "RAWGraphs", intro: "开源的可视化数据展示网站，拖拽式操作，适合CSV/Excel数据，可导出SVG/PNG	", link: "https://rawgraphs.io", avatar: "/img_index/icon/chart.png"}
+    - { title: "RAWGraphs", intro: "开源的可视化数据展示网站，拖拽式操作，适合CSV/Excel数据，可导出SVG/PNG", link: "https://rawgraphs.io", avatar: "/img_index/icon/chart.png"}
+    - { title: "好用便签", intro: "一款界面简洁、功能专注的Windows桌面便签工具，支持云端同步与多端登录，主打轻量高效记录", link: "https://www.haoyong333.cn/downloadCenter.html", avatar: "/img_index/icon/tag.png"}
+    - { title: "DrawDB", intro: "一款出色的、专注于“设计-生成”流程的轻量级在线数据库建模工具", link: "https://www.drawdb.app", avatar: "/img_index/icon/table.png"}
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
