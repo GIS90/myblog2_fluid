@@ -1,0 +1,825 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Windows, winget">
+  
+    <meta name="description" content="1、什么是 Winget？Winget 是 Windows 包管理器（Windows Package Manager）的命令行工具，由微软开发。它允许用户通过命令行轻松查找、安装、升级、配置和卸载 Windows 上的应用程序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows的winget命令教程">
+<meta property="og:url" content="http://pygo2.top/articles/63286/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="1、什么是 Winget？Winget 是 Windows 包管理器（Windows Package Manager）的命令行工具，由微软开发。它允许用户通过命令行轻松查找、安装、升级、配置和卸载 Windows 上的应用程序。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20250913-001.png">
+<meta property="article:published_time" content="2025-09-13T12:28:22.000Z">
+<meta property="article:modified_time" content="2025-09-13T12:28:22.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="winget">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20250913-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Windows的winget命令教程 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows的winget命令教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-13 20:28" pubdate>
+          创建日期：2025-09-13 08:28:22（星期六）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          721 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Windows的winget命令教程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1、什么是-Winget？"><a href="#1、什么是-Winget？" class="headerlink" title="1、什么是 Winget？"></a>1、什么是 Winget？</h3><p>Winget 是 Windows 包管理器（Windows Package Manager）的命令行工具，由微软开发。它允许用户通过命令行轻松查找、安装、升级、配置和卸载 Windows 上的应用程序。</p>
+<span id="more"></span>
+
+<h3 id="2、系统要求"><a href="#2、系统要求" class="headerlink" title="2、系统要求"></a>2、系统要求</h3><p>Windows 10及以上版本</p>
+<h3 id="3、安装-Winget"><a href="#3、安装-Winget" class="headerlink" title="3、安装 Winget"></a>3、安装 Winget</h3><h4 id="3-1、通过-Microsoft-Store-安装（推荐）"><a href="#3-1、通过-Microsoft-Store-安装（推荐）" class="headerlink" title="3.1、通过 Microsoft Store 安装（推荐）"></a>3.1、通过 Microsoft Store 安装（推荐）</h4><ol>
+<li>打开 Microsoft Store</li>
+<li>搜索 “App Installer”</li>
+<li>点击”获取”进行安装</li>
+</ol>
+<h4 id="3-2、手动安装"><a href="#3-2、手动安装" class="headerlink" title="3.2、手动安装"></a>3.2、手动安装</h4><p>从 GitHub 发布页面下载最新版本的 <code>.msixbundle</code> 文件并安装：<br><a target="_blank" rel="noopener" href="https://github.com/microsoft/winget-cli/releases">https://github.com/microsoft/winget-cli/releases</a></p>
+<h3 id="4、基础命令"><a href="#4、基础命令" class="headerlink" title="4、基础命令"></a>4、基础命令</h3><h4 id="4-1、搜索软件包"><a href="#4-1、搜索软件包" class="headerlink" title="4.1、搜索软件包"></a>4.1、搜索软件包</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 基本搜索</span><br>winget search &lt;软件名称&gt;<br><br><span class="hljs-comment"># 示例：搜索 Chrome 浏览器</span><br>winget search chrome<br><br><span class="hljs-comment"># 使用通配符搜索</span><br>winget search *python*<br><br><span class="hljs-comment"># 按发布者搜索</span><br>winget search --publisher Google<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-2、安装软件"><a href="#4-2、安装软件" class="headerlink" title="4.2、安装软件"></a>4.2、安装软件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 基本安装</span><br>winget install &lt;软件包ID或名称&gt;<br><br><span class="hljs-comment"># 示例：安装 Google Chrome</span><br>winget install Google.Chrome<br><br><span class="hljs-comment"># 安装特定版本</span><br>winget install Google.Chrome --version 91.0.4472.124<br><br><span class="hljs-comment"># 安装到特定位置</span><br>winget install Google.Chrome --location <span class="hljs-string">&quot;D:\Applications&quot;</span><br><br><span class="hljs-comment"># 静默安装（无交互）</span><br>winget install Google.Chrome --silent<br><br><span class="hljs-comment"># 接受所有提示（自动同意许可协议等）</span><br>winget install Google.Chrome --accept-package-agreements --accept-source-agreements<br></code></pre></td></tr></table></figure>
+
+<h3 id="5、升级软件"><a href="#5、升级软件" class="headerlink" title="5、升级软件"></a>5、升级软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看可升级的软件</span><br>winget upgrade<br><br><span class="hljs-comment"># 升级所有软件</span><br>winget upgrade --all<br><br><span class="hljs-comment"># 升级特定软件</span><br>winget upgrade Google.Chrome<br><br><span class="hljs-comment"># 升级时跳过特定软件</span><br>winget upgrade --all --exclude Google.Chrome<br></code></pre></td></tr></table></figure>
+
+<h3 id="6、卸载软件"><a href="#6、卸载软件" class="headerlink" title="6、卸载软件"></a>6、卸载软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 卸载软件</span><br>winget uninstall &lt;软件包ID或名称&gt;<br><br><span class="hljs-comment"># 示例：卸载 Google Chrome</span><br>winget uninstall Google.Chrome<br><br><span class="hljs-comment"># 使用精确ID卸载</span><br>winget uninstall --<span class="hljs-built_in">id</span> Google.Chrome<br></code></pre></td></tr></table></figure>
+<h3 id="7、显示软件信息"><a href="#7、显示软件信息" class="headerlink" title="7、显示软件信息"></a>7、显示软件信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看软件详情</span><br>winget show &lt;软件包ID或名称&gt;<br><br><span class="hljs-comment"># 示例：查看 Firefox 详情</span><br>winget show Mozilla.Firefox<br></code></pre></td></tr></table></figure>
+
+<h3 id="8、高级用法"><a href="#8、高级用法" class="headerlink" title="8、高级用法"></a>8、高级用法</h3><h4 id="8-1、导出和导入配置"><a href="#8-1、导出和导入配置" class="headerlink" title="8.1、导出和导入配置"></a>8.1、导出和导入配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 导出已安装软件列表</span><br>winget <span class="hljs-built_in">export</span> -o packages.json<br><br><span class="hljs-comment"># 从文件安装软件</span><br>winget import -i packages.json<br></code></pre></td></tr></table></figure>
+
+<h4 id="8-2、列出已安装软件"><a href="#8-2、列出已安装软件" class="headerlink" title="8.2、列出已安装软件"></a>8.2、列出已安装软件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出所有已安装软件</span><br>winget list<br><br><span class="hljs-comment"># 按名称过滤</span><br>winget list --query <span class="hljs-string">&quot;Python&quot;</span><br><br><span class="hljs-comment"># 按来源过滤</span><br>winget list --<span class="hljs-built_in">source</span> winget<br></code></pre></td></tr></table></figure>
+<h4 id="8-3、源管理"><a href="#8-3、源管理" class="headerlink" title="8.3、源管理"></a>8.3、源管理</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出所有源</span><br>winget <span class="hljs-built_in">source</span> list<br><br><span class="hljs-comment"># 添加新源</span><br>winget <span class="hljs-built_in">source</span> add &lt;源名称&gt; &lt;源URL&gt;<br><br><span class="hljs-comment"># 重置为默认源</span><br>winget <span class="hljs-built_in">source</span> reset<br></code></pre></td></tr></table></figure>
+<h4 id="8-4、验证软件哈希值"><a href="#8-4、验证软件哈希值" class="headerlink" title="8.4、验证软件哈希值"></a>8.4、验证软件哈希值</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">winget validate &lt;安装包路径&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="9、实用技巧和提示"><a href="#9、实用技巧和提示" class="headerlink" title="9、实用技巧和提示"></a>9、实用技巧和提示</h3><h4 id="9-1、使用交互模式"><a href="#9-1、使用交互模式" class="headerlink" title="9.1、使用交互模式"></a>9.1、使用交互模式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 交互式安装</span><br>winget install --interactive<br></code></pre></td></tr></table></figure>
+<h4 id="9-2、忽略依赖项"><a href="#9-2、忽略依赖项" class="headerlink" title="9.2、忽略依赖项"></a>9.2、忽略依赖项</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">winget install &lt;软件包&gt; --ignore-dependencies<br></code></pre></td></tr></table></figure>
+<h4 id="9-3、指定架构"><a href="#9-3、指定架构" class="headerlink" title="9.3、指定架构"></a>9.3、指定架构</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">winget install &lt;软件包&gt; --architecture x64<br><span class="hljs-comment"># 或</span><br>winget install &lt;软件包&gt; --architecture x86<br></code></pre></td></tr></table></figure>
+
+<h4 id="9-4、批量安装开发工具"><a href="#9-4、批量安装开发工具" class="headerlink" title="9.4、批量安装开发工具"></a>9.4、批量安装开发工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建安装脚本</span><br>winget install Microsoft.VisualStudioCode<br>winget install Git.Git<br>winget install Python.Python.3.9<br>winget install Docker.DockerDesktop<br></code></pre></td></tr></table></figure>
+
+<h4 id="9-5、查看帮助信息"><a href="#9-5、查看帮助信息" class="headerlink" title="9.5、查看帮助信息"></a>9.5、查看帮助信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看全局帮助</span><br>winget --<span class="hljs-built_in">help</span><br><br><span class="hljs-comment"># 查看具体命令帮助</span><br>winget install --<span class="hljs-built_in">help</span><br></code></pre></td></tr></table></figure>
+<h4 id="9-6、保存安装日志"><a href="#9-6、保存安装日志" class="headerlink" title="9.6、保存安装日志"></a>9.6、保存安装日志</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">winget install &lt;软件包&gt; --<span class="hljs-built_in">log</span> &lt;日志文件路径&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="10、常见问题解决"><a href="#10、常见问题解决" class="headerlink" title="10、常见问题解决"></a>10、常见问题解决</h3><h4 id="10-1、权限不足"><a href="#10-1、权限不足" class="headerlink" title="10.1、权限不足"></a>10.1、权限不足</h4><p>使用管理员权限打开 PowerShell 或命令提示符</p>
+<h4 id="10-2、源更新失败"><a href="#10-2、源更新失败" class="headerlink" title="10.2、源更新失败"></a>10.2、源更新失败</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">winget <span class="hljs-built_in">source</span> update<br></code></pre></td></tr></table></figure>
+<h4 id="10-3、软件包冲突"><a href="#10-3、软件包冲突" class="headerlink" title="10.3、软件包冲突"></a>10.3、软件包冲突</h4><p>使用精确的包ID而不是名称</p>
+<h4 id="10-4、版本不兼容"><a href="#10-4、版本不兼容" class="headerlink" title="10.4、版本不兼容"></a>10.4、版本不兼容</h4><p>使用 –version 参数指定兼容版本</p>
+<h3 id="11、资源推荐"><a href="#11、资源推荐" class="headerlink" title="11、资源推荐"></a>11、资源推荐</h3><ul>
+<li>官方文档：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/package-manager/">https://learn.microsoft.com/zh-cn/windows/package-manager/</a></li>
+<li>软件包仓库：<a target="_blank" rel="noopener" href="https://github.com/microsoft/winget-pkgs">https://github.com/microsoft/winget-pkgs</a></li>
+<li>社区讨论：<a target="_blank" rel="noopener" href="https://github.com/microsoft/winget-cli/discussions">https://github.com/microsoft/winget-cli/discussions</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Windows/" class="category-chain-item">Windows</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/winget/" class="print-no-link">#winget</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows的winget命令教程</div>
+      <div>http://pygo2.top/articles/63286/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/65101/" title="Oracle删除全局Session表">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Oracle删除全局Session表</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/12345/" title="🔧SVN 命令教程">
+                        <span class="hidden-mobile">🔧SVN 命令教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
