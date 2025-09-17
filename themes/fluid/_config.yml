@@ -1030,7 +1030,7 @@ links:
     - { title: "DrawDB", intro: "一款出色的、专注于“设计-生成”流程的轻量级在线数据库建模工具", link: "https://www.drawdb.app", avatar: "/img_index/icon/table.png"}
     - { title: "Flow Launcher", intro: "一款用于Windows的快速应用程序启动器和生产力工具，通过全局快捷键呼出搜索框，实现秒开应用、文件搜索、系统命令及插件扩展功能", link: "https://www.flowlauncher.com/", avatar: "/img_index/icon/tool2.png"}
     - { title: "IconFont", intro: "阿里巴巴矢量图标库是一个提供海量免费矢量图标下载、定制与管理的在线工具平台", link: "https://www.iconfont.cn/", avatar: "/img_index/icon/baicai.png"}
-    - { title: "Caddy", intro: "Caddy 是一个现代化、易用的 Web 服务器，能自动为网站启用 HTTPS（自动申请和续期证书），并通过简洁的 Caddyfile 配置文件轻松实现静态文件托管、反向代理、负载均衡等核心功能", link: "https://github.com/caddyserver/caddy", avatar: "/img_index/icon/web.png"}
+    - { title: "Caddy", intro: "Caddy是一个现代化、易用的Web服务器，能自动为网站启用HTTPS（自动申请和续期证书），并通过简洁的Caddyfile配置文件轻松实现静态文件托管、反向代理、负载均衡等核心功能", link: "https://github.com/caddyserver/caddy", avatar: "/img_index/icon/web.png"}
 
 
   # 当成员头像加载失败时，替换为指定图片
