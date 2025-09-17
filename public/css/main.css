@@ -2158,7 +2158,9 @@ input[type=checkbox] {
   padding: 0.5rem;
 }
 .tagcloud a:hover {
-  color: var(--link-hover-color) !important;
+  background-color: var(--link-hover-color) !important;
+  border-radius: 10px;
+  color: #fff !important;
 }
 .links .card {
   box-shadow: none;
