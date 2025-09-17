@@ -74,6 +74,18 @@ border-left: 8px double rgb(255, 23, 0) !important;
       .link-avatar
         transform scale(1.3)
 ```
+### 7.4、标签页面（tags）页面的文字hover新增背景效果
+文件位置：E:\github\myblog2_fluid\public\css\main.css
+样式类：.tagcloud a:hover
+修改内容：
+```css
+-- 修改
+.tagcloud a:hover {
+  background-color: var(--link-hover-color) !important;
+  border-radius: 10px;
+  color: white !important;
+}
+```
 
 ## 联系方式
 
