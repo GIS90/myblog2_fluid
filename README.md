@@ -5,7 +5,7 @@
 ## 1、启动
 
 - 本地Server
-      hexo server -p 8888 -o
+      hexo server --port 4000 -o
 
 - 上传服务器
 
@@ -27,15 +27,15 @@
 
 ## 4、部署
 
-采用git部署到静态服务器，用git push进行云服务器仓库提交。
+采用git部署到静态服务器，用git push进行云服务器仓库提交，用于云服务器部署。
 
 ## 5、问题列表
 
-1. 使用gi-endgi语法糖并排多个图片的时候，需要置顶image图片source绝对目录下的位置，不能用post自动建立文章的相对路径。
-2. 最新版本的Hexo不支持cq-endcq语法糖。
+- 1. 使用gi-endgi语法糖并排多个图片的时候，需要置顶image图片source绝对目录下的位置，不能用post自动建立文章的相对路径。
+- 2. 最新版本的Hexo不支持cq-endcq语法糖。
 
 ## 6、个性化配置
-用于配置个性化的文件，比如自定义css、博客首页、404页面等
+用于配置个性化的文件，比如自定义css、博客首页、404页面等。
 
 ### 6.1、自定义CSS
 路径：source\custom\custom.css
@@ -75,3 +75,7 @@ border-left: 8px double rgb(255, 23, 0) !important;
         transform scale(1.3)
 ```
 
+## 联系方式
+
+- github：https://github.com/GIS90
+- emial：gaoming971366@163.com
