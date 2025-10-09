@@ -19,9 +19,9 @@ sticky: 1000
 <hr />
 
 # 2025
-{% gi 1 1 %}
- ![](/img_index/tianwei/2025二季度琅琊榜.png)
-
+{% gi 2 2 %}
+ ![](/img_index/qita/tianwei/2025二季度琅琊榜.png)
+ ![](/img_index/qita/tianwei/2025三季度琅琊榜.png)
 {% endgi %}
 
 
@@ -29,43 +29,43 @@ sticky: 1000
 
 # 2024
 {% gi 3 3 %}
- ![](/img_index/tianwei/2024知识创新先锋.jpg)
- ![](/img_index/tianwei/2024创新鼓励奖.jpg)
- ![](/img_index/tianwei/2024金点子鼓励奖.jpg)
+ ![](/img_index/qita/tianwei/2024知识创新先锋.jpg)
+ ![](/img_index/qita/tianwei/2024创新鼓励奖.jpg)
+ ![](/img_index/qita/tianwei/2024金点子鼓励奖.jpg)
 
 {% endgi %}
 {% gi 3 3%}
- ![](/img_index/tianwei/2024一季度琅琊榜.jpg)
- ![](/img_index/tianwei/2024四季度琅琊榜.png)
- ![](/img_index/tianwei/2024年度琅琊榜.png)
+ ![](/img_index/qita/tianwei/2024一季度琅琊榜.jpg)
+ ![](/img_index/qita/tianwei/2024四季度琅琊榜.png)
+ ![](/img_index/qita/tianwei/2024年度琅琊榜.png)
 
 {% endgi %}
 
 
 # 2023
 {% gi 3 3 %}
- ![](/img_index/tianwei/2023AI潜力之星奖.jpg)
- ![](/img_index/tianwei/2023创新金点子奖.jpg)
- ![](/img_index/tianwei/2023质量工匠奖.jpg)
+ ![](/img_index/qita/tianwei/2023AI潜力之星奖.jpg)
+ ![](/img_index/qita/tianwei/2023创新金点子奖.jpg)
+ ![](/img_index/qita/tianwei/2023质量工匠奖.jpg)
 
 {% endgi %}
 {% gi 2 2 %}
- ![](/img_index/tianwei/2023一季度琅琊榜.jpg)
- ![](/img_index/tianwei/2023三季度琅琊榜.jpg)
+ ![](/img_index/qita/tianwei/2023一季度琅琊榜.jpg)
+ ![](/img_index/qita/tianwei/2023三季度琅琊榜.jpg)
 
 {% endgi %}
 
 # 2022
 {% gi 2 2 %}
- ![](/img_index/tianwei/2022第三季度技术标兵.jpg)
- ![](/img_index/tianwei/2022质量改善奖.jpg)
+ ![](/img_index/qita/tianwei/2022第三季度技术标兵.jpg)
+ ![](/img_index/qita/tianwei/2022质量改善奖.jpg)
 
 {% endgi %}
 
 
 # 2021
 {% gi 1 1 %}
- ![](/img_index/tianwei/2021技术飞跃奖.jpg)
+ ![](/img_index/qita/tianwei/2021技术飞跃奖.jpg)
 
 {% endgi %}
 
