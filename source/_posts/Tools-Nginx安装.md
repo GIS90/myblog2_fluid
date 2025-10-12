@@ -3,7 +3,7 @@ title: Nginx源码安装
 index_img: /img_index/index/20200520-001.jpeg
 categories:
     - [工具集]
-tags: [Nginx]
+tags: [Nginx, Web服务器]
 abbrlink: 47364
 date: 2020-05-20 20:30:22
 updated: 2020-05-20 20:30:22

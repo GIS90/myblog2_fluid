@@ -2,7 +2,7 @@
 title: Qunar项目之总结篇
 index_img: /img_index/index/20190810-002.png
 categories:
-  - [项目]
+  - [Python]
 tags: [Python]
 abbrlink: 30296
 date: 2019-08-10 20:10:44
