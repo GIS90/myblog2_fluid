@@ -1,128 +1,545 @@
 <!DOCTYPE html>
-<html lang="zh" class="no-js dark">
-
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>首页 | PyGo²个人技术分享空间</title>
-  <meta name="keywords" content="技术分享, Python, Linux, Hexo, 技术, 影视说, 娱乐, 旅行记, 博客, 代码, 生活, 人生, 分享">
-  <meta name="Description" content="Enjoy the good lift everyday ~ Python开发工程师">
-  <meta name="baidu-site-verification" content="code-6sFTIFsVI3" />
-  <meta name="baidu-site-verification" content="code-rX7O19AySH" />
-  <style>
-    body {
-      background: url(img_index/root.jpg);
-      background-size: 100%;
-    }
-
-    .box {
-      margin: 100px auto 0;
-      max-width: 1000px;
-      align-items: center;
-      text-align: center;
-    }
-
-    .box_title {
-      color: #f39c12;
-      font-size: 50px;
-      letter-spacing: 12px;
-      font-family: Comic Sans MS;
-      text-shadow: -6px -6px 6px red, 8px 8px 8px #000;
-    }
-
-    .box_quote_line_up {
-      background: #eee;
-      display: block;
-      margin: 60px 0 40px 0;
-      border-top: 8px double #3C3C3C;
-    }
-
-    .box_quote_line_down {
-      background: #eee;
-      display: block;
-      margin: 40px 0 60px 0;
-      border-bottom: 8px double #3C3C3C;
-    }
-
-    .box_quote_content_l1 {
-      color: #bdc3c7;
-      font-size: 48px;
-      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
-    }
-
-    .box_quote_content_l2 {
-      color: #1abc9c;
-      font-size: 36px;
-      text-shadow: -1px -1px white, 1px 1px #333
-    }
-
-    .box_links {
-      margin-top: 10px;
-    }
-
-    .box_links button {
-      font-size: 15px;
-      width: 160px;
-      line-height: 38px;
-      text-align: center;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 1px 1px 1px #333;
-      border-radius: 5px;
-      margin: 0 20px 20px 0;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #1e7db9;
-      box-shadow: 0 1px 2px #8fcaee inset, 0 -1px 0 #497897 inset, 0 -2px 3px #8fcaee inset;
-      background: -webkit-linear-gradient(top, #42a4e0, #2e88c0);
-      background: -moz-linear-gradient(top, #42a4e0, #2e88c0);
-      background: linear-gradient(top, #42a4e0, #2e88c0);
-    }
-
-    .box_links button a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .box_links button a:hover {
-      color: black;
-    }
-
-    .box_footer {
-      font-size: 2.4em;
-      color: #efe390;
-      line-height: 2em;
-      font-weight: 400;
-      width: 65%;
-      margin: 1.5em auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 | PyGo²个人技术分享空间</title>
+    <meta name="keywords" content="技术分享, Python, Linux, Hexo, 技术, 影视说, 娱乐, 旅行记, 博客, 代码, 生活, 人生, 分享">
+    <meta name="Description" content="Enjoy the good lift everyday ~ Python开发工程师">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 博客标题部分 */
+        .header {
+            text-align: center;
+            padding: 10px 20px 10px 20px;
+            margin-bottom: 50px;
+        }
+        
+        .blog-title {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff0080, #00ffcc, #ff0080);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorChange 8s linear infinite;
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .blog-subtitle {
+            font-size: 2rem;
+            color: #a0a0c0;
+            font-weight: 500;
+            letter-spacing: 3px;
+            //text-transform: uppercase;
+            margin-top: 10px;
+        }
+        
+        @keyframes colorChange {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        /* 内容区域 - 上下对齐布局 */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex: 1;
+        }
+        
+        .card {
+            background: rgba(30, 30, 60, 0.7);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff0080, #00ffcc);
+            z-index: 1;
+        }
+        
+        .card-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 130px;
+            height: 5px;
+            background: linear-gradient(90deg, #ff0080, #00ffcc);
+            border-radius: 4px;
+        }
+        
+        /* 常用网站样式 - 网格布局 */
+        .website-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .website-item {
+            display: flex;
+        }
+        
+        .website-link {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 25px;
+            background: rgba(40, 40, 70, 0.6);
+            border-radius: 15px;
+            color: #d0d0e0;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            height: 100%;
+        }
+        
+        .website-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .website-link:hover {
+            background: rgba(50, 50, 90, 0.9);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .website-link:hover::before {
+            left: 100%;
+        }
+        
+        .website-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+        }
+        
+        .website-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .website-desc {
+            font-size: 0.95rem;
+            color: #a0a0c0;
+            line-height: 1.5;
+        }
+        
+        /* 联系方式样式 - 网格布局 */
+        .contact-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+        }
+        
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 20px;
+            background: rgba(40, 40, 70, 0.6);
+            border-radius: 15px;
+            color: #d0d0e0;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            text-align: center;
+        }
+        
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .contact-link:hover {
+            background: rgba(50, 50, 90, 0.9);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-link:hover::before {
+            left: 100%;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+        }
+        
+        .contact-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        /* 底部备案信息 */
+        .footer {
+			color: white;
+            text-align: center;
+            padding: 25px;
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            margin-top: auto;
+            font-size: 1.8rem;
+            color: #a0a0c0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+		
+		.footer a {
+			color: #F25912;
+		}
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 2.8rem;
+            }
+            
+            .blog-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .website-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 动态背景 */
+        .dynamic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(-40px) translateX(-10px);
+            }
+            75% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+        
+        /* 卡片动态背景 */
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background: linear-gradient(45deg, #ff0080, #00ffcc, #ff0080);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+            border-radius: 20px;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="box">
-    <h1 class="box_title">PyGo²</h1>
-    <div class="box_quote">
-      <span class="box_quote_line_up"></span>
-      <p class="box_quote_content_l1">Enjoy the good lift everyday ~</p>
-      <p class="box_quote_content_l2">Python开发工程师</p>
-      <span class="box_quote_line_down"></span>
+    <!-- 动态背景 -->
+    <div class="dynamic-bg" id="dynamicBg"></div>
+    
+    <div class="container">
+        <!-- 博客标题部分 -->
+        <header class="header">
+            <h1 class="blog-title">PyGo²</h1>
+            <p class="blog-subtitle">Enjoy the good lift everyday ~</p>
+        </header>
+        
+        <!-- 主要内容区域 - 上下对齐布局 -->
+        <div class="content">
+		
+            <!-- 常用网站模块 -->
+            <section class="card">
+                <div class="card-bg"></div>
+                <h2 class="card-title">个人作品</h2>
+                <ul class="website-list">
+                    <li class="website-item">
+                        <a target="_blank" href="http://2l.pygo2.top/" class="website-link">
+                            <div class="website-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="website-name">OpenTool-Z系统</div>
+                            <div class="website-desc">Python + VUE研发的项目，集成日常工作效率工具箱，让工作变的更简单。</div>
+                        </a>
+                    </li>
+                    <li class="website-item">
+                        <a target="_blank" href="http://etherpad.pygo2.top/" class="website-link">
+                            <div class="website-icon">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div class="website-name">协作Etherpad</div>
+                            <div class="website-desc">一款开源的在线协作文本编辑器，支持多人同时实时编辑同一文档，简单高效率，用于内部使用，搭建于云服务器部署。</div>
+                        </a>
+                    </li>
+                    <li class="website-item">
+                        <a target="_blank" href="http://fastapi.pygo2.top/" class="website-link">
+                            <div class="website-icon">
+                                <i class="fa-solid fa-snowflake"></i>
+                            </div>
+                            <div class="website-name">FastAPI脚手架</div>
+                            <div class="website-desc">编写开发的FastAPI脚手架，提供JWT认证、工具库与数据库封装等开箱即用的通用功能，旨在提升开发效率。</div>
+                        </a>
+                    </li>
+                    <li class="website-item">
+                        <a target="_blank" href="http://wzheros.pygo2.top/" class="website-link">
+                            <div class="website-icon">
+                                <i style="" class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div class="website-name">移动VUE3端王者英雄</div>
+                            <div class="website-desc">VUE3开发的半成品项目，介绍王者荣耀英雄（技能说明、装备推荐、符文推荐），帮助上分。</div>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+			
+            <!-- 个人联系方式模块 -->
+            <section class="card">
+                <div class="card-bg"></div>
+                <h2 class="card-title">个人空间</h2>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <a target="_blank" href="http://www.pygo2.top/index.html" class="contact-link">
+                            <div class="contact-icon">
+                                <i class="fas fa-blog"></i>
+                            </div>
+                            <div class="contact-name">个人博客</div>
+                        </a>
+                    </li>
+                    <li class="contact-item">
+                        <a target="_blank" href="http://github.com/GIS90" class="contact-link">
+                            <div class="contact-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="contact-name">GitHub</div>
+                        </a>
+                    </li>
+                    <li class="contact-item">
+                        <a target="_blank" href="http://my.oschina.net/u/2259452" class="contact-link">
+                            <div class="contact-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="contact-name">OSChina</div>
+                        </a>
+                    </li>
+					<li class="contact-item">
+                        <a class="contact-link">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-name">电子邮箱：gaoming971366@163.com</div>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+			
+        </div>
+        
+        <!-- 底部备案信息 -->
+        <footer class="footer">
+            <p>© 代码改变世界 | 备案编号：<a href='http://beian.miit.gov.cn/' target='_blank'>蒙ICP备2021000415号</a></p>
+        </footer>
     </div>
-    <div class="box_links">
-      <button><a href="index.html">Blog</a></button>
-      <button><a target="_blank" href="https://github.com/GIS90">GitHub</a></button>
-      <button><a target="_blank" href="https://my.oschina.net/u/2259452">OsChina</a></button>
-      <button><a target="_blank" href="https://weibo.com/u/1989571513/home">WeiBo</a></button>
-    </div>
-    <div class="box_links">
-      <button><a style="color:red" target="_blank" href="http://2l.pygo2.top/">OpenTool-Z系统</a></button>
-      <button><a style="color:red" target="_blank" href="http://etherpad.pygo2.top/">协作Etherpad</a></button>
-      <button><a style="color:red" target="_blank" href="http://fastapi.pygo2.top/">FastAPI脚手架</a></button>
-	  <button><a style="color:red" target="_blank" href="http://wzheros.pygo2.top/">移动端王者Demo</a></button>
-    </div>
-    <div class="box_footer">备案编号：<a href='http://beian.miit.gov.cn/' target='_blank'>蒙ICP备2021000415号</a></div>
-  </div>
-</body>
 
+    <script>
+        // 创建动态背景气泡
+        document.addEventListener('DOMContentLoaded', function() {
+            const dynamicBg = document.getElementById('dynamicBg');
+            
+            // 创建气泡
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // 随机大小
+                const size = Math.random() * 120 + 30;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // 随机位置
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.top = `${Math.random() * 100}%`;
+                
+                // 随机动画延迟
+                bubble.style.animationDelay = `${Math.random() * 15}s`;
+                
+                dynamicBg.appendChild(bubble);
+            }
+            
+            // 标题颜色变化增强
+            const title = document.querySelector('.blog-title');
+            let hue = 0;
+            
+            function updateTitleColor() {
+                hue = (hue + 1) % 360;
+                title.style.background = `linear-gradient(90deg, 
+                    hsl(${hue}, 100%, 65%), 
+                    hsl(${(hue + 60) % 360}, 100%, 65%), 
+                    hsl(${(hue + 120) % 360}, 100%, 65%),
+                    hsl(${(hue + 180) % 360}, 100%, 65%),
+                    hsl(${(hue + 240) % 360}, 100%, 65%))`;
+                title.style.backgroundSize = '200% auto';
+                title.style.webkitBackgroundClip = 'text';
+                title.style.webkitTextFillColor = 'transparent';
+                requestAnimationFrame(updateTitleColor);
+            }
+            
+            updateTitleColor();
+            
+            // 添加卡片背景动画
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cardBg = card.querySelector('.card-bg');
+                
+                card.addEventListener('mouseenter', function() {
+                    this.style.background = 'rgba(40, 40, 80, 0.8)';
+                    cardBg.style.opacity = '0.2';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.background = 'rgba(30, 30, 60, 0.7)';
+                    cardBg.style.opacity = '0.1';
+                });
+            });
+        });
+    </script>
+</body>
 </html>
