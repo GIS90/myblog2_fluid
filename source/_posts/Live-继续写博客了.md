@@ -25,4 +25,6 @@ date: 2025-08-01 18:47:16
 ## 其他参考
 
 - hexo-theme-fluid：https://github.com/fluid-dev/hexo-theme-fluid
-- hexo-theme-fluid主题手册官网：https://hexo.fluid-dev.com/
+- hexo-theme-fluid主题手册官网：https://hexo.fluid-dev.com/docs/start/
+- hexo-theme-fluid博主：https://hexo.fluid-dev.com/
+- 

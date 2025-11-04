@@ -14,10 +14,15 @@ keywords: hexo, Hexo, 常用语, markdown
 
 <font size=6.5 color='red'>主要用于记录我写博文常用的markdown语句，持续更新中。。。。。。</font>
 
+
+
 <!-- more -->
 
 <hr />
 
+### Label
+
+{% label primary@primary %} {% label success@success %} {% label danger@danger %} {% label warning@warning %} {% label info@info %} 
 
 
 ### 特殊语
@@ -42,6 +47,7 @@ keywords: hexo, Hexo, 常用语, markdown
 
 ```
 <font color="red" size="5">***特殊语！！！***</font>
+<font size="4" color="red">***Schemes***</font>
 ```
 
 <!--more-->

@@ -21,6 +21,13 @@ updated: 2019-05-24 10:12:04
 起始于2019年5月24日背单词，<font size="5" color="blue">坚持下去~~~</font>
 
 ### 2025
+#### 第四季度
+{% gi 3 3 %}
+ ![7月](/img_index/qita/baicizhan/202510.jpg)
+ ![8月](/img_index/qita/baicizhan/undaka.jpg)
+ ![9月](/img_index/qita/baicizhan/undaka.jpg)
+{% endgi %}
+
 #### 第三季度
 {% gi 3 3 %}
  ![7月](/img_index/qita/baicizhan/202507.jpg)
