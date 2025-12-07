@@ -1,5 +1,5 @@
 ---
-title: Tools-Caddy前后端分离项目配置
+title: Caddy配置前后端分离项目
 index_img: /img_index/index/20251113-001.png
 tags: [Caddy, Web服务器]
 categories: [工具集]
@@ -93,5 +93,4 @@ api.pygo2.top {
 转发到云服务器请求的时候直接用http就行了。
 
 
-#### 前端配置后台请求
 

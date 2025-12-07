@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python, Linux, Hexo, 技术, 影视说, 娱乐, 旅行记, 博客, 代码, 生活, 人生, 分享">
+  
+    <meta name="description" content="背景项目上去其他项目支援Java源码开发，对于新的SpringBoot框架不是很了解，去之前也做了很多Java学习，包含基础语法（真应了那句万物皆对象）、SpringBoot框架的学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识SpringBoot">
+<meta property="og:url" content="http://pygo2.top/articles/36936/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="背景项目上去其他项目支援Java源码开发，对于新的SpringBoot框架不是很了解，去之前也做了很多Java学习，包含基础语法（真应了那句万物皆对象）、SpringBoot框架的学习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/20251207-001.png">
+<meta property="article:published_time" content="2025-12-07T02:49:24.000Z">
+<meta property="article:modified_time" content="2025-12-07T02:49:24.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="SpingBoot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/20251207-001.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>初识SpringBoot || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="初识SpringBoot"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-07 10:49" pubdate>
+          创建日期：2025-12-07 10:49:24（星期日）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">初识SpringBoot</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>项目上去其他项目支援Java源码开发，对于新的SpringBoot框架不是很了解，去之前也做了很多Java学习，包含基础语法（真应了那句<strong>万物皆对象</strong>）、SpringBoot框架的学习。</p>
+<span id="more"></span>
+<hr />
+
+
+<p>通过这几天的B站视频学习，总结记录一下SpringBoot的学习内容。</p>
+<h3 id="1、SpringBoot项目脚手架"><a href="#1、SpringBoot项目脚手架" class="headerlink" title="1、SpringBoot项目脚手架"></a>1、SpringBoot项目脚手架</h3><p>推荐自动化生成脚手架源码：<a target="_blank" rel="noopener" href="https://start.spring.io/">https://start.spring.io/</a><br>配置说明：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> Project：Maven<br><span class="hljs-bullet">-</span> Language：Java<br><span class="hljs-bullet">-</span> Spring Boot：4.0.0<br><span class="hljs-bullet">-</span> Project Metadata：<br><span class="hljs-bullet">  -</span> Group<br><span class="hljs-bullet">  -</span> Artifact<br><span class="hljs-bullet">  -</span> Name<br><span class="hljs-bullet">  -</span> Description<br><span class="hljs-bullet">  -</span> Package name<br><span class="hljs-bullet">  -</span> Packaging<br><span class="hljs-bullet">  -</span> Configuration<br><span class="hljs-bullet">  -</span> Java<br><span class="hljs-bullet">-</span> Dependencies<br><span class="hljs-bullet">  -</span> Spring Web<br><span class="hljs-bullet">  -</span> Spring Data JPA<br><span class="hljs-bullet">  -</span> Mysql Driver<br></code></pre></td></tr></table></figure>
+
+<h3 id="2、项目结构"><a href="#2、项目结构" class="headerlink" title="2、项目结构"></a>2、项目结构</h3><ul>
+<li>control：Controller层</li>
+<li>service：Service层</li>
+<li>dao：Modal层</li>
+<li>dto：数据传输模型</li>
+<li>converter：数据转换（一个对象生成新的对象）</li>
+</ul>
+<h3 id="3、编译器"><a href="#3、编译器" class="headerlink" title="3、编译器"></a>3、编译器</h3><p>IDEA</p>
+<h3 id="4、项目启动"><a href="#4、项目启动" class="headerlink" title="4、项目启动"></a>4、项目启动</h3><p>IDEA找到BootDemoApplication（主类）直接启动即可。</p>
+<h3 id="5、示例代码"><a href="#5、示例代码" class="headerlink" title="5、示例代码"></a>5、示例代码</h3><h4 id="5-1、Controller层"><a href="#5-1、Controller层" class="headerlink" title="5.1、Controller层"></a>5.1、Controller层</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">package</span> top.pygo2.boot_demo.control;<br><br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">import</span> org.springframework.web.bind.<span class="hljs-keyword">annotation</span>.*;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.dao.Sysuser;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.dto.SysuserDTO;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.service.SysuserService;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.Response;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.<span class="hljs-keyword">annotation</span>.Autowired;<br><br><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/sysuser&quot;</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SysuserControl</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> SysuserService sysuserService;<br><br><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/&#123;id&#125;&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Response&lt;SysuserDTO&gt; getSysuserById(<span class="hljs-meta">@PathVariable</span> long id)&#123;<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;getSysuserById=============id：&quot;</span> + id);<br>        <span class="hljs-keyword">return</span> Response.success(sysuserService.getSysuserById(id));<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/rtx/&#123;rtx&#125;&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Response&lt;SysuserDTO&gt; getSysuserByRtx(<span class="hljs-meta">@PathVariable</span> String rtx)&#123;<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;getSysuserByRtx=============rtx：&quot;</span> + rtx);<br>        <span class="hljs-keyword">return</span> Response.success(sysuserService.getSysuserByRtx(rtx));<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Response&lt;List&lt;SysuserDTO&gt;&gt; getAllSysuser()&#123;<br>        <span class="hljs-keyword">return</span> Response.success(sysuserService.getSysuserList());<br>    &#125;<br><br>    <span class="hljs-meta">@PostMapping(<span class="hljs-string">&quot;&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Response&lt;<span class="hljs-built_in">Long</span>&gt; addSysuser(<span class="hljs-meta">@RequestBody</span> SysuserDTO sysuserDTO)&#123;<br>        <span class="hljs-keyword">return</span> sysuserService.addSysuser(sysuserDTO);<br>    &#125;<br><br>    <span class="hljs-meta">@DeleteMapping(<span class="hljs-string">&quot;/&#123;rtx&#125;&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Response&lt;String&gt; deleteSysuser(<span class="hljs-meta">@PathVariable</span> String rtx)&#123;<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;deleteSysuser=============rtx：&quot;</span> + rtx);<br>        <span class="hljs-keyword">return</span> sysuserService.deleteSysuser(rtx);<br>    &#125;<br><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-2、Service层"><a href="#5-2、Service层" class="headerlink" title="5.2、Service层"></a>5.2、Service层</h4><h5 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> top.pygo2.boot_demo.service;<br><br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.Response;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.dao.Sysuser;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.dto.SysuserDTO;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">SysuserService</span> &#123;<br>    SysuserDTO <span class="hljs-title function_">getSysuserById</span><span class="hljs-params">(Long id)</span>;<br><br>    SysuserDTO <span class="hljs-title function_">getSysuserByRtx</span><span class="hljs-params">(String rtx)</span>;<br><br>    List&lt;SysuserDTO&gt; <span class="hljs-title function_">getSysuserList</span><span class="hljs-params">()</span>;<br><br>    Response&lt;Long&gt; <span class="hljs-title function_">addSysuser</span><span class="hljs-params">(SysuserDTO sysuserDTO)</span>;<br><br>    Response&lt;String&gt; <span class="hljs-title function_">deleteSysuser</span><span class="hljs-params">(String rtx)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">package</span> top.pygo2.boot_demo.service;<br><br><span class="hljs-keyword">import</span> jakarta.transaction.Transactional;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.<span class="hljs-keyword">annotation</span>.Autowired;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.Response;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.converter.SysuserConverter;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.dao.Sysuser;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.dto.SysuserDTO;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Service;<br><span class="hljs-keyword">import</span> top.pygo2.boot_demo.dao.SysuserRepository;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><br><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SysuserServiceImpl</span> <span class="hljs-title">implements</span> <span class="hljs-title">SysuserService</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> SysuserRepository sysuserRepository;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> SysuserDTO getSysuserById(<span class="hljs-built_in">Long</span> id) &#123;<br>        <span class="hljs-keyword">if</span> (id == <span class="hljs-literal">null</span>) &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; &#125;<br><br>        Sysuser result = sysuserRepository.findById(id).orElse(<span class="hljs-literal">null</span>);<br>        <span class="hljs-keyword">if</span> (result == <span class="hljs-literal">null</span>) &#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;&#125;<br><br>        <span class="hljs-keyword">for</span>(int i=<span class="hljs-number">0</span>; i&lt;=<span class="hljs-number">55</span>; i++) &#123;<br>            System.<span class="hljs-keyword">out</span>.print(<span class="hljs-string">&quot;*&quot;</span>);<br>        &#125;<br>        System.<span class="hljs-keyword">out</span>.println();<br>        System.<span class="hljs-keyword">out</span>.print(<span class="hljs-string">&quot;getSysuserById：&quot;</span> + result.getName());<br><br>        <span class="hljs-keyword">return</span> SysuserConverter.convert(result);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> SysuserDTO getSysuserByRtx(String rtx) &#123;<br>        <span class="hljs-keyword">if</span> (rtx == <span class="hljs-literal">null</span>) &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; &#125;<br><br>        Sysuser result = new Sysuser();<br>        result = sysuserRepository.findByRtx(rtx).orElse(<span class="hljs-literal">null</span>);<br>        <span class="hljs-keyword">if</span> (result == <span class="hljs-literal">null</span>) &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; &#125;<br><br>        <span class="hljs-keyword">for</span>(int i=<span class="hljs-number">0</span>; i&lt;=<span class="hljs-number">55</span>; i++) &#123;<br>            System.<span class="hljs-keyword">out</span>.print(<span class="hljs-string">&quot;*&quot;</span>);<br>        &#125;<br>        System.<span class="hljs-keyword">out</span>.println();<br>        System.<span class="hljs-keyword">out</span>.print(<span class="hljs-string">&quot;getSysuserByRtx：&quot;</span> + result.getName());<br><br>        <span class="hljs-keyword">return</span> SysuserConverter.convert(result);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> List&lt;SysuserDTO&gt; getSysuserList() &#123;<br>        List&lt;SysuserDTO&gt; result = new ArrayList&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (Sysuser sysuser: sysuserRepository.findAll()) &#123;<br>            <span class="hljs-keyword">if</span> (sysuser == <span class="hljs-literal">null</span>) &#123; <span class="hljs-keyword">continue</span>; &#125;<br>            result.add(SysuserConverter.convert(sysuser));<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Response&lt;<span class="hljs-built_in">Long</span>&gt; addSysuser(SysuserDTO sysuserDTO) &#123;<br>        Sysuser sysusersRtx = sysuserRepository.findByRtx(sysuserDTO.getRtx()).orElse(<span class="hljs-literal">null</span>);<br>        <span class="hljs-keyword">if</span> (sysusersRtx != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> Response.fail(<span class="hljs-string">&quot;用户Rtx已存在，新增失败&quot;</span>);<br>        &#125;<br>        List&lt;Sysuser&gt; sysusersListEmail = sysuserRepository.findByEmail(sysuserDTO.getEmail());<br>        <span class="hljs-keyword">if</span> (sysusersListEmail.size() &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> Response.fail(<span class="hljs-string">&quot;用户邮箱已存在，新增失败&quot;</span>);<br>        &#125;<br>        List&lt;Sysuser&gt; sysusersListPhone = sysuserRepository.findByPhone(sysuserDTO.getPhone());<br>        <span class="hljs-keyword">if</span> (sysusersListPhone.size() &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> Response.fail(<span class="hljs-string">&quot;用户电话已存在，新增失败&quot;</span>);<br>        &#125;<br>        Sysuser sysuser = SysuserConverter.convert(sysuserDTO);<br>        sysuserRepository.save(sysuser);<br>        <span class="hljs-keyword">return</span> Response.success(sysuser.getId());<br>     &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-meta">@Transactional</span><br>    <span class="hljs-keyword">public</span> Response&lt;String&gt; deleteSysuser(String rtx) &#123;<br>       <span class="hljs-keyword">if</span> (rtx == <span class="hljs-literal">null</span>) &#123;<br>           <span class="hljs-keyword">return</span> Response.fail(<span class="hljs-string">&quot;缺少rtx参数&quot;</span>);<br>       &#125;<br>       Sysuser sysuser = sysuserRepository.findByRtx(rtx).orElse(<span class="hljs-literal">null</span>);<br>       <span class="hljs-keyword">if</span> (sysuser == <span class="hljs-literal">null</span>) &#123;<br>           <span class="hljs-keyword">return</span> Response.fail(<span class="hljs-string">&quot;用户不存在&quot;</span>);<br>       &#125; <span class="hljs-keyword">else</span> &#123;<br>           sysuserRepository.deleteByRtx(rtx);<br>           <span class="hljs-keyword">return</span> Response.success(<span class="hljs-string">&quot;删除成功&quot;</span>);<br>       &#125;<br>     &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-3、Modal层"><a href="#5-3、Modal层" class="headerlink" title="5.3、Modal层"></a>5.3、Modal层</h4><h5 id="Sysuser"><a href="#Sysuser" class="headerlink" title="Sysuser"></a>Sysuser</h5><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br></pre></td><td class="code"><pre><code class="hljs typescript">package top.<span class="hljs-property">pygo2</span>.<span class="hljs-property">boot_demo</span>.<span class="hljs-property">dao</span>;<br><br><span class="hljs-keyword">import</span> jakarta.<span class="hljs-property">persistence</span>.*;<br><br><br><span class="hljs-comment">//@Data</span><br><span class="hljs-meta">@Entity</span><br><span class="hljs-meta">@Table</span>(name = <span class="hljs-string">&quot;sysuser&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Sysuser</span> &#123;<br><br>    <span class="hljs-meta">@Id</span><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;id&quot;</span>)<br>    <span class="hljs-meta">@GeneratedValue</span>(strategy = <span class="hljs-title class_">GenerationType</span>.<span class="hljs-property">IDENTITY</span>)<br>    <span class="hljs-keyword">private</span> long id;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;rtx_id&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> rtx;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;md5_id&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> md5;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;fullname&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> name;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;password&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> password;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;email&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> email;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;phone&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> phone;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;avatar&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> avatar;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;introduction&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> introduction;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;role&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> role;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;department&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> department;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;create_time&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> createTime;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;create_rtx&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> createRtx;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;delete_time&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> deleteTime;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;delete_rtx&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> deleteRtx;<br><br>    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">&quot;is_del&quot;</span>)<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> status;<br><br>    <span class="hljs-keyword">public</span> long <span class="hljs-title function_">getId</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> id;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setId</span>(<span class="hljs-params">long id</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span> = id;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getRtx</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> rtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setRtx</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> rtx</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">rtx</span> = rtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getMd5</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> md5;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setMd5</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> md5</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">md5</span> = md5;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getName</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setName</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> name</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getPassword</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> password;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setPassword</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> password</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">password</span> = password;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getEmail</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> email;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setEmail</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> email</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">email</span> = email;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getPhone</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> phone;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setPhone</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> phone</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">phone</span> = phone;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getAvatar</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> avatar;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setAvatar</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> avatar</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">avatar</span> = avatar;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getIntroduction</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> introduction;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setIntroduction</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> introduction</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">introduction</span> = introduction;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getRole</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> role;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setRole</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> role</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">role</span> = role;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getDepartment</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> department;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setDepartment</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> department</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">department</span> = department;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getCreateTime</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> createTime;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setCreateTime</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> createTime</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">createTime</span> = createTime;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getCreateRtx</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> createRtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setCreateRtx</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> createRtx</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">createRtx</span> = createRtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getDeleteTime</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> deleteTime;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setDeleteTime</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> deleteTime</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">deleteTime</span> = deleteTime;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getDeleteRtx</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> deleteRtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setDeleteRtx</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> deleteRtx</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">deleteRtx</span> = deleteRtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getStatus</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> status;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setStatus</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> status</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">status</span> = status;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="SysuserRepository"><a href="#SysuserRepository" class="headerlink" title="SysuserRepository"></a>SysuserRepository</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> top.pygo2.boot_demo.dao;<br><br><br><span class="hljs-keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Repository;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Optional;<br><br><span class="hljs-meta">@Repository</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">SysuserRepository</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JpaRepository</span>&lt;Sysuser, Long&gt; &#123;<br>    Optional&lt;Sysuser&gt; <span class="hljs-title function_">findByRtx</span><span class="hljs-params">(String rtx)</span>;<br>    List&lt;Sysuser&gt; <span class="hljs-title function_">findByEmail</span><span class="hljs-params">(String email)</span>;<br>    List&lt;Sysuser&gt; <span class="hljs-title function_">findByPhone</span><span class="hljs-params">(String phone)</span>;<br><br>    Sysuser <span class="hljs-title function_">deleteByRtx</span><span class="hljs-params">(String rtx)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-4、DTO"><a href="#5-4、DTO" class="headerlink" title="5.4、DTO"></a>5.4、DTO</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><code class="hljs typescript">package top.<span class="hljs-property">pygo2</span>.<span class="hljs-property">boot_demo</span>.<span class="hljs-property">dto</span>;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SysuserDTO</span> &#123;<br><br>    <span class="hljs-keyword">private</span> long id;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> rtx;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> md5;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> name;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> email;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> phone;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> avatar;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> introduction;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> status;<br><br>    <span class="hljs-keyword">public</span> long <span class="hljs-title function_">getId</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> id;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setId</span>(<span class="hljs-params">long id</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span> = id;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getRtx</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> rtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setRtx</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> rtx</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">rtx</span> = rtx;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getMd5</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> md5;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setMd5</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> md5</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">md5</span> = md5;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getName</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setName</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> name</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getEmail</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> email;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setEmail</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> email</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">email</span> = email;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getPhone</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> phone;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setPhone</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> phone</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">phone</span> = phone;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getAvatar</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> avatar;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setAvatar</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> avatar</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">avatar</span> = avatar;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getIntroduction</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> introduction;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setIntroduction</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> introduction</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">introduction</span> = introduction;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getStatus</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;0&quot;</span>.<span class="hljs-title function_">equals</span>(status) ? <span class="hljs-string">&quot;否&quot;</span> : <span class="hljs-string">&quot;是&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setStatus</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> status</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">status</span> = status;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="5-4、Converter"><a href="#5-4、Converter" class="headerlink" title="5.4、Converter"></a>5.4、Converter</h4><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs abnf">package top.pygo2.boot_demo.converter<span class="hljs-comment">;</span><br><br>import top.pygo2.boot_demo.dao.Sysuser<span class="hljs-comment">;</span><br>import top.pygo2.boot_demo.dto.SysuserDTO<span class="hljs-comment">;</span><br>import top.pygo2.boot_demo.Utils<span class="hljs-comment">;</span><br><br>public class SysuserConverter &#123;<br><br>    public static SysuserDTO convert(Sysuser sysuser) &#123;<br>        SysuserDTO sysuserDTO <span class="hljs-operator">=</span> new SysuserDTO()<span class="hljs-comment">;</span><br>        sysuserDTO.setId(sysuser.getId())<span class="hljs-comment">;</span><br>        sysuserDTO.setRtx(sysuser.getRtx())<span class="hljs-comment">;</span><br>        sysuserDTO.setMd5(sysuser.getMd5())<span class="hljs-comment">;</span><br>        sysuserDTO.setName(sysuser.getName())<span class="hljs-comment">;</span><br>        sysuserDTO.setEmail(sysuser.getEmail())<span class="hljs-comment">;</span><br>        sysuserDTO.setPhone(sysuser.getPhone())<span class="hljs-comment">;</span><br>        sysuserDTO.setAvatar(sysuser.getAvatar())<span class="hljs-comment">;</span><br>        sysuserDTO.setIntroduction(sysuser.getIntroduction())<span class="hljs-comment">;</span><br>        sysuserDTO.setStatus(sysuser.getStatus())<span class="hljs-comment">;</span><br>        return sysuserDTO<span class="hljs-comment">;</span><br>    &#125;<br><br>    public static Sysuser convert(SysuserDTO sysuserDTO) &#123;<br>        Sysuser sysuser <span class="hljs-operator">=</span> new Sysuser()<span class="hljs-comment">;</span><br>        sysuser.setRtx(sysuserDTO.getRtx())<span class="hljs-comment">;</span><br>        sysuser.setMd5(Utils.md5(sysuserDTO.getRtx()))<span class="hljs-comment">;</span><br>        sysuser.setName(sysuserDTO.getName())<span class="hljs-comment">;</span><br>        sysuser.setPassword(<span class="hljs-string">&quot;abcd.1234&quot;</span>)<span class="hljs-comment">;  // 默认密码</span><br>        sysuser.setEmail(sysuserDTO.getEmail())<span class="hljs-comment">;</span><br>        sysuser.setPhone(sysuserDTO.getPhone())<span class="hljs-comment">;</span><br>        sysuser.setAvatar(<span class="hljs-string">&quot;http://store.pygo2.top/w.jpg&quot;</span>)<span class="hljs-comment">; // 默认头像</span><br>        sysuser.setIntroduction(sysuserDTO.getIntroduction())<span class="hljs-comment">;</span><br>        sysuser.setStatus(<span class="hljs-string">&quot;0&quot;</span>)<span class="hljs-comment">;</span><br>        return sysuser<span class="hljs-comment">;</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%85%B6%E4%BB%96%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/" class="category-chain-item">其他计算机语言</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JAVA/" class="print-no-link">#JAVA</a>
+      
+        <a href="/tags/SpingBoot/" class="print-no-link">#SpingBoot</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>初识SpringBoot</div>
+      <div>http://pygo2.top/articles/36936/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/7767/" title="Caddy配置前后端分离项目">
+                        <span class="hidden-mobile">Caddy配置前后端分离项目</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
