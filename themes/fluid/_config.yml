@@ -1034,6 +1034,11 @@ links:
     - { title: "Colorhunt", intro: "一个提供时尚、精美配色方案的调色板灵感网站", link: "https://colorhunt.co/", avatar: "/img_index/icon/color.png"}
     - { title: "toolfk", intro: "一个提供多种在线工具的免费网站，旨在提高开发者和用户的效率", link: "https://www.toolfk.com/", avatar: "/img_index/icon/tool-1.png"}
     - { title: "Cherry Studio", intro: "一款专注于 AI 应用开发和集成的 IDE", link: "https://www.cherry-ai.com/download", avatar: "/img_index/icon/cherry.png"}
+    - { title: "TrafficMonitor", intro: "一款在 Windows 任务栏实时显示网速、CPU 和内存占用率的轻量级开源监控工具", link: "https://github.com/zhongyang219/TrafficMonitor/releases/", avatar: "/img_index/icon/CPU.png"}
+    - { title: "ImageClass", intro: "一款专注于快速浏览图像的轻量级Windows看图软件，支持格式丰富且界面简洁", link: "	http://imageglass.org/", avatar: "/img_index/icon/photos.png"}
+    - { title: "KeePass", intro: "一款免费开源的本地密码管理器，通过加密数据库安全存储并管理您的所有密码", link: "	https://keepass.info/", avatar: "/img_index/icon/mima.png"}
+    - { title: "VLC media player", intro: "强大的开源全能播放器，支持几乎所有格式且无广告干扰", link: "	https://www.videolan.org/", avatar: "/img_index/icon/shipin.png"}
+    - { title: "TRAE", intro: "融合先进AI的智能代码编辑器，能通过对话理解和生成代码，是面向未来的AI-first开发工具", link: "	https://www.trae.cn/", avatar: "/img_index/icon/ide.png"}
 
 
   # 当成员头像加载失败时，替换为指定图片
