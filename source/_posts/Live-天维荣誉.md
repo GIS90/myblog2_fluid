@@ -19,6 +19,10 @@ sticky: 1000
 <hr />
 
 # 2025
+{% gi 1 1 %}
+ ![](/img_index/qita/tianwei/2025四季年度琅琊榜.png)
+{% endgi %}
+
 {% gi 3 3 %}
  ![](/img_index/qita/tianwei/2025二季度琅琊榜.png)
  ![](/img_index/qita/tianwei/2025三季度琅琊榜.png)

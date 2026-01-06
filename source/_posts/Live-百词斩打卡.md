@@ -20,12 +20,41 @@ updated: 2019-05-24 10:12:04
 
 起始于2019年5月24日背单词，<font size="5" color="blue">坚持下去~~~</font>
 
+### 2026
+#### 第四季度
+{% gi 3 3 %}
+ ![10月](/img_index/qita/baicizhan/undaka.jpg)
+ ![11月](/img_index/qita/baicizhan/undaka.jpg)
+ ![12月](/img_index/qita/baicizhan/undaka.jpg)
+{% endgi %}
+
+#### 第三季度
+{% gi 3 3 %}
+ ![7月](/img_index/qita/baicizhan/undaka.jpg)
+ ![8月](/img_index/qita/baicizhan/undaka.jpg)
+ ![9月](/img_index/qita/baicizhan/undaka.jpg)
+{% endgi %}
+
+#### 第二季度
+{% gi 3 3 %}
+ ![4月](/img_index/qita/baicizhan/undaka.jpg)
+ ![5月](/img_index/qita/baicizhan/undaka.jpg)
+ ![6月](/img_index/qita/baicizhan/undaka.jpg)
+{% endgi %}
+
+#### 第一季度
+{% gi 3 3 %}
+ ![1月](/img_index/qita/baicizhan/undaka.jpg)
+ ![2月](/img_index/qita/baicizhan/undaka.jpg)
+ ![3月](/img_index/qita/baicizhan/undaka.jpg)
+{% endgi %}
+
 ### 2025
 #### 第四季度
 {% gi 3 3 %}
- ![7月](/img_index/qita/baicizhan/202510.jpg)
- ![8月](/img_index/qita/baicizhan/202511.jpg)
- ![9月](/img_index/qita/baicizhan/undaka.jpg)
+ ![10月](/img_index/qita/baicizhan/202510.jpg)
+ ![11月](/img_index/qita/baicizhan/202511.jpg)
+ ![12月](/img_index/qita/baicizhan/202512.jpg)
 {% endgi %}
 
 #### 第三季度
