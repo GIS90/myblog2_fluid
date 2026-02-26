@@ -12,13 +12,17 @@ sticky: 1000
 ---
 
 
-从2020年11月入职天维（广州天维信息技术有限公司，官网：http://www.tiancom.com ），记录一下获得的荣誉，在这里成了很多。
+从2020年11月入职天维（广州天维信息技术有限公司，官网：http://www.tiancom.com ），2026年3月2日离职，记录一下获得的荣誉，在这里成了很多。
 <div style="font-style: italic;font-size: 35px;font-weight:800;color: red;"> 感谢天维～～～～～～🥰</div>
 
 <!--more-->
 <hr />
 
 # 2025
+{% gi 1 1 %}
+ ![](/img_index/qita/tianwei/2025突出贡献个人奖.jpg)
+{% endgi %}
+
 {% gi 2 2 %}
  ![](/img_index/qita/tianwei/2025四季年度琅琊榜.png)
  ![](/img_index/qita/tianwei/2025四季度知识管理.png)
