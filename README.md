@@ -1,18 +1,15 @@
-# README
-
 基于 **Hexo** + **Fluid 主题** 搭建的静态博客网站，记录自己的工作、生活等内容，充实程序人生。
 
-## 1、启动
 
+## 1、启动   
 - 本地 Server
-      hexo server --port 4000 -o
+hexo server --port 4000 -o
 
 - 上传服务器
+需要在_config.yml 配置文件中配置 deploy，再用 hexo g -d
 
-     需要在_config.yml 配置文件中配置 deploy，再用 hexo g -d
 
-## 2、版本信息
-
+## 2、版本信息   
 |   软件        | 版本          |    
 |   :----:     | :----:        | 
 |  node        |  v23.11.1     |      
@@ -20,30 +17,35 @@
 |   hexo       |    7.3.0      |     
 |   hexo-cli   |    4.3.2      |     
 
-## 3、配置
 
+## 3、配置   
 - 项目配置：_config.yml
 - 主题配置：themes\fluid\_config.yml
 
-## 4、部署
 
+## 4、部署   
 采用 git 部署到静态服务器，用 git push 进行云服务器仓库提交，用于云服务器部署。
 
-## 5、问题列表
 
+## 5、问题列表   
 - 1. 使用 gi-endgi 语法糖并排多个图片的时候，需要置顶 image 图片 source 绝对目录下的位置，不能用 post 自动建立文章的相对路径。
 - 2. 最新版本的 Hexo 不支持 cq-endcq 语法糖。
+
 
 ## 6、个性化配置
 用于配置个性化的文件，比如自定义 css、博客首页、404 页面等。
 
-### 6.1、自定义 CSS
+### 6.1、工具推荐配置
+采用的是主题配置（themes\fluid\_config.yml）中的links->items配置项。
+
+### 6.2、自定义 CSS
 路径：source\custom\custom.css
-### 6.2、公共文件
+
+### 6.3、公共文件
 路径：source\public-files
 
-## 7、自定义样式
 
+## 7、自定义样式   
 直接基于 Fluid 主题源码进行样式修改，记录一下历史的修改。
 
 ### 7.1、文章详情底部版本新增左侧边框

@@ -1018,6 +1018,7 @@ links:
   # Member item of page
   items:
     - { title: "ExcaliDraw", intro: "开源绘图工具，支持无限推展", link: "https://excalidraw.com/", avatar: "/img_index/icon/draw.png"}
+    - { title: "VUE脚手架", intro: "众多开源Vue后台管理系统模板的网站", link: "http://vue.easydo.work/", avatar: "/img_index/icon/vue.png"}
     - { title: "Umi-OCR", intro: "免费开源、高精度、支持多图片、离线的文字识别工具", link: "https://github.com/hiroi-sora/Umi-OCR", avatar: "/img_index/icon/ocr.png"}
     - { title: "Geek", intro: "轻量强悍，一键彻底卸载软件，无广告，Windows卸载神器", link: "https://geekuninstaller.com/download", avatar: "/img_index/icon/software.png"}
     - { title: "WizTree", intro: "免费磁盘分析工具，直观图表展示文件占用，快速定位大文件并清理", link: "https://www.diskanalyzer.com/", avatar: "/img_index/icon/yingpan.png"}
@@ -1035,11 +1036,20 @@ links:
     - { title: "toolfk", intro: "一个提供多种在线工具的免费网站，旨在提高开发者和用户的效率", link: "https://www.toolfk.com/", avatar: "/img_index/icon/tool-1.png"}
     - { title: "Cherry Studio", intro: "一款专注于 AI 应用开发和集成的 IDE", link: "https://www.cherry-ai.com/download", avatar: "/img_index/icon/cherry.png"}
     - { title: "TrafficMonitor", intro: "一款在 Windows 任务栏实时显示网速、CPU 和内存占用率的轻量级开源监控工具", link: "https://github.com/zhongyang219/TrafficMonitor/releases/", avatar: "/img_index/icon/CPU.png"}
-    - { title: "ImageClass", intro: "一款专注于快速浏览图像的轻量级Windows看图软件，支持格式丰富且界面简洁", link: "	http://imageglass.org/", avatar: "/img_index/icon/photos.png"}
-    - { title: "KeePass", intro: "一款免费开源的本地密码管理器，通过加密数据库安全存储并管理您的所有密码", link: "	https://keepass.info/", avatar: "/img_index/icon/mima.png"}
-    - { title: "VLC media player", intro: "强大的开源全能播放器，支持几乎所有格式且无广告干扰", link: "	https://www.videolan.org/", avatar: "/img_index/icon/shipin.png"}
-    - { title: "TRAE", intro: "融合先进AI的智能代码编辑器，能通过对话理解和生成代码，是面向未来的AI-first开发工具", link: "	https://www.trae.cn/", avatar: "/img_index/icon/ide.png"}
-
+    - { title: "ImageClass", intro: "一款专注于快速浏览图像的轻量级Windows看图软件，支持格式丰富且界面简洁", link: "http://imageglass.org/", avatar: "/img_index/icon/photos.png"}
+    - { title: "KeePass", intro: "一款免费开源的本地密码管理器，通过加密数据库安全存储并管理您的所有密码", link: "https://keepass.info/", avatar: "/img_index/icon/mima.png"}
+    - { title: "VLC media player", intro: "强大的开源全能播放器，支持几乎所有格式且无广告干扰", link: "https://www.videolan.org/", avatar: "/img_index/icon/shipin.png"}
+    - { title: "TRAE", intro: "融合先进AI的智能代码编辑器，能通过对话理解和生成代码，是面向未来的AI-first开发工具", link: "https://www.trae.cn/", avatar: "/img_index/icon/ide.png"}
+    - { title: "Sqlark", intro: "是一款面向信创数据库应用开发的免费工具，具备智能SQL编辑、数据生成、迁移评估等多种功能", link: "https://www.sqlark.com/", avatar: "/img_index/icon/dg.png"}
+    - { title: "LocalSend", intro: "无需云端即可分享文件，快速、私密、离线，面向所有人的开源跨平台文件共享", link: "https://localsend.org/zh-CN", avatar: "/img_index/icon/chuanshu.png"}
+    - { title: "PaywallBuster", intro: "一个集合了多种付费墙绕过工具的聚合平台，旨在帮助用户免费访问被付费墙限制的在线新闻内容", link: "https://paywallbuster.com/", avatar: "/img_index/icon/fanqiang.png"}
+    - { title: "FogSight", intro: "将抽象概念（如算法、物理原理）通过AI快速转化为直观动态HTML动画的平台", link: "https://fogsight.ai/", avatar: "/img_index/icon/html.png"}
+    - { title: "Flourish Studio", intro: "无需代码即可将数据转化为交互式图表和叙事可视化内容的在线平台", link: "https://flourish.studio/", avatar: "/img_index/icon/datax.png"}
+    - { title: "PNGIMG", intro: "一个提供超过11万张免费 PNG 格式透明背景图片和剪贴画的素材库", link: "https://pngimg.com/", avatar: "/img_index/icon/png.png"}
+    - { title: "LatentBox", intro: "专注于人工智能、创意和艺术领域的精选资源合集网站", link: "https://latentbox.com/zh", avatar: "/img_index/icon/ai.png"}
+    - { title: "Convertio", intro: "一个支持超过300种格式、在云端进行快速文件转换的在线工具", link: "https://convertio.co/zh/", avatar: "/img_index/icon/pdf1.png"}
+    - { title: "iFixit", intro: "一个提供电子设备维修指南、销售维修工具和零件的全球性开源社区平台", link: "https://zh.ifixit.com/", avatar: "/img_index/icon/fix.png"}
+    - { title: "KMS", intro: "免费激活Windows、Office等软件，附带图文教程", link: "https://kms.cx/", avatar: "/img_index/icon/windows.png"}
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
