@@ -1,6 +1,6 @@
 ---
-title: Python-模块之异步API请求工具
-index_img: /img_index/index/XXXX.png
+title: Python模块之异步API请求工具
+index_img: /img_index/index/article_python_module.jpeg
 tags:
   - Python
   - Python模块系列
