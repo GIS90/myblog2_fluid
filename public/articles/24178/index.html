@@ -1,0 +1,823 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mingliang.gao">
+  <meta name="keywords" content="Python, Linux, Hexo, 技术, 影视说, 娱乐, 旅行记, 博客, 代码, 生活, 人生, 分享">
+  
+    <meta name="description" content="Python模块系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-模块之异步API请求工具">
+<meta property="og:url" content="http://pygo2.top/articles/24178/index.html">
+<meta property="og:site_name" content="PyGo²个人博客">
+<meta property="og:description" content="Python模块系列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pygo2.top/img_index/index/XXXX.png">
+<meta property="article:published_time" content="2026-03-12T15:00:20.000Z">
+<meta property="article:modified_time" content="2026-03-12T15:00:20.000Z">
+<meta property="article:author" content="mingliang.gao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python模块系列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pygo2.top/img_index/index/XXXX.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python-模块之异步API请求工具 || PyGo²个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/custom/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pygo2.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>代码改变世界💕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html" target="_self">
+                <i class="iconfont icon-bilibili"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>工具推荐</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/" target="_self">
+                <i class="iconfont icon-images"></i>
+                <span>个人相册</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-google-fill"></i>
+                <span>常用工具</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="http://2l.pygo2.top/" target="_self">
+                    
+                    <span>OPENTOOL-Z</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://www.iconfont.cn/" target="_self">
+                    
+                    <span>阿里图标库</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://squoosh.app/" target="_self">
+                    
+                    <span>Google图片压缩</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://unsplash.com/illustrations" target="_self">
+                    
+                    <span>动画免费图片</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img_index/img_post.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python-模块之异步API请求工具"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-12 23:00" pubdate>
+          创建日期：2026-03-12 11:00:20（星期四）
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Python-模块之异步API请求工具</h1>
+            
+            
+              <div class="markdown-body">
+                
+                
+<div class="post_cus_note">Python模块系列</div>
+
+
+<span id="more"></span>
+<hr />
+
+
+
+<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Python</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>之前写了一个同步API请求的类工具（基于requests），最近新写了一个Fastappi脚手架，是异步的，于是新增了一个异步HTTP客户端工具类，基于httpx，支持重试、超时、连接池管理、请求&#x2F;响应拦截等功能。</p>
+<h4 id="状态码说明"><a href="#状态码说明" class="headerlink" title="状态码说明"></a>状态码说明</h4><p>在请求的时候默认加入了3次重试请求，但是重试请求的response status是以下状态码才进行请求：</p>
+<ul>
+<li>408     Request Timeout(请求超时)</li>
+<li>429	    Too Many Requests(请求过多)</li>
+<li>500	    Internal Server Error(服务器内部错误)</li>
+<li>502	    Bad Gateway(错误网关)</li>
+<li>503	    Service Unavailable(服务不可用)</li>
+<li>504	    Gateway Timeout(网关超时)</li>
+</ul>
+<h4 id="工具调用Demo"><a href="#工具调用Demo" class="headerlink" title="工具调用Demo"></a>工具调用Demo</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 使用示例</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">example_usage1</span>():<br>    <span class="hljs-comment"># 创建客户端实例</span><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> AsyncHTTPClientLib(<br>            base_url=<span class="hljs-string">&quot;https://jsonplaceholder.typicode.com&quot;</span>,<br>            timeout=<span class="hljs-number">10.0</span>,<br>            max_retries=<span class="hljs-number">2</span>,<br>            http2=<span class="hljs-literal">True</span>,<br>            log=<span class="hljs-literal">True</span><br>    ) <span class="hljs-keyword">as</span> client:<br>        <span class="hljs-comment"># 1. 简单的GET请求</span><br>        response = <span class="hljs-keyword">await</span> client.get(<span class="hljs-string">&quot;/posts/1&quot;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;GET响应: <span class="hljs-subst">&#123;response.status_code&#125;</span>&quot;</span>)<br>        <span class="hljs-built_in">print</span>(response.json())<br><br>        <span class="hljs-comment"># 2. POST请求</span><br>        new_post = &#123;<br>            <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;测试文章&quot;</span>,<br>            <span class="hljs-string">&quot;body&quot;</span>: <span class="hljs-string">&quot;这是文章内容&quot;</span>,<br>            <span class="hljs-string">&quot;userId&quot;</span>: <span class="hljs-number">1</span><br>        &#125;<br>        response = <span class="hljs-keyword">await</span> client.post(<span class="hljs-string">&quot;/posts&quot;</span>, json_data=new_post)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\nPOST响应: <span class="hljs-subst">&#123;response.status_code&#125;</span>&quot;</span>)<br>        <span class="hljs-built_in">print</span>(response.json())<br><br>        <span class="hljs-comment"># 3. 带查询参数的GET请求</span><br>        response = <span class="hljs-keyword">await</span> client.get(<span class="hljs-string">&quot;/comments&quot;</span>, params=&#123;<span class="hljs-string">&quot;postId&quot;</span>: <span class="hljs-number">1</span>&#125;)<br>        comments = response.json()<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n评论数量: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(comments)&#125;</span>&quot;</span>)<br><br>        <span class="hljs-comment"># 4. 批量请求</span><br>        requests = [<br>            &#123;<span class="hljs-string">&quot;method&quot;</span>: <span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;/posts/1&quot;</span>&#125;,<br>            &#123;<span class="hljs-string">&quot;method&quot;</span>: <span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;/posts/2&quot;</span>&#125;,<br>            &#123;<span class="hljs-string">&quot;method&quot;</span>: <span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;/posts/3&quot;</span>&#125;,<br>        ]<br>        responses = <span class="hljs-keyword">await</span> client.batch_request(requests, max_concurrent=<span class="hljs-number">3</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n批量请求完成，共 <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(responses)&#125;</span> 个响应&quot;</span>)<br><br>        <span class="hljs-comment"># 5. 添加请求拦截器</span><br>        <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">log_request</span>(<span class="hljs-params">request</span>):<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;拦截到请求: <span class="hljs-subst">&#123;request.method&#125;</span> <span class="hljs-subst">&#123;request.url&#125;</span>&quot;</span>)<br>            <span class="hljs-keyword">return</span> request<br><br>        client.add_request_interceptor(log_request)<br><br>        <span class="hljs-comment"># 6. 添加响应拦截器</span><br>        <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">log_response</span>(<span class="hljs-params">response</span>):<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;拦截到响应: <span class="hljs-subst">&#123;response.status_code&#125;</span>&quot;</span>)<br>            <span class="hljs-keyword">return</span> response<br><br>        client.add_response_interceptor(log_response)<br><br>        <span class="hljs-comment"># 使用拦截器的请求</span><br>        response = <span class="hljs-keyword">await</span> client.get(<span class="hljs-string">&quot;/posts/4&quot;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n带拦截器的请求完成，状态码: <span class="hljs-subst">&#123;response.status_code&#125;</span>&quot;</span>)<br><br><br><span class="hljs-comment"># 高级用法示例：自定义重试策略和错误处理</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">example_usage2</span>():<br>    <span class="hljs-comment"># 自定义错误处理</span><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">error_handler</span>(<span class="hljs-params">error, context</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;自定义错误处理: <span class="hljs-subst">&#123;context[<span class="hljs-string">&#x27;method&#x27;</span>]&#125;</span> <span class="hljs-subst">&#123;context[<span class="hljs-string">&#x27;url&#x27;</span>]&#125;</span> - <span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(error)&#125;</span>&quot;</span>)<br>        <span class="hljs-comment"># 可以在这里发送告警、记录到数据库等</span><br><br>    <span class="hljs-comment"># 创建客户端</span><br>    client = (AsyncHTTPClientLib(<br>        base_url=<span class="hljs-string">&quot;https://api.example.com&quot;</span>,<br>        timeout=<span class="hljs-number">5.0</span>,<br>        max_retries=<span class="hljs-number">3</span>,<br>        retry_status_codes=[<span class="hljs-number">408</span>, <span class="hljs-number">429</span>, <span class="hljs-number">500</span>, <span class="hljs-number">502</span>, <span class="hljs-number">503</span>, <span class="hljs-number">504</span>],<br>        pool_limits=&#123;<br>            <span class="hljs-string">&#x27;max_connections&#x27;</span>: <span class="hljs-number">50</span>,<br>            <span class="hljs-string">&#x27;max_keepalive_connections&#x27;</span>: <span class="hljs-number">10</span><br>        &#125;,<br>        headers=&#123;<br>            <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;Bearer your-token-here&#x27;</span>,<br>            <span class="hljs-string">&#x27;X-Custom-Header&#x27;</span>: <span class="hljs-string">&#x27;custom-value&#x27;</span><br>        &#125;<br>    ))<br><br>    client.add_error_handler(error_handler)<br><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-comment"># 发送请求</span><br>        response = <span class="hljs-keyword">await</span> client.get(<span class="hljs-string">&quot;/users/1&quot;</span>)<br>        <span class="hljs-keyword">if</span> response.status_code == <span class="hljs-number">200</span>:<br>            user_data = response.json()<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;用户数据: <span class="hljs-subst">&#123;user_data&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;请求失败: <span class="hljs-subst">&#123;response.status_code&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;最终错误: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">finally</span>:<br>        <span class="hljs-keyword">await</span> client.close()<br><br><br><span class="hljs-comment"># 运行示例</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    asyncio.run(example_usage1())<br>    <span class="hljs-comment"># asyncio.run(example_usage2())</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">------------------------------------------------</span><br><span class="hljs-string"></span><br><span class="hljs-string">import asyncio</span><br><span class="hljs-string">import httpx</span><br><span class="hljs-string">from typing import Optional, Dict, Any, List, Callable</span><br><span class="hljs-string">from urllib.parse import urljoin</span><br><span class="hljs-string">from httpx import Timeout, Limits, HTTPError, RequestError</span><br><span class="hljs-string"></span><br><span class="hljs-string">from deploy.utils.logger import logger as LOG</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">class AsyncHTTPClientLib:</span><br><span class="hljs-string">    def __init__(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            base_url: str = &quot;&quot;,</span><br><span class="hljs-string">            timeout: float = 30.0,</span><br><span class="hljs-string">            max_retries: int = 3,</span><br><span class="hljs-string">            retry_delay: float = 1.0,</span><br><span class="hljs-string">            retry_status_codes: List[int] = None,</span><br><span class="hljs-string">            pool_limits: Dict[str, int] = None,</span><br><span class="hljs-string">            headers: Dict[str, str] = None,</span><br><span class="hljs-string">            cookies: Dict[str, str] = None,</span><br><span class="hljs-string">            verify_ssl: bool = True,</span><br><span class="hljs-string">            http2: bool = False,</span><br><span class="hljs-string">            log: bool = False</span><br><span class="hljs-string">    ):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        Args:<br>            base_url: 基础URL，用于构建完整URL<br>            timeout: 超时时间（秒）<br>            max_retries: 最大重试次数<br>            retry_delay: 重试延迟（秒）<br>            retry_status_codes: 重试的HTTP状态码<br>            pool_limits: 连接池限制 &#123;<span class="hljs-string">&#x27;max_connections&#x27;</span>: <span class="hljs-number">100</span>, <span class="hljs-string">&#x27;max_keepalive_connections&#x27;</span>: <span class="hljs-number">20</span>&#125;<br>            headers: 默认请求头<br>            cookies: 默认cookies<br>            verify_ssl: 是否验证SSL证书<br>            http2: 是否启用HTTP/<span class="hljs-number">2</span><br>            log: 是否开启日志<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        self.base_url = base_url.rstrip(&#x27;/&#x27;)</span><br><span class="hljs-string">        self.max_retries = max_retries</span><br><span class="hljs-string">        self.retry_delay = retry_delay</span><br><span class="hljs-string">        self.retry_status_codes = retry_status_codes or [408, 429, 500, 502, 503, 504]</span><br><span class="hljs-string">        self.log = log</span><br><span class="hljs-string"></span><br><span class="hljs-string">        # 设置默认请求头</span><br><span class="hljs-string">        default_headers: Dict = &#123;</span><br><span class="hljs-string">            &#x27;User-Agent&#x27;: &#x27;Mozilla/5.0 (compatible; AsyncHTTPClient/1.0)&#x27;,</span><br><span class="hljs-string">            &#x27;Accept&#x27;: &#x27;application/json, text/plain, */*&#x27;,</span><br><span class="hljs-string">            &#x27;Accept-Encoding&#x27;: &#x27;gzip, deflate&#x27;,</span><br><span class="hljs-string">            &#x27;Connection&#x27;: &#x27;keep-alive&#x27;</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string">        if headers:</span><br><span class="hljs-string">            default_headers.update(headers)</span><br><span class="hljs-string"></span><br><span class="hljs-string">        # 配置连接池限制</span><br><span class="hljs-string">        pool_limits = pool_limits or &#123;</span><br><span class="hljs-string">            &#x27;max_connections&#x27;: 100,</span><br><span class="hljs-string">            &#x27;max_keepalive_connections&#x27;: 20</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">        # 创建客户端实例</span><br><span class="hljs-string">        self.client = httpx.AsyncClient(</span><br><span class="hljs-string">            base_url=base_url,</span><br><span class="hljs-string">            headers=default_headers,</span><br><span class="hljs-string">            cookies=cookies or &#123;&#125;,</span><br><span class="hljs-string">            verify=verify_ssl,</span><br><span class="hljs-string">            http2=http2,</span><br><span class="hljs-string">            timeout=Timeout(timeout),</span><br><span class="hljs-string">            limits=Limits(</span><br><span class="hljs-string">                max_connections=pool_limits.get(&#x27;max_connections&#x27;, 100),</span><br><span class="hljs-string">                max_keepalive_connections=pool_limits.get(&#x27;max_keepalive_connections&#x27;, 20)</span><br><span class="hljs-string">            ),</span><br><span class="hljs-string">            follow_redirects=True</span><br><span class="hljs-string">        )</span><br><span class="hljs-string"></span><br><span class="hljs-string">        # 请求/响应拦截器</span><br><span class="hljs-string">        self.request_interceptors: List[Callable] = []</span><br><span class="hljs-string">        self.response_interceptors: List[Callable] = []</span><br><span class="hljs-string">        self.error_handlers: List[Callable] = []</span><br><span class="hljs-string"></span><br><span class="hljs-string">    def __str__(self) -&gt; str:</span><br><span class="hljs-string">        return f&quot;AsyncHTTPClientLib Class: [base-url: &#123;self.base_url&#125;]&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">    def __repr__(self) -&gt; str:</span><br><span class="hljs-string">        return self.__str__()</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def __aenter__(self):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>异步上下文管理器入口<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return self</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def __aexit__(self, exc_type, exc_val, exc_tb):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>异步上下文管理器退出，确保资源释放<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        await self.close()</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def close(self):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>关闭客户端连接<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        if self.client:</span><br><span class="hljs-string">            await self.client.aclose()</span><br><span class="hljs-string">            if self.log: LOG.info(&quot;HTTPX客户端连接已关闭&quot;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    def add_request_interceptor(self, interceptor: Callable):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>添加请求拦截器<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        self.request_interceptors.append(interceptor)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    def add_response_interceptor(self, interceptor: Callable):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>添加响应拦截器<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        self.response_interceptors.append(interceptor)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    def add_error_handler(self, handler: Callable):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>添加错误处理器<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        self.error_handlers.append(handler)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def _apply_request_interceptors(self, request):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>应用请求拦截器<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        for interceptor in self.request_interceptors:</span><br><span class="hljs-string">            request = await interceptor(request) or request</span><br><span class="hljs-string">        return request</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def _apply_response_interceptors(self, response):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>应用响应拦截器<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        for interceptor in self.response_interceptors:</span><br><span class="hljs-string">            response = await interceptor(response) or response</span><br><span class="hljs-string">        return response</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def _handle_error(self, error: Exception, context: Dict[str, Any]):</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>处理错误<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        for handler in self.error_handlers:</span><br><span class="hljs-string">            try:</span><br><span class="hljs-string">                await handler(error, context)</span><br><span class="hljs-string">            except Exception as e:</span><br><span class="hljs-string">                if self.log: LOG.error(f&quot;错误处理器执行失败: &#123;e&#125;&quot;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    def __build_url(self, url: str) -&gt; str:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>构建完整URL<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        if url.startswith((&#x27;http://&#x27;, &#x27;https://&#x27;)):</span><br><span class="hljs-string">            return url</span><br><span class="hljs-string">        return urljoin(self.base_url, url.lstrip(&#x27;/&#x27;))</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def __request(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            method: str,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            *,</span><br><span class="hljs-string">            params: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            json_data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            headers: Optional[Dict[str, str]] = None,</span><br><span class="hljs-string">            cookies: Optional[Dict[str, str]] = None,</span><br><span class="hljs-string">            files: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            timeout: Optional[float] = None,</span><br><span class="hljs-string">            retries: Optional[int] = None,</span><br><span class="hljs-string">            retry_delay: Optional[float] = None,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        发送HTTP请求的核心方法<br><br>        Returns:<br>            httpx.Response: 响应对象<br><br>        Raises:<br>            Exception: 请求失败且超过重试次数<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        full_url = self.__build_url(url)</span><br><span class="hljs-string">        retries = retries if retries is not None else self.max_retries</span><br><span class="hljs-string">        delay = retry_delay if retry_delay is not None else self.retry_delay</span><br><span class="hljs-string"></span><br><span class="hljs-string">        # 合并请求头</span><br><span class="hljs-string">        request_headers = dict(self.client.headers)</span><br><span class="hljs-string">        if headers:</span><br><span class="hljs-string">            request_headers.update(headers)</span><br><span class="hljs-string"></span><br><span class="hljs-string">        # 准备请求参数</span><br><span class="hljs-string">        request_kwargs = &#123;</span><br><span class="hljs-string">            &#x27;params&#x27;: params,</span><br><span class="hljs-string">            &#x27;headers&#x27;: request_headers,</span><br><span class="hljs-string">            &#x27;cookies&#x27;: cookies,</span><br><span class="hljs-string">            &#x27;files&#x27;: files,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">        if json_data is not None:</span><br><span class="hljs-string">            request_kwargs[&#x27;json&#x27;] = json_data</span><br><span class="hljs-string">        elif data is not None:</span><br><span class="hljs-string">            request_kwargs[&#x27;data&#x27;] = data</span><br><span class="hljs-string">        if timeout:</span><br><span class="hljs-string">            request_kwargs[&#x27;timeout&#x27;] = timeout</span><br><span class="hljs-string"></span><br><span class="hljs-string">        last_error = None</span><br><span class="hljs-string"></span><br><span class="hljs-string">        for attempt in range(retries + 1):</span><br><span class="hljs-string">            try:</span><br><span class="hljs-string">                # 创建请求对象（用于拦截器）</span><br><span class="hljs-string">                request = self.client.build_request(</span><br><span class="hljs-string">                    method=method,</span><br><span class="hljs-string">                    url=full_url,</span><br><span class="hljs-string">                    **request_kwargs</span><br><span class="hljs-string">                )</span><br><span class="hljs-string"></span><br><span class="hljs-string">                # 应用请求拦截器</span><br><span class="hljs-string">                request = await self._apply_request_interceptors(request)</span><br><span class="hljs-string"></span><br><span class="hljs-string">                # 记录请求日志</span><br><span class="hljs-string">                if self.log:</span><br><span class="hljs-string">                    LOG.debug(f&quot;请求 [&#123;attempt + 1&#125;/&#123;retries + 1&#125;]: &#123;method&#125; &#123;full_url&#125;&quot;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">                # 发送请求</span><br><span class="hljs-string">                response = await self.client.send(request)</span><br><span class="hljs-string"></span><br><span class="hljs-string">                # 应用响应拦截器</span><br><span class="hljs-string">                response = await self._apply_response_interceptors(response)</span><br><span class="hljs-string"></span><br><span class="hljs-string">                # 检查是否需要重试</span><br><span class="hljs-string">                if response.status_code in self.retry_status_codes and attempt &lt; retries:</span><br><span class="hljs-string">                    wait_time = delay * (2 ** attempt)  # 指数退避</span><br><span class="hljs-string">                    if self.log:</span><br><span class="hljs-string">                        LOG.warning(f&quot;请求返回状态码 &#123;response.status_code&#125;，将在 &#123;wait_time:.2f&#125; 秒后重试&quot;)</span><br><span class="hljs-string">                    await asyncio.sleep(wait_time)</span><br><span class="hljs-string">                    continue</span><br><span class="hljs-string"></span><br><span class="hljs-string">                # 记录响应日志</span><br><span class="hljs-string">                if self.log:</span><br><span class="hljs-string">                    LOG.debug(f&quot;响应: &#123;method&#125; &#123;full_url&#125; - 状态码: &#123;response.status_code&#125;&quot;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">                return response</span><br><span class="hljs-string"></span><br><span class="hljs-string">            except (RequestError, HTTPError) as e:</span><br><span class="hljs-string">                last_error = e</span><br><span class="hljs-string">                if attempt &lt; retries:</span><br><span class="hljs-string">                    wait_time = delay * (2 ** attempt)</span><br><span class="hljs-string">                    if self.log:</span><br><span class="hljs-string">                        LOG.warning(f&quot;请求失败 (&#123;str(e)&#125;)，将在 &#123;wait_time:.2f&#125; 秒后重试&quot;)</span><br><span class="hljs-string">                    await asyncio.sleep(wait_time)</span><br><span class="hljs-string">                else:</span><br><span class="hljs-string">                    if self.log:</span><br><span class="hljs-string">                        LOG.error(f&quot;请求失败，已达到最大重试次数: &#123;str(e)&#125;&quot;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">                    # 处理错误</span><br><span class="hljs-string">                    context = &#123;</span><br><span class="hljs-string">                        &#x27;method&#x27;: method,</span><br><span class="hljs-string">                        &#x27;url&#x27;: full_url,</span><br><span class="hljs-string">                        &#x27;attempt&#x27;: attempt + 1,</span><br><span class="hljs-string">                        &#x27;error&#x27;: e</span><br><span class="hljs-string">                    &#125;</span><br><span class="hljs-string">                    await self._handle_error(e, context)</span><br><span class="hljs-string"></span><br><span class="hljs-string">        # 所有重试都失败</span><br><span class="hljs-string">        raise last_error or Exception(&quot;未知错误&quot;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def get(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            params: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送GET请求<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return await self.__request(&#x27;GET&#x27;, url=url, params=params, **kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def post(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            json_data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送POST请求<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return await self.__request(&#x27;POST&#x27;, url=url, data=data, json_data=json_data, **kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def put(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            json_data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送PUT请求<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return await self.__request(&#x27;PUT&#x27;, url=url, data=data, json_data=json_data, **kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def patch(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            json_data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送PATCH请求<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return await self.__request(&#x27;PATCH&#x27;, url=url, data=data, json_data=json_data, **kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def delete(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送DELETE请求<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return await self.__request(&#x27;DELETE&#x27;, url=url, **kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def head(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送HEAD请求<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return await self.__request(&#x27;HEAD&#x27;, url=url, **kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def options(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; httpx.Response:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送OPTIONS请求<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        return await self.__request(&#x27;OPTIONS&#x27;, url=url, **kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">    # 便捷方法：自动解析JSON</span><br><span class="hljs-string">    async def get_json(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            params: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; Any:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送GET请求并返回JSON响应<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        response = await self.get(url=url, params=params, **kwargs)</span><br><span class="hljs-string">        return response.json()</span><br><span class="hljs-string"></span><br><span class="hljs-string">    async def post_json(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            url: str,</span><br><span class="hljs-string">            json_data: Optional[Dict[str, Any]] = None,</span><br><span class="hljs-string">            **kwargs</span><br><span class="hljs-string">    ) -&gt; Any:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>发送POST请求并返回JSON响应<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        response = await self.post(url=url, json_data=json_data, **kwargs)</span><br><span class="hljs-string">        return response.json()</span><br><span class="hljs-string"></span><br><span class="hljs-string">    # 批量请求</span><br><span class="hljs-string">    async def batch_request(</span><br><span class="hljs-string">            self,</span><br><span class="hljs-string">            requests: List[Dict[str, Any]],</span><br><span class="hljs-string">            max_concurrent: int = 10</span><br><span class="hljs-string">    ) -&gt; List[httpx.Response]:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        批量发送请求（并发控制）<br><br>        Args:<br>            requests: 请求参数列表，每个元素包含method、url等参数<br>            max_concurrent: 最大并发数<br><br>        Returns:<br>            List[httpx.Response]: 响应列表<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        semaphore = asyncio.Semaphore(max_concurrent)</span><br><span class="hljs-string"></span><br><span class="hljs-string">        async def _limited_request(req_kwargs):</span><br><span class="hljs-string">            async with semaphore:</span><br><span class="hljs-string">                method = req_kwargs.pop(&#x27;method&#x27;, &#x27;GET&#x27;)</span><br><span class="hljs-string">                url = req_kwargs.pop(&#x27;url&#x27;)</span><br><span class="hljs-string">                return await self.__request(method, url, **req_kwargs)</span><br><span class="hljs-string"></span><br><span class="hljs-string">        tasks = [_limited_request(req.copy()) for req in requests]</span><br><span class="hljs-string">        return await asyncio.gather(*tasks, return_exceptions=True)</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+<h4 id="系列"><a href="#系列" class="headerlink" title="系列"></a>系列</h4><p><a href="http://pygo2.top/articles/26110/">Python模块之command系统命令</a><br><a href="http://pygo2.top/articles/19275/">Python模块之excel模块</a><br><a href="http://pygo2.top/articles/5145/">Python模块之logger日志</a><br><a href="http://pygo2.top/articles/61799/">Python模块之utils公共方法</a><br><a href="http://pygo2.top/articles/31232/">Python模块之watcher打点</a><br><a href="http://pygo2.top/articles/51787/">Python模块之config配置解析</a><br><a href="http://pygo2.top/articles/58292/">Python模块之dtalk钉钉消息</a><br><a href="http://pygo2.top/articles/33254/">Python模块之企业微信</a></p>
+<p>更多模块请参考文章TAG进行查看。</p>
+<p><font size=6.5 color='red'><em><strong>Python模块系列，持续更新中。。。。。。</strong></em></font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Python%E6%A8%A1%E5%9D%97%E7%B3%BB%E5%88%97/" class="print-no-link">#Python模块系列</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python-模块之异步API请求工具</div>
+      <div>http://pygo2.top/articles/24178/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mingliang.gao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/30798/" title="python-m高级用法教程">
+                        <span class="hidden-mobile">python-m高级用法教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2018 - 2025 <i class="iconfont icon-copyright" style="color: red;"></i> PyGo²
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021000415"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>蒙ICP备2021000415号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
