@@ -15,6 +15,17 @@ updated: 2025-11-10 10:12:07
 <!--more-->
 
 <hr />
+
+
+### 2026-04-05【2次】
+
+{% gi 2 2 %}
+ ![](/img_index/qita/pinduoduo/2026-04-05-01.jpg)
+ ![](/img_index/qita/pinduoduo/2026-04-05-02.jpg)
+
+{% endgi %}
+
+
 ### 2026-01-01【1次】
 
 ![](2026-01-01.jpg)
