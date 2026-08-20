@@ -1050,6 +1050,10 @@ links:
     - { title: "Convertio", intro: "一个支持超过300种格式、在云端进行快速文件转换的在线工具", link: "https://convertio.co/zh/", avatar: "/img_index/icon/pdf1.png"}
     - { title: "iFixit", intro: "一个提供电子设备维修指南、销售维修工具和零件的全球性开源社区平台", link: "https://zh.ifixit.com/", avatar: "/img_index/icon/fix.png"}
     - { title: "KMS", intro: "免费激活Windows、Office等软件，附带图文教程", link: "https://kms.cx/", avatar: "/img_index/icon/windows.png"}
+    - { title: "Typora", intro: "一款极简主义的所见即所得Markdown编辑器", link: "https://pan.baidu.com/s/10fSvUCgMMLf6rJH_yH3YAA?pwd=abcd", avatar: "/img_index/icon/Typora.png"}
+    - { title: "Hexo", intro: "自动化构建博客工具，主题、插件等生态圈非常完善，适合个人博客写作", link: "https://hexo.io/zh-cn/", avatar: "/img_index/icon/Hexo.png"}
+    - { title: "MobaXterm", intro: "MobaXterm 是一款集 SSH、X11、RDP 等多种协议于一体的远程连接工具，被很多开发者称为“远程运维的瑞士军刀", link: "https://mobaxterm.mobatek.net/", avatar: "/img_index/icon/MobaXterm.png"}
+    - { title: "PhotoPea", intro: "一个免费、专业级的在线图像编辑器，可直接在浏览器中运行，无需上传图片，并支持PSD、AI、PDF等超过40种文件格式", link: "https://www.photopea.com/", avatar: "/img_index/icon/PhotoPea.png"}
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image

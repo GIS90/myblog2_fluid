@@ -30,16 +30,16 @@ updated: 2019-05-24 10:12:04
 
 #### 第三季度
 {% gi 3 3 %}
- ![7月](/img_index/qita/baicizhan/undaka.jpg)
+ ![7月](/img_index/qita/baicizhan/202607.jpg)
  ![8月](/img_index/qita/baicizhan/undaka.jpg)
  ![9月](/img_index/qita/baicizhan/undaka.jpg)
 {% endgi %}
 
 #### 第二季度
 {% gi 3 3 %}
- ![4月](/img_index/qita/baicizhan/undaka.jpg)
- ![5月](/img_index/qita/baicizhan/undaka.jpg)
- ![6月](/img_index/qita/baicizhan/undaka.jpg)
+ ![4月](/img_index/qita/baicizhan/202604.jpg)
+ ![5月](/img_index/qita/baicizhan/202605.jpg)
+ ![6月](/img_index/qita/baicizhan/202606.jpg)
 {% endgi %}
 
 #### 第一季度
