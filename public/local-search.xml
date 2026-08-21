@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>Conda命令初始化PowerShell</title>
+    <link href="/articles/19481/"/>
+    <url>/articles/19481/</url>
+    
+    <content type="html"><![CDATA[<p>Windows电脑环境上安装了conda命令，用于处理多版本Python共存环境问题，但是每次使用conda命令都需要先激活环境，比较麻烦。所以，我想找到一种方法，每次打开powershell都自动激活conda环境。</p><span id="more"></span><hr /><h3 id="初始化环境"><a href="#初始化环境" class="headerlink" title="初始化环境"></a>初始化环境</h3><p>在powershell中执行以下命令，初始化环境。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">&amp; <span class="hljs-string">&quot;D:\miniconda3\Scripts\conda.exe&quot;</span> shell.powershell hook | <span class="hljs-built_in">Out-String</span> | <span class="hljs-built_in">Invoke-Expression</span><br>conda init powershell<br></code></pre></td></tr></table></figure><h3 id="验证环境"><a href="#验证环境" class="headerlink" title="验证环境"></a>验证环境</h3><p>重新打开后，输入命令。</p><p><img src="/articles/57737/powershell/1.png" alt="效果图"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>Conda</tag>
+      
+      <tag>uv</tag>
+      
+      <tag>Powershell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Windows的PowerShell增强版</title>
     <link href="/articles/35006/"/>
     <url>/articles/35006/</url>
