@@ -62,6 +62,31 @@
   
   
   <entry>
+    <title>Windows的PowerShell新增which命令</title>
+    <link href="/articles/10392/"/>
+    <url>/articles/10392/</url>
+    
+    <content type="html"><![CDATA[<p>发现在PowerShell找命令的路径时，发现没有which命令，只能使用Get-Command或where.exe来查找命令的路径，喜欢Linux命令的简捷性，想在PowerShell中也能直接使用which命令。</p><span id="more"></span><hr /><h4 id="打开PowerShell配置文件"><a href="#打开PowerShell配置文件" class="headerlink" title="打开PowerShell配置文件"></a>打开PowerShell配置文件</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 编辑配置文件</span><br>notepad <span class="hljs-variable">$PROFILE</span><br></code></pre></td></tr></table></figure><h4 id="在打开的记事本中添加以下内容并保存："><a href="#在打开的记事本中添加以下内容并保存：" class="headerlink" title="在打开的记事本中添加以下内容并保存："></a>在打开的记事本中添加以下内容并保存：</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-Alias</span> which <span class="hljs-built_in">Get-Command</span><br></code></pre></td></tr></table></figure><p>重新打开 PowerShell 后，which 命令就可以直接使用了。</p><h4 id="测试查询Python路径"><a href="#测试查询Python路径" class="headerlink" title="测试查询Python路径"></a>测试查询Python路径</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">which python<br></code></pre></td></tr></table></figure><h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">CommandType     Name        Version    Source<br>-----------     ----        -------    ------<br>Application     python.exe  3.11.0     D:\miniconda3\python.exe<br></code></pre></td></tr></table></figure><h4 id="拓展查询其他命令路径"><a href="#拓展查询其他命令路径" class="headerlink" title="拓展查询其他命令路径"></a>拓展查询其他命令路径</h4><p>用于查询目录下的所有文件和子目录</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-Alias</span> ll <span class="hljs-built_in">Get-ChildItem</span> <span class="hljs-literal">-Force</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Windows</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>PowerShell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python模块之异步API请求工具</title>
     <link href="/articles/24178/"/>
     <url>/articles/24178/</url>
