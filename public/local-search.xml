@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Navicat破解提示Rsa Public Key not Find..</title>
+    <link href="/articles/49647/"/>
+    <url>/articles/49647/</url>
+    
+    <content type="html"><![CDATA[<p>Navicat是支持各种数据库的连接管理工具，备份、模型等日常功能应有尽有，总之夯就完了。</p><span id="more"></span><hr /><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>对于Navicat Premium15进行破解的时候，点击Patch.exe生成密钥的时候，需要在安装时输入Rsa Public Key，否则会提示Rsa Public Key not Find。</p><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>原因：如果是在激活 Navicat 15 时看到这个提示，原因通常是操作顺序反了：先打开了 Navicat，再点注册机的 patch，导致破解用的公钥文件没有被正确生成或替换。</p><p>正确操作顺序：<br>1、彻底关闭 Navicat（确保进程完全退出），找到 Navicat 的安装目录。<br><img src="/articles/57737/%E8%A7%A3%E6%8F%90%E7%A4%BARsa-Public-Key-not-Find/1.png"><br>2、以管理员身份运行注册机（Keygen&#x2F;Patch 程序）。<br><img src="/articles/57737/%E8%A7%A3%E6%8F%90%E7%A4%BARsa-Public-Key-not-Find/2.png"><br>3、在注册机里点击 Patch，并选中 Navicat 的安装目录下的 navicat.exe 文件。<br><img src="/articles/57737/%E8%A7%A3%E6%8F%90%E7%A4%BARsa-Public-Key-not-Find/3.png"><br>4、Patch 成功后，再打开 Navicat 进行激活操作。</p><h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><p>通过网盘分享的文件：Navicat Premium.zip<br>链接: <a href="https://pan.baidu.com/s/1bCzBGnjN_bTxlwmJDVQDag?pwd=aay9">https://pan.baidu.com/s/1bCzBGnjN_bTxlwmJDVQDag?pwd=aay9</a> 提取码: aay9</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Windows</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Navicat</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Conda命令初始化PowerShell</title>
     <link href="/articles/19481/"/>
     <url>/articles/19481/</url>
@@ -118,14 +143,12 @@
     <link href="/articles/45540/"/>
     <url>/articles/45540/</url>
     
-    <content type="html"><![CDATA[<p><img src="/articles/45540/1.jpg"></p>]]></content>
+    <content type="html"><![CDATA[<p>2026年初考取了GBase8a数据库管理工程师证书，记录一下，继续加油！！！</p><p><img src="/articles/45540/1.jpg"></p>]]></content>
     
     
     <categories>
       
       <category>生活记</category>
-      
-      <category>数据库</category>
       
     </categories>
     
