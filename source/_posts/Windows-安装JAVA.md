@@ -79,10 +79,10 @@ Windows版本，下载的时候根据安装系统选择对应的版本、位数�
 
 #### 部署教程系列
 
-- LINUX+ORACLE部署安装：http://pygo2.top/articles/40987/
-- Linux安装JAVA1.7与配置：http://pygo2.top/articles/13502/
-- Windows安装JAVA1.7与配置：http://pygo2.top/articles/1151/
-- Windows安装Tomcat7与配置：http://pygo2.top/articles/2013/
-- Windows安装PLSQL与配置：http://pygo2.top/articles/47618/
+- LINUX+ORACLE部署安装：https://pygo.space/articles/40987/
+- Linux安装JAVA1.7与配置：https://pygo.space/articles/13502/
+- Windows安装JAVA1.7与配置：https://pygo.space/articles/1151/
+- Windows安装Tomcat7与配置：https://pygo.space/articles/2013/
+- Windows安装PLSQL与配置：https://pygo.space/articles/47618/
 
 <font size=6.5 color='red'>部署系列持续更新中。。。。。。</font>

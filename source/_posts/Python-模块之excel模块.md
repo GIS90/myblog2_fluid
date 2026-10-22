@@ -819,14 +819,14 @@ class ExcelLib(object):
 #### 系列
 
 
-[Python模块之command系统命令](http://pygo2.top/articles/26110/)
-[Python模块之excel模块](http://pygo2.top/articles/19275/)
-[Python模块之logger日志](http://pygo2.top/articles/5145/)
-[Python模块之utils公共方法](http://pygo2.top/articles/61799/)
-[Python模块之watcher打点](http://pygo2.top/articles/31232/)
-[Python模块之config配置解析](http://pygo2.top/articles/51787/)
-[Python模块之dtalk钉钉消息](http://pygo2.top/articles/58292/)
-[Python模块之企业微信](http://pygo2.top/articles/33254/)
+[Python模块之command系统命令](https://pygo.space/articles/26110/)
+[Python模块之excel模块](https://pygo.space/articles/19275/)
+[Python模块之logger日志](https://pygo.space/articles/5145/)
+[Python模块之utils公共方法](https://pygo.space/articles/61799/)
+[Python模块之watcher打点](https://pygo.space/articles/31232/)
+[Python模块之config配置解析](https://pygo.space/articles/51787/)
+[Python模块之dtalk钉钉消息](https://pygo.space/articles/58292/)
+[Python模块之企业微信](https://pygo.space/articles/33254/)
 
 更多模块请参考文章TAG进行查看。
 

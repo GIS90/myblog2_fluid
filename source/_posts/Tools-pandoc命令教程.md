@@ -1,6 +1,6 @@
 ---
 title: "\U0001F6A2Pandoc 文件格式转换命令"
-index_img: /img_index/index/2024-01-22-001.png
+index_img: /img_index/index/20240122-001.png
 tags:
   - 命令工具
   - pandoc

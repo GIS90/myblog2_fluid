@@ -39,7 +39,7 @@ DingApi类，主要用请求dingTalk openApi来操作DingDing进行发消息等�
 #### 设计
 
 - 官网发消息API：https://developers.dingtalk.com/document/robots/chatbots-send-one-on-one-chat-messages-in-batches/h2-xsq-kwt-wyg
-- Status JSON说明：http://pygo2.top/articles/40461/
+- Status JSON说明：https://pygo.space/articles/40461/
 
 #### 使用
 
@@ -90,7 +90,7 @@ design:
 
 reference urls:
     官网发消息API：https://developers.dingtalk.com/document/robots/chatbots-send-one-on-one-chat-messages-in-batches/h2-xsq-kwt-wyg
-    Status JSON说明：http://pygo2.top/articles/40461/
+    Status JSON说明：https://pygo.space/articles/40461/
 
 python version:
     python3
@@ -194,7 +194,7 @@ class DtalkLib(object):
             status: success or failure,
             msg: 消息体
             data: 数据体（diact类型）
-            具体说明：http://pygo2.top/articles/40461/
+            具体说明：https://pygo.space/articles/40461/
         """
         # check access token && parameters
         if not self.access_token:
@@ -227,14 +227,14 @@ class DtalkLib(object):
 #### 系列
 
 
-[Python模块之command系统命令](http://pygo2.top/articles/26110/)
-[Python模块之excel模块](http://pygo2.top/articles/19275/)
-[Python模块之logger日志](http://pygo2.top/articles/5145/)
-[Python模块之utils公共方法](http://pygo2.top/articles/61799/)
-[Python模块之watcher打点](http://pygo2.top/articles/31232/)
-[Python模块之config配置解析](http://pygo2.top/articles/51787/)
-[Python模块之dtalk钉钉消息](http://pygo2.top/articles/58292/)
-[Python模块之企业微信](http://pygo2.top/articles/33254/)
+[Python模块之command系统命令](https://pygo.space/articles/26110/)
+[Python模块之excel模块](https://pygo.space/articles/19275/)
+[Python模块之logger日志](https://pygo.space/articles/5145/)
+[Python模块之utils公共方法](https://pygo.space/articles/61799/)
+[Python模块之watcher打点](https://pygo.space/articles/31232/)
+[Python模块之config配置解析](https://pygo.space/articles/51787/)
+[Python模块之dtalk钉钉消息](https://pygo.space/articles/58292/)
+[Python模块之企业微信](https://pygo.space/articles/33254/)
 
 更多模块请参考文章TAG进行查看。
 

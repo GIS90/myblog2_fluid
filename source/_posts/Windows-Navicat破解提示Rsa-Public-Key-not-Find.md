@@ -1,6 +1,6 @@
 ---
 title: Navicat破解提示Rsa Public Key not Find..
-index_img: /img_index/index/2026-10-20-001.png
+index_img: /img_index/index/20261020-001.png
 tags:
   - Navicat
 categories:

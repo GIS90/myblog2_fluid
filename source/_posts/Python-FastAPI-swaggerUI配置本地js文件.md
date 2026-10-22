@@ -1,6 +1,6 @@
 ---
 title: 关于FastAPI Swagger-UI本地js文件配置
-index_img: /img_index/index/2025-12-23-001.png
+index_img: /img_index/index/20251223-001.png
 tags: [Python]
 categories: [Python]
 abbrlink: 1877

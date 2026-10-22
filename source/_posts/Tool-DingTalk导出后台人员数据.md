@@ -45,5 +45,5 @@ keywords: DingTalk, 后台, 导出, 人员数据
 
 #### 5、其他
 
-- DingTalk（钉钉）创建企业内部机器人：http://pygo2.top/articles/32206/
-- DingTalk后台导出人员数据：http://pygo2.top/articles/45420/
+- DingTalk（钉钉）创建企业内部机器人：https://pygo.space/articles/32206/
+- DingTalk后台导出人员数据：https://pygo.space/articles/45420/

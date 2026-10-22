@@ -1054,6 +1054,8 @@ links:
     - { title: "Hexo", intro: "自动化构建博客工具，主题、插件等生态圈非常完善，适合个人博客写作", link: "https://hexo.io/zh-cn/", avatar: "/img_index/icon/Hexo.png"}
     - { title: "MobaXterm", intro: "MobaXterm 是一款集 SSH、X11、RDP 等多种协议于一体的远程连接工具，被很多开发者称为“远程运维的瑞士军刀", link: "https://mobaxterm.mobatek.net/", avatar: "/img_index/icon/MobaXterm.png"}
     - { title: "PhotoPea", intro: "一个免费、专业级的在线图像编辑器，可直接在浏览器中运行，无需上传图片，并支持PSD、AI、PDF等超过40种文件格式", link: "https://www.photopea.com/", avatar: "/img_index/icon/PhotoPea.png"}
+    - { title: "iclovers", intro: "专为直播、录屏教学设计的强大工具。支持实时可视化键盘与鼠标操作，提供全沉浸式定位与丰富的自定义外观设置", link: "https://iclovers.com/", avatar: "/img_index/icon/iclovers.png"}
+
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
